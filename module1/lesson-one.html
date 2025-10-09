@@ -4,8 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Applied Linguistics - Lecture 01</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- General Reset & Base Style --- */
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -15,98 +29,160 @@
 
         body {
             line-height: 1.8;
-            color: #2c3e50;
-            background-color: #f4f6f8;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
             padding: 40px 20px;
+            min-height: 100vh;
         }
 
-        /* --- Layout Container --- */
         .container {
             max-width: 1000px;
             margin: 0 auto;
             background: #fff;
             padding: 40px 50px;
-            border-radius: 14px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
 
         .container:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
 
-        /* --- Header --- */
         header {
             text-align: center;
             margin-bottom: 35px;
-            padding-bottom: 20px;
+            padding-bottom: 25px;
             border-bottom: 2px solid #eaecef;
+            position: relative;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 3px;
         }
 
         h1 {
-            color: #1e3a8a;
+            color: var(--secondary);
             margin-bottom: 8px;
             font-size: 2.4rem;
             letter-spacing: 0.5px;
+            font-weight: 700;
         }
 
         h2 {
-            color: #2563eb;
+            color: var(--primary);
             margin: 30px 0 15px;
             padding-bottom: 8px;
             border-bottom: 2px solid #e5e7eb;
             font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        h2 i {
+            margin-right: 12px;
+            color: var(--secondary);
         }
 
         h3 {
             color: #334155;
             margin: 20px 0 10px;
             font-size: 1.2rem;
+            display: flex;
+            align-items: center;
         }
 
-        /* --- Text --- */
+        h3 i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
         p {
             margin-bottom: 16px;
             font-size: 1rem;
         }
 
-        /* --- Quote Block --- */
+        .lesson-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 25px;
+            transition: var(--transition);
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 50px;
+            background-color: #f0f4ff;
+            border: 1px solid #e6ecff;
+        }
+
+        .lesson-link:hover {
+            color: var(--accent);
+            transform: translateX(-5px);
+            background-color: #e6ecff;
+            box-shadow: var(--shadow);
+        }
+
+        .lesson-link i {
+            margin-right: 8px;
+        }
+
         .quote {
-            background-color: #eff6ff;
-            border-left: 5px solid #3b82f6;
-            padding: 18px 20px;
+            background: linear-gradient(to right, #eff6ff, #f8fbff);
+            border-left: 5px solid var(--primary);
+            padding: 20px 25px;
             margin: 25px 0;
             font-style: italic;
             color: #1e293b;
-            border-radius: 5px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .quote::before {
+            content: """;
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: Georgia, serif;
         }
 
         .quote-source {
             text-align: right;
             font-weight: 600;
             margin-top: 8px;
-            color: #475569;
+            color: var(--secondary);
         }
 
-        /* --- Table --- */
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 25px 0;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-            border-radius: 8px;
+            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
             overflow: hidden;
+            border: 1px solid #e2e8f0;
         }
 
         th, td {
             border: 1px solid #e2e8f0;
-            padding: 12px 14px;
+            padding: 14px 16px;
             text-align: left;
         }
 
         th {
-            background-color: #2563eb;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             font-weight: 600;
         }
@@ -115,70 +191,142 @@
             background-color: #f9fafb;
         }
 
-        /* --- Example Box --- */
+        tr:hover {
+            background-color: #f0f4ff;
+            transition: var(--transition);
+        }
+
         .example-box {
-            background-color: #f0f9ff;
-            border-radius: 8px;
-            padding: 18px;
+            background: linear-gradient(to right, #f0f9ff, #f8fdff);
+            border-radius: var(--border-radius);
+            padding: 20px;
             margin: 20px 0;
-            border-left: 5px solid #3b82f6;
+            border-left: 5px solid var(--success);
+            box-shadow: var(--shadow);
         }
 
         .example-title {
             font-weight: 700;
             margin-bottom: 10px;
-            color: #1e40af;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
         }
 
-        /* --- Definition List --- */
+        .example-title i {
+            margin-right: 8px;
+        }
+
         .definition-list {
             margin: 20px 0;
         }
 
         .definition-list dt {
             font-weight: 700;
-            margin-top: 10px;
-            color: #1e3a8a;
+            margin-top: 15px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .definition-list dt i {
+            margin-right: 8px;
+            color: var(--primary);
         }
 
         .definition-list dd {
-            margin-left: 20px;
-            margin-bottom: 10px;
+            margin-left: 30px;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background-color: white;
+            border-radius: 6px;
+            border-left: 3px solid #e2e8f0;
         }
 
-        /* --- Section --- */
         .section {
             margin-bottom: 45px;
+            padding: 25px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
 
-        /* --- Footer --- */
+        .section:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+
         footer {
             margin-top: 50px;
             text-align: center;
             padding-top: 25px;
             border-top: 1px solid #e2e8f0;
-            color: #64748b;
+            color: var(--gray);
             font-size: 0.95rem;
             letter-spacing: 0.3px;
         }
 
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>Applied Linguistics - Lecture 01</h1>
-            <h2>Introducing Applied Linguistics</h2>
+            <h2><i class="fas fa-book-open"></i>Introducing Applied Linguistics</h2>
             <p>Master 1 / Applied Linguistics | Instructor: Nour el houda KHERFANE</p>
             <p>Zaine Achour University-Djelfa | Department of English</p>
         </header>
+        
         <a href="index.html" class="lesson-link">
-                        <span class="lesson-number">GO back to lessons list</span>
-                        
-                    </a>
+            <i class="fas fa-arrow-left"></i>
+            GO back to lessons list
+        </a>
 
         <div class="section">
-            <h2>1. Defining Applied Linguistics</h2>
+            <h2><i class="fas fa-pencil-alt"></i>1. Defining Applied Linguistics</h2>
             
             <div class="quote">
                 "Applied Linguistics means many things to many people." (Cook 2006)
@@ -188,24 +336,24 @@
             
             <div class="definition-list">
                 <dl>
-                    <dt>Mediation between theory and practice</dt>
+                    <dt><i class="fas fa-link"></i>Mediation between theory and practice</dt>
                     <dd>"A mediation between theory and practice." (Kaplan and Widdowson 1992)</dd>
                     
-                    <dt>Synthesis of research</dt>
+                    <dt><i class="fas fa-sync-alt"></i>Synthesis of research</dt>
                     <dd>"A synthesis of research from a variety of disciplines, including linguistics." (Hudson 1999)</dd>
                     
-                    <dt>Investigation of real-world problems</dt>
+                    <dt><i class="fas fa-search"></i>Investigation of real-world problems</dt>
                     <dd>"AL is the theoretical and empirical investigation of real world problems in which language is a central issue." (Brumfit, 1977)</dd>
                     
-                    <dt>Problem-solving focus</dt>
+                    <dt><i class="fas fa-tasks"></i>Problem-solving focus</dt>
                     <dd>"The focus of AL is on trying to resolve language based problems that people encounter in the real world..." (Spolsky, 2005)</dd>
                     
-                    <dt>Interdisciplinary field</dt>
+                    <dt><i class="fas fa-project-diagram"></i>Interdisciplinary field</dt>
                     <dd>"Applied Linguistics is an interdisciplinary field of inquiry that addresses a broad range of language-related issues..." (AAAL)</dd>
                 </dl>
             </div>
             
-            <h3>Applied Linguistics vs. Linguistics Applied</h3>
+            <h3><i class="fas fa-balance-scale"></i>Applied Linguistics vs. Linguistics Applied</h3>
             
             <p>There's an important distinction between these two concepts:</p>
             
@@ -236,7 +384,7 @@
                 </tbody>
             </table>
             
-            <h3>Classification of Language Problems</h3>
+            <h3><i class="fas fa-list-alt"></i>Classification of Language Problems</h3>
             
             <table>
                 <thead>
@@ -291,14 +439,14 @@
         </div>
 
         <div class="section">
-            <h2>2. The Scope of Applied Linguistics</h2>
+            <h2><i class="fas fa-globe-americas"></i>2. The Scope of Applied Linguistics</h2>
             
             <p>While initially focused on language teaching, Applied Linguistics has expanded to include many areas:</p>
             
-            <h3>Language and Education</h3>
+            <h3><i class="fas fa-graduation-cap"></i>Language and Education</h3>
             
             <div class="example-box">
-                <div class="example-title">Examples:</div>
+                <div class="example-title"><i class="fas fa-lightbulb"></i>Examples:</div>
                 <ul>
                     <li><strong>First-language education:</strong> A child studying their home language(s)</li>
                     <li><strong>Additional-language education:</strong> 
@@ -311,14 +459,14 @@
                 </ul>
             </div>
             
-            <h3>Language Testing</h3>
+            <h3><i class="fas fa-clipboard-check"></i>Language Testing</h3>
             
             <div class="example-box">
-                <div class="example-title">Example:</div>
+                <div class="example-title"><i class="fas fa-lightbulb"></i>Example:</div>
                 <p>Designing a proficiency test for university admission that accurately measures a student's ability to use academic English in reading, writing, listening, and speaking.</p>
             </div>
             
-            <h3>Language, Work, and Law</h3>
+            <h3><i class="fas fa-balance-scale"></i>Language, Work, and Law</h3>
             
             <table>
                 <thead>
@@ -347,7 +495,7 @@
                 </tbody>
             </table>
             
-            <h3>Language, Information, and Effect</h3>
+            <h3><i class="fas fa-info-circle"></i>Language, Information, and Effect</h3>
             
             <table>
                 <thead>
@@ -388,7 +536,7 @@
         </div>
 
         <div class="section">
-            <h2>3. The Need for Applied Linguistics</h2>
+            <h2><i class="fas fa-question-circle"></i>3. The Need for Applied Linguistics</h2>
             
             <p>Applied Linguistics is crucial because:</p>
             
@@ -400,7 +548,7 @@
             </ul>
             
             <div class="example-box">
-                <div class="example-title">Real-World Applications:</div>
+                <div class="example-title"><i class="fas fa-lightbulb"></i>Real-World Applications:</div>
                 <ul>
                     <li>Improving diagnosis of speech pathologies</li>
                     <li>Designing new writing systems for previously unwritten languages</li>
@@ -414,10 +562,10 @@
                 </ul>
             </div>
             
-            <h3>Key Questions in Applied Linguistics</h3>
+            <h3><i class="fas fa-key"></i>Key Questions in Applied Linguistics</h3>
             
             <div class="example-box">
-                <div class="example-title">Critical Questions:</div>
+                <div class="example-title"><i class="fas fa-lightbulb"></i>Critical Questions:</div>
                 <ul>
                     <li>What language skills should children attain beyond basic literacy?</li>
                     <li>Should children speaking a dialect be encouraged to maintain it or learn the standard form?</li>
@@ -432,29 +580,24 @@
                 </ul>
             </div>
         </div>
-        <!-- Brief HTML summary of "Introducing Applied Linguistics" (Lecture 01) -->
-<section>
-  <h2>Introducing Applied Linguistics — Brief Summary</h2>
 
-  <p>
-    Applied Linguistics (AL) studies real-world language problems by combining linguistic theory with
-    other fields (education, sociology, psychology, law, etc.). It’s both interdisciplinary and practical —
-    aiming to solve issues like language teaching, testing, translation, clinical diagnosis, and policy. 
-    (source: lecture notes) :contentReference[oaicite:0]{index=0}
-  </p>
-
-  <ul>
-    <li><strong>Core idea:</strong> mediation between theory and practice — using research to reframe and solve language problems.</li>
-    <li><strong>AL vs. “Linguistics Applied”:</strong> AL is multilateral (uses many disciplines); “linguistics applied” tries to apply only linguistic concepts directly.</li>
-    <li><strong>Major areas:</strong> language teaching & acquisition, assessment, sociolinguistics, forensic linguistics, translation, corpus & computational work, information design, lexicography, and clinical linguistics.</li>
-    <li><strong>Why it matters:</strong> helps make decisions about schooling languages, dialect policy, literacy, sign language, preservation of endangered languages, and more.</li>
-  </ul>
-
-  <p>
-    <em>Example:</em> designing a valid language test for migrant learners requires linguistics + measurement theory + knowledge of learners’ social context.
-  </p>
-</section>
-
+        <section class="section">
+            <h2><i class="fas fa-file-alt"></i>Introducing Applied Linguistics — Brief Summary</h2>
+            <p>
+                Applied Linguistics (AL) studies real-world language problems by combining linguistic theory with
+                other fields (education, sociology, psychology, law, etc.). It's both interdisciplinary and practical —
+                aiming to solve issues like language teaching, testing, translation, clinical diagnosis, and policy.
+            </p>
+            <ul>
+                <li><strong>Core idea:</strong> mediation between theory and practice — using research to reframe and solve language problems.</li>
+                <li><strong>AL vs. "Linguistics Applied":</strong> AL is multilateral (uses many disciplines); "linguistics applied" tries to apply only linguistic concepts directly.</li>
+                <li><strong>Major areas:</strong> language teaching & acquisition, assessment, sociolinguistics, forensic linguistics, translation, corpus & computational work, information design, lexicography, and clinical linguistics.</li>
+                <li><strong>Why it matters:</strong> helps make decisions about schooling languages, dialect policy, literacy, sign language, preservation of endangered languages, and more.</li>
+            </ul>
+            <p>
+                <em>Example:</em> designing a valid language test for migrant learners requires linguistics + measurement theory + knowledge of learners' social context.
+            </p>
+        </section>
 
         <footer>
             <p>Lecture Notes Summary | Based on "Introducing Applied Linguistics" | Master 1 Applied Linguistics</p>
