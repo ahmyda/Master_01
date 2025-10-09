@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Methodology Steps - Detailed Overview</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.7;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
+            color: var(--dark);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px 50px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .container:hover {
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #eaecef;
+            position: relative;
+        }
+        
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        h1 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 2.4rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 25px;
+            transition: var(--transition);
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 50px;
+            background-color: #f0f4ff;
+            border: 1px solid #e6ecff;
+        }
+        
+        .back-link:hover {
+            color: var(--accent);
+            transform: translateX(-5px);
+            background-color: #e6ecff;
+            box-shadow: var(--shadow);
+        }
+        
+        .back-link i {
+            margin-right: 8px;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-top: 35px;
+            padding: 15px 20px;
+            background: linear-gradient(to right, #f0f4ff, #ffffff);
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--primary);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        
+        h2:hover {
+            transform: translateX(5px);
+            background: linear-gradient(to right, #e6ecff, #ffffff);
+        }
+        
+        h2 i {
+            margin-right: 12px;
+            color: var(--secondary);
+        }
+        
+        strong {
+            color: var(--secondary);
+        }
+        
+        ol {
+            list-style-type: none;
+            counter-reset: step-counter;
+            padding-left: 0;
+        }
+        
+        li {
+            margin-bottom: 30px;
+            padding: 25px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+            position: relative;
+        }
+        
+        li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            border-left-color: var(--accent);
+        }
+        
+        li::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        p {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        ul {
+            list-style-type: none;
+            margin-top: 15px;
+            padding-left: 0;
+        }
+        
+        ul li {
+            margin-bottom: 12px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: none;
+            border-left: 3px solid var(--success);
+            transition: var(--transition);
+        }
+        
+        ul li:hover {
+            transform: none;
+            box-shadow: none;
+            background-color: #f0f4ff;
+        }
+        
+        ul li::before {
+            content: none;
+        }
+        
+        ul ul {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+        
+        ul ul li {
+            background-color: #f1f3f9;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .example-box {
+            background: linear-gradient(to right, #f0f9ff, #f8fdff);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--success);
+            box-shadow: var(--shadow);
+        }
+        
+        .example-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        .example-title i {
+            margin-right: 8px;
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid #e2e8f0;
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+                padding: 12px 15px;
+            }
+            
+            li {
+                padding: 20px 15px 20px 25px;
+            }
+            
+            li::before {
+                left: -12px;
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Research Methodology Steps</h1>
+            <p class="subtitle">Comprehensive Guide to Research Process</p>
+        </header>
+        
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to lessons List
+        </a>
+
+        <ol>
+            <li>
+                <h2><i class="fas fa-search"></i>Step 1: Formulating the Research Problem</h2>
+                <p>The foundation of the entire study. A well-defined problem is crucial for a focused investigation.</p>
+                <ul>
+                    <li><strong>Identify a Broad Area:</strong> Select a general topic of interest (e.g., impact of social media).</li>
+                    <li><strong>Narrow the Topic:</strong> Focus on a specific aspect (e.g., effect of social media on adolescent sleep patterns).</li>
+                    <li><strong>Review Existing Literature:</strong> Understand what is already known; identify gaps in current knowledge.</li>
+                    <li><strong>Operationalize the Problem:</strong> Phrase the problem clearly, typically as a question (e.g., "To what extent does daily social media usage correlate with sleep quality among 16-18 year olds?").</li>
+                </ul>
+                
+                <div class="example-box">
+                    <div class="example-title"><i class="fas fa-lightbulb"></i>Example Research Question:</div>
+                    <p>"How does implementing mindfulness practices in the workplace affect employee productivity and job satisfaction in tech companies?"</p>
+                </div>
+            </li>
+
+            <li>
+                <h2><i class="fas fa-project-diagram"></i>Step 2: Conceptualizing the Design & Review</h2>
+                <p>Developing the theoretical framework and blueprint for data collection and analysis.</p>
+                <ul>
+                    <li><strong>Develop Hypotheses:</strong> Formulate testable statements (null, alternative) based on the problem.
+                        <ul>
+                            <li><strong>Null Hypothesis (H₀):</strong> States there is no relationship or difference.</li>
+                            <li><strong>Alternative Hypothesis (Hₐ):</strong> States there is a relationship or difference.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Specify Variables:</strong> Clearly define the Independent (manipulated), Dependent (measured outcome), and Control variables.</li>
+                    <li><strong>Review the Literature (Detailed):</strong> Conduct a thorough, systematic review to ensure the methodology is justified and the research is novel.</li>
+                </ul>
+            </li>
+
+            <li>
+                <h2><i class="fas fa-clipboard-list"></i>Step 3: Determining the Research Design</h2>
+                <p>Selecting the appropriate framework to answer the research question effectively.</p>
+                <ul>
+                    <li><strong>Select Study Type:</strong>
+                        <ul>
+                            <li><strong>Quantitative:</strong> Experimental, Quasi-Experimental, Survey, Correlational.</li>
+                            <li><strong>Qualitative:</strong> Ethnography, Phenomenology, Case Study, Grounded Theory.</li>
+                            <li><strong>Mixed Methods:</strong> Combining both qualitative and quantitative approaches.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Define the Sample:</strong> Specify the population (the entire group) and the sample (the subset studied).</li>
+                    <li><strong>Choose Sampling Technique:</strong>
+                        <ul>
+                            <li><strong>Probability:</strong> Simple Random, Stratified, Cluster (ensures generalizability).</li>
+                            <li><strong>Non-Probability:</strong> Convenience, Purposive, Quota (used when generalizability is less critical).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <h2><i class="fas fa-tools"></i>Step 4: Designing Data Collection Instruments</h2>
+                <p>Creating or selecting the tools necessary to gather reliable and valid data.</p>
+                <ul>
+                    <li><strong>Instrument Selection/Construction:</strong> Surveys/Questionnaires, Interview Schedules, Observation Checklists, Pre-tests/Post-tests.</li>
+                    <li><strong>Pilot Testing:</strong> Test the instrument on a small group (not part of the main sample) to identify ambiguity, clarity issues, or time constraints.</li>
+                    <li><strong>Ensure Validity:</strong> The instrument measures what it intends to measure (Content, Construct, Criterion).</li>
+                    <li><strong>Ensure Reliability:</strong> The instrument yields consistent results upon repeated measures (Test-retest, Inter-rater, Internal Consistency).</li>
+                </ul>
+                
+                <div class="example-box">
+                    <div class="example-title"><i class="fas fa-lightbulb"></i>Instrument Design Tip:</div>
+                    <p>Use a Likert scale (1-5 or 1-7) for attitude measurement, and include both positively and negatively worded items to reduce response bias.</p>
+                </div>
+            </li>
+
+            <li>
+                <h2><i class="fas fa-database"></i>Step 5: Collecting the Data</h2>
+                <p>The practical execution phase, adhering strictly to the ethical guidelines and the design.</p>
+                <ul>
+                    <li><strong>Obtain Ethical Approval:</strong> Secure consent from participants and approval from Institutional Review Boards (IRB) or ethics committees.</li>
+                    <li><strong>Administer Instruments:</strong> Systematically distribute surveys, conduct interviews, or perform experiments.
+                        <ul>
+                            <li><strong>Maintain Consistency:</strong> Ensure all data is collected under the same, controlled conditions to minimize bias.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Data Cleaning:</strong> Verify the raw data for errors, outliers, missing values, and inconsistencies immediately after collection.</li>
+                </ul>
+            </li>
+
+            <li>
+                <h2><i class="fas fa-chart-bar"></i>Step 6: Analyzing the Data</h2>
+                <p>Processing the collected data to extract meaningful conclusions and test hypotheses.</p>
+                <ul>
+                    <li><strong>Data Entry/Coding:</strong> Input data into statistical software (SPSS, R) or qualitative software (NVivo, ATLAS.ti).</li>
+                    <li><strong>Select Statistical/Analytical Techniques:</strong>
+                        <ul>
+                            <li><strong>Quantitative:</strong> Descriptive Statistics (mean, standard deviation), Inferential Statistics (t-tests, ANOVA, regression, correlation).</li>
+                            <li><strong>Qualitative:</strong> Thematic Analysis, Discourse Analysis, Content Analysis, Narrative Analysis.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Test Hypotheses:</strong> Use statistical tests to determine the probability of results occurring by chance (p-value).</li>
+                </ul>
+            </li>
+
+            <li>
+                <h2><i class="fas fa-file-alt"></i>Step 7: Interpreting and Reporting the Results</h2>
+                <p>Drawing conclusions, discussing implications, and formally presenting the findings.</p>
+                <ul>
+                    <li><strong>Interpret Findings:</strong> Relate the results back to the original research question and hypotheses. Explain *why* the findings emerged (e.g., "The null hypothesis is rejected/failed to be rejected...").</li>
+                    <li><strong>Discuss Implications:</strong> Explain the practical and theoretical importance of the study. How does it fill the knowledge gap?</li>
+                    <li><strong>Identify Limitations:</strong> Acknowledge any shortcomings in the design, sample, or methodology that may have affected the results.</li>
+                    <li><strong>Propose Future Research:</strong> Suggest avenues for further study based on the limitations and unresolved questions.</li>
+                    <li><strong>Write the Report/Thesis:</strong> Structure the final document with Introduction, Literature Review, Methodology, Results, Discussion, and Conclusion sections.</li>
+                </ul>
+                
+                <div class="example-box">
+                    <div class="example-title"><i class="fas fa-lightbulb"></i>Reporting Tip:</div>
+                    <p>Use visualizations like charts and graphs to make complex data more accessible. Always connect your findings back to your original research questions.</p>
+                </div>
+            </li>
+        </ol>
+        
+        <footer>
+            <p>Research Methodology Lesson | Master 1 Applied Linguistics</p>
+            <p>Further Reading: Creswell, J. W. (2014). Research Design: Qualitative, Quantitative, and Mixed Methods Approaches</p>
+        </footer>
+    </div>
+</body>
+</html>
