@@ -3,275 +3,502 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 2: Sociolinguistics - Getting Started</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Sociolinguistics - Lecture 1</title>
     <style>
-        :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
-            --secondary: #7209b7;
-            --accent: #f72585;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --success: #4cc9f0;
-            --border-radius: 12px;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
-        }
-        
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
-            color: var(--dark);
-            min-height: 100vh;
+            color: #333;
+            background-color: #f5f7fa;
             padding: 20px;
         }
         
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
         
         header {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            color: white;
-            padding: 40px 30px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path d="M20,20 C40,0 60,0 80,20 C100,40 100,60 80,80 C60,100 40,100 20,80 C0,60 0,40 20,20 Z" fill="white"/></svg>');
-            background-size: 200px;
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 1;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
         }
         
         h1 {
-            font-size: 2.5rem;
+            color: #2c3e50;
             margin-bottom: 10px;
-            font-weight: 700;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            color: var(--primary);
-            font-weight: 500;
-            margin-bottom: 25px;
-            transition: var(--transition);
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 50px;
-            background-color: #f0f4ff;
-        }
-        
-        .back-link:hover {
-            color: var(--accent);
-            transform: translateX(-5px);
-            background-color: #e6ecff;
-        }
-        
-        .back-link i {
-            margin-right: 8px;
-        }
-        
-        .module-description {
-            background: linear-gradient(to right, #f8f9fa, #ffffff);
-            padding: 25px;
-            border-radius: var(--border-radius);
-            margin-bottom: 30px;
-            border-left: 5px solid var(--primary);
-            box-shadow: var(--shadow);
-        }
-        
-        .module-description h3 {
-            color: var(--secondary);
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .module-description h3 i {
-            margin-right: 10px;
-            color: var(--primary);
-        }
-        
-        .module-description p {
-            color: #555;
-            line-height: 1.7;
-            font-size: 1.05rem;
+            font-size: 2.2rem;
         }
         
         h2 {
-            color: var(--secondary);
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--light);
-            font-size: 1.8rem;
-            display: flex;
-            align-items: center;
+            color: #9b59b6;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e9ecef;
         }
         
-        h2 i {
-            margin-right: 12px;
-            color: var(--primary);
+        h3 {
+            color: #8e44ad;
+            margin: 20px 0 10px;
         }
         
-        .lesson-list {
-            list-style: none;
+        p {
+            margin-bottom: 15px;
         }
-        
-        .lesson-item {
-            background-color: white;
-            margin: 20px 0;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            overflow: hidden;
-            border-left: 5px solid var(--primary);
-        }
-        
-        .lesson-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-            border-left-color: var(--accent);
-        }
-        
+   
         .lesson-link {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            padding: 20px;
-            color: var(--dark);
+            gap: 8px;
             text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
+            color: #fff;
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(155, 89, 182, 0.3);
+        }
+
+        .lesson-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 14px rgba(155, 89, 182, 0.4);
+            background: linear-gradient(135deg, #8e44ad, #732d91);
+        }
+
+        
+        .quote {
+            background-color: #f8f9fa;
+            border-left: 4px solid #9b59b6;
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
         }
         
-        .lesson-link:hover {
+        .quote-source {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #7d3c98;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #9b59b6;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
             background-color: #f8f9fa;
         }
         
-        .lesson-number {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 50%;
-            margin-right: 20px;
-            font-weight: bold;
-            flex-shrink: 0;
-            transition: var(--transition);
+        .example-box {
+            background-color: #f4ecf7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #9b59b6;
         }
         
-        .lesson-item:hover .lesson-number {
-            background-color: var(--accent);
-            transform: scale(1.1);
+        .example-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        .definition-list {
+            margin: 15px 0;
+        }
+        
+        .definition-list dt {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #2c3e50;
+        }
+        
+        .definition-list dd {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .founder-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid #9b59b6;
+        }
+        
+        .founder-name {
+            font-weight: bold;
+            color: #7d3c98;
+            margin-bottom: 8px;
+        }
+        
+        .quiz-section {
+            background-color: #f0e6f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .quiz-title {
+            color: #7d3c98;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #d7bde2;
+        }
+        
+        .question:last-child {
+            border-bottom: none;
+        }
+        
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .options {
+            margin-left: 20px;
         }
         
         footer {
+            margin-top: 40px;
             text-align: center;
-            padding: 25px;
-            color: var(--gray);
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
             font-size: 0.9rem;
-            border-top: 1px solid #ecf0f1;
-            background-color: #f8f9fa;
         }
         
-        @media (max-width: 600px) {
-            .container {
-                border-radius: 0;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .content {
-                padding: 25px;
-            }
-            
-            .lesson-link {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .lesson-number {
-                margin-bottom: 10px;
-            }
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="header-content">
-                <h1>Sociolinguistics</h1>
-                <p class="subtitle">Getting Started</p>
-            </div>
+            <h1>Sociolinguistics - Lecture 1</h1>
+            <h2>An Introduction to Sociolinguistics</h2>
         </header>
-        
-        <div class="content">
-            <a href="../index.html" class="back-link">
-                <i class="fas fa-arrow-left"></i>
-                Back to Main Modules List
-            </a>
+        <a href="index.html" class="lesson-link">
+    ← Go back to lessons list
+</a>
+
+
+        <div class="section">
+            <h2>1. Defining Sociolinguistics</h2>
             
-            <div class="module-description">
-                <h3><i class="fas fa-info-circle"></i> About This Module</h3>
-                <p>This module introduces the foundational concepts of Sociolinguistics, exploring how language varies across social groups and contexts. You'll learn how language interacts with culture, identity, community, and social norms, and how these patterns affect communication in everyday life, education, and the workplace</p>
+            <p><strong>Sociolinguistics</strong> is a sub-branch of linguistics that scientifically studies the relationship between language and society. However, this simple definition hides considerable complexity due to:</p>
+            
+            <ul>
+                <li>The intricate nature of language structure itself</li>
+                <li>The additional complexity introduced by social aspects</li>
+                <li>The need for alternative tools to explore language use in social contexts</li>
+            </ul>
+            
+            <h3>Founding Figures of Sociolinguistics</h3>
+            
+            <div class="founders-grid">
+                <div class="founder-card">
+                    <div class="founder-name">William Labov</div>
+                    <p>Focused on how social determinants are embedded in language use; developed variationist sociolinguistics</p>
+                </div>
+                
+                <div class="founder-card">
+                    <div class="founder-name">Basil Bernstein</div>
+                    <p>Known for his theory of language codes (restricted vs. elaborated codes)</p>
+                </div>
+                
+                <div class="founder-card">
+                    <div class="founder-name">Dell Hymes</div>
+                    <p>Developed the concept of communicative competence and emphasized knowledge of social norms in communication</p>
+                </div>
+                
+                <div class="founder-card">
+                    <div class="founder-name">John Gumperz</div>
+                    <p>Emphasized interactional sociolinguistics and conversational inference</p>
+                </div>
+                
+                <div class="founder-card">
+                    <div class="founder-name">Charles Ferguson</div>
+                    <p>Introduced the concept of diglossia (situations where two varieties of the same language exist side by side)</p>
+                </div>
+                
+                <div class="founder-card">
+                    <div class="founder-name">Joshua Fishman</div>
+                    <p>Focused on multilingualism, language planning, and language maintenance</p>
+                </div>
             </div>
             
-            <h2><i class="fas fa-play-circle"></i> Lessons</h2>
+            <div class="quote">
+                "The central dogma of sociolinguistics is that the community is prior to the individual."
+                <div class="quote-source">Labov (2010, p. 7)</div>
+            </div>
             
-            <ul class="lesson-list">
-                <li class="lesson-item">
-                    <a href="lesson-one.html" class="lesson-link">
-                        <span class="lesson-number">1</span>
-                        <span>Introducing to sociolinguistics</span>
-                    </a>
-                </li>
-            </ul>
+            <div class="quote">
+                "Speech is not a personal possession, but a social; it belongs, not to the individual, but to the member of society. No item of existing language is the work of an individual; for what we may severally choose to say is not language until it be accepted and employed by our fellows."
+                <div class="quote-source">Whitney (1867, p. 404)</div>
+            </div>
         </div>
-        
+
+        <div class="section">
+            <h2>2. Sociolinguistics vs. Sociology of Language</h2>
+            
+            <p>Since language is both an individual and social possession, it can be studied from two perspectives:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Micro-sociolinguistics (Sociolinguistics)</th>
+                        <th>Macro-sociolinguistics (Sociology of Language)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Focus</strong></td>
+                        <td>Individuals and how language functions in communication</td>
+                        <td>Large groups and understanding society through language</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Level of Analysis</strong></td>
+                        <td>Micro-level: individual speakers, conversations</td>
+                        <td>Macro-level: societal patterns, language policies</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Key Questions</strong></td>
+                        <td>How do social factors (age, gender, class) affect language use?</td>
+                        <td>Why do languages change? Why does one language dominate others?</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Key Concepts</strong></td>
+                        <td>Language variation, style-shifting, politeness strategies</td>
+                        <td>Speech community, language planning, diglossia</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Example</strong></td>
+                        <td>Studying how women vs. men use tag questions in conversation</td>
+                        <td>Analyzing why English became a global lingua franca</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Micro-sociolinguistics</h3>
+            
+            <div class="example-box">
+                <div class="example-title">Focus Areas:</div>
+                <ul>
+                    <li>Examining how social attributes (sex, gender, age, ethnicity, religion, class) are reflected in language use</li>
+                    <li>Accounting for variation in individuals' ways of speaking</li>
+                    <li>Viewing variation as an important aspect of how language functions</li>
+                </ul>
+            </div>
+            
+            <p>This perspective challenges Ferdinand de Saussure and Noam Chomsky's views that downplay language variation in performance.</p>
+            
+            <h3>Macro-sociolinguistics</h3>
+            
+            <div class="example-box">
+                <div class="example-title">Focus Areas:</div>
+                <ul>
+                    <li>Interaction between large groups of people and language</li>
+                    <li>Concepts like speech community and community of practice</li>
+                    <li>Questions about language change, language dominance, and language death</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3. Key Concepts and Examples</h2>
+            
+            <h3>Language Variation Based on Social Factors</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Social Factor</th>
+                        <th>How It Influences Language</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Age</strong></td>
+                        <td>Different generations use language differently; new slang emerges</td>
+                        <td>Teenagers using terms like "lit" or "salty" that older generations may not use</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gender</strong></td>
+                        <td>Men and women may use different speech patterns</td>
+                        <td>Women sometimes use more tag questions ("isn't it?", "don't you think?")</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Social Class</strong></td>
+                        <td>Different classes may use different vocabulary, pronunciation</td>
+                        <td>In England, pronunciation of "h" in words like "house" varies by class</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ethnicity</strong></td>
+                        <td>Ethnic groups may develop distinct language varieties</td>
+                        <td>African American Vernacular English (AAVE) has distinct grammatical patterns</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Region</strong></td>
+                        <td>Geographical location affects accent and vocabulary</td>
+                        <td>In the US, "soda" vs. "pop" vs. "coke" for carbonated beverages</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Speech Community</h3>
+            
+            <div class="example-box">
+                <div class="example-title">Definition:</div>
+                <p>A group of people who share not only a language variety but also norms for its appropriate use.</p>
+                
+                <div class="example-title">Example:</div>
+                <p>Members of a particular profession (like doctors or lawyers) develop specialized vocabulary and communication styles that mark them as part of that community.</p>
+            </div>
+            
+            <h3>Why Variation Matters</h3>
+            
+            <div class="example-box">
+                <p>Sociolinguists argue that variation is not a problem to be eliminated but rather:</p>
+                <ul>
+                    <li>An essential aspect of how language functions</li>
+                    <li>A reflection of social identity and group membership</li>
+                    <li>A mechanism for language change over time</li>
+                    <li>A resource for expressing different social meanings</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="quiz-section">
+            <h2 class="quiz-title">Sociolinguistics Quiz</h2>
+            
+            <h3>Part A: Definitions and Concepts</h3>
+            
+            <div class="question">
+                <div class="question-text">1. Define sociolinguistics in your own words.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">2. What does William Labov mean when he says, "The community is prior to the individual"?</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">3. Explain the difference between micro-sociolinguistics and macro-sociolinguistics.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">4. What is meant by the term "speech community"?</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">5. How does Whitney (1867) describe the nature of speech?</div>
+            </div>
+            
+            <h3>Part B: Multiple Choice</h3>
+            
+            <div class="question">
+                <div class="question-text">6. Which of the following is not one of the founding figures of sociolinguistics?</div>
+                <div class="options">
+                    <p>a) William Labov</p>
+                    <p>b) Basil Bernstein</p>
+                    <p>c) Noam Chomsky</p>
+                    <p>d) Dell Hymes</p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">7. Which of the following best describes macro-sociolinguistics?</div>
+                <div class="options">
+                    <p>a) Focuses on individual speakers' accents</p>
+                    <p>b) Studies how language use reflects large social structures</p>
+                    <p>c) Examines speech errors in communication</p>
+                    <p>d) Analyzes personal language habits</p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">8. According to Labov's variationist approach, language variation is:</div>
+                <div class="options">
+                    <p>a) A sign of linguistic decay</p>
+                    <p>b) An essential aspect of how language functions</p>
+                    <p>c) A problem to be eliminated by grammarians</p>
+                    <p>d) A feature that only exists in non-standard dialects</p>
+                </div>
+            </div>
+            
+            <h3>Part C: Short Answer</h3>
+            
+            <div class="question">
+                <div class="question-text">9. Give an example of how social variables (such as class, gender, or age) can influence language use.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">10. Why do sociolinguists argue that variation is important rather than a problem?</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">11. In your opinion, why is the study of sociolinguistics important for understanding society today?</div>
+            </div>
+            
+            <h3>Part D: Critical Thinking</h3>
+            
+            <div class="question">
+                <div class="question-text">12. Consider the statement: "A language only exists when it is accepted and employed by a community." Discuss how this idea challenges the view of language as an individual possession. Provide examples.</div>
+            </div>
+        </div>
+
         <footer>
-            <p>Applied Linguistics Course &copy; 2023</p>
+            <p>Lecture Notes Summary | Based on "An Introduction to Sociolinguistics"</p>
+            <p>References: Labov (2010), Trudgill (1984), Wardhaugh (2006), Whitney (1867)</p>
         </footer>
     </div>
 </body>
