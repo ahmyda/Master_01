@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1: Applied Linguistics - Getting Started</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--secondary), var(--primary-dark));
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+        
+        .back-link:hover {
+            color: var(--accent);
+            transform: translateX(-5px);
+        }
+        
+        .back-link::before {
+            content: "←";
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+            font-size: 1.5rem;
+        }
+        
+        .lesson-list {
+            list-style: none;
+        }
+        
+        .lesson-item {
+            background-color: white;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            overflow: hidden;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .lesson-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            border-left-color: var(--accent);
+        }
+        
+        .lesson-link {
+            display: flex;
+            align-items: center;
+            padding: 18px 20px;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .lesson-link:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .lesson-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .lesson-item:hover .lesson-number {
+            background-color: var(--accent);
+            transform: scale(1.1);
+        }
+        
+        .module-description {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .module-description h3 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        
+        .module-description p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #ecf0f1;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sociolinguistics</h1>
+            <p class="subtitle">Getting Started</p>
+        </header>
+        
+        <div class="content">
+            <a href="../index.html" class="back-link">Back to Main Modules List</a>
+            
+            <div class="module-description">
+                <h3>About This Module</h3>
+                <p>This module introduces the foundational concepts of Sociolinguistics, exploring how language varies across social groups and contexts. You'll learn how language interacts with culture, identity, community, and social norms, and how these patterns affect communication in everyday life, education, and the workplace</p>
+            </div>
+            
+            <h2>Lessons</h2>
+            
+            <ul class="lesson-list">
+                <li class="lesson-item">
+                    <a href="lesson-one.html" class="lesson-link">
+                        <span class="lesson-number">1</span>
+                        <span>Introducing to sociolinguistics</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+        
+        <footer>
+            <p>Applied Linguistics Course &copy; 2023</p>
+        </footer>
+    </div>
+</body>
+</html>
