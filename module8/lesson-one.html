@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applied Linguistics - Needs Analysis in ESP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.8;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px 50px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #eaecef;
+            position: relative;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+
+        h1 {
+            color: var(--secondary);
+            margin-bottom: 8px;
+            font-size: 2.4rem;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 30px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e5e7eb;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        h2 i {
+            margin-right: 12px;
+            color: var(--secondary);
+        }
+
+        h3 {
+            color: #334155;
+            margin: 20px 0 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        h3 i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .lesson-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(155, 89, 182, 0.3);
+        }
+
+        .lesson-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 14px rgba(155, 89, 182, 0.4);
+            background: linear-gradient(135deg, #8e44ad, #732d91);
+        }
+
+        .quote {
+            background: linear-gradient(to right, #eff6ff, #f8fbff);
+            border-left: 5px solid var(--primary);
+            padding: 20px 25px;
+            margin: 25px 0;
+            font-style: italic;
+            color: #1e293b;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .quote::before {
+            
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        .quote-source {
+            text-align: right;
+            font-weight: 600;
+            margin-top: 8px;
+            color: var(--secondary);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 14px 16px;
+            text-align: left;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        tr:hover {
+            background-color: #f0f4ff;
+            transition: var(--transition);
+        }
+
+        .example-box {
+            background: linear-gradient(to right, #f0f9ff, #f8fdff);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--success);
+            box-shadow: var(--shadow);
+        }
+
+        .example-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+        }
+
+        .example-title i {
+            margin-right: 8px;
+        }
+
+        .definition-list {
+            margin: 20px 0;
+        }
+
+        .definition-list dt {
+            font-weight: 700;
+            margin-top: 15px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .definition-list dt i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+
+        .definition-list dd {
+            margin-left: 30px;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background-color: white;
+            border-radius: 6px;
+            border-left: 3px solid #e2e8f0;
+        }
+
+        .section {
+            margin-bottom: 45px;
+            padding: 25px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .section:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid #e2e8f0;
+            color: var(--gray);
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Applied Linguistics - Needs Analysis in ESP</h1>
+            <h2><i class="fas fa-chart-line"></i>Didactics of Teaching ESP</h2>
+            <p>Master 1 / Applied Linguistics | Instructor: Dr. Ouafa Ouarniki</p>
+            <p>Zaine Achour University-Djelfa | Department of English</p>
+        </header>
+        
+        <a href="index.html" class="lesson-link">← Go back to lessons list</a>
+
+        <div class="section">
+            <h2><i class="fas fa-play-circle"></i>Introduction</h2>
+            
+            <p>Needs analysis in ESP involves the systematic and comprehensive study of the language needs of the target learners, their goals and objectives, and the context in which they will use English.</p>
+            
+            <div class="quote">
+                "By conducting a needs analysis, ESP practitioners can design a course and develop materials that are tailored to the specific needs of the learners, ensuring that they acquire the language skills and competencies necessary to succeed in their professional or academic contexts."
+            </div>
+            
+            <p>This course provides an overview of needs analysis in ESP, including its definition, types, instruments, steps, and the importance of conducting ongoing needs assessment throughout the course.</p>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-eye"></i>1. Overview on Needs Analysis</h2>
+            
+            <div class="quote">
+                "In the context of ESP, needs analysis has become the dynamic impulse underlying course design, the justification for the S and the P, the driving force that has motivated teachers and course designers throughout the world ever since the magic acronym ESP came in."
+                <div class="quote-source">- Escorcia (1985:53)</div>
+            </div>
+            
+            <p>Perhaps the basis of a sound approach to course design is to start with a profile of the needs of the learner, so as to fit what is taught to what is needed. ESP has an advantage over EGP (English for General Purposes), in that it brought into focus the concept of 'needs analysis'.</p>
+            
+            <div class="example-box">
+                <div class="example-title"><i class="fas fa-lightbulb"></i>Key Insight:</div>
+                <p>ESP's focus on needs analysis distinguishes it from general English teaching and provides a systematic framework for designing targeted, effective language courses.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-book"></i>2. Definition of Needs Analysis</h2>
+            
+            <p>Needs analysis in English language teaching has been defined in several ways by different scholars:</p>
+            
+            <div class="definition-list">
+                <dl>
+                    <dt><i class="fas fa-procedures"></i>Nunan (1988)</dt>
+                    <dd>"A family of procedures for gathering information about learners and about communication tasks."</dd>
+                    
+                    <dt><i class="fas fa-database"></i>Brown (1995)</dt>
+                    <dd>"The analysis of both subjective and objective data to set up the objectives of the course that meet the requirements of the students and the institute."</dd>
+                    
+                    <dt><i class="fas fa-sync-alt"></i>Brown (2009)</dt>
+                    <dd>"The systematic collection and analysis of all information necessary for defining a defensible curriculum."</dd>
+                    
+                    <dt><i class="fas fa-link"></i>Holec (1980)</dt>
+                    <dd>"A classical procedure by which a close link can be established between the learners and the curricula."</dd>
+                </dl>
+            </div>
+            
+            <h3><i class="fas fa-exchange-alt"></i>Terminology Note</h3>
+            
+            <div class="example-box">
+                <div class="example-title"><i class="fas fa-comment"></i>Interchangeable Terms:</div>
+                <p>The terms "needs analysis" and "needs assessment" are often used interchangeably in ESP literature. Both refer to the process of identifying language learning needs for specific purposes.</p>
+            </div>
+            
+            <div class="quote">
+                "Needs analysis comes to mean the whole cluster of techniques which lead to an understanding of the parameters of the learning situation: ego, learners, teachers, administrators, course-writers, producers, career-expectation and job satisfaction, social dynamics, learner-type and resource analysis, etc, are relevant factors in addition to the original predicted communication behaviour."
+                <div class="quote-source">- Richterich and Trim (1980)</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-cogs"></i>3. Needs Analysis in ESP Course Development</h2>
+            
+            <h3><i class="fas fa-history"></i>Historical Context</h3>
+            
+            <p>The term "needs analysis" first appeared in the 1920s but became central to ESP in the 1960s, as needs analysis became a significant part of ESP course development (West, 1994).</p>
+            
+            <div class="definition-list">
+                <dl>
+                    <dt><i class="fas fa-check-circle"></i>Hutchinson & Waters (1987)</dt>
+                    <dd>Highlighted that an awareness of needs distinguishes ESP from general English</dd>
+                    
+                    <dt><i class="fas fa-times-circle"></i>Seedhouse (1995)</dt>
+                    <dd>Believed that needs analysis theory and application can be applied in general English courses</dd>
+                    
+                    <dt><i class="fas fa-exclamation-circle"></i>Long (2005)</dt>
+                    <dd>Affirmed that any language course without a needs analysis does not provide detailed and selective goals</dd>
+                </dl>
+            </div>
+            
+            <h3><i class="fas fa-project-diagram"></i>Course Development Integration</h3>
+            
+            <p>Needs analysis is seen to be related to other specific phases of ESP course development:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Phase</th>
+                        <th>Role of Needs Analysis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Course Design</td>
+                        <td>Provides foundation for learning objectives and content structure</td>
+                    </tr>
+                    <tr>
+                        <td>Materials Selection</td>
+                        <td>Guides selection of relevant and appropriate teaching materials</td>
+                    </tr>
+                    <tr>
+                        <td>Pedagogical Approaches</td>
+                        <td>Informs teaching methods and classroom activities</td>
+                    </tr>
+                    <tr>
+                        <td>Assessment</td>
+                        <td>Helps design evaluation methods that measure targeted competencies</td>
+                    </tr>
+                    <tr>
+                        <td>Evaluation</td>
+                        <td>Provides criteria for course effectiveness measurement</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3><i class="fas fa-sync"></i>3.1 On-going Needs Analysis</h3>
+            
+            <div class="quote">
+                "Needs analysis has been traditionally conducted during the initial stage of course development as the first step taken before a course begins. However, Dudley-Evans and St. John's diagram of the stages in the ESP process indicates that needs analysis can be conducted at different stages of the course according to each situation."
+            </div>
+            
+            <p>An on-going needs analysis later in a course may lead to a successful revision of an ESP programme (Ahour & Mohseni, 2015; Prachanant, 2012).</p>
+            
+            <div class="example-box">
+                <div class="example-title"><i class="fas fa-lightbulb"></i>Benefits of Ongoing Analysis:</div>
+                <ul>
+                    <li>Allows course realignment based on emerging needs</li>
+                    <li>Enables revision of objectives and modification of teaching materials</li>
+                    <li>Accommodates changing perceptions of learners, teachers, and stakeholders</li>
+                    <li>Supports continuous improvement of ESP programs</li>
+                </ul>
+            </div>
+        </div>
+
+        <section class="section">
+            <h2><i class="fas fa-file-alt"></i>Quick Summary</h2>
+            <p>
+                Needs Analysis is the cornerstone of effective ESP course design, providing a systematic approach to understanding and addressing learners' specific language requirements.
+            </p>
+            <ul>
+                <li><strong>Core purpose:</strong> To identify specific language needs for targeted course design</li>
+                <li><strong>Key characteristic:</strong> Systematic collection and analysis of learner information</li>
+                <li><strong>ESP distinction:</strong> Focus on specific purposes rather than general language proficiency</li>
+                <li><strong>Process nature:</strong> Ongoing rather than one-time initial activity</li>
+            </ul>
+            <p><em>Practical application:</em> Designing a business English course for engineers requires different needs analysis than one for marketing professionals, even within the same company.</p>
+        </section>
+
+        <footer>
+            <p>Lecture Notes Summary | Based on "Needs Analysis in ESP" | Master 1 Applied Linguistics</p>
+            <p>Further Reading: Dudley-Evans, T. & St. John, M. J. (1998). Developments in English for Specific Purposes</p>
+        </footer>
+    </div>
+</body>
+</html>
