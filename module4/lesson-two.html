@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic Essay Writing Guide</title>
+    <title>Academic Article Structure - Complete Guide</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -36,7 +36,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             background: #fff;
             padding: 40px 50px;
@@ -304,6 +304,16 @@
             border-left: 5px solid #9b59b6;
         }
 
+        .orange-block {
+            background: linear-gradient(to right, #fef0e7, #fef5eb);
+            border-left: 5px solid #e67e22;
+        }
+
+        .teal-block {
+            background: linear-gradient(to right, #e7f9f5, #ebfcf9);
+            border-left: 5px solid #1abc9c;
+        }
+
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -329,6 +339,64 @@
         .grid-item h4 i {
             margin-right: 8px;
             color: var(--primary);
+        }
+
+        .structure-visual {
+            background: linear-gradient(to right, #f8f9fa, #ffffff);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+            border: 2px dashed var(--primary);
+        }
+
+        .structure-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .thesis-application {
+            background: linear-gradient(to right, #fff9f5, #fffdfb);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            border-left: 5px solid #ff9e58;
+            box-shadow: var(--shadow);
+        }
+
+        .thesis-title {
+            color: #e67e22;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .thesis-title i {
+            margin-right: 10px;
         }
 
         footer {
@@ -366,14 +434,23 @@
             .grid-container {
                 grid-template-columns: 1fr;
             }
+            
+            .structure-step {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                margin-bottom: 15px;
+                margin-right: 0;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Academic Essay Writing Guide</h1>
-            <h2><i class="fas fa-pen-fancy"></i>Mastering the Art of Academic Writing(not an official lesson but an addition )</h2>
+            <h1>Academic Article Structure</h1>
+            <h2><i class="fas fa-book-open"></i>Complete Guide to Research Writing for Theses and Dissertations</h2>
             <p>Master 1 / Applied Linguistics | Instructor: Nour el Houda KHERFANE</p>
             <p>Zaine Achour University-Djelfa | Department of English</p>
         </header>
@@ -381,61 +458,128 @@
         <a href="index.html" class="lesson-link">← Go back to lessons list</a>
 
         <div class="section">
-            <h2><i class="fas fa-pencil-alt"></i>The Structure of an Academic Essay</h2>
+            <h2><i class="fas fa-compass"></i>Introduction to Academic Article Structure</h2>
             
             <div class="quote">
-                "Good writing is clear thinking made visible."
-                <div class="quote-source">- William Wheeler</div>
+                "A well-structured academic article is like a well-built house - every component serves a specific purpose and contributes to the overall integrity of the work."
             </div>
             
-            <p>Academic essay writing follows a structured approach that helps present ideas logically and persuasively. This guide breaks down the essential components of a successful academic essay.</p>
+            <p>Understanding the standard structure of academic articles is crucial for both reading research effectively and writing your own thesis or dissertation. This structure follows the IMRaD format (Introduction, Methods, Results, and Discussion) with additional components that vary by discipline.</p>
+            
+            <div class="structure-visual">
+                <h3><i class="fas fa-sitemap"></i>Standard Academic Article Structure</h3>
+                <div class="structure-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Title & Abstract</h4>
+                        <p>Concise summary and entry point to the research</p>
+                    </div>
+                </div>
+                <div class="structure-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Introduction</h4>
+                        <p>Background, problem statement, and research questions</p>
+                    </div>
+                </div>
+                <div class="structure-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Literature Review</h4>
+                        <p>Contextualizing within existing research (often part of Introduction)</p>
+                    </div>
+                </div>
+                <div class="structure-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Methods</h4>
+                        <p>Research design, participants, procedures, and analysis</p>
+                    </div>
+                </div>
+                <div class="structure-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Results</h4>
+                        <p>Presentation of findings without interpretation</p>
+                    </div>
+                </div>
+                <div class="structure-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h4>Discussion</h4>
+                        <p>Interpretation, implications, and limitations</p>
+                    </div>
+                </div>
+                <div class="structure-step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h4>Conclusion & References</h4>
+                        <p>Final summary and cited works</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="section">
             <div class="color-block green-block">
-                <h2><i class="fas fa-heading"></i>1. Title</h2>
+                <h2><i class="fas fa-heading"></i>1. Title and Abstract</h2>
+                
+                <h3><i class="fas fa-bullseye"></i>Purpose and Function</h3>
                 
                 <div class="definition-list">
                     <dl>
-                        <dt><i class="fas fa-bullseye"></i>Purpose</dt>
-                        <dd>The title is the first impression of your essay - it should capture attention while accurately representing your content.</dd>
+                        <dt><i class="fas fa-search"></i>Discovery Tool</dt>
+                        <dd>The title and abstract help researchers find your work through database searches.</dd>
                         
-                        <dt><i class="fas fa-magic"></i>Characteristics of Effective Titles</dt>
-                        <dd>
-                            <ul>
-                                <li><strong>Short and catchy:</strong> 5-12 words maximum</li>
-                                <li><strong>Reflective:</strong> Clearly indicates the main idea or argument</li>
-                                <li><strong>Precise:</strong> Avoids vague or ambiguous language</li>
-                                <li><strong>Academic tone:</strong> Maintains formal language appropriate for the discipline</li>
-                            </ul>
-                        </dd>
+                        <dt><i class="fas fa-clipboard-check"></i>Decision Aid</dt>
+                        <dd>Readers use them to quickly determine if the full article is relevant to their needs.</dd>
+                        
+                        <dt><i class="fas fa-map"></i>Roadmap</dt>
+                        <dd>They provide a concise overview of the entire study.</dd>
                     </dl>
                 </div>
                 
-                <h3><i class="fas fa-lightbulb"></i>Title Formulation Strategies</h3>
+                <h3><i class="fas fa-cogs"></i>Components of an Effective Abstract</h3>
                 
-                <div class="grid-container">
-                    <div class="grid-item">
-                        <h4><i class="fas fa-question"></i>Question-Based</h4>
-                        <p>"To What Extent Does Social Media Influence Political Polarization?"</p>
-                    </div>
-                    <div class="grid-item">
-                        <h4><i class="fas fa-chart-line"></i>Argument-Based</h4>
-                        <p>"The Detrimental Effects of Standardized Testing on Creative Thinking"</p>
-                    </div>
-                    <div class="grid-item">
-                        <h4><i class="fas fa-balance-scale"></i>Two-Part Titles</h4>
-                        <p>"Climate Change and Economic Development: An Inseparable Relationship"</p>
-                    </div>
-                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Description</th>
+                            <th>Word Count Guide</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Background/Problem</strong></td>
+                            <td>Brief context and research gap</td>
+                            <td>20-25% of abstract</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Methods</strong></td>
+                            <td>Research design and approach</td>
+                            <td>25-30% of abstract</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Key Results</strong></td>
+                            <td>Most important findings</td>
+                            <td>35-40% of abstract</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Conclusion/Implications</strong></td>
+                            <td>Main takeaway and significance</td>
+                            <td>10-15% of abstract</td>
+                        </tr>
+                    </tbody>
+                </table>
                 
-                <div class="example-box">
-                    <div class="example-title"><i class="fas fa-exclamation-circle"></i>Avoid These Common Mistakes:</div>
+                <div class="thesis-application">
+                    <h3 class="thesis-title"><i class="fas fa-graduation-cap"></i>Thesis/Dissertation Application</h3>
                     <ul>
-                        <li>Overly long titles that lose focus</li>
-                        <li>Using jargon or technical terms without context</li>
-                        <li>Making claims that the essay doesn't substantiate</li>
-                        <li>Being too creative at the expense of clarity</li>
+                        <li><strong>Extended Abstract:</strong> For dissertations, abstracts are typically 250-350 words</li>
+                        <li><strong>Keywords:</strong> Include 5-7 relevant keywords for indexing</li>
+                        <li><strong>Structured Abstracts:</strong> Some disciplines require subheaded abstracts</li>
+                        <li><strong>Multiple Revisions:</strong> Write the abstract last, but revise it first during editing</li>
                     </ul>
                 </div>
             </div>
@@ -445,306 +589,411 @@
             <div class="color-block blue-block">
                 <h2><i class="fas fa-door-open"></i>2. Introduction</h2>
                 
+                <h3><i class="fas fa-bullseye"></i>Primary Objectives</h3>
+                
                 <div class="definition-list">
                     <dl>
-                        <dt><i class="fas fa-fish"></i>The Hook</dt>
-                        <dd>Begin with an engaging element that captures reader interest and establishes relevance.</dd>
+                        <dt><i class="fas fa-flag"></i>Establish Context</dt>
+                        <dd>Provide background information and situate the research within the broader field.</dd>
                         
-                        <dt><i class="fas fa-map"></i>Context and Background</dt>
-                        <dd>Provide necessary information to understand the topic and its significance.</dd>
+                        <dt><i class="fas fa-question"></i>Identify Research Gap</dt>
+                        <dd>Clearly state what is unknown or problematic that your research addresses.</dd>
                         
-                        <dt><i class="fas fa-flag"></i>Thesis Statement</dt>
-                        <dd>Clearly state your main argument or position - the central idea your essay will prove.</dd>
+                        <dt><i class="fas fa-bullhorn"></i>State Purpose</dt>
+                        <dd>Explicitly declare the research objectives, questions, or hypotheses.</dd>
+                        
+                        <dt><i class="fas fa-road"></i>Outline Structure</dt>
+                        <dd>Briefly describe how the article is organized (optional but helpful).</dd>
                     </dl>
                 </div>
                 
-                <h3><i class="fas fa-anchor"></i>Effective Hook Strategies</h3>
+                <h3><i class="fas fa-footsteps"></i>Step-by-Step Introduction Development</h3>
                 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Strategy</th>
-                            <th>Description</th>
-                            <th>Example</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Provocative Question</strong></td>
-                            <td>Engages reader by prompting them to think</td>
-                            <td>"What if everything we know about traditional education is wrong?"</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Surprising Statistic</strong></td>
-                            <td>Uses data to establish importance</td>
-                            <td>"Recent studies show that 65% of jobs today didn't exist 20 years ago."</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Relevant Quotation</strong></td>
-                            <td>Lends authority and perspective</td>
-                            <td>"As Albert Einstein famously noted, 'Imagination is more important than knowledge.'"</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Brief Anecdote</strong></td>
-                            <td>Creates human connection to the topic</td>
-                            <td>"When Maria first entered the classroom, she never imagined how technology would transform her learning experience."</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <h3><i class="fas fa-gem"></i>Crafting a Strong Thesis Statement</h3>
-                
-                <div class="example-box">
-                    <div class="example-title"><i class="fas fa-check-circle"></i>Characteristics of Effective Thesis Statements:</div>
-                    <ul>
-                        <li><strong>Specific:</strong> Clearly defines the scope of your argument</li>
-                        <li><strong>Arguable:</strong> Presents a position that could be challenged</li>
-                        <li><strong>Focused:</strong> Addresses a manageable aspect of the topic</li>
-                        <li><strong>Preview:</strong> Suggests the organization of your argument</li>
-                    </ul>
+                <div class="structure-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Start Broad</h4>
+                        <p>Begin with the general research area and gradually narrow focus</p>
+                        <div class="example-box">
+                            <div class="example-title"><i class="fas fa-comment"></i>Example:</div>
+                            <p>"Language acquisition has been extensively studied in various contexts, with particular attention to..."</p>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="example-box">
-                    <div class="example-title"><i class="fas fa-times-circle"></i>Thesis Statement Examples:</div>
-                    <p><strong>Weak:</strong> "This essay will discuss social media."</p>
-                    <p><strong>Strong:</strong> "While social media platforms have revolutionized communication, their algorithmic structures contribute significantly to political polarization by creating echo chambers that reinforce existing beliefs."</p>
+                <div class="structure-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Review Relevant Literature</h4>
+                        <p>Cite key studies that frame your research problem (can be separate section in theses)</p>
+                        <div class="example-box">
+                            <div class="example-title"><i class="fas fa-comment"></i>Example:</div>
+                            <p>"While Smith (2020) demonstrated X, and Johnson (2021) found Y, the interaction between these factors remains unexplored."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="structure-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Identify the Gap</h4>
+                        <p>Explicitly state what is missing in current research</p>
+                        <div class="example-box">
+                            <div class="example-title"><i class="fas fa-comment"></i>Example:</div>
+                            <p>"However, previous studies have not examined how these factors operate in multilingual classroom contexts."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="structure-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>State Research Questions/Hypotheses</h4>
+                        <p>Clearly articulate what your study aims to discover</p>
+                        <div class="example-box">
+                            <div class="example-title"><i class="fas fa-comment"></i>Example:</div>
+                            <p>"This study addresses the following research question: How do multilingual teaching strategies impact vocabulary acquisition in secondary education?"</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="thesis-application">
+                    <h3 class="thesis-title"><i class="fas fa-graduation-cap"></i>Thesis/Dissertation Application</h3>
+                    <ul>
+                        <li><strong>Extended Introduction:</strong> Typically 10-15% of total word count</li>
+                        <li><strong>Separate Literature Review:</strong> Often a dedicated chapter in longer works</li>
+                        <li><strong>Detailed Problem Statement:</strong> More comprehensive than in journal articles</li>
+                        <li><strong>Conceptual Framework:</strong> May include theoretical models specific to your research</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
         <div class="section">
             <div class="color-block yellow-block">
-                <h2><i class="fas fa-cubes"></i>3. Body Paragraphs</h2>
+                <h2><i class="fas fa-flask"></i>3. Methods/ Methodology</h2>
                 
-                <p>The body of your essay develops your argument through well-structured paragraphs that provide evidence and analysis.</p>
-                
-                <h3><i class="fas fa-sitemap"></i>Paragraph Structure (PEEL Method)</h3>
+                <h3><i class="fas fa-bullseye"></i>Core Purpose</h3>
                 
                 <div class="definition-list">
                     <dl>
-                        <dt><i class="fas fa-arrow-right"></i>Point (Topic Sentence)</dt>
-                        <dd>States the main idea of the paragraph and connects to your thesis.</dd>
+                        <dt><i class="fas fa-clipboard-check"></i>Replicability</dt>
+                        <dd>Provide sufficient detail for other researchers to repeat your study.</dd>
                         
-                        <dt><i class="fas fa-clipboard-check"></i>Evidence</dt>
-                        <dd>Provides data, examples, quotations, or research findings that support your point.</dd>
+                        <dt><i class="fas fa-shield-alt"></i>Validity Demonstration</dt>
+                        <dd>Show that your approach appropriately addresses the research questions.</dd>
                         
-                        <dt><i class="fas fa-microscope"></i>Explanation</dt>
-                        <dd>Analyzes the evidence and explains how it supports your point.</dd>
-                        
-                        <dt><i class="fas fa-link"></i>Link</dt>
-                        <dd>Connects back to the thesis and transitions to the next paragraph.</dd>
+                        <dt><i class="fas fa-balance-scale"></i>Transparency</dt>
+                        <dd>Allow readers to evaluate potential biases or limitations in your approach.</dd>
                     </dl>
                 </div>
                 
-                <h3><i class="fas fa-random"></i>Effective Transitions</h3>
+                <h3><i class="fas fa-cogs"></i>Essential Methodological Components</h3>
                 
                 <div class="grid-container">
                     <div class="grid-item">
-                        <h4><i class="fas fa-plus"></i>Adding Ideas</h4>
-                        <p>Furthermore, Moreover, In addition, Similarly</p>
+                        <h4><i class="fas fa-users"></i>Research Design</h4>
+                        <p>Qualitative, quantitative, or mixed methods; experimental, correlational, case study, etc.</p>
                     </div>
                     <div class="grid-item">
-                        <h4><i class="fas fa-balance-scale"></i>Contrasting</h4>
-                        <p>However, Nevertheless, On the other hand, Conversely</p>
+                        <h4><i class="fas fa-user-friends"></i>Participants/Sample</h4>
+                        <p>Selection criteria, demographics, sample size, and recruitment methods</p>
                     </div>
                     <div class="grid-item">
-                        <h4><i class="fas fa-cogs"></i>Showing Cause/Effect</h4>
-                        <p>Consequently, Therefore, As a result, Thus</p>
+                        <h4><i class="fas fa-tools"></i>Materials/Instruments</h4>
+                        <p>Surveys, tests, equipment, software, with reliability and validity information</p>
                     </div>
                     <div class="grid-item">
-                        <h4><i class="fas fa-sort-numeric-up"></i>Sequencing</h4>
-                        <p>Firstly, Subsequently, Finally, In conclusion</p>
+                        <h4><i class="fas fa-procedures"></i>Procedures</h4>
+                        <p>Step-by-step description of data collection process</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4><i class="fas fa-chart-bar"></i>Data Analysis</h4>
+                        <p>Statistical tests, qualitative coding methods, software used</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4><i class="fas fa-shield-alt"></i>Ethical Considerations</h4>
+                        <p>Informed consent, confidentiality, institutional approval</p>
                     </div>
                 </div>
                 
-                <h3><i class="fas fa-chart-bar"></i>Types of Evidence</h3>
-                
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th>When to Use</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Statistical Data</strong></td>
-                            <td>Numerical information from research studies</td>
-                            <td>Establishing trends, patterns, or prevalence</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Expert Testimony</strong></td>
-                            <td>Quotations or paraphrases from authorities</td>
-                            <td>Adding credibility and supporting arguments</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Examples/Case Studies</strong></td>
-                            <td>Specific instances that illustrate your point</td>
-                            <td>Making abstract concepts concrete and relatable</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Historical Evidence</strong></td>
-                            <td>References to past events or developments</td>
-                            <td>Providing context or showing evolution</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="thesis-application">
+                    <h3 class="thesis-title"><i class="fas fa-graduation-cap"></i>Thesis/Dissertation Application</h3>
+                    <ul>
+                        <li><strong>Detailed Justification:</strong> Explain why specific methods were chosen over alternatives</li>
+                        <li><strong>Pilot Studies:</strong> Include information about preliminary testing and refinements</li>
+                        <li><strong>Methodological Chapter:</strong> Often a separate, comprehensive chapter</li>
+                        <li><strong>Appendices:</strong> Include full copies of surveys, interview protocols, etc.</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
         <div class="section">
             <div class="color-block red-block">
-                <h2><i class="fas fa-flag-checkered"></i>4. Conclusion</h2>
+                <h2><i class="fas fa-chart-line"></i>4. Results/Findings</h2>
+                
+                <h3><i class="fas fa-bullseye"></i>Key Principles</h3>
                 
                 <div class="definition-list">
                     <dl>
-                        <dt><i class="fas fa-sync-alt"></i>Restate Thesis</dt>
-                        <dd>Rephrase your main argument in a fresh way that reflects the development of your essay.</dd>
+                        <dt><i class="fas fa-presentation"></i>Objective Presentation</dt>
+                        <dd>Report findings without interpretation or discussion of their meaning.</dd>
                         
-                        <dt><i class="fas fa-clipboard-list"></i>Summarize Key Points</dt>
-                        <dd>Briefly recap the main supporting arguments without introducing new information.</dd>
+                        <dt><i class="fas fa-sitemap"></i>Logical Organization</dt>
+                        <dd>Structure results to correspond with research questions or hypotheses.</dd>
                         
-                        <dt><i class="fas fa-rocket"></i>Final Thought</dt>
-                        <dd>Provide a concluding insight, recommendation, or implication of your argument.</dd>
+                        <dt><i class="fas fa-filter"></i>Selective Reporting</dt>
+                        <dd>Include all relevant results, but avoid overwhelming readers with raw data.</dd>
                     </dl>
                 </div>
                 
-                <h3><i class="fas fa-exclamation-triangle"></i>Conclusion Pitfalls to Avoid</h3>
+                <h3><i class="fas fa-table"></i>Effective Results Presentation</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Purpose</th>
+                            <th>Best Practices</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Textual Description</strong></td>
+                            <td>Narrate key findings</td>
+                            <td>Be concise, use past tense, refer to tables/figures</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tables</strong></td>
+                            <td>Present detailed numerical data</td>
+                            <td>Clear titles, logical organization, minimal formatting</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Figures</strong></td>
+                            <td>Visualize patterns and relationships</td>
+                            <td>Appropriate chart types, clear labels, high resolution</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Statistical Reporting</strong></td>
+                            <td>Provide evidence for claims</td>
+                            <td>Include test statistics, degrees of freedom, p-values, effect sizes</td>
+                        </tr>
+                    </tbody>
+                </table>
                 
                 <div class="example-box">
-                    <div class="example-title"><i class="fas fa-times"></i>Common Mistakes:</div>
-                    <ul>
-                        <li><strong>Introducing new ideas:</strong> The conclusion should synthesize, not introduce</li>
-                        <li><strong>Being too repetitive:</strong> Rephrase rather than copy from earlier sections</li>
-                        <li><strong>Undermining your argument:</strong> Maintain confidence in your position</li>
-                        <li><strong>Ending abruptly:</strong> Provide a sense of closure and completion</li>
-                    </ul>
+                    <div class="example-title"><i class="fas fa-lightbulb"></i>Results Writing Technique:</div>
+                    <p><strong>Problem:</strong> "The results show that Group A performed better than Group B."</p>
+                    <p><strong>Improved:</strong> "Group A (M = 85.2, SD = 4.3) scored significantly higher than Group B (M = 72.6, SD = 5.1), t(58) = 3.45, p < .01, d = 0.89."</p>
                 </div>
                 
-                <h3><i class="fas fa-thumbs-up"></i>Effective Conclusion Strategies</h3>
-                
-                <div class="grid-container">
-                    <div class="grid-item">
-                        <h4><i class="fas fa-globe"></i>Broader Implications</h4>
-                        <p>Connect your specific argument to wider contexts or future considerations</p>
-                    </div>
-                    <div class="grid-item">
-                        <h4><i class="fas fa-lightbulb"></i>Call to Action</h4>
-                        <p>Suggest specific steps readers might take based on your findings</p>
-                    </div>
-                    <div class="grid-item">
-                        <h4><i class="fas fa-question-circle"></i>Provocative Question</h4>
-                        <p>Leave readers with a thought-provoking question to ponder</p>
-                    </div>
-                    <div class="grid-item">
-                        <h4><i class="fas fa-forward"></i>Looking Forward</h4>
-                        <p>Suggest directions for future research or development</p>
-                    </div>
+                <div class="thesis-application">
+                    <h3 class="thesis-title"><i class="fas fa-graduation-cap"></i>Thesis/Dissertation Application</h3>
+                    <ul>
+                        <li><strong>Comprehensive Reporting:</strong> Include all results, even non-significant findings</li>
+                        <li><strong>Multiple Chapters:</strong> May divide results by research question or theme</li>
+                        <li><strong>Detailed Appendices:</strong> Include raw data, additional analyses, or supplementary results</li>
+                        <li><strong>Visual Presentation:</strong> Use professional-quality tables and figures throughout</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
         <div class="section">
             <div class="color-block purple-block">
-                <h2><i class="fas fa-book"></i>5. References (Optional)</h2>
+                <h2><i class="fas fa-comments"></i>5. Discussion</h2>
                 
-                <p>Proper citation acknowledges sources and allows readers to verify your research.</p>
+                <h3><i class="fas fa-bullseye"></i>Core Functions</h3>
                 
-                <h3><i class="fas fa-file-alt"></i>Citation Styles</h3>
+                <div class="definition-list">
+                    <dl>
+                        <dt><i class="fas fa-sync-alt"></i>Interpretation</dt>
+                        <dd>Explain what your results mean in the context of your research questions.</dd>
+                        
+                        <dt><i class="fas fa-project-diagram"></i>Integration</dt>
+                        <dd>Connect your findings to existing literature and theoretical frameworks.</dd>
+                        
+                        <dt><i class="fas fa-exclamation-circle"></i>Implications</dt>
+                        <dd>Discuss the practical and theoretical significance of your findings.</dd>
+                        
+                        <dt><i class="fas fa-tachometer-alt"></i>Limitations</dt>
+                        <dd>Acknowledge study constraints and their potential impact on results.</dd>
+                    </dl>
+                </div>
+                
+                <h3><i class="fas fa-footsteps"></i>Discussion Structure</h3>
+                
+                <div class="structure-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Restate Key Findings</h4>
+                        <p>Briefly summarize main results without repeating the results section</p>
+                    </div>
+                </div>
+                
+                <div class="structure-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Interpret Results</h4>
+                        <p>Explain what the findings mean and why they matter</p>
+                    </div>
+                </div>
+                
+                <div class="structure-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Compare with Literature</h4>
+                        <p>Discuss how your findings align or contrast with previous research</p>
+                    </div>
+                </div>
+                
+                <div class="structure-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Address Limitations</h4>
+                        <p>Acknowledge methodological constraints and their implications</p>
+                    </div>
+                </div>
+                
+                <div class="structure-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Suggest Future Research</h4>
+                        <p>Propose directions based on your findings and limitations</p>
+                    </div>
+                </div>
+                
+                <div class="structure-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h4>State Implications</h4>
+                        <p>Discuss theoretical, practical, or policy implications</p>
+                    </div>
+                </div>
+                
+                <div class="thesis-application">
+                    <h3 class="thesis-title"><i class="fas fa-graduation-cap"></i>Thesis/Dissertation Application</h3>
+                    <ul>
+                        <li><strong>Comprehensive Discussion:</strong> Typically the longest chapter</li>
+                        <li><strong>Theoretical Contribution:</strong> Emphasize how your research advances theory</li>
+                        <li><strong>Methodological Reflection:</strong> Critical assessment of research choices</li>
+                        <li><strong>Multiple Implications:</strong> Address theoretical, practical, and methodological implications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="color-block teal-block">
+                <h2><i class="fas fa-flag-checkered"></i>6. Conclusion and References</h2>
+                
+                <h3><i class="fas fa-bullseye"></i>Conclusion Components</h3>
+                
+                <div class="definition-list">
+                    <dl>
+                        <dt><i class="fas fa-sync-alt"></i>Summary of Main Points</dt>
+                        <dd>Briefly restate the research problem, methods, key findings, and their significance.</dd>
+                        
+                        <dt><i class="fasfa-gem"></i>Final Synthesis</dt>
+                        <dd>Provide a cohesive final statement that connects all elements of the study.</dd>
+                        
+                        <dt><i class="fas fa-forward"></i>Forward Look</dt>
+                        <dd>Suggest practical applications or final thoughts for the reader.</dd>
+                    </dl>
+                </div>
+                
+                <h3><i class="fas fa-book"></i>References and Citations</h3>
                 
                 <table>
                     <thead>
                         <tr>
-                            <th>Style</th>
-                            <th>Common Usage</th>
-                            <th>Key Features</th>
+                            <th>Citation Element</th>
+                            <th>Purpose</th>
+                            <th>Best Practices</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>APA</strong></td>
-                            <td>Social Sciences, Education, Psychology</td>
-                            <td>Author-date format, emphasis on publication date</td>
+                            <td><strong>In-text Citations</strong></td>
+                            <td>Attribute ideas and findings to sources</td>
+                            <td>Consistent style, appropriate placement, accurate page numbers</td>
                         </tr>
                         <tr>
-                            <td><strong>MLA</strong></td>
-                            <td>Humanities, Literature, Arts</td>
-                            <td>Author-page format, focus on authorship</td>
+                            <td><strong>Reference List</strong></td>
+                            <td>Provide complete publication details</td>
+                            <td>Alphabetical order, consistent formatting, all cited works included</td>
                         </tr>
                         <tr>
-                            <td><strong>Chicago</strong></td>
-                            <td>History, Business, Fine Arts</td>
-                            <td>Notes-bibliography or author-date systems</td>
+                            <td><strong>Citation Management</strong></td>
+                            <td>Organize and format references</td>
+                            <td>Use software like Zotero, Mendeley, or EndNote</td>
                         </tr>
                         <tr>
-                            <td><strong>Harvard</strong></td>
-                            <td>Various disciplines</td>
-                            <td>Author-date format similar to APA</td>
+                            <td><strong>Style Consistency</strong></td>
+                            <td>Follow disciplinary conventions</td>
+                            <td>APA, MLA, Chicago, or other required style guide</td>
                         </tr>
                     </tbody>
                 </table>
                 
-                <h3><i class="fas fa-database"></i>Reference Management Tips</h3>
-                
-                <div class="example-box">
-                    <div class="example-title"><i class="fas fa-check-square"></i>Best Practices:</div>
+                <div class="thesis-application">
+                    <h3 class="thesis-title"><i class="fas fa-graduation-cap"></i>Thesis/Dissertation Application</h3>
                     <ul>
-                        <li>Record complete source information as you research</li>
-                        <li>Use reference management software (Zotero, Mendeley)</li>
-                        <li>Be consistent with your chosen citation style</li>
-                        <li>Double-check formatting before submission</li>
-                        <li>Include all sources cited in the text</li>
+                        <li><strong>Comprehensive Bibliography:</strong> Typically extensive (100+ sources)</li>
+                        <li><strong>Multiple Appendices:</strong> Include instruments, raw data, IRB approval, etc.</li>
+                        <li><strong>Acknowledgements:</strong> Formal section thanking advisors, participants, and supporters</li>
+                        <li><strong>Abstract in Multiple Languages:</strong> Often required for institutional submission</li>
                     </ul>
                 </div>
             </div>
         </div>
 
         <section class="section">
-            <h2><i class="fas fa-file-alt"></i>Essay Writing Checklist</h2>
+            <h2><i class="fas fa-tasks"></i>Thesis/Dissertation Writing Timeline</h2>
             <div class="grid-container">
                 <div class="grid-item">
-                    <h4><i class="fas fa-check"></i>Pre-Writing</h4>
+                    <h4><i class="fas fa-calendar-alt"></i>Months 1-3</h4>
                     <ul>
-                        <li>Understand the assignment requirements</li>
-                        <li>Conduct thorough research</li>
-                        <li>Develop a clear thesis statement</li>
-                        <li>Create a detailed outline</li>
+                        <li>Proposal development</li>
+                        <li>Literature review</li>
+                        <li>Methodology planning</li>
+                        <li>IRB/ethics approval</li>
                     </ul>
                 </div>
                 <div class="grid-item">
-                    <h4><i class="fas fa-pencil-alt"></i>Drafting</h4>
+                    <h4><i class="fas fa-calendar-alt"></i>Months 4-6</h4>
                     <ul>
-                        <li>Write a compelling introduction</li>
-                        <li>Develop coherent body paragraphs</li>
-                        <li>Use appropriate evidence and examples</li>
-                        <li>Maintain consistent tone and style</li>
+                        <li>Data collection</li>
+                        <li>Preliminary analysis</li>
+                        <li>Introduction chapter</li>
+                        <li>Methods chapter</li>
                     </ul>
                 </div>
                 <div class="grid-item">
-                    <h4><i class="fas fa-search"></i>Revision</h4>
+                    <h4><i class="fas fa-calendar-alt"></i>Months 7-9</h4>
                     <ul>
-                        <li>Check logical flow and organization</li>
-                        <li>Ensure thesis is supported throughout</li>
-                        <li>Verify paragraph structure and transitions</li>
-                        <li>Confirm conclusion provides closure</li>
+                        <li>Complete data analysis</li>
+                        <li>Results chapter</li>
+                        <li>Discussion chapter</li>
+                        <li>Conclusion chapter</li>
                     </ul>
                 </div>
                 <div class="grid-item">
-                    <h4><i class="fas fa-edit"></i>Editing</h4>
+                    <h4><i class="fas fa-calendar-alt"></i>Months 10-12</h4>
                     <ul>
-                        <li>Correct grammar and punctuation</li>
-                        <li>Check spelling and word choice</li>
-                        <li>Verify citation format and accuracy</li>
-                        <li>Review formatting requirements</li>
+                        <li>Revision and editing</li>
+                        <li>Formatting check</li>
+                        <li>Reference completion</li>
+                        <li>Final submission</li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <footer>
-            <p>Academic Writing Guide | Master 1 Applied Linguistics</p>
-            <p>Further Reading: Bailey, S. (2018). Academic Writing: A Handbook for International Students.</p>
+            <p>Academic Article Structure Guide | Master 1 Applied Linguistics</p>
+            <p>Further Reading: Creswell, J. W., & Creswell, J. D. (2018). Research Design: Qualitative, Quantitative, and Mixed Methods Approaches.</p>
         </footer>
     </div>
 </body>
