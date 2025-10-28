@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teaching and Self-Monitoring</title>
+    <title>Self-Monitoring in Language Teaching</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -19,24 +19,24 @@
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s ease;
         }
-
+        
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            line-height: 1.8;
-            color: var(--dark);
+            line-height: 1.7;
             background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
-            padding: 40px 20px;
+            color: var(--dark);
+            padding: 20px;
             min-height: 100vh;
         }
-
+        
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             background: #fff;
             padding: 40px 50px;
@@ -44,12 +44,11 @@
             box-shadow: var(--shadow);
             transition: var(--transition);
         }
-
+        
         .container:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
         }
-
+        
         header {
             text-align: center;
             margin-bottom: 35px;
@@ -57,7 +56,7 @@
             border-bottom: 2px solid #eaecef;
             position: relative;
         }
-
+        
         header::after {
             content: "";
             position: absolute;
@@ -68,237 +67,338 @@
             background: linear-gradient(to right, var(--primary), var(--secondary));
             border-radius: 3px;
         }
-
+        
         h1 {
             color: var(--secondary);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-size: 2.4rem;
-            letter-spacing: 0.5px;
             font-weight: 700;
         }
-
+        
+        .lesson-info {
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .date {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 25px;
+            transition: var(--transition);
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 50px;
+            background-color: #f0f4ff;
+            border: 1px solid #e6ecff;
+        }
+        
+        .back-link:hover {
+            color: var(--accent);
+            transform: translateX(-5px);
+            background-color: #e6ecff;
+            box-shadow: var(--shadow);
+        }
+        
+        .back-link i {
+            margin-right: 8px;
+        }
+        
         h2 {
             color: var(--primary);
             margin: 30px 0 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e5e7eb;
-            font-size: 1.5rem;
+            padding: 15px 20px;
+            background: linear-gradient(to right, #f0f4ff, #ffffff);
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--primary);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
             display: flex;
             align-items: center;
         }
-
+        
+        h2:hover {
+            transform: translateX(5px);
+            background: linear-gradient(to right, #e6ecff, #ffffff);
+        }
+        
         h2 i {
             margin-right: 12px;
             color: var(--secondary);
         }
-
+        
         h3 {
-            color: #334155;
-            margin: 20px 0 10px;
-            font-size: 1.2rem;
+            color: var(--secondary);
+            margin: 25px 0 12px;
+            padding-left: 15px;
+            border-left: 3px solid var(--accent);
             display: flex;
             align-items: center;
         }
-
+        
         h3 i {
             margin-right: 10px;
             color: var(--primary);
         }
-
+        
         p {
             margin-bottom: 16px;
-            font-size: 1rem;
+            color: #555;
+            line-height: 1.7;
         }
-
-        .lesson-link {
-            display: inline-flex;
+        
+        .intro-box {
+            background: linear-gradient(to right, #fff9e6, #ffffff);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid #ffc107;
+            box-shadow: var(--shadow);
+        }
+        
+        .intro-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #b38f00;
+            display: flex;
             align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: #fff;
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);
-            padding: 12px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(155, 89, 182, 0.3);
         }
-
-        .lesson-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 14px rgba(155, 89, 182, 0.4);
-            background: linear-gradient(135deg, #8e44ad, #732d91);
+        
+        .intro-title i {
+            margin-right: 8px;
         }
-
-        .quote {
-            background: linear-gradient(to right, #eff6ff, #f8fbff);
-            border-left: 5px solid var(--primary);
-            padding: 20px 25px;
+        
+        .highlight {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .assumptions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
             margin: 25px 0;
-            font-style: italic;
-            color: #1e293b;
+        }
+        
+        .assumption-card {
+            background: white;
+            padding: 25px;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            position: relative;
-        }
-
-        .quote::before {
-           
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            font-size: 3rem;
-            color: var(--primary);
-            opacity: 0.2;
-            font-family: Georgia, serif;
-        }
-
-        .quote-source {
-            text-align: right;
-            font-weight: 600;
-            margin-top: 8px;
-            color: var(--secondary);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            box-shadow: var(--shadow);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-        }
-
-        th, td {
-            border: 1px solid #e2e8f0;
-            padding: 14px 16px;
-            text-align: left;
-        }
-
-        th {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            font-weight: 600;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9fafb;
-        }
-
-        tr:hover {
-            background-color: #f0f4ff;
             transition: var(--transition);
+            border-top: 4px solid var(--primary);
         }
-
-        .example-box {
-            background: linear-gradient(to right, #f0f9ff, #f8fdff);
+        
+        .assumption-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .assumption-number {
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .assumption-number i {
+            margin-right: 10px;
+        }
+        
+        .definition-box {
+            background: linear-gradient(to right, #f0f9ff, #ffffff);
             border-radius: var(--border-radius);
-            padding: 20px;
-            margin: 20px 0;
+            padding: 25px;
+            margin: 30px 0;
             border-left: 5px solid var(--success);
             box-shadow: var(--shadow);
         }
-
-        .example-title {
+        
+        .definition-title {
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             color: var(--primary-dark);
             display: flex;
             align-items: center;
         }
-
-        .example-title i {
+        
+        .definition-title i {
             margin-right: 8px;
         }
-
-        .definition-list {
-            margin: 20px 0;
+        
+        .process-box {
+            background: linear-gradient(to right, #fff0f7, #ffffff);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 5px solid var(--accent);
+            box-shadow: var(--shadow);
         }
-
-        .definition-list dt {
+        
+        .process-title {
             font-weight: 700;
-            margin-top: 15px;
-            color: var(--secondary);
+            margin-bottom: 15px;
+            color: #c2185b;
             display: flex;
             align-items: center;
-            padding: 8px 12px;
-            background-color: #f8f9fa;
-            border-radius: 6px;
         }
-
-        .definition-list dt i {
+        
+        .process-title i {
             margin-right: 8px;
-            color: var(--primary);
         }
-
-        .definition-list dd {
-            margin-left: 30px;
-            margin-bottom: 15px;
-            padding: 10px 15px;
-            background-color: white;
-            border-radius: 6px;
-            border-left: 3px solid #e2e8f0;
-        }
-
-        .section {
-            margin-bottom: 45px;
-            padding: 25px;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .section:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        ul {
-            margin: 15px 0;
-            padding-left: 25px;
-        }
-
-        li {
-            margin-bottom: 8px;
-            position: relative;
-        }
-
-        li::before {
-            content: "•";
-            color: var(--primary);
-            font-weight: bold;
-            position: absolute;
-            left: -15px;
-        }
-
-        .grid-container {
+        
+        .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
-            margin: 20px 0;
+            margin: 25px 0;
         }
-
-        .grid-item {
-            background: linear-gradient(to bottom right, #f8f9fa, #ffffff);
+        
+        .benefit-card {
+            background: white;
             padding: 20px;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
+            transition: var(--transition);
             border-top: 4px solid var(--primary);
         }
-
-        .grid-item h4 {
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .benefit-name {
+            font-weight: 700;
             color: var(--secondary);
             margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .self-awareness-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .awareness-card {
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .awareness-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .awareness-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .awareness-name {
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .method-card {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--primary);
+        }
+        
+        .method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .method-name {
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
         }
-
-        .grid-item h4 i {
-            margin-right: 8px;
-            color: var(--primary);
+        
+        .method-name i {
+            margin-right: 10px;
         }
-
+        
+        .homework-box {
+            background: linear-gradient(to right, #f0fff4, #ffffff);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 5px solid #28a745;
+            box-shadow: var(--shadow);
+        }
+        
+        .homework-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #28a745;
+            display: flex;
+            align-items: center;
+        }
+        
+        .homework-title i {
+            margin-right: 8px;
+        }
+        
+        .conclusion-box {
+            background: linear-gradient(to right, #fff9e6, #ffffff);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 5px solid #ffc107;
+            box-shadow: var(--shadow);
+        }
+        
+        .conclusion-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #b38f00;
+            display: flex;
+            align-items: center;
+        }
+        
+        .conclusion-title i {
+            margin-right: 8px;
+        }
+        
         footer {
             margin-top: 50px;
             text-align: center;
@@ -306,9 +406,8 @@
             border-top: 1px solid #e2e8f0;
             color: var(--gray);
             font-size: 0.95rem;
-            letter-spacing: 0.3px;
         }
-
+        
         @media (max-width: 768px) {
             .container {
                 padding: 25px;
@@ -320,18 +419,22 @@
             
             h2 {
                 font-size: 1.3rem;
+                padding: 12px 15px;
             }
             
-            table {
-                display: block;
-                overflow-x: auto;
+            .assumptions-grid {
+                grid-template-columns: 1fr;
             }
             
-            .section {
-                padding: 15px;
+            .benefits-grid {
+                grid-template-columns: 1fr;
             }
             
-            .grid-container {
+            .self-awareness-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .methods-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -340,285 +443,176 @@
 <body>
     <div class="container">
         <header>
-            <h1>Teaching and Self-Monitoring</h1>
-            <h2><i class="fas fa-chalkboard-teacher"></i>The Nature of Teaching and Self-Monitoring</h2>
-            <p>Zaine Achour University-Djelfa | Department of English</p>
+            <h1>Self-Monitoring in Language Teaching</h1>
+            <p class="lesson-info">Professional Development & Reflective Practice</p>
+            <p class="date">Official Notes</p>
         </header>
         
-        <a href="index.html" class="lesson-link">← Go back to lessons list</a>
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Lessons List
+        </a>
 
-        <div class="section">
-            <h2><i class="fas fa-book-open"></i>1. The Nature of Teaching</h2>
-            
-            <div class="quote">
-                "Teaching is not only about transferring knowledge; it's about creating a personalized and meaningful learning experience."
+        <div class="intro-box">
+            <div class="intro-title"><i class="fas fa-chalkboard-teacher"></i> Introduction</div>
+            <p>All teachers want to know what kind of teachers they are, but they need to step back to reflect on their lessons through regular observation of their own teaching. This is a crucial component of <strong>ongoing professional development</strong>.</p>
+        </div>
+
+        <h2><i class="fas fa-lightbulb"></i>Assumptions About Teacher Development</h2>
+        
+        <div class="assumptions-grid">
+            <div class="assumption-card">
+                <div class="assumption-number"><i class="fas fa-1"></i> Knowledge Base</div>
+                <p><strong>Effective teaching relies on a strong knowledge base.</strong> Continuous learning and updating pedagogical knowledge is essential for teaching excellence.</p>
             </div>
             
-            <p>Effective teaching connects form, accuracy, and meaning to help students communicate successfully.</p>
-
-            <h3><i class="fas fa-key"></i>Key Teaching Elements</h3>
+            <div class="assumption-card">
+                <div class="assumption-number"><i class="fas fa-2"></i> Awareness Gap</div>
+                <p><strong>Teachers are often unaware of their own teaching practices.</strong> Without systematic observation, teachers may not recognize patterns in their teaching behavior.</p>
+            </div>
             
-            <div class="grid-container">
-                <div class="grid-item">
-                    <h4><i class="fas fa-user"></i>Personalization</h4>
-                    <p>Lessons should relate to students' lives, interests, and needs.</p>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-bullseye"></i>Meaningfulness</h4>
-                    <p>Learning is more effective when students find it relevant and purposeful.</p>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-cogs"></i>Form + Accuracy (ALM Drills)</h4>
-                    <p>The Audio-Lingual Method emphasizes repetition and structure to develop correct language use.</p>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-comments"></i>Meaning + Communication</h4>
-                    <p>Learners need opportunities to use language meaningfully through real-life tasks and activities that promote fluency.</p>
-                </div>
+            <div class="assumption-card">
+                <div class="assumption-number"><i class="fas fa-3"></i> Beyond Experience</div>
+                <p><strong>Experience alone does not guarantee development.</strong> Mere repetition of teaching without reflection does not lead to improvement.</p>
+            </div>
+            
+            <div class="assumption-card">
+                <div class="assumption-number"><i class="fas fa-4"></i> Reflection Power</div>
+                <p><strong>Critical reflection fosters deeper insight and change.</strong> Teachers are in the best position to evaluate and improve their own teaching through reflection and self-assessment.</p>
             </div>
         </div>
 
-        <div class="section">
-            <h2><i class="fas fa-star"></i>2. The Qualities of an Effective Teacher</h2>
-            
-            <div class="quote">
-                "Effective teaching depends not only on knowledge but also on how lessons are delivered and assessed."
-                <div class="quote-source">- Ryholds (2005)</div>
+        <h2><i class="fas fa-search"></i>What is Self-Monitoring?</h2>
+        
+        <div class="definition-box">
+            <div class="definition-title"><i class="fas fa-book"></i> Definition</div>
+            <p><strong>"A systematic approach to the observation, evaluation and management of one's own behavior to achieve better understanding and control of one's behavior."</strong> - Armstrong and Firth (1984)</p>
+            <p>Self-monitoring is a method of <strong>reflective teaching</strong>, which means thinking carefully about how you teach in order to improve. It serves as an approach to assessment that complements other forms of assessment.</p>
+        </div>
+
+        <div class="process-box">
+            <div class="process-title"><i class="fas fa-cogs"></i> The Self-Monitoring Process</div>
+            <p>To improve as a teacher through self-monitoring, you need to:</p>
+            <ol>
+                <li><strong>Understand your own teaching</strong> - identify what you do well and what might need improvement</li>
+                <li><strong>Collect real information</strong> - gather objective data about what happens in your classroom</li>
+                <li><strong>Use systematic methods</strong> - ensure information is collected in an objective, structured way without personal bias</li>
+                <li><strong>Analyze the information</strong> - make informed decisions about what to keep doing and what to change</li>
+            </ol>
+        </div>
+
+        <h2><i class="fas fa-question-circle"></i>Why Use Self-Monitoring?</h2>
+        
+        <div class="highlight">
+            <p><strong>Critical Thinking Prompt:</strong> "Critically evaluate the role of self-monitoring (or reflective teaching) in teacher professional development." Discuss how self-monitoring addresses the limitations of initial teacher training, its contribution to reflective practice, and its effectiveness in aligning perceived teaching performance with actual classroom realities.</p>
+        </div>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-name">Beyond Initial Training</div>
+                <p>Teachers spend relatively short time in training programs, which should mark only the beginning of their professional development journey.</p>
             </div>
             
-            <h3><i class="fas fa-check-circle"></i>Main Characteristics</h3>
-            
-            <div class="definition-list">
-                <dl>
-                    <dt><i class="fas fa-users"></i>Student Engagement</dt>
-                    <dd>Keeps learners active, motivated, and involved.</dd>
-                    
-                    <dt><i class="fas fa-tasks"></i>Lesson Delivery</dt>
-                    <dd>Presents ideas clearly and uses varied techniques (visuals, discussions, etc.).</dd>
-                    
-                    <dt><i class="fas fa-chart-line"></i>Assessment</dt>
-                    <dd>Monitors progress through feedback, quizzes, and reflection.</dd>
-                    
-                    <dt><i class="fas fa-smile"></i>Optimism and Positivity</dt>
-                    <dd>Creates a comfortable and encouraging atmosphere.</dd>
-                    
-                    <dt><i class="fas fa-clock"></i>Time Management</dt>
-                    <dd>Uses class time wisely to balance activities.</dd>
-                    
-                    <dt><i class="fas fa-sitemap"></i>Lesson Structure</dt>
-                    <dd>Organizes lessons logically (introduction, practice, feedback).</dd>
-                </dl>
+            <div class="benefit-card">
+                <div class="benefit-name">Critical Reflection</div>
+                <p>Self-monitoring provides opportunities for teachers to reflect critically on their teaching practices and identify areas for improvement.</p>
             </div>
             
-            <h3><i class="fas fa-question-circle"></i>Question Variety</h3>
-            
-            <div class="example-box">
-                <div class="example-title"><i class="fas fa-lightbulb"></i>Examples:</div>
-                <ul>
-                    <li><strong>Reflective Questions:</strong> Encourage critical thinking (e.g., "Why do we use this tense here?")</li>
-                    <li><strong>Display Questions:</strong> Check knowledge (e.g., "What's the past form of go?")</li>
-                </ul>
+            <div class="benefit-card">
+                <div class="benefit-name">Reality Alignment</div>
+                <p>Self-monitoring helps teachers narrow the gap between their perception of their teaching and the actual classroom reality.</p>
             </div>
         </div>
 
-        <div class="section">
-            <h2><i class="fas fa-globe"></i>3. Teaching and Context</h2>
+        <h2><i class="fas fa-eye"></i>What Can Be Learned From Self-Monitoring?</h2>
+        
+        <div class="intro-box">
+            <div class="intro-title"><i class="fas fa-binoculars"></i> Self-Awareness Dimensions</div>
+            <p>Self-assessment or self-monitoring helps teachers examine different types of information about their teaching through various awareness dimensions:</p>
+        </div>
+        
+        <div class="self-awareness-grid">
+            <div class="awareness-card">
+                <div class="awareness-icon">
+                    <i class="fas fa-door-open"></i>
+                </div>
+                <div class="awareness-name">The Open Self</div>
+                <p>Information about teaching behavior that is known to both the teacher and others</p>
+            </div>
             
-            <p>Teaching is a context-specific activity. An effective teacher considers the students' background and individual differences when planning lessons.</p>
+            <div class="awareness-card">
+                <div class="awareness-icon">
+                    <i class="fas fa-user-secret"></i>
+                </div>
+                <div class="awareness-name">The Secret Self</div>
+                <p>Known to the teacher but not to others - private reflections and intentions</p>
+            </div>
             
-            <h3><i class="fas fa-sliders-h"></i>Contextual Factors</h3>
+            <div class="awareness-card">
+                <div class="awareness-icon">
+                    <i class="fas fa-low-vision"></i>
+                </div>
+                <div class="awareness-name">The Blind Self</div>
+                <p>Known to others but not to the teacher - unconscious teaching habits</p>
+            </div>
             
-            <table>
-                <thead>
-                    <tr>
-                        <th>Factor</th>
-                        <th>Impact on Teaching</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Age</strong></td>
-                        <td>Younger learners need active, playful methods; adults prefer goal-oriented tasks.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Gender</strong></td>
-                        <td>May influence participation style or learning preferences.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Social & Economic Status</strong></td>
-                        <td>Affects access to materials, technology, and exposure to language.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Personality & Self-Esteem</strong></td>
-                        <td>Confident learners take more risks; shy ones may need more support.</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="awareness-card">
+                <div class="awareness-icon">
+                    <i class="fas fa-question"></i>
+                </div>
+                <div class="awareness-name">The Hidden Self</div>
+                <p>Unknown to both the teacher and others - untapped potential and possibilities</p>
+            </div>
+        </div>
+        
+        <div class="highlight">
+            <p><strong>Through self-monitoring, teachers seek to find out the critical factors that could explain teaching challenges and identify areas for growth.</strong></p>
+        </div>
+
+        <h2><i class="fas fa-tasks"></i>How is Self-Monitoring Carried Out?</h2>
+        
+        <div class="methods-grid">
+            <div class="method-card">
+                <div class="method-name"><i class="fas fa-brain"></i> Personal Reflection</div>
+                <p>Systematic thinking about teaching experiences, lesson outcomes, and student responses. This can include journaling, mental review of lessons, or structured reflection frameworks.</p>
+            </div>
             
-            <div class="quote">
-                "Teaching is complex and multidimensional, involving emotional, social, and cognitive aspects."
+            <div class="method-card">
+                <div class="method-name"><i class="fas fa-clipboard-list"></i> Self-Reporting</div>
+                <p>Using checklists, teaching logs, or structured forms to document teaching behaviors, strategies used, and student engagement patterns.</p>
+            </div>
+            
+            <div class="method-card">
+                <div class="method-name"><i class="fas fa-video"></i> Audio/Video Recording</div>
+                <p>Recording lessons to objectively review teaching practices, classroom interactions, and student responses without relying on memory alone.</p>
+            </div>
+            
+            <div class="method-card">
+                <div class="method-name"><i class="fas fa-flask"></i> Action Research</div>
+                <p>Systematic investigation of teaching practices through cycles of planning, acting, observing, and reflecting to improve specific aspects of teaching.</p>
             </div>
         </div>
 
-        <div class="section">
-            <h2><i class="fas fa-eye"></i>4. Self-Monitoring (SM) in Language Teaching</h2>
-            
-            <p>Self-Monitoring means observing and evaluating your own teaching to understand what works best. It's a reflective process that helps teachers become more aware and effective.</p>
-            
-            <h3><i class="fas fa-question"></i>Why Use Self-Monitoring?</h3>
-            
+        <div class="conclusion-box">
+            <div class="conclusion-title"><i class="fas fa-flag-checkered"></i> Conclusion</div>
+            <p>Self-monitoring has many applications in language teaching and is most effective when practiced regularly. <strong>Self-monitoring techniques give teachers far greater insight into their own teaching than traditional forms of teacher assessment</strong> and are simultaneously a simple but effective way of improving the management and understanding of their own teaching.</p>
+        </div>
+
+        <div class="homework-box">
+            <div class="homework-title"><i class="fas fa-tasks"></i>Critical Thinking Questions</div>
+            <p><strong>Discussion Points:</strong></p>
             <ul>
-                <li>Promotes critical evaluation of teaching methods</li>
-                <li>Helps identify strengths and areas for improvement</li>
-                <li>Enhances self-awareness and professional growth</li>
-                <li>Leads to better student outcomes through improved instruction</li>
+                <li>How does self-monitoring address the limitations of relying solely on teaching experience for professional growth?</li>
+                <li>What challenges might teachers face when implementing self-monitoring practices, and how can these be overcome?</li>
+                <li>How do the different self-awareness dimensions (open, secret, blind, hidden) contribute to comprehensive teacher development?</li>
+                <li>Why is systematic data collection important in self-monitoring rather than relying on memory or impressions?</li>
+                <li>How might self-monitoring practices differ for novice versus experienced teachers?</li>
             </ul>
-            
-            <h3><i class="fas fa-tools"></i>Methods of Self-Monitoring</h3>
-            
-            <div class="grid-container">
-                <div class="grid-item">
-                    <h4><i class="fas fa-video"></i>Video/Audio Recording</h4>
-                    <p>Recording lessons for later analysis and reflection.</p>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-user-friends"></i>Peer Observation</h4>
-                    <p>Collaborating with colleagues for feedback and team teaching.</p>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-book"></i>Reflective Journals</h4>
-                    <p>Writing reflections after each class to track progress and insights.</p>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-comment-dots"></i>Student Feedback</h4>
-                    <p>Using forms or discussions to gather student perspectives.</p>
-                </div>
-            </div>
         </div>
-
-        <div class="section">
-            <h2><i class="fas fa-chart-line"></i>5. Self-Monitoring and CPD</h2>
-            
-            <p>CPD (Continuous Professional Development) refers to an ongoing process where teachers continuously develop their skills, knowledge, and professional attitudes. It's a proactive way to remain effective and competitive in the teaching field.</p>
-            
-            <h3><i class="fas fa-check-double"></i>Key Assumptions</h3>
-            
-            <div class="definition-list">
-                <dl>
-                    <dt><i class="fas fa-brain"></i>Intentional Reflection</dt>
-                    <dd>Teaching improvement requires intentional reflection, not just experience.</dd>
-                    
-                    <dt><i class="fas fa-history"></i>Experience Alone Isn't Enough</dt>
-                    <dd>Experience alone doesn't guarantee good teaching.</dd>
-                    
-                    <dt><i class="fas fa-search"></i>Critical Reflection</dt>
-                    <dd>Critical reflection helps teachers understand their classroom actions.</dd>
-                    
-                    <dt><i class="fas fa-seedling"></i>Willingness to Evolve</dt>
-                    <dd>Effective teaching depends on a strong knowledge base and willingness to evolve.</dd>
-                </dl>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2><i class="fas fa-user-circle"></i>6. The Four Selves in Self-Monitoring</h2>
-            
-            <p>These are aspects of a teacher's self-awareness, based on the Johari Window model:</p>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>Type of Self</th>
-                        <th>Description</th>
-                        <th>Example</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Open Self</strong></td>
-                        <td>What both the teacher and students know</td>
-                        <td>Teacher knows they use humor in class, and students see it too.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Secret Self</strong></td>
-                        <td>What only the teacher knows</td>
-                        <td>Teacher hides nervousness but students can't tell.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Blind Self</strong></td>
-                        <td>What others see but the teacher doesn't</td>
-                        <td>Students feel lessons are rushed, but the teacher is unaware.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Hidden Self</strong></td>
-                        <td>What is unknown to both teacher and students</td>
-                        <td>Potential strengths or weaknesses yet to be discovered.</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <div class="example-box">
-                <div class="example-title"><i class="fas fa-lightbulb"></i>Insight:</div>
-                <p>Understanding these four selves helps teachers analyze their behavior and improve classroom performance through greater self-awareness.</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2><i class="fas fa-seedling"></i>7. Reflection and Professional Growth</h2>
-            
-            <p>Developing critical reflection involves taking a step back from daily teaching to observe, analyze, and question one's actions.</p>
-            
-            <h3><i class="fas fa-question"></i>Reflective Questions</h3>
-            
-            <div class="grid-container">
-                <div class="grid-item">
-                    <h4><i class="fas fa-check-circle"></i>Understanding</h4>
-                    <p>Did my students understand the activity?</p>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-bullhorn"></i>Clarity</h4>
-                    <p>Were the instructions clear?</p>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-clock"></i>Timing</h4>
-                    <p>Did I give enough time for practice?</p>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-magic"></i>Engagement</h4>
-                    <p>How could I make the next lesson more engaging?</p>
-                </div>
-            </div>
-            
-            <div class="quote">
-                "By consistently asking such questions, teachers build awareness and evolve professionally."
-            </div>
-        </div>
-
-        <section class="section">
-            <h2><i class="fas fa-file-alt"></i>Summary</h2>
-            <div class="grid-container">
-                <div class="grid-item">
-                    <h4><i class="fas fa-chalkboard-teacher"></i>Teaching Nature</h4>
-                    <p>Teaching is personalized, meaningful, and context-dependent.</p>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-user-tie"></i>Effective Teachers</h4>
-                    <p>Effective teachers are organized, reflective, and positive.</p>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-chart-line"></i>Self-Monitoring</h4>
-                    <p>Self-Monitoring (SM) helps teachers grow through Continuous Professional Development (CPD).</p>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-graduation-cap"></i>Reflection</h4>
-                    <p>Reflection transforms everyday teaching into an ongoing learning journey.</p>
-                </div>
-            </div>
-        </section>
-
+        
         <footer>
-            <p>Lecture Notes Summary | Based on "The Nature of Teaching and Self-Monitoring" | Master 1 Applied Linguistics</p>
-            <p>Further Reading: Richards, J. C., & Lockhart, C. (1994). Reflective Teaching in Second Language Classrooms.</p>
+            <p>Teacher Development Course | Self-Monitoring in Language Teaching &copy; 2025</p>
+            <p>Based on Official Notes</p>
         </footer>
     </div>
 </body>
