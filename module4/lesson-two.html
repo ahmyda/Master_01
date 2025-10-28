@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic Article Structure - Complete Guide</title>
+    <title>Research Methodology - Lecture 1: Didactics Specialization</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -19,22 +19,22 @@
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s ease;
         }
-
+        
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            line-height: 1.8;
-            color: var(--dark);
+            line-height: 1.7;
             background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
-            padding: 40px 20px;
+            color: var(--dark);
+            padding: 20px;
             min-height: 100vh;
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -44,12 +44,11 @@
             box-shadow: var(--shadow);
             transition: var(--transition);
         }
-
+        
         .container:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
         }
-
+        
         header {
             text-align: center;
             margin-bottom: 35px;
@@ -57,7 +56,7 @@
             border-bottom: 2px solid #eaecef;
             position: relative;
         }
-
+        
         header::after {
             content: "";
             position: absolute;
@@ -68,337 +67,282 @@
             background: linear-gradient(to right, var(--primary), var(--secondary));
             border-radius: 3px;
         }
-
+        
         h1 {
             color: var(--secondary);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-size: 2.4rem;
-            letter-spacing: 0.5px;
             font-weight: 700;
         }
-
+        
+        .lesson-info {
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .date {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 25px;
+            transition: var(--transition);
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 50px;
+            background-color: #f0f4ff;
+            border: 1px solid #e6ecff;
+        }
+        
+        .back-link:hover {
+            color: var(--accent);
+            transform: translateX(-5px);
+            background-color: #e6ecff;
+            box-shadow: var(--shadow);
+        }
+        
+        .back-link i {
+            margin-right: 8px;
+        }
+        
         h2 {
             color: var(--primary);
             margin: 30px 0 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e5e7eb;
-            font-size: 1.5rem;
+            padding: 15px 20px;
+            background: linear-gradient(to right, #f0f4ff, #ffffff);
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--primary);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
             display: flex;
             align-items: center;
         }
-
+        
+        h2:hover {
+            transform: translateX(5px);
+            background: linear-gradient(to right, #e6ecff, #ffffff);
+        }
+        
         h2 i {
             margin-right: 12px;
             color: var(--secondary);
         }
-
+        
         h3 {
-            color: #334155;
-            margin: 20px 0 10px;
-            font-size: 1.2rem;
+            color: var(--secondary);
+            margin: 25px 0 12px;
+            padding-left: 15px;
+            border-left: 3px solid var(--accent);
             display: flex;
             align-items: center;
         }
-
+        
         h3 i {
             margin-right: 10px;
             color: var(--primary);
         }
-
+        
         p {
             margin-bottom: 16px;
-            font-size: 1rem;
+            color: #555;
+            line-height: 1.7;
         }
-
-        .lesson-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: #fff;
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);
-            padding: 12px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(155, 89, 182, 0.3);
-        }
-
-        .lesson-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 14px rgba(155, 89, 182, 0.4);
-            background: linear-gradient(135deg, #8e44ad, #732d91);
-        }
-
-        .quote {
-            background: linear-gradient(to right, #eff6ff, #f8fbff);
-            border-left: 5px solid var(--primary);
-            padding: 20px 25px;
+        
+        .specialty-intro {
+            background: linear-gradient(to right, #fff9e6, #ffffff);
+            border-radius: var(--border-radius);
+            padding: 25px;
             margin: 25px 0;
-            font-style: italic;
-            color: #1e293b;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-
-        .quote::before {
-            content: """;
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            font-size: 3rem;
-            color: var(--primary);
-            opacity: 0.2;
-            font-family: Georgia, serif;
-        }
-
-        .quote-source {
-            text-align: right;
-            font-weight: 600;
-            margin-top: 8px;
-            color: var(--secondary);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            box-shadow: var(--shadow);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-        }
-
-        th, td {
-            border: 1px solid #e2e8f0;
-            padding: 14px 16px;
-            text-align: left;
-        }
-
-        th {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            font-weight: 600;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9fafb;
-        }
-
-        tr:hover {
-            background-color: #f0f4ff;
-            transition: var(--transition);
-        }
-
-        .example-box {
-            background: linear-gradient(to right, #f0f9ff, #f8fdff);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin: 20px 0;
-            border-left: 5px solid var(--success);
+            border-left: 5px solid #ffc107;
             box-shadow: var(--shadow);
         }
-
-        .example-title {
+        
+        .intro-title {
             font-weight: 700;
+            margin-bottom: 15px;
+            color: #b38f00;
+            display: flex;
+            align-items: center;
+        }
+        
+        .intro-title i {
+            margin-right: 8px;
+        }
+        
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .component-card {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--primary);
+        }
+        
+        .component-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .component-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eaecef;
+        }
+        
+        .component-icon {
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .component-name {
+            font-weight: 700;
+            color: var(--secondary);
+            font-size: 1.3rem;
+        }
+        
+        .component-description {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .steps-box {
+            background: #f0f4ff;
+            border-radius: 8px;
+            padding: 18px;
+            margin: 15px 0;
+        }
+        
+        .steps-title {
+            font-weight: 600;
             margin-bottom: 10px;
             color: var(--primary-dark);
             display: flex;
             align-items: center;
         }
-
+        
+        .steps-title i {
+            margin-right: 8px;
+        }
+        
+        .steps-box ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .steps-box li {
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            background-color: white;
+            border-radius: 6px;
+            border-left: 3px solid var(--success);
+            transition: var(--transition);
+        }
+        
+        .steps-box li:hover {
+            background-color: #e6ecff;
+        }
+        
+        .example-box {
+            background: #e3f2fd;
+            border-radius: 8px;
+            padding: 18px;
+            margin: 15px 0;
+            border-left: 3px solid var(--success);
+        }
+        
+        .example-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+        }
+        
         .example-title i {
             margin-right: 8px;
         }
-
-        .definition-list {
-            margin: 20px 0;
+        
+        .research-focus {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
         }
-
-        .definition-list dt {
-            font-weight: 700;
-            margin-top: 15px;
-            color: var(--secondary);
-            display: flex;
-            align-items: center;
-            padding: 8px 12px;
-            background-color: #f8f9fa;
-            border-radius: 6px;
-        }
-
-        .definition-list dt i {
-            margin-right: 8px;
-            color: var(--primary);
-        }
-
-        .definition-list dd {
-            margin-left: 30px;
-            margin-bottom: 15px;
-            padding: 10px 15px;
-            background-color: white;
-            border-radius: 6px;
-            border-left: 3px solid #e2e8f0;
-        }
-
-        .section {
-            margin-bottom: 45px;
-            padding: 25px;
+        
+        .focus-card {
             background: white;
+            padding: 20px;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             transition: var(--transition);
-        }
-
-        .section:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        ul {
-            margin: 15px 0;
-            padding-left: 25px;
-        }
-
-        li {
-            margin-bottom: 8px;
-            position: relative;
-        }
-
-        li::before {
-            content: "•";
-            color: var(--primary);
-            font-weight: bold;
-            position: absolute;
-            left: -15px;
-        }
-
-        .color-block {
-            padding: 20px;
-            border-radius: var(--border-radius);
-            margin: 20px 0;
-            box-shadow: var(--shadow);
-        }
-
-        .green-block {
-            background: linear-gradient(to right, #e8f5e8, #f0f9f0);
-            border-left: 5px solid #2ecc71;
-        }
-
-        .blue-block {
-            background: linear-gradient(to right, #e8f4fd, #f0f9ff);
-            border-left: 5px solid #3498db;
-        }
-
-        .yellow-block {
-            background: linear-gradient(to right, #fef9e7, #fefce8);
-            border-left: 5px solid #f1c40f;
-        }
-
-        .red-block {
-            background: linear-gradient(to right, #fde8e8, #fdf0f0);
-            border-left: 5px solid #e74c3c;
-        }
-
-        .purple-block {
-            background: linear-gradient(to right, #f3e8fd, #f8f0ff);
-            border-left: 5px solid #9b59b6;
-        }
-
-        .orange-block {
-            background: linear-gradient(to right, #fef0e7, #fef5eb);
-            border-left: 5px solid #e67e22;
-        }
-
-        .teal-block {
-            background: linear-gradient(to right, #e7f9f5, #ebfcf9);
-            border-left: 5px solid #1abc9c;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .grid-item {
-            background: linear-gradient(to bottom right, #f8f9fa, #ffffff);
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
+            text-align: center;
             border-top: 4px solid var(--primary);
         }
-
-        .grid-item h4 {
+        
+        .focus-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .focus-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .focus-name {
+            font-weight: 700;
             color: var(--secondary);
             margin-bottom: 10px;
-            display: flex;
-            align-items: center;
+            font-size: 1.1rem;
         }
-
-        .grid-item h4 i {
-            margin-right: 8px;
-            color: var(--primary);
-        }
-
-        .structure-visual {
-            background: linear-gradient(to right, #f8f9fa, #ffffff);
-            padding: 30px;
+        
+        .homework-box {
+            background: linear-gradient(to right, #f0fff4, #ffffff);
             border-radius: var(--border-radius);
+            padding: 25px;
             margin: 30px 0;
-            box-shadow: var(--shadow);
-            border: 2px dashed var(--primary);
-        }
-
-        .structure-step {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 25px;
-            padding: 20px;
-            background: white;
-            border-radius: var(--border-radius);
+            border-left: 5px solid #28a745;
             box-shadow: var(--shadow);
         }
-
-        .step-number {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 50%;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-right: 20px;
-            flex-shrink: 0;
-        }
-
-        .step-content {
-            flex: 1;
-        }
-
-        .thesis-application {
-            background: linear-gradient(to right, #fff9f5, #fffdfb);
-            padding: 20px;
-            border-radius: var(--border-radius);
-            margin: 20px 0;
-            border-left: 5px solid #ff9e58;
-            box-shadow: var(--shadow);
-        }
-
-        .thesis-title {
-            color: #e67e22;
+        
+        .homework-title {
+            font-weight: 700;
             margin-bottom: 15px;
+            color: #28a745;
             display: flex;
             align-items: center;
         }
-
-        .thesis-title i {
-            margin-right: 10px;
+        
+        .homework-title i {
+            margin-right: 8px;
         }
-
+        
         footer {
             margin-top: 50px;
             text-align: center;
@@ -406,9 +350,8 @@
             border-top: 1px solid #e2e8f0;
             color: var(--gray);
             font-size: 0.95rem;
-            letter-spacing: 0.3px;
         }
-
+        
         @media (max-width: 768px) {
             .container {
                 padding: 25px;
@@ -420,28 +363,25 @@
             
             h2 {
                 font-size: 1.3rem;
+                padding: 12px 15px;
             }
             
-            table {
-                display: block;
-                overflow-x: auto;
-            }
-            
-            .section {
-                padding: 15px;
-            }
-            
-            .grid-container {
+            .components-grid {
                 grid-template-columns: 1fr;
             }
             
-            .structure-step {
-                flex-direction: column;
+            .research-focus {
+                grid-template-columns: 1fr;
             }
             
-            .step-number {
-                margin-bottom: 15px;
+            .component-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .component-icon {
                 margin-right: 0;
+                margin-bottom: 10px;
             }
         }
     </style>
@@ -449,551 +389,191 @@
 <body>
     <div class="container">
         <header>
-            <h1>Academic Article Structure</h1>
-            <h2><i class="fas fa-book-open"></i>Complete Guide to Research Writing for Theses and Dissertations</h2>
-            <p>Master 1 / Applied Linguistics | Instructor: Nour el Houda KHERFANE</p>
-            <p>Zaine Achour University-Djelfa | Department of English</p>
+            <h1>Research Methodology - Lecture 2</h1>
+            <p class="lesson-info">Didactics Specialization Research</p>
+            <p class="date">Ziane-Achour University - Djelfa | Faculty of Letters and Languages</p>
         </header>
         
-        <a href="index.html" class="lesson-link">← Go back to lessons list</a>
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Lessons List
+        </a>
 
-        <div class="section">
-            <h2><i class="fas fa-compass"></i>Introduction to Academic Article Structure</h2>
-            
-            <div class="quote">
-                "A well-structured academic article is like a well-built house - every component serves a specific purpose and contributes to the overall integrity of the work."
-            </div>
-            
-            <p>Understanding the standard structure of academic articles is crucial for both reading research effectively and writing your own thesis or dissertation. This structure follows the IMRaD format (Introduction, Methods, Results, and Discussion) with additional components that vary by discipline.</p>
-            
-            <div class="structure-visual">
-                <h3><i class="fas fa-sitemap"></i>Standard Academic Article Structure</h3>
-                <div class="structure-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>Title & Abstract</h4>
-                        <p>Concise summary and entry point to the research</p>
-                    </div>
-                </div>
-                <div class="structure-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>Introduction</h4>
-                        <p>Background, problem statement, and research questions</p>
-                    </div>
-                </div>
-                <div class="structure-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>Literature Review</h4>
-                        <p>Contextualizing within existing research (often part of Introduction)</p>
-                    </div>
-                </div>
-                <div class="structure-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h4>Methods</h4>
-                        <p>Research design, participants, procedures, and analysis</p>
-                    </div>
-                </div>
-                <div class="structure-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h4>Results</h4>
-                        <p>Presentation of findings without interpretation</p>
-                    </div>
-                </div>
-                <div class="structure-step">
-                    <div class="step-number">6</div>
-                    <div class="step-content">
-                        <h4>Discussion</h4>
-                        <p>Interpretation, implications, and limitations</p>
-                    </div>
-                </div>
-                <div class="structure-step">
-                    <div class="step-number">7</div>
-                    <div class="step-content">
-                        <h4>Conclusion & References</h4>
-                        <p>Final summary and cited works</p>
-                    </div>
-                </div>
-            </div>
+        <div class="specialty-intro">
+            <div class="intro-title"><i class="fas fa-chalkboard-teacher"></i> Didactics Research Focus</div>
+            <p>Didactics research focuses on teaching methods, learning processes, and how students engage with educational materials. This specialization addresses practical educational challenges and aims to improve teaching effectiveness and learning outcomes through systematic investigation.</p>
         </div>
 
-        <div class="section">
-            <div class="color-block green-block">
-                <h2><i class="fas fa-heading"></i>1. Title and Abstract</h2>
-                
-                <h3><i class="fas fa-bullseye"></i>Purpose and Function</h3>
-                
-                <div class="definition-list">
-                    <dl>
-                        <dt><i class="fas fa-search"></i>Discovery Tool</dt>
-                        <dd>The title and abstract help researchers find your work through database searches.</dd>
-                        
-                        <dt><i class="fas fa-clipboard-check"></i>Decision Aid</dt>
-                        <dd>Readers use them to quickly determine if the full article is relevant to their needs.</dd>
-                        
-                        <dt><i class="fas fa-map"></i>Roadmap</dt>
-                        <dd>They provide a concise overview of the entire study.</dd>
-                    </dl>
+        <h2><i class="fas fa-cogs"></i>Research Components in Didactics</h2>
+        
+        <div class="components-grid">
+            <div class="component-card">
+                <div class="component-header">
+                    <div class="component-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="component-name">Research Problem</div>
                 </div>
-                
-                <h3><i class="fas fa-cogs"></i>Components of an Effective Abstract</h3>
-                
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Component</th>
-                            <th>Description</th>
-                            <th>Word Count Guide</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Background/Problem</strong></td>
-                            <td>Brief context and research gap</td>
-                            <td>20-25% of abstract</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Methods</strong></td>
-                            <td>Research design and approach</td>
-                            <td>25-30% of abstract</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Key Results</strong></td>
-                            <td>Most important findings</td>
-                            <td>35-40% of abstract</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Conclusion/Implications</strong></td>
-                            <td>Main takeaway and significance</td>
-                            <td>10-15% of abstract</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <div class="thesis-application">
-                    <h3 class="thesis-title"><i class="fas fa-graduation-cap"></i>Thesis/Dissertation Application</h3>
+                <div class="component-description">
+                    <p>Focuses on teaching methods, learning processes, or how students engage with materials. Addresses challenges in teaching historical content, gaps in learning, ineffective teaching methods, or the need for innovative approaches.</p>
+                </div>
+                <div class="steps-box">
+                    <div class="steps-title"><i class="fas fa-list-ol"></i> Development Steps:</div>
                     <ul>
-                        <li><strong>Extended Abstract:</strong> For dissertations, abstracts are typically 250-350 words</li>
-                        <li><strong>Keywords:</strong> Include 5-7 relevant keywords for indexing</li>
-                        <li><strong>Structured Abstracts:</strong> Some disciplines require subheaded abstracts</li>
-                        <li><strong>Multiple Revisions:</strong> Write the abstract last, but revise it first during editing</li>
+                        <li>Focus on a specific teaching or learning challenge</li>
+                        <li>Define the educational context</li>
+                        <li>Highlight why the problem is significant</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="color-block blue-block">
-                <h2><i class="fas fa-door-open"></i>2. Introduction</h2>
-                
-                <h3><i class="fas fa-bullseye"></i>Primary Objectives</h3>
-                
-                <div class="definition-list">
-                    <dl>
-                        <dt><i class="fas fa-flag"></i>Establish Context</dt>
-                        <dd>Provide background information and situate the research within the broader field.</dd>
-                        
-                        <dt><i class="fas fa-question"></i>Identify Research Gap</dt>
-                        <dd>Clearly state what is unknown or problematic that your research addresses.</dd>
-                        
-                        <dt><i class="fas fa-bullhorn"></i>State Purpose</dt>
-                        <dd>Explicitly declare the research objectives, questions, or hypotheses.</dd>
-                        
-                        <dt><i class="fas fa-road"></i>Outline Structure</dt>
-                        <dd>Briefly describe how the article is organized (optional but helpful).</dd>
-                    </dl>
-                </div>
-                
-                <h3><i class="fas fa-footsteps"></i>Step-by-Step Introduction Development</h3>
-                
-                <div class="structure-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>Start Broad</h4>
-                        <p>Begin with the general research area and gradually narrow focus</p>
-                        <div class="example-box">
-                            <div class="example-title"><i class="fas fa-comment"></i>Example:</div>
-                            <p>"Language acquisition has been extensively studied in various contexts, with particular attention to..."</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="structure-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>Review Relevant Literature</h4>
-                        <p>Cite key studies that frame your research problem (can be separate section in theses)</p>
-                        <div class="example-box">
-                            <div class="example-title"><i class="fas fa-comment"></i>Example:</div>
-                            <p>"While Smith (2020) demonstrated X, and Johnson (2021) found Y, the interaction between these factors remains unexplored."</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="structure-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>Identify the Gap</h4>
-                        <p>Explicitly state what is missing in current research</p>
-                        <div class="example-box">
-                            <div class="example-title"><i class="fas fa-comment"></i>Example:</div>
-                            <p>"However, previous studies have not examined how these factors operate in multilingual classroom contexts."</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="structure-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h4>State Research Questions/Hypotheses</h4>
-                        <p>Clearly articulate what your study aims to discover</p>
-                        <div class="example-box">
-                            <div class="example-title"><i class="fas fa-comment"></i>Example:</div>
-                            <p>"This study addresses the following research question: How do multilingual teaching strategies impact vocabulary acquisition in secondary education?"</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="thesis-application">
-                    <h3 class="thesis-title"><i class="fas fa-graduation-cap"></i>Thesis/Dissertation Application</h3>
-                    <ul>
-                        <li><strong>Extended Introduction:</strong> Typically 10-15% of total word count</li>
-                        <li><strong>Separate Literature Review:</strong> Often a dedicated chapter in longer works</li>
-                        <li><strong>Detailed Problem Statement:</strong> More comprehensive than in journal articles</li>
-                        <li><strong>Conceptual Framework:</strong> May include theoretical models specific to your research</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="color-block yellow-block">
-                <h2><i class="fas fa-flask"></i>3. Methods/ Methodology</h2>
-                
-                <h3><i class="fas fa-bullseye"></i>Core Purpose</h3>
-                
-                <div class="definition-list">
-                    <dl>
-                        <dt><i class="fas fa-clipboard-check"></i>Replicability</dt>
-                        <dd>Provide sufficient detail for other researchers to repeat your study.</dd>
-                        
-                        <dt><i class="fas fa-shield-alt"></i>Validity Demonstration</dt>
-                        <dd>Show that your approach appropriately addresses the research questions.</dd>
-                        
-                        <dt><i class="fas fa-balance-scale"></i>Transparency</dt>
-                        <dd>Allow readers to evaluate potential biases or limitations in your approach.</dd>
-                    </dl>
-                </div>
-                
-                <h3><i class="fas fa-cogs"></i>Essential Methodological Components</h3>
-                
-                <div class="grid-container">
-                    <div class="grid-item">
-                        <h4><i class="fas fa-users"></i>Research Design</h4>
-                        <p>Qualitative, quantitative, or mixed methods; experimental, correlational, case study, etc.</p>
-                    </div>
-                    <div class="grid-item">
-                        <h4><i class="fas fa-user-friends"></i>Participants/Sample</h4>
-                        <p>Selection criteria, demographics, sample size, and recruitment methods</p>
-                    </div>
-                    <div class="grid-item">
-                        <h4><i class="fas fa-tools"></i>Materials/Instruments</h4>
-                        <p>Surveys, tests, equipment, software, with reliability and validity information</p>
-                    </div>
-                    <div class="grid-item">
-                        <h4><i class="fas fa-procedures"></i>Procedures</h4>
-                        <p>Step-by-step description of data collection process</p>
-                    </div>
-                    <div class="grid-item">
-                        <h4><i class="fas fa-chart-bar"></i>Data Analysis</h4>
-                        <p>Statistical tests, qualitative coding methods, software used</p>
-                    </div>
-                    <div class="grid-item">
-                        <h4><i class="fas fa-shield-alt"></i>Ethical Considerations</h4>
-                        <p>Informed consent, confidentiality, institutional approval</p>
-                    </div>
-                </div>
-                
-                <div class="thesis-application">
-                    <h3 class="thesis-title"><i class="fas fa-graduation-cap"></i>Thesis/Dissertation Application</h3>
-                    <ul>
-                        <li><strong>Detailed Justification:</strong> Explain why specific methods were chosen over alternatives</li>
-                        <li><strong>Pilot Studies:</strong> Include information about preliminary testing and refinements</li>
-                        <li><strong>Methodological Chapter:</strong> Often a separate, comprehensive chapter</li>
-                        <li><strong>Appendices:</strong> Include full copies of surveys, interview protocols, etc.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="color-block red-block">
-                <h2><i class="fas fa-chart-line"></i>4. Results/Findings</h2>
-                
-                <h3><i class="fas fa-bullseye"></i>Key Principles</h3>
-                
-                <div class="definition-list">
-                    <dl>
-                        <dt><i class="fas fa-presentation"></i>Objective Presentation</dt>
-                        <dd>Report findings without interpretation or discussion of their meaning.</dd>
-                        
-                        <dt><i class="fas fa-sitemap"></i>Logical Organization</dt>
-                        <dd>Structure results to correspond with research questions or hypotheses.</dd>
-                        
-                        <dt><i class="fas fa-filter"></i>Selective Reporting</dt>
-                        <dd>Include all relevant results, but avoid overwhelming readers with raw data.</dd>
-                    </dl>
-                </div>
-                
-                <h3><i class="fas fa-table"></i>Effective Results Presentation</h3>
-                
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Element</th>
-                            <th>Purpose</th>
-                            <th>Best Practices</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Textual Description</strong></td>
-                            <td>Narrate key findings</td>
-                            <td>Be concise, use past tense, refer to tables/figures</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Tables</strong></td>
-                            <td>Present detailed numerical data</td>
-                            <td>Clear titles, logical organization, minimal formatting</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Figures</strong></td>
-                            <td>Visualize patterns and relationships</td>
-                            <td>Appropriate chart types, clear labels, high resolution</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Statistical Reporting</strong></td>
-                            <td>Provide evidence for claims</td>
-                            <td>Include test statistics, degrees of freedom, p-values, effect sizes</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
                 <div class="example-box">
-                    <div class="example-title"><i class="fas fa-lightbulb"></i>Results Writing Technique:</div>
-                    <p><strong>Problem:</strong> "The results show that Group A performed better than Group B."</p>
-                    <p><strong>Improved:</strong> "Group A (M = 85.2, SD = 4.3) scored significantly higher than Group B (M = 72.6, SD = 5.1), t(58) = 3.45, p < .01, d = 0.89."</p>
+                    <div class="example-title"><i class="fas fa-lightbulb"></i> Example:</div>
+                    <p><strong>Why do English learners find difficulties speaking English in high school classrooms?</strong></p>
                 </div>
-                
-                <div class="thesis-application">
-                    <h3 class="thesis-title"><i class="fas fa-graduation-cap"></i>Thesis/Dissertation Application</h3>
+            </div>
+            
+            <div class="component-card">
+                <div class="component-header">
+                    <div class="component-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="component-name">Research Questions</div>
+                </div>
+                <div class="component-description">
+                    <p>Address practical educational issues and focus on educational outcomes related to teaching. Research questions are designed to investigate teaching or learning phenomena, often focusing on how specific strategies or tools impact educational outcomes.</p>
+                </div>
+                <div class="steps-box">
+                    <div class="steps-title"><i class="fas fa-list-ol"></i> Development Steps:</div>
                     <ul>
-                        <li><strong>Comprehensive Reporting:</strong> Include all results, even non-significant findings</li>
-                        <li><strong>Multiple Chapters:</strong> May divide results by research question or theme</li>
-                        <li><strong>Detailed Appendices:</strong> Include raw data, additional analyses, or supplementary results</li>
-                        <li><strong>Visual Presentation:</strong> Use professional-quality tables and figures throughout</li>
+                        <li>Frame questions around educational processes</li>
+                        <li>Use open-ended questions to encourage exploration</li>
+                        <li>Ensure questions are directly related to the research problem</li>
                     </ul>
+                </div>
+                <div class="example-box">
+                    <div class="example-title"><i class="fas fa-lightbulb"></i> Examples:</div>
+                    <ul>
+                        <li>What are the key factors that hinder high school students from confidently speaking English in classroom environments?</li>
+                        <li>What are the primary psychological or social barriers that high school English learners experience during oral activities?</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="component-card">
+                <div class="component-header">
+                    <div class="component-icon">
+                        <i class="fas fa-hyphen"></i>
+                    </div>
+                    <div class="component-name">Hypotheses</div>
+                </div>
+                <div class="component-description">
+                    <p>Predict the potential effects of teaching methods, tools, or interventions on learning outcomes. Hypotheses in didactics are often measurable and help to guide experimental or observational studies.</p>
+                </div>
+                <div class="steps-box">
+                    <div class="steps-title"><i class="fas fa-list-ol"></i> Development Steps:</div>
+                    <ul>
+                        <li>Identify the key variables</li>
+                        <li>Propose a relationship between them</li>
+                        <li>Make it testable to help validate the hypothesis through data collection and analysis</li>
+                    </ul>
+                </div>
+                <div class="example-box">
+                    <div class="example-title"><i class="fas fa-lightbulb"></i> Example Hypothesis:</div>
+                    <p><em>"Implementing communicative language teaching approaches will significantly improve high school students' English speaking confidence and proficiency compared to traditional grammar-focused methods."</em></p>
+                </div>
+            </div>
+            
+            <div class="component-card">
+                <div class="component-header">
+                    <div class="component-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="component-name">Statement of the Problem</div>
+                </div>
+                <div class="component-description">
+                    <p>Often focuses on an instructional challenge or a gap in teaching practices that impacts learning outcomes. It might address issues like student engagement, assessment methods, or integrating new technologies in the classroom.</p>
+                </div>
+                <div class="steps-box">
+                    <div class="steps-title"><i class="fas fa-list-ol"></i> Development Steps:</div>
+                    <ul>
+                        <li>Describe the educational challenge</li>
+                        <li>Explain the context and why it's significant</li>
+                        <li>Indicate the potential impact</li>
+                    </ul>
+                </div>
+                <div class="example-box">
+                    <div class="example-title"><i class="fas fa-lightbulb"></i> Example Statement:</div>
+                    <p><em>"High school students often struggle with speaking English in class, despite years of instruction. Factors like limited proficiency, social anxiety, fear of judgment, and lack of supportive classroom settings contribute to these difficulties. Understanding these psychological and social barriers is crucial for developing effective instructional strategies that promote inclusivity and support in language learning."</em></p>
                 </div>
             </div>
         </div>
 
-        <div class="section">
-            <div class="color-block purple-block">
-                <h2><i class="fas fa-comments"></i>5. Discussion</h2>
-                
-                <h3><i class="fas fa-bullseye"></i>Core Functions</h3>
-                
-                <div class="definition-list">
-                    <dl>
-                        <dt><i class="fas fa-sync-alt"></i>Interpretation</dt>
-                        <dd>Explain what your results mean in the context of your research questions.</dd>
-                        
-                        <dt><i class="fas fa-project-diagram"></i>Integration</dt>
-                        <dd>Connect your findings to existing literature and theoretical frameworks.</dd>
-                        
-                        <dt><i class="fas fa-exclamation-circle"></i>Implications</dt>
-                        <dd>Discuss the practical and theoretical significance of your findings.</dd>
-                        
-                        <dt><i class="fas fa-tachometer-alt"></i>Limitations</dt>
-                        <dd>Acknowledge study constraints and their potential impact on results.</dd>
-                    </dl>
+        <h2><i class="fas fa-bullseye"></i>Research Focus Areas in Didactics</h2>
+        
+        <div class="research-focus">
+            <div class="focus-card">
+                <div class="focus-icon">
+                    <i class="fas fa-chalkboard"></i>
                 </div>
-                
-                <h3><i class="fas fa-footsteps"></i>Discussion Structure</h3>
-                
-                <div class="structure-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>Restate Key Findings</h4>
-                        <p>Briefly summarize main results without repeating the results section</p>
-                    </div>
+                <div class="focus-name">Teaching Methods</div>
+                <p>Investigating effectiveness of different instructional approaches and pedagogical strategies</p>
+            </div>
+            
+            <div class="focus-card">
+                <div class="focus-icon">
+                    <i class="fas fa-brain"></i>
                 </div>
-                
-                <div class="structure-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>Interpret Results</h4>
-                        <p>Explain what the findings mean and why they matter</p>
-                    </div>
+                <div class="focus-name">Learning Processes</div>
+                <p>Examining how students acquire knowledge and develop skills in educational settings</p>
+            </div>
+            
+            <div class="focus-card">
+                <div class="focus-icon">
+                    <i class="fas fa-users"></i>
                 </div>
-                
-                <div class="structure-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>Compare with Literature</h4>
-                        <p>Discuss how your findings align or contrast with previous research</p>
-                    </div>
+                <div class="focus-name">Student Engagement</div>
+                <p>Exploring factors that influence student participation and motivation in learning activities</p>
+            </div>
+            
+            <div class="focus-card">
+                <div class="focus-icon">
+                    <i class="fas fa-laptop"></i>
                 </div>
-                
-                <div class="structure-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h4>Address Limitations</h4>
-                        <p>Acknowledge methodological constraints and their implications</p>
-                    </div>
+                <div class="focus-name">Educational Technology</div>
+                <p>Studying integration and impact of digital tools and resources in teaching and learning</p>
+            </div>
+            
+            <div class="focus-card">
+                <div class="focus-icon">
+                    <i class="fas fa-clipboard-check"></i>
                 </div>
-                
-                <div class="structure-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h4>Suggest Future Research</h4>
-                        <p>Propose directions based on your findings and limitations</p>
-                    </div>
+                <div class="focus-name">Assessment Methods</div>
+                <p>Developing and evaluating techniques for measuring learning outcomes and progress</p>
+            </div>
+            
+            <div class="focus-card">
+                <div class="focus-icon">
+                    <i class="fas fa-graduation-cap"></i>
                 </div>
-                
-                <div class="structure-step">
-                    <div class="step-number">6</div>
-                    <div class="step-content">
-                        <h4>State Implications</h4>
-                        <p>Discuss theoretical, practical, or policy implications</p>
-                    </div>
-                </div>
-                
-                <div class="thesis-application">
-                    <h3 class="thesis-title"><i class="fas fa-graduation-cap"></i>Thesis/Dissertation Application</h3>
-                    <ul>
-                        <li><strong>Comprehensive Discussion:</strong> Typically the longest chapter</li>
-                        <li><strong>Theoretical Contribution:</strong> Emphasize how your research advances theory</li>
-                        <li><strong>Methodological Reflection:</strong> Critical assessment of research choices</li>
-                        <li><strong>Multiple Implications:</strong> Address theoretical, practical, and methodological implications</li>
-                    </ul>
-                </div>
+                <div class="focus-name">Curriculum Design</div>
+                <p>Creating and analyzing educational programs and learning materials</p>
             </div>
         </div>
 
-        <div class="section">
-            <div class="color-block teal-block">
-                <h2><i class="fas fa-flag-checkered"></i>6. Conclusion and References</h2>
-                
-                <h3><i class="fas fa-bullseye"></i>Conclusion Components</h3>
-                
-                <div class="definition-list">
-                    <dl>
-                        <dt><i class="fas fa-sync-alt"></i>Summary of Main Points</dt>
-                        <dd>Briefly restate the research problem, methods, key findings, and their significance.</dd>
-                        
-                        <dt><i class="fasfa-gem"></i>Final Synthesis</dt>
-                        <dd>Provide a cohesive final statement that connects all elements of the study.</dd>
-                        
-                        <dt><i class="fas fa-forward"></i>Forward Look</dt>
-                        <dd>Suggest practical applications or final thoughts for the reader.</dd>
-                    </dl>
-                </div>
-                
-                <h3><i class="fas fa-book"></i>References and Citations</h3>
-                
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Citation Element</th>
-                            <th>Purpose</th>
-                            <th>Best Practices</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>In-text Citations</strong></td>
-                            <td>Attribute ideas and findings to sources</td>
-                            <td>Consistent style, appropriate placement, accurate page numbers</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Reference List</strong></td>
-                            <td>Provide complete publication details</td>
-                            <td>Alphabetical order, consistent formatting, all cited works included</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Citation Management</strong></td>
-                            <td>Organize and format references</td>
-                            <td>Use software like Zotero, Mendeley, or EndNote</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Style Consistency</strong></td>
-                            <td>Follow disciplinary conventions</td>
-                            <td>APA, MLA, Chicago, or other required style guide</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <div class="thesis-application">
-                    <h3 class="thesis-title"><i class="fas fa-graduation-cap"></i>Thesis/Dissertation Application</h3>
-                    <ul>
-                        <li><strong>Comprehensive Bibliography:</strong> Typically extensive (100+ sources)</li>
-                        <li><strong>Multiple Appendices:</strong> Include instruments, raw data, IRB approval, etc.</li>
-                        <li><strong>Acknowledgements:</strong> Formal section thanking advisors, participants, and supporters</li>
-                        <li><strong>Abstract in Multiple Languages:</strong> Often required for institutional submission</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="homework-box">
+            <div class="homework-title"><i class="fas fa-tasks"></i>Critical Thinking Questions</div>
+            <p><strong>Discussion Points:</strong></p>
+            <ul>
+                <li>How does the practical focus of didactics research differ from more theoretical approaches in education?</li>
+                <li>What challenges might researchers face when measuring the effectiveness of teaching methods?</li>
+                <li>How can didactics research balance the need for measurable outcomes with the complexity of educational contexts?</li>
+                <li>What ethical considerations are particularly important in didactics research involving students?</li>
+                <li>How might didactics research contribute to evidence-based teaching practices?</li>
+            </ul>
         </div>
-
-        <section class="section">
-            <h2><i class="fas fa-tasks"></i>Thesis/Dissertation Writing Timeline</h2>
-            <div class="grid-container">
-                <div class="grid-item">
-                    <h4><i class="fas fa-calendar-alt"></i>Months 1-3</h4>
-                    <ul>
-                        <li>Proposal development</li>
-                        <li>Literature review</li>
-                        <li>Methodology planning</li>
-                        <li>IRB/ethics approval</li>
-                    </ul>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-calendar-alt"></i>Months 4-6</h4>
-                    <ul>
-                        <li>Data collection</li>
-                        <li>Preliminary analysis</li>
-                        <li>Introduction chapter</li>
-                        <li>Methods chapter</li>
-                    </ul>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-calendar-alt"></i>Months 7-9</h4>
-                    <ul>
-                        <li>Complete data analysis</li>
-                        <li>Results chapter</li>
-                        <li>Discussion chapter</li>
-                        <li>Conclusion chapter</li>
-                    </ul>
-                </div>
-                <div class="grid-item">
-                    <h4><i class="fas fa-calendar-alt"></i>Months 10-12</h4>
-                    <ul>
-                        <li>Revision and editing</li>
-                        <li>Formatting check</li>
-                        <li>Reference completion</li>
-                        <li>Final submission</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
+        
         <footer>
-            <p>Academic Article Structure Guide | Master 1 Applied Linguistics</p>
-            <p>Further Reading: Creswell, J. W., & Creswell, J. D. (2018). Research Design: Qualitative, Quantitative, and Mixed Methods Approaches.</p>
+            <p>Research Methodology Course | Lecture 1: Didactics Specialization &copy; 2025</p>
+            <p>Ziane-Achour University - Djelfa | Department of English</p>
         </footer>
     </div>
 </body>
