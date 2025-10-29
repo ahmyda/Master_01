@@ -5,308 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Applied Linguistics - Lecture 01</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
-            --secondary: #7209b7;
-            --accent: #f72585;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --success: #4cc9f0;
-            --border-radius: 12px;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            line-height: 1.8;
-            color: var(--dark);
-            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
-            padding: 40px 20px;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 40px 50px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .container:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 35px;
-            padding-bottom: 25px;
-            border-bottom: 2px solid #eaecef;
-            position: relative;
-        }
-
-        header::after {
-            content: "";
-            position: absolute;
-            bottom: -2px;
-            left: 25%;
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            border-radius: 3px;
-        }
-
-        h1 {
-            color: var(--secondary);
-            margin-bottom: 8px;
-            font-size: 2.4rem;
-            letter-spacing: 0.5px;
-            font-weight: 700;
-        }
-
-        h2 {
-            color: var(--primary);
-            margin: 30px 0 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e5e7eb;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        h2 i {
-            margin-right: 12px;
-            color: var(--secondary);
-        }
-
-        h3 {
-            color: #334155;
-            margin: 20px 0 10px;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-        }
-
-        h3 i {
-            margin-right: 10px;
-            color: var(--primary);
-        }
-
-        p {
-            margin-bottom: 16px;
-            font-size: 1rem;
-        }
-
-        .lesson-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: #fff;
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);
-            padding: 12px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(155, 89, 182, 0.3);
-        }
-
-        .lesson-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 14px rgba(155, 89, 182, 0.4);
-            background: linear-gradient(135deg, #8e44ad, #732d91);
-        }
-
-        .quote {
-            background: linear-gradient(to right, #eff6ff, #f8fbff);
-            border-left: 5px solid var(--primary);
-            padding: 20px 25px;
-            margin: 25px 0;
-            font-style: italic;
-            color: #1e293b;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-
-        .quote::before {
-            
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            font-size: 3rem;
-            color: var(--primary);
-            opacity: 0.2;
-            font-family: Georgia, serif;
-        }
-
-        .quote-source {
-            text-align: right;
-            font-weight: 600;
-            margin-top: 8px;
-            color: var(--secondary);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            box-shadow: var(--shadow);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-        }
-
-        th, td {
-            border: 1px solid #e2e8f0;
-            padding: 14px 16px;
-            text-align: left;
-        }
-
-        th {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            font-weight: 600;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9fafb;
-        }
-
-        tr:hover {
-            background-color: #f0f4ff;
-            transition: var(--transition);
-        }
-
-        .example-box {
-            background: linear-gradient(to right, #f0f9ff, #f8fdff);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin: 20px 0;
-            border-left: 5px solid var(--success);
-            box-shadow: var(--shadow);
-        }
-
-        .example-title {
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--primary-dark);
-            display: flex;
-            align-items: center;
-        }
-
-        .example-title i {
-            margin-right: 8px;
-        }
-
-        .definition-list {
-            margin: 20px 0;
-        }
-
-        .definition-list dt {
-            font-weight: 700;
-            margin-top: 15px;
-            color: var(--secondary);
-            display: flex;
-            align-items: center;
-            padding: 8px 12px;
-            background-color: #f8f9fa;
-            border-radius: 6px;
-        }
-
-        .definition-list dt i {
-            margin-right: 8px;
-            color: var(--primary);
-        }
-
-        .definition-list dd {
-            margin-left: 30px;
-            margin-bottom: 15px;
-            padding: 10px 15px;
-            background-color: white;
-            border-radius: 6px;
-            border-left: 3px solid #e2e8f0;
-        }
-
-        .section {
-            margin-bottom: 45px;
-            padding: 25px;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .section:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        ul {
-            margin: 15px 0;
-            padding-left: 25px;
-        }
-
-        li {
-            margin-bottom: 8px;
-            position: relative;
-        }
-
-        li::before {
-            content: "•";
-            color: var(--primary);
-            font-weight: bold;
-            position: absolute;
-            left: -15px;
-        }
-
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            padding-top: 25px;
-            border-top: 1px solid #e2e8f0;
-            color: var(--gray);
-            font-size: 0.95rem;
-            letter-spacing: 0.3px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h2 {
-                font-size: 1.3rem;
-            }
-            
-            table {
-                display: block;
-                overflow-x: auto;
-            }
-            
-            .section {
-                padding: 15px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/style2.css">
 </head>
 <body>
+      <!-- Toggle Menu Button -->
+    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+
+    <!-- Sidebar will load here -->
+    <div id="sidebar-container"></div>
     <div class="container">
         <header>
             <h1>Applied Linguistics - Lecture 01</h1>
@@ -315,7 +21,6 @@
             <p>Zaine Achour University-Djelfa | Department of English</p>
         </header>
         
-        <a href="index.html" class="lesson-link">← Go back to lessons list</a>
 
         <div class="section">
             <h2><i class="fas fa-pencil-alt"></i>1. What is Applied Linguistics?</h2>
@@ -572,6 +277,30 @@
             </ul>
             <p><em>Example:</em> Creating a fair English test for immigrants involves linguistics, psychology, and social awareness.</p>
         </section>
+   <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const sidebarContainer = document.getElementById("sidebar-container");
+
+    // Load sidebar first
+    fetch("../sidebar.html")
+      .then(res => res.text())
+      .then(html => {
+        sidebarContainer.innerHTML = html;
+
+        // Wait until sidebar is loaded, then attach listeners
+        const sidebar = document.getElementById("sidebar");
+        const closeBtn = document.getElementById("closeSidebar");
+
+        menuBtn.addEventListener("click", () => {
+          sidebar.classList.toggle("active");
+        });
+
+        closeBtn.addEventListener("click", () => {
+          sidebar.classList.remove("active");
+        });
+      })
+      .catch(err => console.error("Failed to load sidebar:", err));
+  </script>       
 
         <footer>
             <p>Lecture Notes Summary | Based on "Introducing Applied Linguistics" | Master 1 Applied Linguistics</p>
