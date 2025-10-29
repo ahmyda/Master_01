@@ -1,247 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Applied Linguistics - Lecture 02</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style3.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AL Lectures - PDF Viewer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style3.css">
 </head>
 <body>
-          <!-- Toggle Menu Button -->
-    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+    <!-- Toggle Menu Button -->
+  <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
 
-    <!-- Sidebar will load here -->
-    <div id="sidebar-container"></div>
-    <div class="container">
-        <header>
-            <h1>Applied Linguistics - Lecture 02</h1>
-            <h2><i class="fas fa-book-open"></i>Approaches in Applied Linguistics</h2>
+  <!-- Sidebar will load here -->
+  <div id="sidebar-container"></div>
+  <div class="container">
+    <header>
+      <h1>Applied Linguistics/h1>
+      <p class="subtitle">Lecture PDFs & Resources</p>
+    </header>
     
-        </header>
-        
+    <a href="index.html" class="back-link">
+      <i class="fas fa-arrow-left"></i>
+      Back to Module Overview
+    </a>
 
-        <div class="section">
-            <h2><i class="fas fa-history"></i>Historical Context</h2>
-            
-            <div class="quote">
-                "In the late 1960s and early 1970s, several researches pointed out that the language of second language learners is systematic and that learner errors are not random mistakes but evidence of rule governed behavior."
-            </div>
-            
-            <p>Applied Linguistics has viewed errors not merely by native speakers, but also by non-native speakers, recognizing the systematic nature of learner language.</p>
+
+    <div class="lectures-grid">
+      <div class="lecture-card">
+        <div class="lecture-icon">
+          <i class="fas fa-file-pdf"></i>
         </div>
-
-        <div class="section">
-            <h2><i class="fas fa-balance-scale"></i>1. Contrastive Analysis (CA)</h2>
-            
-            <div class="quote">
-                "We can predict and describe the patterns that will cause difficulty in learning, and those that will not cause difficulty, by comparing systematically the language and culture to be learned with the native language and culture of the student."
-                <div class="quote-source">- Lado, 1957</div>
-            </div>
-            
-            <div class="definition-list">
-                <dl>
-                    <dt><i class="fas fa-rocket"></i>Pioneering Work</dt>
-                    <dd>Lado was the first to provide comprehensive theoretical treatment and systematic procedures for contrastive study of languages.</dd>
-                    
-                    <dt><i class="fas fa-cogs"></i>Systematic Comparison</dt>
-                    <dd>CA involves describing languages (using structuralist linguistics), comparing them, and predicting learning difficulties.</dd>
-                    
-                    <dt><i class="fas fa-bullseye"></i>Behaviorist Foundation</dt>
-                    <dd>Based on behaviorist theories where language learning was viewed as habit formation reinforced by existing habits.</dd>
-                </dl>
-            </div>
-            
-            <h3><i class="fas fa-list-ol"></i>Lee's Four Assumptions (1968)</h3>
-            
-            <div class="example-box">
-                <div class="example-title"><i class="fas fa-lightbulb"></i>Key Principles:</div>
-                <ul>
-                    <li>The prime cause of difficulty in L2 learning is interference from L1</li>
-                    <li>Greater differences between languages lead to more acute learning difficulties</li>
-                    <li>Language comparison predicts difficulties and errors in L2 learning</li>
-                    <li>Teaching content equals the sum of differences established by CA</li>
-                </ul>
-            </div>
-            
-            <h3><i class="fas fa-exchange-alt"></i>Theory of Transfer</h3>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>Type of Transfer</th>
-                        <th>Description</th>
-                        <th>Effect on Learning</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Positive Transfer</td>
-                        <td>Similar patterns between L1 and L2</td>
-                        <td>Facilitates learning, easier to grasp</td>
-                    </tr>
-                    <tr>
-                        <td>Negative Transfer</td>
-                        <td>Dissimilar patterns between L1 and L2</td>
-                        <td>Impedes learning, requires more effort</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <div class="example-box">
-                <div class="example-title"><i class="fas fa-comment"></i>Real Example - Arab Learners:</div>
-                <ul>
-                    <li>Omitting third person '-s' (*he come instead of he comes)</li>
-                    <li>Overusing Past Simple instead of Present Perfect (*Did you see Ahmed today? instead of Have you seen Ahmed today?)</li>
-                </ul>
-            </div>
+        <h3>Lecture 1</h3>
+        <div class="lecture-actions">
+          <a href="#" class="btn btn-primary" onclick="showPdf('AL_1.pdf', 'Lecture 1: Introduction to AL')">
+            <i class="fas fa-eye"></i> View PDF
+          </a>
+          <a href="../pdfs/AL_1.pdf" class="btn btn-outline" download>
+            <i class="fas fa-download"></i> Download
+          </a>
         </div>
-
-        <div class="section">
-            <h2><i class="fas fa-sort-amount-down"></i>2. CA Hierarchy of Difficulty</h2>
-            
-            <p>Stockwell et al. (1965) established a hierarchy of difficulty from greatest to least:</p>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>Level</th>
-                        <th>Description</th>
-                        <th>Example (Arabic → English)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Split</strong></td>
-                        <td>L1 has one form, L2 has two or more</td>
-                        <td>Arabic has /b/, English has /p/ and /b/</td>
-                    </tr>
-                    <tr>
-                        <td><strong>New Category</strong></td>
-                        <td>Exists in L2 but not in L1</td>
-                        <td>Arabic lacks indefiniteness markers ('a', 'an')</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Absent Category</strong></td>
-                        <td>Exists in L1 but absent in L2</td>
-                        <td>Arabic has grammatical gender, English has natural gender</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Coalesced Forms</strong></td>
-                        <td>L1 has multiple forms, L2 has one</td>
-                        <td>Arabic has multiple negators, English mainly uses 'not'</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Complete Correspondence</strong></td>
-                        <td>Same or similar forms in both languages</td>
-                        <td>Simple Past Tense available in both languages</td>
-                    </tr>
-                </tbody>
-            </table>
+      </div>
+      
+      <div class="lecture-card">
+        <div class="lecture-icon">
+          <i class="fas fa-file-pdf"></i>
         </div>
-
-        <div class="section">
-            <h2><i class="fas fa-flask"></i>3. CA Methodology</h2>
-            
-            <h3><i class="fas fa-list-ol"></i>Traditional Five Steps</h3>
-            
-            <div class="example-box">
-                <div class="example-title"><i class="fas fa-lightbulb"></i>Procedure:</div>
-                <ul>
-                    <li>Select compatible tasks for comparison</li>
-                    <li>Ensure theoretical compatibility (deep structure)</li>
-                    <li>Use same descriptive model for both languages</li>
-                    <li>Identify similarities and contrasts</li>
-                    <li>Develop teaching materials based on predictions</li>
-                </ul>
-            </div>
-            
-            <h3><i class="fas fa-chart-line"></i>Enhanced Three-Step Approach</h3>
-            
-            <div class="definition-list">
-                <dl>
-                    <dt><i class="fas fa-hypothesis"></i>Hypothesis Building & Testing</dt>
-                    <dd>Develop and empirically test predictions using learner performance data</dd>
-                    
-                    <dt><i class="fas fa-chart-bar"></i>Data Analysis</dt>
-                    <dd>Analyze data and accept/reject hypotheses based on evidence</dd>
-                    
-                    <dt><i class="fas fa-book"></i>Material Development</dt>
-                    <dd>Create teaching materials based on validated results</dd>
-                </dl>
-            </div>
-            
-            <h3><i class="fas fa-check-circle"></i>Practical Applications</h3>
-            
-            <ul>
-                <li>Most effective for homogeneous classrooms (e.g., teaching English only to Arab learners)</li>
-                <li>Helps in curriculum design and test item selection</li>
-                <li>Prevents L1 transfer and remedies errors</li>
-                <li>Exploits similarities between languages</li>
-            </ul>
+        <h3>Lecture 2</h3>
+        <div class="lecture-actions">
+          <a href="#" class="btn btn-primary" onclick="showPdf('AL_2.pdf', 'Lecture 2')">
+            <i class="fas fa-eye"></i> View PDF
+          </a>
+          <a href="../pdfs/AL_2.pdf" class="btn btn-outline" download>
+            <i class="fas fa-download"></i> Download
+          </a>
         </div>
-
-        <div class="section">
-            <h2><i class="fas fa-exclamation-triangle"></i>4. Criticism of Contrastive Analysis</h2>
-            
-            <div class="example-box">
-                <div class="example-title"><i class="fas fa-lightbulb"></i>Major Limitations:</div>
-                <ul>
-                    <li><strong>Over-reliance on behaviorism:</strong> Neglects cognitive aspects of language learning</li>
-                    <li><strong>Researcher limitations:</strong> Requires comprehensive knowledge of both languages</li>
-                    <li><strong>Overprediction of errors:</strong> Not all predicted difficulties materialize in practice</li>
-                    <li><strong>Underprediction of errors:</strong> Fails to account for developmental errors like *goed, *comed</li>
-                    <li><strong>Limited explanatory power:</strong> Doesn't fully explain the learning process</li>
-                </ul>
-            </div>
-            
-            <div class="example-box">
-                <div class="example-title"><i class="fas fa-comment"></i>Example of Underprediction:</div>
-                <p>Errors like *goed, *comed, *hurted result from overgeneralization of regular patterns, not L1 interference, and are common in both L2 learners and children learning L1.</p>
-            </div>
+      </div>
+      <div class="lecture-card">
+        <div class="lecture-icon">
+          <i class="fas fa-file-pdf"></i>
         </div>
-
-        <section class="section">
-            <h2><i class="fas fa-file-alt"></i>Quick Summary</h2>
-            <p>
-                Contrastive Analysis was a dominant approach in the 1960s-1970s that systematically compared languages to predict learning difficulties based on L1-L2 differences.
-            </p>
-            <ul>
-                <li><strong>Core idea:</strong> L1 habits interfere with L2 learning, with similarities facilitating and differences impeding acquisition</li>
-                <li><strong>Key contribution:</strong> Hierarchy of difficulty predicting specific learning challenges</li>
-                <li><strong>Main limitation:</strong> Overemphasis on behaviorism and inability to explain all error types</li>
-                <li><strong>Modern relevance:</strong> Still useful for specific contexts, especially homogeneous classrooms</li>
-            </ul>
-        </section>
-           <script>
-    const menuBtn = document.getElementById("menuBtn");
-    const sidebarContainer = document.getElementById("sidebar-container");
-
-    // Load sidebar first
-    fetch("../sidebar.html")
-      .then(res => res.text())
-      .then(html => {
-        sidebarContainer.innerHTML = html;
-
-        // Wait until sidebar is loaded, then attach listeners
-        const sidebar = document.getElementById("sidebar");
-        const closeBtn = document.getElementById("closeSidebar");
-
-        menuBtn.addEventListener("click", () => {
-          sidebar.classList.toggle("active");
-        });
-
-        closeBtn.addEventListener("click", () => {
-          sidebar.classList.remove("active");
-        });
-      })
-      .catch(err => console.error("Failed to load sidebar:", err));
-  </script> 
-
-        <footer>
-            <p>Lecture Notes Summary | Based on "Approaches in Applied Linguistics" | Master 1 Applied Linguistics</p>
-            <p>Further Reading: Whitman, R. L. (1970). Contrastive analysis: Problems and procedures.</p>
-        </footer>
+      <h3>Lecture 3</h3>
+        <div class="lecture-actions">
+          <a href="#" class="btn btn-primary" onclick="showPdf('AL_3.pdf', 'Lecture 3')">
+            <i class="fas fa-eye"></i> View PDF
+          </a>
+          <a href="../pdfs/AL_3.pdf" class="btn btn-outline" download>
+            <i class="fas fa-download"></i> Download
+          </a>
+        </div>
+      </div>
+     
     </div>
+
+    <div class="pdf-viewer-section">
+      <div class="pdf-viewer-header">
+        <h2><i class="fas fa-file-pdf"></i> <span id="pdf-title">Select a PDF to View</span></h2>
+
+      </div>
+      
+      <div id="pdf-container">
+        <div class="pdf-placeholder">
+          <i class="fas fa-file-pdf"></i>
+          <h3>No PDF Selected</h3>
+          <p>Click "View PDF" on any lecture card to display it here</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Applied Linguistics &copy; 2025 | Lecture PDFs Repository</p>
+    </footer>
+  </div>
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebarContainer = document.getElementById("sidebar-container");
+
+// Load sidebar first
+fetch("../sidebar.html")
+  .then(res => res.text())
+  .then(html => {
+    sidebarContainer.innerHTML = html;
+
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("closeSidebar");
+
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+    });
+
+    // ✅ Add this part AFTER sidebar loads
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const parent = link.parentElement;
+        const sublist = parent.querySelector(".nav-sublist");
+        const arrow = link.querySelector(".arrow");
+
+        if (sublist.style.display === "block") {
+          sublist.style.display = "none";
+          arrow.classList.remove("rotate");
+        } else {
+          sublist.style.display = "block";
+          arrow.classList.add("rotate");
+        }
+      });
+    });
+  })
+  .catch(err => console.error("Failed to load sidebar:", err));
+</script>
+
 </body>
 </html>
