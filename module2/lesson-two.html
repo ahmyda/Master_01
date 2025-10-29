@@ -3,403 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sociolinguistics - The Scientificity of Language Study</title>
+    <title>Master Didactics</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
-            --secondary: #7209b7;
-            --accent: #f72585;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --success: #4cc9f0;
-            --border-radius: 12px;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            line-height: 1.8;
-            color: var(--dark);
-            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
-            padding: 40px 20px;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 40px 50px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .container:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 35px;
-            padding-bottom: 25px;
-            border-bottom: 2px solid #eaecef;
-            position: relative;
-        }
-
-        header::after {
-            content: "";
-            position: absolute;
-            bottom: -2px;
-            left: 25%;
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            border-radius: 3px;
-        }
-
-        h1 {
-            color: var(--secondary);
-            margin-bottom: 8px;
-            font-size: 2.4rem;
-            letter-spacing: 0.5px;
-            font-weight: 700;
-        }
-
-        h2 {
-            color: var(--primary);
-            margin: 30px 0 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e5e7eb;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        h2 i {
-            margin-right: 12px;
-            color: var(--secondary);
-        }
-
-        h3 {
-            color: #334155;
-            margin: 20px 0 10px;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-        }
-
-        h3 i {
-            margin-right: 10px;
-            color: var(--primary);
-        }
-
-        p {
-            margin-bottom: 16px;
-            font-size: 1rem;
-        }
-
-        .lesson-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: #fff;
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);
-            padding: 12px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(155, 89, 182, 0.3);
-        }
-
-        .lesson-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 14px rgba(155, 89, 182, 0.4);
-            background: linear-gradient(135deg, #8e44ad, #732d91);
-        }
-
-        .quote {
-            background: linear-gradient(to right, #eff6ff, #f8fbff);
-            border-left: 5px solid var(--primary);
-            padding: 20px 25px;
-            margin: 25px 0;
-            font-style: italic;
-            color: #1e293b;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-
-        .quote::before {
-            
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            font-size: 3rem;
-            color: var(--primary);
-            opacity: 0.2;
-            font-family: Georgia, serif;
-        }
-
-        .quote-source {
-            text-align: right;
-            font-weight: 600;
-            margin-top: 8px;
-            color: var(--secondary);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            box-shadow: var(--shadow);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-        }
-
-        th, td {
-            border: 1px solid #e2e8f0;
-            padding: 14px 16px;
-            text-align: left;
-        }
-
-        th {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            font-weight: 600;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9fafb;
-        }
-
-        tr:hover {
-            background-color: #f0f4ff;
-            transition: var(--transition);
-        }
-
-        .example-box {
-            background: linear-gradient(to right, #f0f9ff, #f8fdff);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin: 20px 0;
-            border-left: 5px solid var(--success);
-            box-shadow: var(--shadow);
-        }
-
-        .example-title {
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--primary-dark);
-            display: flex;
-            align-items: center;
-        }
-
-        .example-title i {
-            margin-right: 8px;
-        }
-
-        .definition-list {
-            margin: 20px 0;
-        }
-
-        .definition-list dt {
-            font-weight: 700;
-            margin-top: 15px;
-            color: var(--secondary);
-            display: flex;
-            align-items: center;
-            padding: 8px 12px;
-            background-color: #f8f9fa;
-            border-radius: 6px;
-        }
-
-        .definition-list dt i {
-            margin-right: 8px;
-            color: var(--primary);
-        }
-
-        .definition-list dd {
-            margin-left: 30px;
-            margin-bottom: 15px;
-            padding: 10px 15px;
-            background-color: white;
-            border-radius: 6px;
-            border-left: 3px solid #e2e8f0;
-        }
-
-        .section {
-            margin-bottom: 45px;
-            padding: 25px;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .section:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        ul {
-            margin: 15px 0;
-            padding-left: 25px;
-        }
-
-        li {
-            margin-bottom: 8px;
-            position: relative;
-        }
-
-        li::before {
-            content: "•";
-            color: var(--primary);
-            font-weight: bold;
-            position: absolute;
-            left: -15px;
-        }
-
-        .quiz-section {
-            background: linear-gradient(to right, #fff9f5, #fffdfb);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            margin: 30px 0;
-            border-left: 5px solid #ff9e58;
-            box-shadow: var(--shadow);
-        }
-
-        .quiz-title {
-            color: #e67e22;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .quiz-title i {
-            margin-right: 10px;
-        }
-
-        .quiz-question {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed #e2e8f0;
-        }
-
-        .question-text {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #2d3748;
-        }
-
-        .question-options {
-            margin-left: 20px;
-        }
-
-        .question-options li {
-            margin-bottom: 8px;
-        }
-
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            padding-top: 25px;
-            border-top: 1px solid #e2e8f0;
-            color: var(--gray);
-            font-size: 0.95rem;
-            letter-spacing: 0.3px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h2 {
-                font-size: 1.3rem;
-            }
-            
-            table {
-                display: block;
-                overflow-x: auto;
-            }
-            
-            .section {
-                padding: 15px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/style2.css">
 </head>
 <body>
+    <!-- Toggle Menu Button -->
+    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
     <div class="container">
         <header>
             <h1>Sociolinguistics</h1>
-            <h2><i class="fas fa-globe-americas"></i>The Scientificity of Language Study</h2>
-            <p>Master 1 / Applied Linguistics | Instructor: Nour el Houda KHERFANE</p>
-            <p>Zaine Achour University-Djelfa | Department of English</p>
+            <h2><i class="fas fa-globe-americas"></i> The Scientificity of Language Study</h2>
         </header>
-        
-        <a href="index.html" class="lesson-link">← Go back to lessons list</a>
 
+        <!-- Section 1 -->
         <div class="section">
-            <h2><i class="fas fa-flask"></i>The Scientific Status of Sociolinguistics</h2>
-            
+            <h2><i class="fas fa-flask"></i> The Scientific Status of Sociolinguistics</h2>
             <div class="quote">
                 "One of the frequently asked questions in academia is whether sociolinguistics or the study of language, in general, is science or not."
             </div>
-            
-            <p>This fundamental question requires addressing two preliminary questions: "what is science?" and "what makes a discipline scientific?". The debate often begins with the distinction between physical/natural sciences and social sciences.</p>
-            
+
+            <p>This question requires addressing: "what is science?" and "what makes a discipline scientific?". The debate often starts with physical vs social sciences distinction.</p>
+
             <div class="example-box">
-                <div class="example-title"><i class="fas fa-lightbulb"></i>Common Misconception:</div>
-                <p>Some adopt the simplistic view that only fields classified as natural sciences are truly scientific, thereby rendering social science disciplines like sociolinguistics as "unscientific."</p>
+                <div class="example-title"><i class="fas fa-lightbulb"></i> Common Misconception:</div>
+                <p>Some view only natural sciences as "true science", labeling social sciences like sociolinguistics as "unscientific".</p>
             </div>
-            
-            <h3><i class="fas fa-balance-scale"></i>Defining Science</h3>
-            
+
+            <h3><i class="fas fa-balance-scale"></i> Defining Science</h3>
             <div class="definition-list">
                 <dl>
-                    <dt><i class="fas fa-book"></i>May, Williams, and Wiggins (2002)</dt>
-                    <dd>Science represents "the production of a body of knowledge that is assumed, in one way or another, to represent the 'truth' about the phenomena with which it is concerned."</dd>
-                    
-                    <dt><i class="fas fa-cogs"></i>Alternative Perspective</dt>
-                    <dd>Science should be evaluated based on the knowledge yielded and the methods implemented, not merely the field's classification.</dd>
+                    <dt><i class="fas fa-book"></i> May, Williams, and Wiggins (2002)</dt>
+                    <dd>Science is "the production of knowledge representing the 'truth' about phenomena."</dd>
+                    <dt><i class="fas fa-cogs"></i> Alternative Perspective</dt>
+                    <dd>Science should be evaluated by knowledge yielded and methods used, not merely field classification.</dd>
                 </dl>
             </div>
         </div>
 
+        <!-- Section 2 -->
         <div class="section">
-            <h2><i class="fas fa-search"></i>Objectivity in Scientific Research</h2>
-            
+            <h2><i class="fas fa-search"></i> Objectivity in Scientific Research</h2>
             <div class="quote">
                 "Scientific knowledge is reliable knowledge because it is objectively proven knowledge."
                 <div class="quote-source">- Chalmers (1982)</div>
             </div>
-            
-            <p>Objectivity is the primary aspect that distinguishes scientific knowledge from ordinary everyday knowledge. In sociolinguistics, researchers attempt to detach their own biases, values, and preferences when describing language use.</p>
-            
-            <h3><i class="fas fa-exclamation-triangle"></i>Challenges to Objectivity</h3>
-            
+
+            <p>Objectivity distinguishes scientific knowledge from everyday knowledge. Sociolinguists aim to minimize biases while analyzing language use.</p>
+
+            <h3><i class="fas fa-exclamation-triangle"></i> Challenges to Objectivity</h3>
             <div class="example-box">
-                <div class="example-title"><i class="fas fa-lightbulb"></i>Cultural Influences:</div>
-                <p>Investigators in sociolinguistics can be influenced by culture-related topics such as:</p>
+                <div class="example-title"><i class="fas fa-lightbulb"></i> Cultural Influences:</div>
                 <ul>
                     <li>Religion and belief systems</li>
                     <li>Regional identities and dialects</li>
@@ -407,65 +65,91 @@
                     <li>Power relations in society</li>
                 </ul>
             </div>
-            
-            <h3><i class="fas fa-check-circle"></i>Verifiability and Empirical Observation</h3>
-            
-            <p>Scientific knowledge needs to be verifiable and based on concrete factual observation. Sociolinguistics practitioners observe and record data with precision, producing reliable information that can be obtained again under the same circumstances.</p>
-            
+
+            <h3><i class="fas fa-check-circle"></i> Verifiability and Empirical Observation</h3>
+            <p>Scientific knowledge must be verifiable and based on factual observation. Sociolinguists collect data precisely to ensure repeatable results.</p>
+
             <div class="definition-list">
                 <dl>
-                    <dt><i class="fas fa-chart-bar"></i>William Labov's Contribution</dt>
-                    <dd>Labov's work in variationist sociolinguistics stands as a prime example of reliance on firm empirical observation. His adaptation of quantitative approaches and statistical analysis reveals correlations between linguistic forms and social variables.</dd>
+                    <dt><i class="fas fa-chart-bar"></i> William Labov's Contribution</dt>
+                    <dd>Labov used quantitative methods and statistical analysis to link linguistic forms with social variables, exemplifying empirical rigor.</dd>
                 </dl>
             </div>
         </div>
 
+        <!-- Section 3 -->
         <div class="section">
-            <h2><i class="fas fa-comments"></i>Criticisms and Alternative Perspectives</h2>
-            
-            <h3><i class="fas fa-times-circle"></i>The "Pseudoscience" Argument</h3>
-            
-            <p>Some critics argue that even adhering to scientific methods does not grant sociolinguistics the status of being a science, suggesting it should be classified as a "pseudoscience" - a subclass of scientific theories.</p>
-            
+            <h2><i class="fas fa-comments"></i> Criticisms and Alternative Perspectives</h2>
+
+            <h3><i class="fas fa-times-circle"></i> The "Pseudoscience" Argument</h3>
+            <p>Some argue sociolinguistics should be classified as "pseudoscience" even if scientific methods are followed.</p>
             <div class="quote">
-                "Junk science - A public relations term used to criticize scientific research even if it is conducted properly that produces findings that an advocacy group opposes."
+                "Junk science - a term criticizing scientific research even when conducted properly for findings opposed by advocacy groups."
                 <div class="quote-source">- Neuman (2014)</div>
             </div>
-            
-            <h3><i class="fas fa-graduation-cap"></i>Scientific Literacy as a Solution</h3>
-            
-            <p>Amidst this ongoing debate, Laugksch (2000) proposes a productive alternative through the concept of "scientific literacy":</p>
-            
+
+            <h3><i class="fas fa-graduation-cap"></i> Scientific Literacy as a Solution</h3>
+            <p>Laugksch (2000) suggests scientific literacy as a framework for evaluating sociolinguistics:</p>
             <div class="definition-list">
                 <dl>
-                    <dt><i class="fas fa-brain"></i>Scientific Literacy</dt>
-                    <dd>"The capacity to understand scientific knowledge; apply scientific concepts, principles, and theories; use scientific processes to solve problems and make decisions; and interact in a way that reflects core scientific values."</dd>
-                    
-                    <dt><i class="fas fa-calculator"></i>Quantitative Literacy (Numeracy)</dt>
-                    <dd>The ability to perceive how data are collected and measurements are displayed through graphs, diagrams, and tables.</dd>
+                    <dt><i class="fas fa-brain"></i> Scientific Literacy</dt>
+                    <dd>The ability to understand, apply, and interact with scientific knowledge while reflecting core scientific values.</dd>
+                    <dt><i class="fas fa-calculator"></i> Quantitative Literacy (Numeracy)</dt>
+                    <dd>The skill to interpret data collection and presentation via graphs, diagrams, and tables.</dd>
                 </dl>
             </div>
         </div>
 
-    
-        <section class="section">
-            <h2><i class="fas fa-file-alt"></i>Quick Summary</h2>
-            <p>
-                The scientific status of sociolinguistics remains a topic of academic debate, centered around definitions of science, objectivity, and methodology.
-            </p>
+        <!-- Quick Summary -->
+        <div class="section">
+            <h2><i class="fas fa-file-alt"></i> Quick Summary</h2>
+            <p>The scientific status of sociolinguistics is debated, focusing on definitions, objectivity, and methodology.</p>
             <ul>
-                <li><strong>Core debate:</strong> Whether sociolinguistics qualifies as a "real" science</li>
-                <li><strong>Key criterion:</strong> Objectivity and empirical verification of knowledge</li>
-                <li><strong>Methodological strength:</strong> Quantitative approaches in variationist sociolinguistics</li>
-                <li><strong>Alternative perspective:</strong> Scientific literacy as a more productive framework</li>
+                <li><strong>Core debate:</strong> Is sociolinguistics a "real" science?</li>
+                <li><strong>Key criterion:</strong> Objectivity and empirical verification</li>
+                <li><strong>Methodological strength:</strong> Quantitative variationist approaches</li>
+                <li><strong>Alternative perspective:</strong> Scientific literacy framework</li>
             </ul>
-            <p><em>Critical insight:</em> The debate highlights broader questions about what constitutes scientific knowledge and how we evaluate different forms of inquiry.</p>
-        </section>
+            <p><em>Critical insight:</em> Highlights how scientific knowledge is evaluated across disciplines.</p>
+        </div>
 
         <footer>
             <p>Lecture Notes Summary | Based on "The Scientificity of Language Study" | Master 1 Applied Linguistics</p>
             <p>Further Reading: Labov, W. (1972). Sociolinguistic Patterns. University of Pennsylvania Press.</p>
         </footer>
     </div>
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebarContainer = document.getElementById("sidebar-container");
+
+fetch("../sidebar.html")
+  .then(res => res.text())
+  .then(html => {
+    sidebarContainer.innerHTML = html;
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("closeSidebar");
+
+    menuBtn.addEventListener("click", () => sidebar.classList.toggle("active"));
+    closeBtn.addEventListener("click", () => sidebar.classList.remove("active"));
+
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const parent = link.parentElement;
+        const sublist = parent.querySelector(".nav-sublist");
+        const arrow = link.querySelector(".arrow");
+        if (sublist.style.display === "block") {
+          sublist.style.display = "none";
+          arrow?.classList.remove("rotate");
+        } else {
+          sublist.style.display = "block";
+          arrow?.classList.add("rotate");
+        }
+      });
+    });
+  })
+  .catch(err => console.error("Failed to load sidebar:", err));
+</script>
 </body>
 </html>
