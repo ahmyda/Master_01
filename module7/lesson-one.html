@@ -3,479 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FOSS Explained Simply</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            position: relative;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #2c3e50, #4a6491);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        .content {
-            padding: 30px;
-        }
-        
-        h2 {
-            color: #2c3e50;
-            margin: 25px 0 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #eaecef;
-        }
-        
-        h3 {
-            color: #3498db;
-            margin: 20px 0 10px;
-        }
-        
-        p {
-            margin-bottom: 15px;
-        }
-        
-        .card {
-            background-color: #f8f9fa;
-            border-left: 4px solid #3498db;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 0 5px 5px 0;
-        }
-        
-        .definition {
-            background-color: #e8f4fc;
-            border-left-color: #2980b9;
-        }
-        
-        .highlight {
-            background-color: #fff3cd;
-            border-left-color: #ffc107;
-        }
-        
-        .simple-explanation {
-            background-color: #e8f5e9;
-            border-left-color: #4caf50;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-        
-        .simple-explanation h3 {
-            color: #2e7d32;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .simple-explanation h3::before {
-            content: "💡";
-            font-size: 1.5rem;
-        }
-        
-        ul {
-            margin: 15px 0;
-            padding-left: 30px;
-        }
-        
-        li {
-            margin-bottom: 8px;
-        }
-        
-        .freedoms {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .freedom-card {
-            background: white;
-            border: 1px solid #e1e4e8;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
-        
-        .freedom-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .freedom-number {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            background-color: #3498db;
-            color: white;
-            border-radius: 50%;
-            line-height: 30px;
-            margin-bottom: 10px;
-        }
-        
-        .license-comparison {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        
-        .license-comparison th, .license-comparison td {
-            border: 1px solid #ddd;
-            padding: 12px 15px;
-            text-align: left;
-        }
-        
-        .license-comparison th {
-            background-color: #2c3e50;
-            color: white;
-        }
-        
-        .license-comparison tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-        
-        .checkmark {
-            color: #27ae60;
-            font-weight: bold;
-        }
-        
-        .page-break {
-            height: 1px;
-            background: linear-gradient(to right, transparent, #3498db, transparent);
-            margin: 30px 0;
-        }
-        
-        .discussion-box {
-            background-color: #e8f5e9;
-            border: 1px solid #c8e6c9;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        
-        .back-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: background-color 0.3s;
-            z-index: 100;
-        }
-        
-        .back-button:hover {
-            background-color: #2980b9;
-        }
-        
-        .analogy {
-            background-color: #fff3e0;
-            border-left: 4px solid #ff9800;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 0 5px 5px 0;
-        }
-        
-        .analogy h3 {
-            color: #e65100;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .analogy h3::before {
-            content: "🔍";
-        }
-        
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #2c3e50;
-            color: white;
-            margin-top: 30px;
-        }
-        
-        @media (max-width: 768px) {
-            .freedoms {
-                grid-template-columns: 1fr;
-            }
-            
-            .license-comparison {
-                display: block;
-                overflow-x: auto;
-            }
-            
-            .back-button {
-                position: relative;
-                top: 0;
-                left: 0;
-                margin-bottom: 20px;
-                width: 100%;
-            }
-        }
-    </style>
+    <title>Logical and Open Source - Lesson 1: Open Source Software</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style2.css">
 </head>
 <body>
-<a href="../index.html" class="back-button">
-            <i class="fas fa-arrow-left"></i>
-            Back to Modules List
-        </a>    
+      <!-- Toggle Menu Button -->
+    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+
+    <!-- Sidebar will load here -->
+    <div id="sidebar-container"></div>
+
     <div class="container">
         <header>
-            <h1>Free and Open Source Software (FOSS)</h1>
-            <p class="subtitle">Understanding the principles and impact of open source technology - Explained Simply</p>
+            <h1>Logical and Open Source - Lesson 1</h1>
+            <p class="lesson-info">Introduction to Open Source Software</p>
+            <p class="date">October 8, 2025</p>
         </header>
         
-        <div class="content">
-            <div class="simple-explanation">
-                <h3>Simple Explanation</h3>
-                <p>This lesson explains Free and Open Source Software (FOSS) in simple terms. Even if you're not a computer expert, you'll understand these important concepts!</p>
+
+        <h2><i class="fas fa-code"></i>What is Open Source Software?</h2>
+        
+        <p><strong>Open Source Software (OSS)</strong> is computer software whose source code is made publicly available for anyone to inspect, modify, and enhance.</p>
+        
+        <div class="comparison-box">
+            <div class="oss">
+                <div class="box-title"><i class="fas fa-lock-open"></i>Open Source Software</div>
+                <ul>
+                    <li>Source code is publicly available</li>
+                    <li>Built on collaboration and sharing</li>
+                    <li>Anyone can inspect, modify, enhance</li>
+                    <li>Community-driven development</li>
+                    <li>Examples: Linux, Firefox, WordPress</li>
+                </ul>
             </div>
             
-            <h2>Operating Systems</h2>
-            <div class="card">
-                <p><strong>Windows</strong> – The most popular computer system by Microsoft.</p>
-                <p><strong>Linux</strong> – A free computer system that anyone can use and improve.</p>
-                <p><strong>macOS</strong> – Apple's computer system known for good design.</p>
+            <div class="proprietary">
+                <div class="box-title"><i class="fas fa-lock"></i>Proprietary Software</div>
+                <ul>
+                    <li>Source code is kept secret</li>
+                    <li>Only the company can modify code</li>
+                    <li>Users get compiled version only</li>
+                    <li>Company-controlled development</li>
+                    <li>Examples: Microsoft Office, Adobe Photoshop</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2><i class="fas fa-freedom"></i>The Four Essential Freedoms</h2>
+        
+        <p>The key rights granted by an open source license are the freedom to:</p>
+        
+        <div class="freedoms-grid">
+            <div class="freedom-card">
+                <div class="freedom-icon"><i class="fas fa-play-circle"></i></div>
+                <div class="freedom-name">Freedom 0: Use</div>
+                <p>Use the software for any purpose</p>
             </div>
             
-            <div class="analogy">
-                <h3>Simple Analogy</h3>
-                <p>Think of an operating system like the "manager" of your computer. It tells all the parts how to work together, just like a store manager tells employees what to do.</p>
+            <div class="freedom-card">
+                <div class="freedom-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="freedom-name">Freedom 1: Study</div>
+                <p>Study how the program works</p>
             </div>
             
-            <h2>What is Software?</h2>
-            <div class="card definition">
-                <p><strong>Software</strong> = Instructions that tell your computer what to do.</p>
-                <p><strong>System Software</strong>: The basic programs that run your computer (like Windows or Linux).</p>
-                <p><strong>Application Software</strong>: Programs for specific tasks (like Word for writing or Photoshop for editing photos).</p>
+            <div class="freedom-card">
+                <div class="freedom-icon"><i class="fas fa-edit"></i></div>
+                <div class="freedom-name">Freedom 2: Modify</div>
+                <p>Modify the source code</p>
             </div>
             
-            <div class="analogy">
-                <h3>Simple Analogy</h3>
-                <p>Software is like recipes for your computer. System software is the basic kitchen rules, while application software is specific recipes for different dishes.</p>
+            <div class="freedom-card">
+                <div class="freedom-icon"><i class="fas fa-share-alt"></i></div>
+                <div class="freedom-name">Freedom 3: Distribute</div>
+                <p>Distribute original or modified copies</p>
+            </div>
+        </div>
+
+        <h2><i class="fas fa-file-contract"></i>Common Open Source Licenses</h2>
+        
+        <div class="licenses-grid">
+            <div class="license-card">
+                <div class="license-name">GPL (General Public License)</div>
+                <span class="license-type copyleft">Copyleft</span>
+                <p>Requires any modified versions to also be open source. Ensures derivatives remain free.</p>
             </div>
             
-            <h2>Free and Open Source Software (FOSS)</h2>
-            <div class="card">
-                <p><strong>Free</strong> = Freedom to use and change, not necessarily free of cost.</p>
-                <p><strong>Open Source</strong> = The "recipe" (source code) is available for everyone to see and improve.</p>
-                <p><strong>Values</strong>: Working together, Being transparent, Making quality software.</p>
+            <div class="license-card">
+                <div class="license-name">LGPL (Lesser General Public License)</div>
+                <span class="license-type copyleft">Weak Copyleft</span>
+                <p>Similar to GPL but allows linking with non-open-source software.</p>
             </div>
             
-            <div class="analogy">
-                <h3>Simple Analogy</h3>
-                <p>Open source is like a community cookbook where everyone can see the recipes, suggest improvements, and create their own versions. Closed source is like a secret family recipe that only the owner knows.</p>
+            <div class="license-card">
+                <div class="license-name">MIT License</div>
+                <span class="license-type permissive">Permissive</span>
+                <p>Very permissive; allows reuse with minimal restrictions. Simple and business-friendly.</p>
             </div>
             
-            <h2>What is a Backdoor?</h2>
-            <div class="card highlight">
-                <p>A hidden way to access software or systems without permission — like a secret entrance to a building that only the builder knows about.</p>
+            <div class="license-card">
+                <div class="license-name">Apache License</div>
+                <span class="license-type permissive">Permissive</span>
+                <p>Permissive and includes explicit patent protection for contributors.</p>
             </div>
             
-            <h2>The Four Essential Freedoms</h2>
-            <div class="freedoms">
-                <div class="freedom-card">
-                    <div class="freedom-number">1</div>
-                    <p>Use the program for any purpose.</p>
-                </div>
-                <div class="freedom-card">
-                    <div class="freedom-number">2</div>
-                    <p>See how it works and change it.</p>
-                </div>
-                <div class="freedom-card">
-                    <div class="freedom-number">3</div>
-                    <p>Share copies with others.</p>
-                </div>
-                <div class="freedom-card">
-                    <div class="freedom-number">4</div>
-                    <p>Improve it and share your improvements.</p>
-                </div>
+            <div class="license-card">
+                <div class="license-name">Creative Commons (CC)</div>
+                <span class="license-type">Content Focused</span>
+                <p>Often used for creative works like documentation, images, and media, not software code.</p>
             </div>
-            
-            <div class="analogy">
-                <h3>Simple Analogy</h3>
-                <p>These freedoms are like having a car where you can: 1) Drive it anywhere, 2) Look under the hood and modify it, 3) Let friends borrow it, and 4) Add new features and share those improvements with other car owners.</p>
-            </div>
-            
-            <h2>Short History</h2>
-            <div class="card">
-                <p><strong>1983</strong>: Richard Stallman started the GNU Project to create free software. Later, Linux was added to complete the system.</p>
-            </div>
-            
-            <h2>Why Animals as Logos?</h2>
-            <div class="card">
-                <p>Animals in logos represent qualities like freedom (bird), speed (cheetah), or community (bees). The Linux penguin is friendly and approachable.</p>
-            </div>
-            
-            <h2>"Free" ≠ "Free of Cost"</h2>
-            <div class="card highlight">
-                <p>"Free" in FOSS means freedom, not necessarily free of charge. You can sell open-source software, but you must follow its rules about sharing improvements.</p>
-            </div>
-            
-            <div class="analogy">
-                <h3>Simple Analogy</h3>
-                <p>It's like "free speech" - it's about freedom, not necessarily free beer. You can charge for a book about free speech ideas.</p>
-            </div>
-            
-            <h2>Educational and Social Impact</h2>
-            <div class="card">
-                <p>Encourages sharing knowledge and working together.</p>
-                <p>Helps students access free learning tools.</p>
-                <p>Reduces software costs for schools and individuals.</p>
-            </div>
-            
-            <div class="page-break"></div>
-            
-            <h2>Cookies</h2>
-            <div class="card definition">
-                <p><strong>Definition:</strong> Small pieces of data that websites store on your computer to remember you.</p>
-                <p><strong>Transparency:</strong> Websites should tell you when they use cookies.</p>
-                <p><strong>Use:</strong> Remember your login, preferences, and show relevant ads.</p>
-            </div>
-            
-            <div class="analogy">
-                <h3>Simple Analogy</h3>
-                <p>Cookies are like name tags at a conference. The website gives you a name tag so it can recognize you when you return, remembering your preferences.</p>
-            </div>
-            
-            <h2>Licenses</h2>
-            <div class="simple-explanation">
-                <h3>What are software licenses?</h3>
-                <p>Licenses are rules about how you can use software. Different open source licenses have different rules.</p>
-            </div>
-            
-            <table class="license-comparison">
-                <thead>
-                    <tr>
-                        <th>License</th>
-                        <th>Commercial Use</th>
-                        <th>Modify</th>
-                        <th>Example</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>GPL</td>
-                        <td class="checkmark">✓</td>
-                        <td class="checkmark">✓</td>
-                        <td>Linux</td>
-                    </tr>
-                    <tr>
-                        <td>MIT</td>
-                        <td class="checkmark">✓</td>
-                        <td class="checkmark">✓</td>
-                        <td>React</td>
-                    </tr>
-                    <tr>
-                        <td>Apache</td>
-                        <td class="checkmark">✓</td>
-                        <td class="checkmark">✓</td>
-                        <td>Android</td>
-                    </tr>
-                    <tr>
-                        <td>BSD</td>
-                        <td class="checkmark">✓</td>
-                        <td class="checkmark">✓</td>
-                        <td>FreeBSD</td>
-                    </tr>
-                    <tr>
-                        <td>Creative Commons</td>
-                        <td>varies</td>
-                        <td>varies</td>
-                        <td>Wikipedia</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <h2>Open Source vs Closed Source</h2>
-            <div class="card">
-                <p><strong>Open Source:</strong> Code is visible to everyone, free to modify (like Linux, VLC media player).</p>
-                <p><strong>Closed Source:</strong> Code is hidden (like Windows, Photoshop).</p>
-            </div>
-            
-            <div class="analogy">
-                <h3>Simple Analogy</h3>
-                <p>Open source is like an open kitchen restaurant where you can see how food is prepared. Closed source is like a restaurant with a closed kitchen - you only see the final dish.</p>
-            </div>
-            
-            <h2>Discussion: Yassir vs Ouedkniss</h2>
-            <div class="discussion-box">
-                <p>Yassir is a closed-source app (code is secret). Ouedkniss uses some open tools (some code is shared).</p>
-                <p><strong>Which approach is better for Algeria's technology future?</strong></p>
-                <p>Think about: Learning opportunities for developers, Control over technology, Cost for businesses</p>
-            </div>
-            
-            <h2>What is a Community?</h2>
-            <div class="card">
-                <p>A group of users and developers who work together to improve software. They help each other, report problems, and suggest new features.</p>
-            </div>
-            
-            <div class="analogy">
-                <h3>Simple Analogy</h3>
-                <p>An open source community is like a neighborhood garden where everyone can plant, water, and harvest. Everyone benefits from the shared work.</p>
-            </div>
+        </div>
+
+        <div class="highlight-box">
+            <div class="highlight-title"><i class="fas fa-lightbulb"></i>Key Concept: Copyleft vs Permissive</div>
+            <p><strong>Copyleft licenses</strong> (like GPL) require that derivative works remain open source, creating a "viral" effect that preserves software freedom.</p>
+            <p><strong>Permissive licenses</strong> (like MIT and Apache) allow more flexibility, including incorporation into proprietary software, making them popular for business use.</p>
+        </div>
+
+        <h2><i class="fas fa-users"></i>Benefits of Open Source</h2>
+        
+        <ul>
+            <li><strong>Transparency:</strong> Anyone can review the code for security and quality</li>
+            <li><strong>Collaboration:</strong> Global community of developers can contribute improvements</li>
+            <li><strong>Cost-Effective:</strong> No licensing fees for use</li>
+            <li><strong>Customization:</strong> Users can modify software to meet specific needs</li>
+            <li><strong>Innovation:</strong> Rapid development through collective effort</li>
+            <li><strong>Longevity:</strong> Not dependent on a single company's survival</li>
+        </ul>
+
+        <div class="question-box">
+            <div class="question"><i class="fas fa-question-circle"></i>Critical Thinking Questions</div>
+            <ul>
+                <li>Why might a company choose a permissive license over a copyleft license for their open source project?</li>
+                <li>What are the potential security advantages and disadvantages of open source software?</li>
+                <li>How does the open source development model differ from traditional proprietary software development?</li>
+                <li>What responsibilities do users have when they modify and redistribute open source software?</li>
+            </ul>
+        </div>
+
+        <div class="homework-box">
+            <div class="homework-title"><i class="fas fa-tasks"></i>Research Assignment</div>
+            <p><strong>Explore Real-World OSS Projects:</strong></p>
+            <ul>
+                <li>Choose three popular open source projects (e.g., Linux, Firefox, WordPress)</li>
+                <li>Identify which license each project uses and explain why that license might have been chosen</li>
+                <li>Research how each project manages community contributions and development</li>
+                <li>Write a brief report comparing their development models and community structures</li>
+            </ul>
         </div>
         
         <footer>
-            <p>FOSS Lesson - Understanding Free and Open Source Software in Simple Terms</p>
+            <p>Logical and Open Source Course | Lesson 1: Open Source Software &copy; 2025</p>
         </footer>
-    </div>
+        <script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebarContainer = document.getElementById("sidebar-container");
 
-    <script>
-        // Simple script to handle the back button
-        document.querySelector('.back-button').addEventListener('click', function() {
-            alert('In a real application, this would take you back to the previous lesson page.');
-            // In a real application, you would use:
-            // window.history.back() or navigate to a specific URL
-        });
+// Load sidebar first
+fetch("../sidebar.html")
+  .then(res => res.text())
+  .then(html => {
+    sidebarContainer.innerHTML = html;
+
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("closeSidebar");
+
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+    });
+
+    // ✅ Add this part AFTER sidebar loads
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const parent = link.parentElement;
+        const sublist = parent.querySelector(".nav-sublist");
+        const arrow = link.querySelector(".arrow");
+
+        if (sublist.style.display === "block") {
+          sublist.style.display = "none";
+          arrow.classList.remove("rotate");
+        } else {
+          sublist.style.display = "block";
+          arrow.classList.add("rotate");
+        }
+      });
+    });
+  })
+  .catch(err => console.error("Failed to load sidebar:", err));
+</script>
         
-        // Add some interactivity to freedom cards
-        document.querySelectorAll('.freedom-card').forEach(card => {
-            card.addEventListener('click', function() {
-                this.style.backgroundColor = '#e8f4fc';
-                setTimeout(() => {
-                    this.style.backgroundColor = 'white';
-                }, 500);
-            });
-        });
-    </script>
+
+    </div>
 </body>
 </html>
