@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AL Lessons - Quizzes</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+/* Header */
+header h1 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+header p.subtitle {
+    text-align: center;
+    color: #555;
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+/* Quiz Grid */
+.quizzes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.quiz-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    width: 280px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.quiz-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.quiz-card h3 {
+    color: #2c3e50;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+/* Icon */
+.quiz-card .quiz-icon {
+    font-size: 50px;
+    color: #4361ee;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.quiz-card .btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 5px 0;
+    transition: all 0.2s ease;
+}
+
+.btn-quiz {
+    background: linear-gradient(135deg, #4361ee, #3a56d4);
+    color: #fff;
+    border: none;
+}
+
+.btn-quiz:hover {
+    background: linear-gradient(135deg, #3a56d4, #2f46b3);
+    transform: scale(1.05);
+}
+
+/* Back link */
+.back-link {
+    display: inline-block;
+    margin-top: 40px;
+    color: #4361ee;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.back-link i {
+    margin-right: 8px;
+}
+
+/* Footer */
+footer {
+    margin-top: 60px;
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+    .quizzes-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Applied Linguistics Quizzes</h1>
+        <p class="subtitle">Select a lesson to take its quiz</p>
+    </header>
+
+    <div class="quizzes-grid">
+        <!-- Lesson 1 Quiz -->
+        <div class="quiz-card">
+            <div class="quiz-icon">
+                <i class="fas fa-question-circle"></i>
+            </div>
+            <h3>Lesson 1</h3>
+            <a href="../quiz/AL1.html" class="btn btn-quiz">Take Quiz</a>
+        </div>
+
+        <!-- Lesson 2 Quiz -->
+        <div class="quiz-card">
+            <div class="quiz-icon">
+                <i class="fas fa-question-circle"></i>
+            </div>
+            <h3>Lesson 2</h3>
+            <a href="../quiz/AL2.html" class="btn btn-quiz">Take Quiz</a>
+        </div>
+
+        <!-- Lesson 3 Quiz -->
+        <div class="quiz-card">
+            <div class="quiz-icon">
+                <i class="fas fa-question-circle"></i>
+            </div>
+            <h3>Lesson 3</h3>
+            <a href="../quiz/AL3.html" class="btn btn-quiz">Take Quiz</a>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Module Overview
+    </a>
+
+    <footer>
+        <p>Applied Linguistics &copy; 2025 | Quizzes Repository</p>
+    </footer>
+</div>
+</body>
+</html>
