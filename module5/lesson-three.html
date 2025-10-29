@@ -5,361 +5,171 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teachers' Beliefs - Educational Notes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(to right, #3498db, #2c3e50);
-            color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        
-        h2 {
-            color: #2c3e50;
-            border-left: 5px solid #3498db;
-            padding-left: 15px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-        
-        h2 i {
-            margin-right: 10px;
-            color: #3498db;
-        }
-                .back-link {
-            display: inline-flex;
-            align-items: center;
-            color: var(--primary);
-            font-weight: 500;
-            margin-bottom: 25px;
-            transition: var(--transition);
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 50px;
-            background-color: #f0f4ff;
-            border: 1px solid #e6ecff;
-        }
-        
-        .back-link:hover {
-            color: var(--accent);
-            transform: translateX(-5px);
-            background-color: #e6ecff;
-            box-shadow: var(--shadow);
-        }
-        
-        .back-link i {
-            margin-right: 8px;
-        }
-        
-        
-        h3 {
-            color: #16a085;
-            margin: 15px 0 10px;
-        }
-        
-        ul {
-            padding-left: 20px;
-            margin: 15px 0;
-        }
-        
-        li {
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 10px;
-        }
-        
-        li:before {
-            content: "•";
-            color: #3498db;
-            font-weight: bold;
-            position: absolute;
-            left: -10px;
-        }
-        
-        .highlight {
-            background-color: #e8f4fc;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border-left: 4px solid #3498db;
-        }
-        
-        .quote {
-            font-style: italic;
-            color: #555;
-            border-left: 4px solid #bdc3c7;
-            padding: 15px 20px;
-            margin: 20px 0;
-            background-color: #f9f9f9;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .model-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .model-item {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            border-top: 4px solid #3498db;
-        }
-        
-        .model-item h4 {
-            color: #2c3e50;
-            margin-bottom: 8px;
-        }
-        
-        .belief-types {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .belief-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            border-top: 4px solid #e74c3c;
-        }
-        
-        .belief-card h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        
-        .key-point {
-            background: #fff9e6;
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-            border-left: 4px solid #f1c40f;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .model-container, .belief-types {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../css/style2.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-chalkboard-teacher"></i> Teachers' Beliefs</h1>
-            <p class="subtitle">Understanding how educator perspectives shape classroom experiences</p>
-        </header>
-        <a href="index.html" class="back-link">
-            <i class="fas fa-arrow-left"></i>
-            Back to Lessons List
-        </a>
-        
-        <div class="card">
-            <h2><i class="fas fa-star"></i> Effective Teaching</h2>
-            <ul>
-                <li><strong>Having high expectations</strong> for all students</li>
-                <li><strong>Acknowledging individual differences</strong> in learning styles and abilities</li>
-                <li><strong>Monitoring progress</strong> and providing timely, constructive feedback</li>
-                <li><strong>Encouraging student responsibility</strong> for their own learning</li>
-                <li><strong>Building positive relationships</strong> with students and colleagues</li>
-            </ul>
-            <div class="key-point">
-                <strong>Note:</strong> These attitudes and abilities can be undermined by various factors.
-            </div>
+
+<!-- Toggle Menu Button -->
+<button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+
+<!-- Sidebar -->
+<div id="sidebar-container"></div>
+
+<div class="container">
+    <header>
+        <h1><i class="fas fa-chalkboard-teacher"></i> Teachers' Beliefs</h1>
+        <p class="subtitle">Understanding how educator perspectives shape classroom experiences</p>
+    </header>
+
+    <section class="section">
+        <h2><i class="fas fa-star"></i>Effective Teaching</h2>
+        <ul>
+            <li><strong>Having high expectations</strong> for all students</li>
+            <li><strong>Acknowledging individual differences</strong> in learning styles and abilities</li>
+            <li><strong>Monitoring progress</strong> and providing timely, constructive feedback</li>
+            <li><strong>Encouraging student responsibility</strong> for their own learning</li>
+            <li><strong>Building positive relationships</strong> with students and colleagues</li>
+        </ul>
+        <div class="key-point">
+            <strong>Note:</strong> These attitudes and abilities can be undermined by various factors.
         </div>
-        
-        <div class="card">
-            <h2><i class="fas fa-exclamation-triangle"></i> Constraints in Effective Teaching</h2>
-            <p><strong>Effective teaching is crucial for fostering student success, but several factors can undermine a teacher's ability to create an optimal learning environment,</strong> including:</p>
-            
-            <ul>
-                <li><strong>The diversity of learning styles</strong> among students</li>
-                <li><strong>Varied ability levels</strong> within the same classroom</li>
-                <li><strong>Insufficient teaching materials</strong> and resources</li>
-                <li><strong>Overwhelming workloads</strong> and administrative tasks</li>
-                <li><strong>Lack of professional development opportunities</strong></li>
-            </ul>
-            
-            <div class="highlight">
-                <h3><i class="fas fa-users"></i> VARK Learning Styles Model</h3>
-                <p>Developed by Neil Fleming in 1987</p>
-                <div class="model-container">
-                    <div class="model-item">
-                        <h4>Visual</h4>
-                        <p>Seeing and observing things</p>
-                    </div>
-                    <div class="model-item">
-                        <h4>Auditory</h4>
-                        <p>Listening and speaking</p>
-                    </div>
-                    <div class="model-item">
-                        <h4>Reading/Writing</h4>
-                        <p>Learning through words</p>
-                    </div>
-                    <div class="model-item">
-                        <h4>Kinesthetic</h4>
-                        <p>Hands-on experience</p>
-                    </div>
+    </section>
+
+    <section class="section">
+        <h2><i class="fas fa-exclamation-triangle"></i>Constraints in Effective Teaching</h2>
+        <p>Effective teaching is crucial for student success, but factors can limit its effectiveness:</p>
+        <ul>
+            <li><strong>Diversity of learning styles</strong></li>
+            <li><strong>Varied ability levels</strong> in the classroom</li>
+            <li><strong>Insufficient teaching materials</strong> and resources</li>
+            <li><strong>Overwhelming workloads</strong> and administrative tasks</li>
+            <li><strong>Lack of professional development</strong></li>
+        </ul>
+
+        <div class="highlight">
+            <h3><i class="fas fa-users"></i>VARK Learning Styles Model</h3>
+            <p>Developed by Neil Fleming (1987)</p>
+            <div class="model-container">
+                <div class="model-item">
+                    <h4>Visual</h4>
+                    <p>Seeing and observing things</p>
                 </div>
-            </div>
-            
-            <div class="key-point">
-                <p><strong>Important Insight:</strong> Effective teaching can also be undermined by teachers themselves.</p>
-                <p><strong>The beliefs teachers hold about teaching and learning</strong> can <em>strongly</em> influence (and sometimes undermine) the effectiveness of their teaching.</p>
-            </div>
-        </div>
-        
-        <div class="card">
-            <h2><i class="fas fa-brain"></i> Teachers' Beliefs</h2>
-            
-            <h3>What do we mean by "belief"?</h3>
-            <p>A belief is a kind of knowledge that is <strong>subjective and experience-based</strong>. Raymond (1997) defined the term belief as a <strong>personal judgment formed from experiences</strong>.</p>
-            
-            <div class="quote">
-                <p><strong>EFL teachers' beliefs are personal constructs of their practical EFL learning and teaching experiences, and these beliefs are also formulated as a result of their experience and interaction with their social and cultural context</strong> (Abelson 1979; Connelly and Clandinin 1988).</p>
-            </div>
-            
-            <div class="key-point">
-                <p><strong>Teachers' beliefs are very difficult to define and evaluate.</strong></p>
-            </div>
-            
-            <h3>Why are teachers' beliefs difficult to define and evaluate?</h3>
-            <ol>
-                <li><strong>Culturally Bound</strong>
-                    <ul>
-                        <li>Teachers' beliefs about education, teaching methods, and student behavior are shaped by:
-                            <ul>
-                                <li>The culture they grew up in</li>
-                                <li>The educational system they experienced</li>
-                                <li>The cultural norms of their society</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><strong>Formed Early in Life</strong>
-                    <ul>
-                        <li>Teachers' beliefs often stem from their own <strong>schooling experiences</strong>.</li>
-                    </ul>
-                </li>
-                <li><strong>Resistant to Change</strong>
-                    <ul>
-                        <li>Teachers' beliefs are usually formed over many years—through personal schooling experiences, training, teaching practice, and interactions with colleagues, students, and parents.</li>
-                    </ul>
-                </li>
-            </ol>
-        </div>
-        
-        <div class="card">
-            <h2><i class="fas fa-user-graduate"></i> Teachers' Beliefs About Learners</h2>
-            <p><strong>The Influence of Teachers' Beliefs About Learners on Classroom Practices</strong></p>
-            <p>Teachers' beliefs about learners significantly shape their views on education and have a direct impact on classroom practices.</p>
-            
-            <div class="belief-types">
-                <div class="belief-card">
-                    <h4>Resisters</h4>
-                    <p>Some students may be viewed as <strong>resistant to learning</strong>. This belief can lead to the assumption that <strong>force or punishment</strong> is the most effective way to overcome resistance.</p>
+                <div class="model-item">
+                    <h4>Auditory</h4>
+                    <p>Listening and speaking</p>
                 </div>
-                
-                <div class="belief-card">
-                    <h4>Receptacles</h4>
-                    <p>In this model, students are seen as passive <strong>"receptacles"</strong> that need to be filled with knowledge. The emphasis is on direct transmission of information from teacher to student.</p>
+                <div class="model-item">
+                    <h4>Reading/Writing</h4>
+                    <p>Learning through words</p>
                 </div>
-                
-                <div class="belief-card">
-                    <h4>Raw Materials</h4>
-                    <p>Students can be molded or shaped into finished products. This approach carries the risk of manipulating students according to predetermined ideas rather than allowing them to develop their own identities.</p>
-                </div>
-                
-                <div class="belief-card">
-                    <h4>Partners</h4>
-                    <p>In this approach, the teacher and students are regarded as <strong>partners</strong> in the learning process. Teachers emphasize collaboration and joint discovery over traditional hierarchy.</p>
-                </div>
-                
-                <div class="belief-card">
-                    <h4>Individual Explorers</h4>
-                    <p>In such cases the teacher acts as a <strong>facilitator</strong> rather than the primary source of knowledge, supporting students in their individual learning journeys.</p>
+                <div class="model-item">
+                    <h4>Kinesthetic</h4>
+                    <p>Hands-on experience</p>
                 </div>
             </div>
         </div>
-        
-        <div class="card">
-            <h2><i class="fas fa-lightbulb"></i> Teachers' Beliefs About Learning</h2>
-            <div class="quote">
-                <p><strong>"The question of what makes a good teacher must ultimately be concerned with what and how and how much learners learn and what exactly that learning is for."</strong></p>
-            </div>
-            
-            <p>Teachers can truly be effective if they are clear in their mind about what learning is. They will then know what kinds of learning outcomes they want their learners to achieve.</p>
-            
-            <p>These beliefs about learning deeply affect classroom dynamics, as they guide the strategies teachers use to engage and support their students in meaningful, effective ways.</p>
+
+        <div class="key-point">
+            <p><strong>Important Insight:</strong> Teachers’ beliefs themselves can influence their effectiveness.</p>
         </div>
-        
-        <footer>
-            <p>Educational Psychology Notes | Teachers' Beliefs & Effective Teaching Practices</p>
-            <p>Created with <i class="fas fa-heart" style="color: #e74c3c;"></i> for educators</p>
-        </footer>
-    </div>
+    </section>
+
+    <section class="section">
+        <h2><i class="fas fa-brain"></i>Teachers' Beliefs</h2>
+        <h3>Definition of Belief</h3>
+        <p>A belief is a type of knowledge that is <strong>subjective and experience-based</strong>. It is a <strong>personal judgment formed from experience</strong> (Raymond, 1997).</p>
+
+        <div class="quote">
+            <p><strong>EFL teachers' beliefs are personal constructs of their practical learning and teaching experiences, shaped by social and cultural context</strong> (Abelson 1979; Connelly & Clandinin 1988).</p>
+        </div>
+
+        <div class="key-point">
+            <p><strong>Teachers' beliefs are difficult to define and evaluate.</strong></p>
+        </div>
+
+        <h3>Why Beliefs Are Hard to Evaluate</h3>
+        <ol>
+            <li><strong>Culturally Bound</strong> – influenced by the culture, education system, and norms teachers grew up with</li>
+            <li><strong>Formed Early</strong> – based on personal schooling experiences</li>
+            <li><strong>Resistant to Change</strong> – shaped over many years through experience, training, and interactions</li>
+        </ol>
+    </section>
+
+    <section class="section">
+        <h2><i class="fas fa-user-graduate"></i>Beliefs About Learners</h2>
+        <p>Teachers' beliefs influence classroom practices and affect how students are perceived and taught.</p>
+        <div class="belief-types">
+            <div class="belief-card">
+                <h4>Resisters</h4>
+                <p>Viewed as resistant to learning; may rely on force or punishment.</p>
+            </div>
+            <div class="belief-card">
+                <h4>Receptacles</h4>
+                <p>Seen as passive vessels needing direct knowledge transmission.</p>
+            </div>
+            <div class="belief-card">
+                <h4>Raw Materials</h4>
+                <p>Molded into finished products; risks limiting students’ own development.</p>
+            </div>
+            <div class="belief-card">
+                <h4>Partners</h4>
+                <p>Teacher and students collaborate in learning.</p>
+            </div>
+            <div class="belief-card">
+                <h4>Individual Explorers</h4>
+                <p>Teacher acts as facilitator for independent learning journeys.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2><i class="fas fa-lightbulb"></i>Beliefs About Learning</h2>
+        <div class="quote">
+            <p><strong>"What makes a good teacher must ultimately be concerned with what and how learners learn and why."</strong></p>
+        </div>
+        <p>Teachers are most effective when clear about learning outcomes and how to achieve them.</p>
+        <p>Beliefs about learning guide strategies, engagement, and support for students in meaningful ways.</p>
+    </section>
+
+    <footer>
+        <p>Educational Psychology Notes | Teachers' Beliefs & Effective Teaching Practices</p>
+        <p>Created with <i class="fas fa-heart" style="color: #e74c3c;"></i> for educators</p>
+    </footer>
+</div>
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebarContainer = document.getElementById("sidebar-container");
+
+fetch("../sidebar.html")
+  .then(res => res.text())
+  .then(html => {
+    sidebarContainer.innerHTML = html;
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("closeSidebar");
+
+    menuBtn.addEventListener("click", () => sidebar.classList.toggle("active"));
+    closeBtn.addEventListener("click", () => sidebar.classList.remove("active"));
+
+    document.querySelectorAll(".nav-link").forEach(link => {
+        link.addEventListener("click", e => {
+            e.preventDefault();
+            const parent = link.parentElement;
+            const sublist = parent.querySelector(".nav-sublist");
+            const arrow = link.querySelector(".arrow");
+
+            if(sublist.style.display === "block") {
+                sublist.style.display = "none";
+                arrow.classList.remove("rotate");
+            } else {
+                sublist.style.display = "block";
+                arrow.classList.add("rotate");
+            }
+        });
+    });
+  })
+  .catch(err => console.error("Failed to load sidebar:", err));
+</script>
+
 </body>
 </html>
