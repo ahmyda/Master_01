@@ -5,318 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESP Course - Needs Analysis</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 25px;
-            background: linear-gradient(to right, #2c3e50, #3498db);
-            color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .university-info {
-            margin-bottom: 15px;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 15px;
-        }
-        
-        .tutor-info {
-            font-size: 1.1rem;
-            margin-top: 15px;
-        }
-        
-        .content-wrapper {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 25px;
-        }
-        
-        .sidebar {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            height: fit-content;
-            position: sticky;
-            top: 20px;
-        }
-        
-        .sidebar h3 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .nav-links {
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-bottom: 10px;
-        }
-        
-        .nav-links a {
-            display: block;
-            padding: 12px 15px;
-            background: #f8f9fa;
-            border-radius: 5px;
-            color: #2c3e50;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
-        }
-        
-        .nav-links a:hover, .nav-links a.active {
-            background: #e8f4fc;
-            border-left: 4px solid #3498db;
-            transform: translateX(5px);
-        }
-        
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-        
-        .lesson-card {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
-        }
-        
-        .lesson-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        h2 {
-            color: #2c3e50;
-            border-left: 5px solid #3498db;
-            padding-left: 15px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-        
-        h2 i {
-            margin-right: 10px;
-            color: #3498db;
-        }
-        
-        h3 {
-            color: #16a085;
-            margin: 20px 0 10px;
-        }
-        
-        h4 {
-            color: #2c3e50;
-            margin: 15px 0 8px;
-        }
-        
-        p {
-            margin-bottom: 15px;
-        }
-        
-        ul, ol {
-            padding-left: 25px;
-            margin: 15px 0;
-        }
-        
-        li {
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 10px;
-        }
-        
-        li:before {
-            content: "•";
-            color: #3498db;
-            font-weight: bold;
-            position: absolute;
-            left: -10px;
-        }
-        
-        .highlight {
-            background-color: #e8f4fc;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 4px solid #3498db;
-        }
-        
-        .quote {
-            font-style: italic;
-            color: #555;
-            border-left: 4px solid #bdc3c7;
-            padding: 15px 20px;
-            margin: 20px 0;
-            background-color: #f9f9f9;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .definition-box {
-            background: #fff9e6;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 4px solid #f1c40f;
-        }
-        
-        .table-container {
-            overflow-x: auto;
-            margin: 20px 0;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        th {
-            background-color: #3498db;
-            color: white;
-        }
-        
-        tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-        
-        .model-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .model-item {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            border-top: 4px solid #3498db;
-        }
-        
-        .model-item h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        
-        .questionnaire-section {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-        
-        .question {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed #ddd;
-        }
-        
-        .options {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .option {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .workshop-box {
-            background: #e8f4fc;
-            padding: 25px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 4px solid #3498db;
-        }
-        
-        .workshop-box h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        
-        .workshop-box ul {
-            margin-left: 20px;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-        
-        .references {
-            font-size: 0.85rem;
-            margin-top: 10px;
-        }
-        
-        @media (max-width: 768px) {
-            .content-wrapper {
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                position: static;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .model-container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/style2.css">
 </head>
 <body>
+      <!-- Toggle Menu Button -->
+    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+
+    <!-- Sidebar will load here -->
+    <div id="sidebar-container"></div>
+
+
     <div class="container">
         <header>
             <div class="university-info">
@@ -331,27 +29,8 @@
             </div>
         </header>
 
-        <a href="index.html" class="back-link">
-            <i class="fas fa-arrow-left"></i>
-            Back to Lessons List
-        </a>        
-        <div class="content-wrapper">
-            <div class="sidebar">
-                <h3>Course Content</h3>
-                <ul class="nav-links">
-                    <li><a href="#introduction" class="active">Introduction to Needs Analysis</a></li>
-                    <li><a href="#overview">Overview on Needs Analysis</a></li>
-                    <li><a href="#definition">Definition of Needs Analysis</a></li>
-                    <li><a href="#course-development">Needs Analysis in ESP Course Development</a></li>
-                    <li><a href="#ongoing">On-going Needs Analysis</a></li>
-                    <li><a href="#types">Types of Needs Analysis</a></li>
-                    <li><a href="#instruments">Instruments for Needs Analysis</a></li>
-                    <li><a href="#steps">Steps in Needs Analysis</a></li>
-                    <li><a href="#importance">Importance of Needs Analysis</a></li>
-                    <li><a href="#questionnaire">Sample Needs Analysis Questionnaire</a></li>
-                    <li><a href="#workshop">Workshop Session</a></li>
-                </ul>
-            </div>
+      
+
             
             <div class="main-content">
                 <div class="lesson-card" id="introduction">
@@ -741,48 +420,45 @@
     </div>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('.nav-links a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                window.scrollTo({
-                    top: targetElement.offsetTop - 20,
-                    behavior: 'smooth'
-                });
-                
-                // Update active link
-                document.querySelectorAll('.nav-links a').forEach(link => {
-                    link.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
-        });
-        
-        // Update active link on scroll
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('.lesson-card');
-            const navLinks = document.querySelectorAll('.nav-links a');
-            
-            let currentSection = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 100) {
-                    currentSection = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentSection}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebarContainer = document.getElementById("sidebar-container");
+
+// Load sidebar first
+fetch("../sidebar.html")
+  .then(res => res.text())
+  .then(html => {
+    sidebarContainer.innerHTML = html;
+
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("closeSidebar");
+
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+    });
+
+    // ✅ Add this part AFTER sidebar loads
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const parent = link.parentElement;
+        const sublist = parent.querySelector(".nav-sublist");
+        const arrow = link.querySelector(".arrow");
+
+        if (sublist.style.display === "block") {
+          sublist.style.display = "none";
+          arrow.classList.remove("rotate");
+        } else {
+          sublist.style.display = "block";
+          arrow.classList.add("rotate");
+        }
+      });
+    });
+  })
+  .catch(err => console.error("Failed to load sidebar:", err));
+</script>
 </body>
 </html>
