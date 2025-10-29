@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Applied Linguistics - Lecture 3: Approaches in Applied Linguistics 2</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style2.css">
+    <link rel="stylesheet" href="/css/style2.css">
 </head>
 <body>
           <!-- Toggle Menu Button -->
@@ -17,8 +17,6 @@
 <div class="container">
     <header>
         <h1>Applied Linguistics - Lecture 3</h1>
-        <p class="lesson-info">Approaches in Applied Linguistics 2</p>
-        <p class="date">Zaine Achour University-Djelfa | Instructor: Nour el houda KHERFANE</p>
     </header>
 
     <!-- Error Analysis Section -->
@@ -178,30 +176,48 @@
 
 
 </div>
-           <script>
-    const menuBtn = document.getElementById("menuBtn");
-    const sidebarContainer = document.getElementById("sidebar-container");
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebarContainer = document.getElementById("sidebar-container");
 
-    // Load sidebar first
-    fetch("../sidebar.html")
-      .then(res => res.text())
-      .then(html => {
-        sidebarContainer.innerHTML = html;
+// Load sidebar first
+fetch("../sidebar.html")
+  .then(res => res.text())
+  .then(html => {
+    sidebarContainer.innerHTML = html;
 
-        // Wait until sidebar is loaded, then attach listeners
-        const sidebar = document.getElementById("sidebar");
-        const closeBtn = document.getElementById("closeSidebar");
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("closeSidebar");
 
-        menuBtn.addEventListener("click", () => {
-          sidebar.classList.toggle("active");
-        });
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
 
-        closeBtn.addEventListener("click", () => {
-          sidebar.classList.remove("active");
-        });
-      })
-      .catch(err => console.error("Failed to load sidebar:", err));
-  </script> 
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+    });
+
+    // ✅ Add this part AFTER sidebar loads
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const parent = link.parentElement;
+        const sublist = parent.querySelector(".nav-sublist");
+        const arrow = link.querySelector(".arrow");
+
+        if (sublist.style.display === "block") {
+          sublist.style.display = "none";
+          arrow.classList.remove("rotate");
+        } else {
+          sublist.style.display = "block";
+          arrow.classList.add("rotate");
+        }
+      });
+    });
+  })
+  .catch(err => console.error("Failed to load sidebar:", err));
+</script>
+
         
         <footer>
             <p>Applied Linguistics Course | Lecture 3: Approaches in Applied Linguistics 2 &copy; 2025</p>
