@@ -5,399 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Research Methodology - Lecture 1: Didactics Specialization</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
-            --secondary: #7209b7;
-            --accent: #f72585;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --success: #4cc9f0;
-            --border-radius: 12px;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            line-height: 1.7;
-            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
-            color: var(--dark);
-            padding: 20px;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 40px 50px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-        
-        .container:hover {
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 35px;
-            padding-bottom: 25px;
-            border-bottom: 2px solid #eaecef;
-            position: relative;
-        }
-        
-        header::after {
-            content: "";
-            position: absolute;
-            bottom: -2px;
-            left: 25%;
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            border-radius: 3px;
-        }
-        
-        h1 {
-            color: var(--secondary);
-            margin-bottom: 10px;
-            font-size: 2.4rem;
-            font-weight: 700;
-        }
-        
-        .lesson-info {
-            color: var(--primary);
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-        
-        .date {
-            color: var(--gray);
-            font-size: 1rem;
-        }
-        
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            color: var(--primary);
-            font-weight: 500;
-            margin-bottom: 25px;
-            transition: var(--transition);
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 50px;
-            background-color: #f0f4ff;
-            border: 1px solid #e6ecff;
-        }
-        
-        .back-link:hover {
-            color: var(--accent);
-            transform: translateX(-5px);
-            background-color: #e6ecff;
-            box-shadow: var(--shadow);
-        }
-        
-        .back-link i {
-            margin-right: 8px;
-        }
-        
-        h2 {
-            color: var(--primary);
-            margin: 30px 0 15px;
-            padding: 15px 20px;
-            background: linear-gradient(to right, #f0f4ff, #ffffff);
-            border-radius: var(--border-radius);
-            border-left: 5px solid var(--primary);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-        }
-        
-        h2:hover {
-            transform: translateX(5px);
-            background: linear-gradient(to right, #e6ecff, #ffffff);
-        }
-        
-        h2 i {
-            margin-right: 12px;
-            color: var(--secondary);
-        }
-        
-        h3 {
-            color: var(--secondary);
-            margin: 25px 0 12px;
-            padding-left: 15px;
-            border-left: 3px solid var(--accent);
-            display: flex;
-            align-items: center;
-        }
-        
-        h3 i {
-            margin-right: 10px;
-            color: var(--primary);
-        }
-        
-        p {
-            margin-bottom: 16px;
-            color: #555;
-            line-height: 1.7;
-        }
-        
-        .specialty-intro {
-            background: linear-gradient(to right, #fff9e6, #ffffff);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            margin: 25px 0;
-            border-left: 5px solid #ffc107;
-            box-shadow: var(--shadow);
-        }
-        
-        .intro-title {
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #b38f00;
-            display: flex;
-            align-items: center;
-        }
-        
-        .intro-title i {
-            margin-right: 8px;
-        }
-        
-        .components-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-        
-        .component-card {
-            background: white;
-            padding: 25px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border-top: 4px solid var(--primary);
-        }
-        
-        .component-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .component-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #eaecef;
-        }
-        
-        .component-icon {
-            background: var(--primary);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        
-        .component-name {
-            font-weight: 700;
-            color: var(--secondary);
-            font-size: 1.3rem;
-        }
-        
-        .component-description {
-            margin-bottom: 20px;
-            color: #555;
-        }
-        
-        .steps-box {
-            background: #f0f4ff;
-            border-radius: 8px;
-            padding: 18px;
-            margin: 15px 0;
-        }
-        
-        .steps-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--primary-dark);
-            display: flex;
-            align-items: center;
-        }
-        
-        .steps-title i {
-            margin-right: 8px;
-        }
-        
-        .steps-box ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        .steps-box li {
-            margin-bottom: 8px;
-            padding: 8px 12px;
-            background-color: white;
-            border-radius: 6px;
-            border-left: 3px solid var(--success);
-            transition: var(--transition);
-        }
-        
-        .steps-box li:hover {
-            background-color: #e6ecff;
-        }
-        
-        .example-box {
-            background: #e3f2fd;
-            border-radius: 8px;
-            padding: 18px;
-            margin: 15px 0;
-            border-left: 3px solid var(--success);
-        }
-        
-        .example-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--primary-dark);
-            display: flex;
-            align-items: center;
-        }
-        
-        .example-title i {
-            margin-right: 8px;
-        }
-        
-        .research-focus {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
-        }
-        
-        .focus-card {
-            background: white;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            text-align: center;
-            border-top: 4px solid var(--primary);
-        }
-        
-        .focus-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .focus-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .focus-name {
-            font-weight: 700;
-            color: var(--secondary);
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-        
-        .homework-box {
-            background: linear-gradient(to right, #f0fff4, #ffffff);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            margin: 30px 0;
-            border-left: 5px solid #28a745;
-            box-shadow: var(--shadow);
-        }
-        
-        .homework-title {
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #28a745;
-            display: flex;
-            align-items: center;
-        }
-        
-        .homework-title i {
-            margin-right: 8px;
-        }
-        
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            padding-top: 25px;
-            border-top: 1px solid #e2e8f0;
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h2 {
-                font-size: 1.3rem;
-                padding: 12px 15px;
-            }
-            
-            .components-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .research-focus {
-                grid-template-columns: 1fr;
-            }
-            
-            .component-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .component-icon {
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/style2.css">
 </head>
 <body>
+      <!-- Toggle Menu Button -->
+    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+
+    <!-- Sidebar will load here -->
+    <div id="sidebar-container"></div>
+
+
     <div class="container">
         <header>
             <h1>Research Methodology - Lecture 2</h1>
             <p class="lesson-info">Didactics Specialization Research</p>
             <p class="date">Ziane-Achour University - Djelfa | Faculty of Letters and Languages</p>
         </header>
-        
-        <a href="index.html" class="back-link">
-            <i class="fas fa-arrow-left"></i>
-            Back to Lessons List
-        </a>
+
 
         <div class="specialty-intro">
             <div class="intro-title"><i class="fas fa-chalkboard-teacher"></i> Didactics Research Focus</div>
@@ -570,11 +194,54 @@
                 <li>How might didactics research contribute to evidence-based teaching practices?</li>
             </ul>
         </div>
+
         
         <footer>
             <p>Research Methodology Course | Lecture 1: Didactics Specialization &copy; 2025</p>
             <p>Ziane-Achour University - Djelfa | Department of English</p>
         </footer>
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebarContainer = document.getElementById("sidebar-container");
+
+// Load sidebar first
+fetch("../sidebar.html")
+  .then(res => res.text())
+  .then(html => {
+    sidebarContainer.innerHTML = html;
+
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("closeSidebar");
+
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+    });
+
+    // ✅ Add this part AFTER sidebar loads
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const parent = link.parentElement;
+        const sublist = parent.querySelector(".nav-sublist");
+        const arrow = link.querySelector(".arrow");
+
+        if (sublist.style.display === "block") {
+          sublist.style.display = "none";
+          arrow.classList.remove("rotate");
+        } else {
+          sublist.style.display = "block";
+          arrow.classList.add("rotate");
+        }
+      });
+    });
+  })
+  .catch(err => console.error("Failed to load sidebar:", err));
+</script>
+
     </div>
 </body>
 </html>
