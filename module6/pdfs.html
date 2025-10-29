@@ -5,332 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SLA Lectures - PDF Viewer</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary: #4361ee;
-      --primary-dark: #3a56d4;
-      --secondary: #7209b7;
-      --accent: #f72585;
-      --light: #f8f9fa;
-      --dark: #212529;
-      --gray: #6c757d;
-      --success: #4cc9f0;
-      --border-radius: 12px;
-      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      --transition: all 0.3s ease;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      line-height: 1.7;
-      background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
-      color: var(--dark);
-      padding: 20px;
-      min-height: 100vh;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 40px 50px;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-    }
-
-    .container:hover {
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 35px;
-      padding-bottom: 25px;
-      border-bottom: 2px solid #eaecef;
-      position: relative;
-    }
-
-    header::after {
-      content: "";
-      position: absolute;
-      bottom: -2px;
-      left: 25%;
-      width: 50%;
-      height: 3px;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      border-radius: 3px;
-    }
-
-    h1 {
-      color: var(--secondary);
-      margin-bottom: 10px;
-      font-size: 2.4rem;
-      font-weight: 700;
-    }
-
-    .subtitle {
-      color: var(--gray);
-      font-size: 1.1rem;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      color: var(--primary);
-      font-weight: 500;
-      margin-bottom: 25px;
-      transition: var(--transition);
-      text-decoration: none;
-      padding: 10px 18px;
-      border-radius: 50px;
-      background-color: #f0f4ff;
-      border: 1px solid #e6ecff;
-    }
-
-    .back-link:hover {
-      color: var(--accent);
-      transform: translateX(-5px);
-      background-color: #e6ecff;
-      box-shadow: var(--shadow);
-    }
-
-    .back-link i {
-      margin-right: 8px;
-    }
-
-    .lectures-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 25px;
-      margin-bottom: 40px;
-    }
-
-    .lecture-card {
-      background: white;
-      border-radius: var(--border-radius);
-      padding: 25px;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      border-top: 4px solid var(--primary);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .lecture-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .lecture-icon {
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 15px;
-      text-align: center;
-    }
-
-    .lecture-card h3 {
-      color: var(--secondary);
-      margin-bottom: 10px;
-      font-size: 1.3rem;
-      text-align: center;
-    }
-
-    .lecture-card p {
-      color: var(--gray);
-      margin-bottom: 20px;
-      text-align: center;
-      flex-grow: 1;
-    }
-
-    .lecture-actions {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 18px;
-      border-radius: 50px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: var(--transition);
-      border: none;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-
-    .btn-primary {
-      background-color: var(--primary);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
-    }
-
-    .btn-outline {
-      background-color: transparent;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-    }
-
-    .btn-outline:hover {
-      background-color: var(--primary);
-      color: white;
-      transform: translateY(-2px);
-    }
-
-    .btn i {
-      margin-right: 8px;
-    }
-
-    .pdf-viewer-section {
-      margin-top: 40px;
-    }
-
-    .pdf-viewer-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding: 15px 20px;
-      background: linear-gradient(to right, #f0f4ff, #ffffff);
-      border-radius: var(--border-radius);
-      border-left: 5px solid var(--primary);
-    }
-
-    .pdf-viewer-header h2 {
-      color: var(--primary);
-      margin: 0;
-      display: flex;
-      align-items: center;
-    }
-
-    .pdf-viewer-header h2 i {
-      margin-right: 10px;
-      color: var(--secondary);
-    }
-
-    .pdf-controls {
-      display: flex;
-      gap: 10px;
-    }
-
-    .pdf-controls .btn {
-      padding: 8px 15px;
-      font-size: 0.85rem;
-    }
-
-    .pdf-viewer {
-      width: 100%;
-      height: 600px;
-      border: none;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-    }
-
-    .pdf-placeholder {
-      width: 100%;
-      height: 600px;
-      border-radius: var(--border-radius);
-      background: linear-gradient(135deg, #f0f4ff 0%, #e6ecff 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: var(--gray);
-      box-shadow: var(--shadow);
-    }
-
-    .pdf-placeholder i {
-      font-size: 4rem;
-      margin-bottom: 20px;
-      color: var(--primary);
-    }
-
-    .pdf-placeholder h3 {
-      color: var(--secondary);
-      margin-bottom: 10px;
-    }
-
-    .lecture-info {
-      background: linear-gradient(to right, #fff9e6, #ffffff);
-      border-radius: var(--border-radius);
-      padding: 20px;
-      margin: 25px 0;
-      border-left: 5px solid #ffc107;
-      box-shadow: var(--shadow);
-    }
-
-    .lecture-info h3 {
-      color: #b38f00;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-    }
-
-    .lecture-info h3 i {
-      margin-right: 8px;
-    }
-
-    footer {
-      margin-top: 50px;
-      text-align: center;
-      padding-top: 25px;
-      border-top: 1px solid #e2e8f0;
-      color: var(--gray);
-      font-size: 0.95rem;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 25px;
-      }
-      
-      h1 {
-        font-size: 2rem;
-      }
-      
-      .lectures-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .pdf-viewer-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-      }
-      
-      .pdf-controls {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../css/style3.css">
 </head>
 <body>
+    <!-- Toggle Menu Button -->
+    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+
+    <!-- Sidebar will load here -->
+    <div id="sidebar-container"></div>
+
+
   <div class="container">
     <header>
       <h1>Second Language Acquisition</h1>
       <p class="subtitle">Lecture PDFs & Resources</p>
     </header>
     
-    <a href="index.html" class="back-link">
-      <i class="fas fa-arrow-left"></i>
-      Back to Module Overview
-    </a>
+
+
 
 
     <div class="lectures-grid">
@@ -366,10 +58,7 @@
      
     </div>
 
-    <div class="pdf-viewer-section">
-      <div class="pdf-viewer-header">
-        <h2><i class="fas fa-file-pdf"></i> <span id="pdf-title">Select a PDF to View</span></h2>
-              </div>
+    
       
       <div id="pdf-container">
         <div class="pdf-placeholder">
@@ -397,36 +86,47 @@
       `;
     }
     
-    function zoomIn() {
-      if (currentZoom < 2) {
-        currentZoom += 0.1;
-        updateZoom();
-      }
-    }
-    
-    function zoomOut() {
-      if (currentZoom > 0.5) {
-        currentZoom -= 0.1;
-        updateZoom();
-      }
-    }
-    
-    function updateZoom() {
-      const pdfFrame = document.getElementById('pdf-frame');
-      if (pdfFrame) {
-        const currentSrc = pdfFrame.src.split('#')[0];
-        pdfFrame.src = `${currentSrc}#zoom=${currentZoom * 100}`;
-      }
-    }
-    
-    function printPdf() {
-      const pdfFrame = document.getElementById('pdf-frame');
-      if (pdfFrame) {
-        pdfFrame.contentWindow.print();
-      } else {
-        alert('Please select a PDF first');
-      }
-    }
+
+  const menuBtn = document.getElementById("menuBtn");
+  const sidebarContainer = document.getElementById("sidebar-container");
+
+  // Load sidebar first
+  fetch("../sidebar.html")
+    .then(res => res.text())
+    .then(html => {
+      sidebarContainer.innerHTML = html;
+
+      const sidebar = document.getElementById("sidebar");
+      const closeBtn = document.getElementById("closeSidebar");
+
+      menuBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.remove("active");
+      });
+
+      // ✅ Add this part AFTER sidebar loads
+      document.querySelectorAll(".nav-link").forEach(link => {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          const parent = link.parentElement;
+          const sublist = parent.querySelector(".nav-sublist");
+          const arrow = link.querySelector(".arrow");
+
+          if (sublist.style.display === "block") {
+            sublist.style.display = "none";
+            arrow.classList.remove("rotate");
+          } else {
+            sublist.style.display = "block";
+            arrow.classList.add("rotate");
+          }
+        });
+      });
+    })
+    .catch(err => console.error("Failed to load sidebar:", err));
+
   </script>
 </body>
 </html>
