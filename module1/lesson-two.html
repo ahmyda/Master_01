@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Applied Linguistics - Lecture 02</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style2.css">
+    <link rel="stylesheet" href="/css/style2.css">
 </head>
 <body>
           <!-- Toggle Menu Button -->
@@ -213,30 +213,48 @@
                 <li><strong>Modern relevance:</strong> Still useful for specific contexts, especially homogeneous classrooms</li>
             </ul>
         </section>
-           <script>
-    const menuBtn = document.getElementById("menuBtn");
-    const sidebarContainer = document.getElementById("sidebar-container");
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebarContainer = document.getElementById("sidebar-container");
 
-    // Load sidebar first
-    fetch("../sidebar.html")
-      .then(res => res.text())
-      .then(html => {
-        sidebarContainer.innerHTML = html;
+// Load sidebar first
+fetch("../sidebar.html")
+  .then(res => res.text())
+  .then(html => {
+    sidebarContainer.innerHTML = html;
 
-        // Wait until sidebar is loaded, then attach listeners
-        const sidebar = document.getElementById("sidebar");
-        const closeBtn = document.getElementById("closeSidebar");
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("closeSidebar");
 
-        menuBtn.addEventListener("click", () => {
-          sidebar.classList.toggle("active");
-        });
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
 
-        closeBtn.addEventListener("click", () => {
-          sidebar.classList.remove("active");
-        });
-      })
-      .catch(err => console.error("Failed to load sidebar:", err));
-  </script> 
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+    });
+
+    // ✅ Add this part AFTER sidebar loads
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const parent = link.parentElement;
+        const sublist = parent.querySelector(".nav-sublist");
+        const arrow = link.querySelector(".arrow");
+
+        if (sublist.style.display === "block") {
+          sublist.style.display = "none";
+          arrow.classList.remove("rotate");
+        } else {
+          sublist.style.display = "block";
+          arrow.classList.add("rotate");
+        }
+      });
+    });
+  })
+  .catch(err => console.error("Failed to load sidebar:", err));
+</script>
+
 
         <footer>
             <p>Lecture Notes Summary | Based on "Approaches in Applied Linguistics" | Master 1 Applied Linguistics</p>
