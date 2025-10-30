@@ -245,14 +245,15 @@ tr:hover {
   justify-content: center;
   gap: 25px;
   margin: 40px 0;
+  flex-wrap: wrap; /* allow wrapping on small screens */
 }
 
 .btn {
   display: inline-block;
   text-decoration: none;
   text-align: center;
-  padding: 15px 35px;
-  font-size: 18px;
+  padding: 12px 25px; /* smaller padding */
+  font-size: 16px;    /* smaller font */
   font-weight: bold;
   border-radius: 12px;
   color: #fff;
@@ -260,21 +261,16 @@ tr:hover {
   transition: all 0.3s ease;
 }
 
-/* Button colors */
-.back {
-  background-color: #f94144;
-}
-.forward {
-  background-color: #43aa8b;
-}
-.quiz {
-  background-color: #577590;
-}
+/* Make buttons smaller on screens narrower than 480px */
+@media (max-width: 480px) {
+  .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
 
-/* Hover effects */
-.btn:hover {
-  opacity: 0.85;
-  transform: scale(1.05);
+  .control-buttons {
+    gap: 15px;
+  }
 }
 
 
