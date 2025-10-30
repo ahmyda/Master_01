@@ -240,6 +240,43 @@ tr:hover {
     border-radius: 6px;
     border-left: 3px solid #e2e8f0;
 }
+.control-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin: 40px 0;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  padding: 15px 35px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Button colors */
+.back {
+  background-color: #f94144;
+}
+.forward {
+  background-color: #43aa8b;
+}
+.quiz {
+  background-color: #577590;
+}
+
+/* Hover effects */
+.btn:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
 
 /* ===== SECTIONS ===== */
 .section {
