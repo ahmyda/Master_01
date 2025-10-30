@@ -279,17 +279,6 @@ tr:hover {
   transform: scale(1.05);
 }
 
-/* Extra small screens */
-@media (max-width: 480px) {
-  .btn {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-  .control-buttons {
-    gap: 10px;
-  }
-}
-
 
 
 
