@@ -89,7 +89,7 @@ h2 i {
 }
 
 h3 {
-    color: #fff; /* sidebar titles white */
+    color: #0f0101; /* sidebar titles white */
     margin: 20px 0 10px;
     font-size: 1.2rem;
     display: flex;
@@ -98,7 +98,7 @@ h3 {
 
 h3 i {
     margin-right: 10px;
-    color: var(--primary);
+    color: rgb(250, 0, 0);
 }
 
 p {
