@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Types of Needs Analysis</title>
+    <link rel="stylesheet" href="../css/style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Toggle Menu Button -->
+    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+
+    <!-- Sidebar will load here -->
+    <div id="sidebar-container"></div>
+
+    <section class="control-buttons">
+                <a class="btn back" href="../module8/lesson-three.html">previous lesson</a>
+                <a class="btn forward" href="../module8/lesson-five.html">next lesson</a>
+                <a class="btn quiz" href="../quiz/ESP4.html">Lesson's Quiz</a>
+            </section>
+
+    <main>
+        <article>
+            <h1>Types of Needs Analysis</h1>
+            
+            <section class="section">
+                <h2>Introduction</h2>
+                <p>Needs analysis is an essential process in developing effective English for Specific Purposes (ESP) courses, which involves the systematic identification of learners' language needs and the context in which they will use English. The process of needs analysis is divided into various types, and each type provides a different perspective on the learners' needs.</p>
+            </section>
+
+            <section class="types-overview">
+                <h2>Types of Needs in ESP</h2>
+                
+                <div class="quote">
+                    <h3>Objective vs. Subjective Needs (Brindley, 1989; Richterich, 1980)</h3>
+                    <p><strong>Objective needs:</strong> Derivable from factual information about learners, their use of language in real-life communication situations, and their current language proficiency and difficulty.</p>
+                    <p><strong>Subjective needs:</strong> The cognitive and affective needs of the learner in the language situation, including personality, confidence, attitudes, learners' wants and expectations.</p>
+                </div>
+
+                <div class="quote">
+                    <h3>Target Needs vs. Learning Needs (Hutchinson & Waters, 1987)</h3>
+                    <p><strong>Target needs:</strong> What the learner needs to do in the target situation.</p>
+                    <p><strong>Learning needs:</strong> What the learners need to do in order to learn.</p>
+                </div>
+
+                <div class="quote">
+                    <h3>Felt Needs vs. Perceived Needs (Berwick, 1989)</h3>
+                    <p><strong>Felt needs:</strong> Related to the feelings and thoughts of the learners (wants and desires).</p>
+                    <p><strong>Perceived needs:</strong> Thoughts of experts about the educational gaps in other people's experience.</p>
+                </div>
+
+                <div class="quote">
+                    <h3>Situational vs. Language Needs (Brown, 1995)</h3>
+                    <p><strong>Situational needs:</strong> Based on the program's human aspects, such as physical, social, and psychological context in which learning takes place.</p>
+                    <p><strong>Language needs:</strong> About the target linguistic behaviors that the learners will acquire.</p>
+                </div>
+            </section>
+
+            <section class="analysis-approaches">
+                <h2>Additional Analysis Approaches</h2>
+                <ul>
+                    <li><strong>Present Situation Analysis:</strong> Estimates strengths and weaknesses in language, skill, learning experience.</li>
+                    <li><strong>Means Analysis:</strong> The environment in which the course will be run.</li>
+                    <li><strong>Deficiency Analysis:</strong> Considers learners' present needs and wants.</li>
+                    <li><strong>Register, Discourse, and Genre Analysis:</strong> Focus on linguistic features and text structures.</li>
+                </ul>
+            </section>
+
+            
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 University Ziane Achour, Djelfa</p>
+    </footer>
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebarContainer = document.getElementById("sidebar-container");
+
+// Load sidebar first
+fetch("../sidebar.html")
+  .then(res => res.text())
+  .then(html => {
+    sidebarContainer.innerHTML = html;
+
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("closeSidebar");
+
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+    });
+
+    // ✅ Add this part AFTER sidebar loads
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const parent = link.parentElement;
+        const sublist = parent.querySelector(".nav-sublist");
+        const arrow = link.querySelector(".arrow");
+
+        if (sublist.style.display === "block") {
+          sublist.style.display = "none";
+          arrow.classList.remove("rotate");
+        } else {
+          sublist.style.display = "block";
+          arrow.classList.add("rotate");
+        }
+      });
+    });
+  })
+  .catch(err => console.error("Failed to load sidebar:", err));
+</script>
+</body>
+</html>

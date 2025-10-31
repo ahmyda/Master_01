@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Definition of Needs Analysis</title>
+    <link rel="stylesheet" href="../css/style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Toggle Menu Button -->
+    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+
+    <!-- Sidebar will load here -->
+    <div id="sidebar-container"></div>
+
+        <section class="control-buttons">
+        <a class="btn back" href="../module8/lesson-one.html">previous lesson</a>
+        <a class="btn forward" href="../module8/lesson-three.html">next lesson</a>
+        <a class="btn quiz" href="../quiz/ESP2.html">Lesson's Quiz</a>
+    </section>
+
+    <main>
+        <article class="section">
+            <h1>Definition of Needs Analysis</h1>
+            
+            <section class="definitions">
+                <h2>Definitions by Various Scholars</h2>
+                
+                <div class="quote">
+                    <h2>Nunan (1988)</h2>
+                    <p>Needs analysis refers to "a family of procedures for gathering information about learners and about communication tasks".</p>
+                </div>
+
+                <div class="quote">
+                    <h2>Brown (1995)</h2>
+                    <p>Needs analysis as the analysis of both subjective and objective data to set up the objectives of the course that meet the requirements of the students and the institute.</p>
+                    <p>Later simplified to: "the systematic collection and analysis of all information necessary for defining a defensible curriculum" (Brown, 2009 : 269).</p>
+                </div>
+
+                <div class="quote">
+                    <h2>Holec (1980)</h2>
+                    <p>"Needs assessment is a classical procedure by which a close link can be established between the learners and the curricula."</p>
+                </div>
+
+                <div class="quote">
+                    <h2>Richterich and Trim (1980)</h2>
+                    <p>"Needs analysis comes to mean the whole cluster of techniques which lead to an understanding of the parameters of the learning situation: ego, learners, teachers, administrators, course-writers, producers, career-expectation and job satisfaction, social dynamics, learner-type and resource analysis, etc, are relevant factors in addition to the original predicted communication behaviour."</p>
+                </div>
+
+                <div class="quote">
+                    <h2>Nagarajan (1988)</h2>
+                    <p>Defines a learner's needs in terms of the reasons for which the learner wishes to learn English and the kind of English he will have to use in future.</p>
+                </div>
+            </section>
+
+            <section class="summary">
+                <h2>Summary</h2>
+                <p>Needs analysis (NA) is generally regarded as a criterion of ESP, although ESP is by no means the only educational enterprise which makes use of it (Berwick, 1989; Brindley, 1989).</p>
+            </section>
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 University Ziane Achour, Djelfa</p>
+    </footer>
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebarContainer = document.getElementById("sidebar-container");
+
+// Load sidebar first
+fetch("../sidebar.html")
+  .then(res => res.text())
+  .then(html => {
+    sidebarContainer.innerHTML = html;
+
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("closeSidebar");
+
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+    });
+
+    // ✅ Add this part AFTER sidebar loads
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const parent = link.parentElement;
+        const sublist = parent.querySelector(".nav-sublist");
+        const arrow = link.querySelector(".arrow");
+
+        if (sublist.style.display === "block") {
+          sublist.style.display = "none";
+          arrow.classList.remove("rotate");
+        } else {
+          sublist.style.display = "block";
+          arrow.classList.add("rotate");
+        }
+      });
+    });
+  })
+  .catch(err => console.error("Failed to load sidebar:", err));
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Needs Analysis in ESP - Introduction</title>
+    <link rel="stylesheet" href="../css/style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Toggle Menu Button -->
+    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+
+    <!-- Sidebar will load here -->
+    <div id="sidebar-container"></div>
+    
+
+
+
+        <div class="control-buttons">
+        <a class="btn forward" href="../module8/lesson-two.html"><i class="fas fa-arrow-right"></i> Next Lesson</a>
+        <a class="btn quiz" href="../quiz/ESP1.html"><i class="fas fa-question-circle"></i> Lesson's Quiz</a>
+    </div>
+
+
+        <main>
+            <article>
+                <h1>Needs Analysis in ESP</h1>
+                
+                <section class="section">
+                    <h2><i class="fas fa-play-circle"></i>Introduction</h2>
+                    <p>Needs analysis in ESP involves the systematic and comprehensive study of the language needs of the target learners, their goals and objectives, and the context in which they will use English. By conducting a needs analysis, ESP practitioners can design a course and develop materials that are tailored to the specific needs of the learners, ensuring that they acquire the language skills and competencies necessary to succeed in their professional or academic contexts.</p>
+                    <p>This term provides an overview of needs analysis in ESP, including its definition, types, instruments, steps, and the importance of conducting ongoing needs assessment throughout the course. Additionally, a sample of needs analysis questionnaire is presented to illustrate the practical application of needs analysis in ESP course development.</p>
+                </section>
+
+                <section class="section">
+                    <h2><i class="fas fa-chart-line"></i>Overview on Needs Analysis</h2>
+                    <p>Perhaps the basis of a sound approach to course design is to start with a profile of the needs of the learner, so as to fit what is taught to what is needed. ESP has an advantage over EGP, in that it brought into focus the concept of 'needs analysis'. As Escorcia (1985 :53) notes:</p>
+                    
+                    <div class="quote">
+                        "In the context of ESP, needs analysis has become the dynamic impulse underlying course design, the justification for the S and the P, the driving force that has motivated teachers and course designers throughout the world ever since the magic acronym ESP came in."
+                        <div class="quote-source">- Escorcia (1985)</div>
+                    </div>
+                    
+                    <div class="example-box">
+                        <div class="example-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Key Insight
+                        </div>
+                        <p>Needs analysis helps bridge the gap between general English proficiency and the specific language skills required in professional or academic contexts.</p>
+                    </div>
+                </section>
+
+            </article>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 University Ziane Achour, Djelfa</p>
+        </footer>
+    </div>
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebarContainer = document.getElementById("sidebar-container");
+
+// Load sidebar first
+fetch("../sidebar.html")
+  .then(res => res.text())
+  .then(html => {
+    sidebarContainer.innerHTML = html;
+
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("closeSidebar");
+
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+    });
+
+    // ✅ Add this part AFTER sidebar loads
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const parent = link.parentElement;
+        const sublist = parent.querySelector(".nav-sublist");
+        const arrow = link.querySelector(".arrow");
+
+        if (sublist.style.display === "block") {
+          sublist.style.display = "none";
+          arrow.classList.remove("rotate");
+        } else {
+          sublist.style.display = "block";
+          arrow.classList.add("rotate");
+        }
+      });
+    });
+  })
+  .catch(err => console.error("Failed to load sidebar:", err));
+</script>
+</body>
+</html>

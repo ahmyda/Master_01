@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steps and Importance of Needs Analysis</title>
+    <link rel="stylesheet" href="../css/style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Toggle Menu Button -->
+    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+
+    <!-- Sidebar will load here -->
+    <div id="sidebar-container"></div>
+
+    <section class="control-buttons">
+    <a class="btn back" href="../module8/lesson-five.html">previous lesson</a>
+    <a class="btn quiz" href="../quiz/ESP6.html">Lesson's Quiz</a>
+</section>
+
+    <main>
+        <article>
+            <h1>Steps and Importance of Needs Analysis</h1>
+            
+            <section class="steps">
+                <h2>Steps in Needs Analysis (Brown, 1995)</h2>
+                
+                <div class="quote">
+                    <h2>Step 1: Making Basic Decisions</h2>
+                    <p>Before any needs analysis study takes place, researchers must make certain decisions about:</p>
+                    <ul>
+                        <li><strong>Target Group:</strong> People about whom information will be collected</li>
+                        <li><strong>Audience:</strong> People who will apply the results (teachers, administrators)</li>
+                        <li><strong>Analysts:</strong> Those responsible for conducting the needs analysis</li>
+                        <li><strong>Resource Group:</strong> People who serve as sources of information</li>
+                    </ul>
+                </div>
+
+                <div class="quote">
+                    <h2>Step 2: Gathering Information</h2>
+                    <p>Various techniques for collecting data:</p>
+                    <ul>
+                        <li><strong>Tests:</strong> General ability levels and specific language problems</li>
+                        <li><strong>Observations:</strong> Watching and recording student behaviors</li>
+                        <li><strong>Interviews:</strong> Gathering personal information and views</li>
+                        <li><strong>Meetings:</strong> Reaching consensus among stakeholders</li>
+                        <li><strong>Questionnaires:</strong> Efficient for large-scale information gathering</li>
+                        <li><strong>Existing Information:</strong> Review of available records</li>
+                    </ul>
+                </div>
+
+                <div class="quote">
+                    <h2>Step 3: Using Collected Data</h2>
+                    <p>Data analysis considerations:</p>
+                    <ul>
+                        <li><strong>Reliability:</strong> Consistency of the procedure</li>
+                        <li><strong>Validity:</strong> Degree to which instrument measures what it claims</li>
+                        <li><strong>Usability:</strong> Practicality of the procedure</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Importance of Needs Analysis</h2>
+                
+                <div class="quote">
+                    <h2>Course Design Foundation</h2>
+                    <p>Berwick (1989) states that needs assessment is important for decision planners to design the course. McDonough (1984) asserts that "information on his or her language needs will help in drawing up a profile to establish coherent objectives, and take subsequent decisions on course content".</p>
+                </div>
+
+                <div class="quote">
+                    <h2>Syllabus and Materials Development</h2>
+                    <p>Riddell (1991) points to the crucial role that needs analysis plays in syllabus and course design. Jordan (1997) states that "needs analysis should be the starting point for devising syllabus, course materials and classroom activities".</p>
+                </div>
+
+                <div class="quote">
+                    <h2>Core Principle of ESP</h2>
+                    <p>One of the main principles of ESP says: "tell me what you 'need' English for and I will tell you the English that you 'need'" (Hutchinson and Waters, 1987). ESP places great emphasis on needs analysis at every stage: course designing, learning/teaching process and application.</p>
+                </div>
+
+                <div class="quote">
+                    <h2>Continuous Process</h2>
+                    <p>Needs analysis should be carried out throughout the course in order to adjust the learning objectives as the need arises. Feedback from learners can be used as basis for modifying learning objectives.</p>
+                </div>
+            </section>
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 University Ziane Achour, Djelfa</p>
+    </footer>
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebarContainer = document.getElementById("sidebar-container");
+
+// Load sidebar first
+fetch("../sidebar.html")
+  .then(res => res.text())
+  .then(html => {
+    sidebarContainer.innerHTML = html;
+
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("closeSidebar");
+
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+    });
+
+    // ✅ Add this part AFTER sidebar loads
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const parent = link.parentElement;
+        const sublist = parent.querySelector(".nav-sublist");
+        const arrow = link.querySelector(".arrow");
+
+        if (sublist.style.display === "block") {
+          sublist.style.display = "none";
+          arrow.classList.remove("rotate");
+        } else {
+          sublist.style.display = "block";
+          arrow.classList.add("rotate");
+        }
+      });
+    });
+  })
+  .catch(err => console.error("Failed to load sidebar:", err));
+</script>
+</body>
+</html>
