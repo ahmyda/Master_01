@@ -137,7 +137,11 @@ const questions = [
     { question: "What is the defining characteristic of Open Source software?", options: ["It has no cost", "Its source code is publicly available", "It only runs on Linux", "It is developed by governments"], answer: "Its source code is publicly available" },
     { question: "Which of the following is a core value of FOSS?", options: ["Exclusivity", "Collaboration", "Secrecy", "Profit Maximization"], answer: "Collaboration" },
     { question: "What is a 'backdoor' in the context of software?", options: ["A hidden method to access a system without permission", "A type of software license", "An open-source development tool", "A feature for improving user interface"], answer: "A hidden method to access a system without permission" },
-    { question: "Which freedom allows a user to study how a program works and change it?", options: ["Freedom 0", "Freedom 1", "Freedom 2", "Freedom 3"], answer: "Freedom 1" },
+    {
+      question: "Which freedom lets a user study how a program works and modify it?",
+      options: ["Freedom to Use", "Freedom to Study", "Freedom to Modify", "Freedom to Distribute"],
+      answer: "Freedom to Study"
+    },
     { question: "Who started the GNU Project in 1983?", options: ["Linus Torvalds", "Richard Stallman", "Steve Jobs", "Bill Gates"], answer: "Richard Stallman" },
     { question: "What is the Linux kernel famously combined with to create a complete operating system?", options: ["Windows NT", "GNU software", "macOS libraries", "Android runtime"], answer: "GNU software" },
     { question: "Why are animals often used as logos for FOSS projects?", options: ["To symbolize freedom, speed, or community", "Because they are easy to draw", "To appeal to children", "They are required by the GPL license"], answer: "To symbolize freedom, speed, or community" },
@@ -251,3 +255,4 @@ restartBtn.onclick = () => {
 </script>
 </body>
 </html>
+
