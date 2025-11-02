@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AL Lectures - PDF Viewer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style3.css">
+</head>
+<body>
+    <!-- Toggle Menu Button -->
+  <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+
+  <!-- Sidebar will load here -->
+  <div id="sidebar-container"></div>
+  <div class="container">
+    <header>
+      <h1> FOSS </h1>
+      <p class="subtitle">Lecture PDFs & Resources</p>
+    </header>
+    
+    <a href="index.html" class="back-link">
+      <i class="fas fa-arrow-left"></i>
+      Back to Module Overview
+    </a>
+
+
+    <div class="lectures-grid">
+      <div class="lecture-card">
+        <div class="lecture-icon">
+          <i class="fas fa-file-pdf"></i>
+        </div>
+        <h3>Lecture 1</h3>
+        <div class="lecture-actions">
+          <a href="#" class="btn btn-primary" onclick="showPdf('OS.pdf', 'Lecture 1: FOSS')">
+            <i class="fas fa-eye"></i> View PDF
+          </a>
+          <a href="../pdfs/OS1.pdf" class="btn btn-outline" download>
+            <i class="fas fa-download"></i> Download
+          </a>
+        </div>
+      </div>
+      
+    </div>
+     
+    </div>
+
+    <div class="pdf-viewer-section">
+      <div class="pdf-viewer-header">
+        <h2><i class="fas fa-file-pdf"></i> <span id="pdf-title">Select a PDF to View</span></h2>
+
+      </div>
+      
+      <div id="pdf-container">
+        <div class="pdf-placeholder">
+          <i class="fas fa-file-pdf"></i>
+          <h3>No PDF Selected</h3>
+          <p>Click "View PDF" on any lecture card to display it here</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Applied Linguistics &copy; 2025 | Lecture PDFs Repository</p>
+    </footer>
+  </div>
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebarContainer = document.getElementById("sidebar-container");
+
+// Load sidebar first
+fetch("../sidebar.html")
+  .then(res => res.text())
+  .then(html => {
+    sidebarContainer.innerHTML = html;
+
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("closeSidebar");
+
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+    });
+
+    // ✅ Add this part AFTER sidebar loads
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const parent = link.parentElement;
+        const sublist = parent.querySelector(".nav-sublist");
+        const arrow = link.querySelector(".arrow");
+
+        if (sublist.style.display === "block") {
+          sublist.style.display = "none";
+          arrow.classList.remove("rotate");
+        } else {
+          sublist.style.display = "block";
+          arrow.classList.add("rotate");
+        }
+      });
+    });
+  })
+  .catch(err => console.error("Failed to load sidebar:", err));
+</script>
+
+</body>
+</html>
