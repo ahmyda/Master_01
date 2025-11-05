@@ -272,6 +272,10 @@ tr:hover {
 .quiz {
   background-color: #577590;
 }
+.pdf {
+  background-color: #03770d;
+}
+
 
 /* Hover effects */
 .btn:hover {
