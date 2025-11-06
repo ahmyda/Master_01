@@ -1,0 +1,610 @@
+/*
+|--------------------------------------------------------------------------
+| 1. GLOBAL RESET & BASE STYLES
+|--------------------------------------------------------------------------
+| Resets default browser margins/paddings and sets base typography/box model.
+*/
+* {
+    /* Box Model Reset */
+    margin: 0;
+    padding: 0;
+    /* Essential for modern layouts */
+    box-sizing: border-box; 
+    /* Typography */
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/*
+|--------------------------------------------------------------------------
+| 2. CSS VARIABLES (DESIGN TOKENS) - NEW DARK THEME
+|--------------------------------------------------------------------------
+| Centralized color palette, gradients, and shadow definitions.
+*/
+:root {
+    /* Primary Colors (Deep Green/Teal) */
+    --primary: #10b981; /* Emerald Green */
+    --primary-dark: #059669; /* Darker Emerald */
+    /* Secondary/Accent Colors (Gold/Yellow) */
+    --secondary: #f59e0b; /* Amber/Gold */
+    --accent: #ef4444; /* Soft Red for errors */
+    /* Utility Colors */
+    --light: #f3f4f6; /* Off-white for accents */
+    --dark: #111827; /* Very Dark Gray/Black for text/base */
+    --success: #10b981; 
+    --warning: #f59e0b; 
+    
+    /* Backgrounds & Overlays */
+    --bg-primary: #1f2937; /* Dark Slate Background */
+    --card-bg: rgba(31, 41, 55, 0.85); /* Dark Semi-transparent Card */
+    --gradient-1: #1e3a8a; /* Deep Blue for Body BG */
+    --gradient-2: #064e3b; /* Dark Green for Body BG */
+
+    /* Shadow Definitions (adjusted for dark mode, subtle glow) */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.8), 0 4px 6px -2px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.9), 0 10px 10px -5px rgba(0, 0, 0, 0.7);
+}
+
+/*
+|--------------------------------------------------------------------------
+| 3. PAGE LAYOUT
+|--------------------------------------------------------------------------
+| Styles for the main body and container elements.
+*/
+body {
+    /* Background & Layout */
+    background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+    color: var(--light); /* Light text on dark background */
+    min-height: 100vh;
+    padding: 20px;
+    
+    /* Centering Content (Flexbox) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Typography */
+    line-height: 1.6;
+}
+
+.container {
+    /* Sizing & Background */
+    width: 100%;
+    max-width: 900px;
+    background: var(--card-bg);
+    
+    /* Styling (Glassmorphism effect on dark background) */
+    border-radius: 24px;
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border */
+}
+
+/*
+|--------------------------------------------------------------------------
+| 4. HEADER & INFO BAR
+|--------------------------------------------------------------------------
+| Styles for the top section (header, title, subtitle, game info).
+*/
+header {
+    background: linear-gradient(135deg, var(--primary-dark), #030712); /* Dark, serious header */
+    color: white;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header overlay/pattern - changed to a subtle dark pattern */
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Using a dark, subtle pattern */
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.05"><polygon points="0,0 1000,50 1000,100 0,100"/></svg>');
+    background-size: cover;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    font-weight: 700;
+    position: relative;
+    /* Gradient text effect: Gold/Light */
+    background: linear-gradient(135deg, var(--secondary), var(--light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1.15rem;
+    opacity: 0.7; /* Muted white */
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-weight: 400;
+    position: relative;
+}
+
+.game-info {
+    /* Layout */
+    display: flex;
+    justify-content: space-between;
+    /* Styling */
+    background: linear-gradient(90deg, #1f2937, #374151); /* Slightly lighter dark bar */
+    color: var(--light);
+    padding: 16px 30px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/*
+|--------------------------------------------------------------------------
+| 5. GAME INTERFACE (MODES, QUESTIONS, ANSWERS)
+|--------------------------------------------------------------------------
+| Styles for the quiz/game elements.
+*/
+.game-container {
+    padding: 30px;
+    min-height: 450px;
+}
+
+/* --- Mode Selector --- */
+.mode-selector {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 24px 0;
+    flex-wrap: wrap;
+}
+
+.mode-btn {
+    /* Base Style */
+    background: #374151; /* Dark button base */
+    color: var(--light);
+    border: 2px solid #4b5563; /* Subtle border */
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+}
+
+.mode-btn:hover:not(.active) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.mode-btn.active {
+    background: var(--primary); /* Primary Green Active */
+    color: var(--dark); /* Dark text on bright active state */
+    border-color: var(--primary);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+    transform: translateY(-2px);
+}
+
+/* --- Question Card --- */
+.question-card {
+    background: var(--bg-primary); /* Dark card background */
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 24px;
+    border: 1px solid #374151;
+    transition: transform 0.3s ease;
+}
+
+.question-card:hover {
+    transform: translateY(-2px);
+}
+
+.question {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    font-weight: 600;
+    color: var(--light);
+    /* Gradient text effect: Light to Secondary (Gold) */
+    background: linear-gradient(135deg, var(--light), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.answer-options {
+    display: grid;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* --- Answer Option --- */
+.option {
+    /* Layout & Base */
+    background: #374151; /* Dark option background */
+    color: var(--light);
+    padding: 18px 20px;
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1.05rem;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    
+    /* Styling & Transition */
+    border: 2px solid #4b5563;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Shimmer effect on hover */
+.option::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    /* Subtle green/white shimmer */
+    background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.option:hover::before {
+    left: 100%;
+}
+
+.option:hover {
+    background: #4b5563;
+    border-color: var(--primary);
+    transform: translateX(8px);
+    box-shadow: var(--shadow-md);
+}
+
+/* State Styles */
+.option.selected {
+    background: linear-gradient(135deg, #374151, #4b5563);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    transform: translateX(8px);
+}
+
+.option.correct {
+    background: linear-gradient(135deg, #1c6d48, #059669); /* Dark Green Success */
+    border-color: var(--success);
+    color: white;
+}
+
+.option.incorrect {
+    background: linear-gradient(135deg, #7f1d1d, #b91c1c); /* Dark Red Incorrect */
+    border-color: var(--accent);
+    color: white;
+}
+
+/*
+|--------------------------------------------------------------------------
+| 6. FEEDBACK & CONTROLS
+|--------------------------------------------------------------------------
+| Styles for the answer feedback, control buttons, and progress bar.
+*/
+
+/* --- Feedback Message --- */
+.feedback {
+    /* Base */
+    padding: 20px;
+    border-radius: 16px;
+    margin-top: 24px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    display: none; 
+    
+    /* Styling */
+    background: linear-gradient(135deg, #1e40af, #1d4ed8); /* Dark Blue Feedback */
+    color: white;
+    border-left: 4px solid var(--primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.feedback.show {
+    display: block;
+    animation: slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Control Buttons --- */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.btn {
+    /* Base */
+    padding: 14px 32px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    
+    /* Transition */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Button hover shimmer effect */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+/* Next Button Styles (Primary Green) */
+.next-btn {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--dark); /* Dark text on bright button */
+    box-shadow: var(--shadow-md);
+}
+
+.next-btn:hover {
+    background: linear-gradient(135deg, var(--primary-dark), #047857);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.next-btn:disabled {
+    background: #4b5563; /* Darker disabled */
+    color: #6b7280;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Reset Button Styles (Secondary Gold) */
+.reset-btn {
+    background: linear-gradient(135deg, var(--warning), var(--secondary));
+    color: var(--dark); /* Dark text on bright button */
+    box-shadow: var(--shadow-md);
+}
+
+.reset-btn:hover {
+    background: linear-gradient(135deg, var(--secondary), #b45309);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* --- Progress Bar --- */
+.progress-container {
+    height: 8px;
+    background: #4b5563; /* Dark track */
+    border-radius: 10px;
+    margin: 24px 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    width: 0%; 
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 10px;
+    position: relative;
+}
+
+/* Progress bar shimmer effect */
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1));
+    animation: shimmer 2s infinite;
+}
+
+/*
+|--------------------------------------------------------------------------
+| 7. RESULTS SECTIONS (MISTAKES & CHECKLIST)
+|--------------------------------------------------------------------------
+| Styles for the end-of-game sections.
+*/
+.mistakes-section, .checklist {
+    margin-top: 30px;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    color: var(--light); /* Ensure section text is light */
+}
+
+.mistakes-section {
+    background: linear-gradient(135deg, #4c1d95, #374151); /* Deep Purple/Dark */
+    border-left: 4px solid var(--warning);
+    display: none; 
+}
+
+.mistakes-section.show {
+    display: block;
+    animation: slideInUp 0.4s ease;
+}
+
+.checklist {
+    background: linear-gradient(135deg, #1e40af, #1f2937); /* Deep Blue/Dark */
+    border-left: 4px solid var(--primary);
+}
+
+.section-title {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+}
+
+.mistakes-list, .checklist-items {
+    padding-left: 0;
+    list-style: none;
+}
+
+.mistakes-list li, .checklist-items li {
+    margin-bottom: 12px;
+    line-height: 1.6;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border for dark mode */
+}
+
+/* Checklist specific layout */
+.checklist-items {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.3); /* Transparent dark background */
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.checklist-item:hover {
+    transform: translateX(4px);
+}
+
+.checklist-item i {
+    color: var(--primary); /* Use primary color for icons */
+    margin-top: 2px;
+    font-size: 1.1rem;
+}
+
+/*
+|--------------------------------------------------------------------------
+| 8. FOOTER
+|--------------------------------------------------------------------------
+*/
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #9ca3af; /* Muted gray for footer text */
+    background: linear-gradient(90deg, #111827, #1f2937);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/*
+|--------------------------------------------------------------------------
+| 9. ACCESSIBILITY & UTILITY
+|--------------------------------------------------------------------------
+| Styles for scrollbar and responsive adjustments.
+*/
+
+/* Modern scrollbar styling for WebKit browsers */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f2937; /* Dark scrollbar track */
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* --- Responsive design (Mobile Optimization) --- */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        border-radius: 20px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .question {
+        font-size: 1.2rem;
+    }
+    
+    .mode-btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+    
+    .game-container {
+        padding: 20px;
+    }
+    
+    .question-card {
+        padding: 24px;
+    }
+    
+    .controls {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| 10. ANIMATIONS
+|--------------------------------------------------------------------------
+*/
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-20px); }
+    100% { transform: translateX(20px); }
+}
+
+.loading {
+    animation: pulse 2s infinite;
+}
