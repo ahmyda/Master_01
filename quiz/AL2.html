@@ -1,242 +1,873 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz Game</title>
-<style>
-body {
-    font-family: 'Poppins', sans-serif;
-    background: #d6e0f0; /* soft pastel blue */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    color: #333;
-}
-
-.container {
-    width: 90%;
-    max-width: 600px;
-    background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    padding: 40px 30px;
-    text-align: center;
-}
-
-h1 {
-    font-size: 28px;
-    color: #1b2a49;
-    margin-bottom: 20px;
-}
-
-h2, p {
-    font-size: 20px;
-    color: #111; /* dark text for readability */
-    margin-bottom: 20px;
-}
-
-.btn {
-    display: inline-block;
-    margin: 12px 10px;
-    padding: 12px 25px;
-    background: #4a7c9b;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.btn:hover {
-    background: #5b8cae;
-    transform: translateY(-2px);
-}
-
-#options {
-    display: flex;
-    flex-direction: column; /* vertical layout */
-    align-items: center;
-    margin-top: 20px;
-}
-
-label {
-    background: #f4f6f8;
-    color: #111; /* darker text */
-    font-size: 18px;
-    padding: 14px 20px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    margin: 8px 0;
-    width: 100%;
-    cursor: pointer;
-    transition: 0.2s;
-    text-align: left;
-}
-
-label:hover {
-    background: #e0e7ef;
-}
-
-label.selected {
-    background: #4a7c9b;
-    color: #fff;
-    border-color: #3c6580;
-}
-
-.correct {
-    color: green;
-    font-weight: bold;
-}
-
-.wrong {
-    color: red;
-    font-weight: bold;
-}
-
-#result-list li {
-    margin: 12px 0;
-    font-size: 16px;
-    text-align: left;
-    background: #f1f3f5;
-    padding: 10px 15px;
-    border-radius: 8px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applied Linguistics Revision Game</title>
+    <link rel="stylesheet" href="../css/style4.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<div class="container">
-    <h1>AL lecture 02</h1>
-    <button id="start-btn" class="btn">Start Quiz</button>
-        <a href="../module1/lesson-two.html" id="start-btn " class="btn">Back to AL lecture 02</a>
+    <div class="container">
+        <header>
+            <h3>Applied Linguistics Revision Game</h3>
+        </header>
+         <a href="../module1/lesson-two.html" class="back-to-lesson-btn">Back to lesson</a>
 
+        
+        <div class="game-info">
+            <div><i class="fas fa-star"></i> Score: <span id="score-value">0</span></div>
+            <div><i class="fas fa-clock"></i> Time: <span id="time-value">60</span>s</div>
+        </div>
+        
+        <div class="game-container">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="mcq">Multiple Choice</button>
+                <button class="mode-btn" data-mode="true-false">True/False</button>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            
+            <div class="question-card">
+                <div class="question" id="question-text">Loading question...</div>
+                <div id="game-content">
+                    <!-- Dynamic content will go here -->
+                </div>
+                <div class="feedback" id="feedback"></div>
+            </div>
+            
+            <div class="controls">
+                <button class="btn next-btn" id="next-btn" disabled>Next Question</button>
+                <button class="btn reset-btn" id="reset-btn">Reset Game</button>
+            </div>
+            
 
-    <div id="quiz-container" style="display:none;">
-        <h2 id="question-number"></h2>
-        <p id="question-text"></p>
-        <div id="options"></div>
-        <button id="next-btn" class="btn" style="display:none;">Next</button>
+            
+
+        </div>
+        
+        <footer>
+            <p>Applied Linguistics Revision Tool | Based on Brumfit (1977), Spolsky (2005), Widdowson, and AAAL</p>
+        </footer>
     </div>
 
-    <div id="result-container" style="display:none;">
-        <h1>Results</h1>
-        <p id="score"></p>
-        <ul id="result-list"></ul>
-        <button id="restart-btn" class="btn">Play Again</button>
-    </div>
-</div>
+    <script>
+        // ===== QUESTION BANK =====
+        const mcqQuestions = 
+            
+        
 
-<script>
-const questions = [
-    { question: "According to researchers in the late 1960s-1970s, second language learner errors are evidence of:", options: ["Random mistakes", "Careless behavior", "Rule-governed behavior", "Lack of intelligence"], answer: "Rule-governed behavior" },
-    { question: "Who first provided a comprehensive theoretical treatment of Contrastive Analysis?", options: ["Chomsky", "Lado", "Selinker", "Corder"], answer: "Lado" },
-    { question: "Contrastive Analysis was extensively used during which period?", options: ["1950s-1960s", "1960s-early 1970s", "1970s-1980s", "1980s-1990s"], answer: "1960s-early 1970s" },
-    { question: "According to behaviorist theories, language learning was viewed as:", options: ["Cognitive problem-solving", "Habit formation", "Innate knowledge activation", "Social interaction"], answer: "Habit formation" },
-    { question: "Lee (1968) stated that the prime cause of difficulty in L2 learning is:", options: ["Teaching methods", "Interference from L1", "Lack of motivation", "Age of learner"], answer: "Interference from L1" },
-    { question: "The theory of transfer suggests that similar patterns between L1 and L2:", options: ["Impede learning", "Have no effect", "Aid acquisition", "Cause confusion"], answer: "Aid acquisition" },
-    { question: "Negative transfer from L1 is most clearly recognized in:", options: ["Vocabulary", "Pronunciation", "Reading skills", "Writing style"], answer: "Pronunciation" },
-    { question: "Arab learners of English often omit the '-s' inflection for third person singular because:", options: ["It's too difficult to pronounce", "Arabic lacks this morpheme", "Teachers don't emphasize it", "It's not important for communication"], answer: "Arabic lacks this morpheme" },
-    { question: "In the CA Hierarchy of Difficulty, which presents the GREATEST difficulty?", options: ["Split", "New category", "Absent category", "Coalesced forms"], answer: "Split" },
-    { question: "A 'Split' in the hierarchy occurs when:", options: ["L2 has a category that L1 lacks", "L1 has one form while L2 has multiple", "L1 has multiple forms while L2 has one", "Forms are identical in both languages"], answer: "L1 has one form while L2 has multiple" },
-    { question: "A 'New category' in the hierarchy refers to:", options: ["Something that exists in L2 but not L1", "Something that exists in L1 but not L2", "Multiple L1 forms matching one L2 form", "Identical forms in both languages"], answer: "Something that exists in L2 but not L1" },
-    { question: "The first step in CA methodology is:", options: ["Develop teaching materials", "Build hypotheses", "Accurate descriptions of languages", "Find points of similarity"], answer: "Accurate descriptions of languages" },
-    { question: "Chomsky's example 'John is easy to please' vs 'John is eager to please' demonstrates:", options: ["Same surface and deep structures", "Different surface but same deep structures", "Same surface but different deep structures", "Complete correspondence"], answer: "Same surface but different deep structures" },
-    { question: "CA is considered most useful in what type of classroom?", options: ["Heterogeneous", "Online", "Homogeneous", "Individual tutoring"], answer: "Homogeneous" },
-    { question: "One major criticism of CA is that it:", options: ["Ignores cultural factors", "Overpredicts errors", "Is too complex", "Focuses only on writing"], answer: "Overpredicts errors" },
-    { question: "Errors like '*goed' and '*comed' are examples of:", options: ["L1 interference", "Overgeneralization", "Careless mistakes", "Pronunciation errors"], answer: "Overgeneralization" },
-    { question: "The English affricate sound /tʃ/ was predicted to be difficult for Arab learners but wasn't, showing:", options: ["Underprediction", "Overprediction", "Accurate prediction", "Irrelevance of prediction"], answer: "Overprediction" },
-    { question: "New supporters of CA add which step to the methodology?", options: ["Build and test hypotheses", "Ignore L1 completely", "Focus only on pronunciation", "Use only structural linguistics"], answer: "Build and test hypotheses" },
-    { question: "According to Gass (1979), transfer involves patterns from L1 being:", options: ["Completely eliminated", "Superimposed on L2 patterns", "Only affecting pronunciation", "Irrelevant to L2 learning"], answer: "Superimposed on L2 patterns" },
-    { question: "The main theoretical basis for Contrastive Analysis comes from:", options: ["Cognitive psychology", "Behaviorist psychology", "Humanistic psychology", "Social psychology"], answer: "Behaviorist psychology" }
-];
 
-let selectedQuestions = [], currentQuestionIndex = 0, userAnswers = [];
 
-const startBtn = document.getElementById("start-btn");
-const quizContainer = document.getElementById("quiz-container");
-const questionNumber = document.getElementById("question-number");
-const questionText = document.getElementById("question-text");
-const optionsDiv = document.getElementById("options");
-const nextBtn = document.getElementById("next-btn");
-const resultContainer = document.getElementById("result-container");
-const scoreText = document.getElementById("score");
-const resultList = document.getElementById("result-list");
-const restartBtn = document.getElementById("restart-btn");
+[
+  {
+    "question": "What is the central assumption of Contrastive Analysis (CA)?",
+    "options": [
+      "L2 errors are mainly caused by poor motivation or lack of practice.",
+      "L2 acquisition is independent of the learner’s first language.",
+      "The primary source of L2 errors is L1 interference, with greater differences causing more difficulty.",
+      "All learners make the same errors regardless of their native language."
+    ],
+    "correct": 2,
+    "feedback": "Correct! As Lee (1968) stated, CA assumes that L1 interference is the main cause of L2 errors—greater structural differences between L1 and L2 lead to more learning difficulty, while similarities ease acquisition."
+  },
+  {
+    "question": "According to Lado (1957), how can teachers anticipate learner difficulties?",
+    "options": [
+      "By ignoring students’ native languages completely.",
+      "By comparing the learner’s native language and culture with the target language and culture.",
+      "By focusing only on the target language’s literary texts.",
+      "By assuming all grammatical rules are universally transferable."
+    ],
+    "correct": 1,
+    "feedback": "Correct! Lado argued that systematic comparison between L1 and L2 (and their cultures) allows teachers to predict which structures will be difficult due to differences and which will be easy due to similarities."
+  },
+  {
+    "question": "Which of the following is an example of negative transfer from Arabic to English?",
+    "options": [
+      "Using 'I saw' correctly for past events.",
+      "Saying 'He is doctor' instead of 'He is a doctor'.",
+      "Pronouncing /t/ and /d/ accurately.",
+      "Using question intonation appropriately."
+    ],
+    "correct": 1,
+    "feedback": "Correct! Arabic lacks indefinite articles like 'a/an,' so Arab learners often omit them—this is a classic case of negative transfer explained by Contrastive Analysis."
+  },
+  {
+    "question": "What does 'positive transfer' refer to in Contrastive Analysis?",
+    "options": [
+      "The learner develops a positive attitude toward the target culture.",
+      "The teacher uses only positive reinforcement in class.",
+      "Similarities between L1 and L2 structures facilitate learning.",
+      "The learner avoids using their L1 in any context."
+    ],
+    "correct": 2,
+    "feedback": "Correct! Positive transfer occurs when L1 and L2 share similar features (e.g., both having a Simple Past tense), which makes acquisition easier for the learner."
+  },
+  {
+    "question": "According to Stockwell et al. (1965), which contrast type is the MOST difficult for learners?",
+    "options": [
+      "Complete Correspondence",
+      "Coalesced Forms",
+      "New Category",
+      "Split"
+    ],
+    "correct": 3,
+    "feedback": "Correct! A 'Split'—where L1 has one form but L2 requires two or more distinct forms (e.g., English 'the' vs. no article in some L1s)—is ranked as the most difficult in Stockwell’s hierarchy."
+  },
+  {
+    "question": "Why did Contrastive Analysis lose favor in the 1970s?",
+    "options": [
+      "It was too expensive to implement in classrooms.",
+      "It perfectly predicted all learner errors with 100% accuracy.",
+      "It overpredicted errors and failed to account for developmental errors like 'goed' or 'hurted'.",
+      "It focused too much on communicative competence."
+    ],
+    "correct": 2,
+    "feedback": "Correct! CA was criticized for overpredicting (foreseeing problems that never occurred) and underpredicting (missing errors caused by L2 rule overgeneralization, like *goed*), which stem from internal cognitive processes—not L1 interference."
+  },
+  {
+    "question": "Which error by an Arabic-speaking English learner CANNOT be explained by Contrastive Analysis?",
+    "options": [
+      "Saying 'She go to school' instead of 'She goes to school'.",
+      "Using 'Did you finish your homework yet?' instead of 'Have you finished...?'",
+      "Saying 'He comed yesterday' instead of 'He came yesterday'.",
+      "Omitting 'a' in 'She is teacher.'"
+    ],
+    "correct": 2,
+    "feedback": "Correct! 'Comed' results from overgeneralizing the English past-tense -ed rule—a developmental error internal to L2 acquisition, not caused by Arabic. CA cannot explain such errors."
+  },
+  {
+    "question": "In which teaching context is Contrastive Analysis most useful today?",
+    "options": [
+      "In large, multilingual online courses with random L1 backgrounds.",
+      "In homogeneous classes where all students share the same L1 (e.g., Arabic speakers).",
+      "Only in theoretical linguistics research labs.",
+      "When using the direct method that bans L1 use entirely."
+    ],
+    "correct": 1,
+    "feedback": "Correct! CA is especially practical in homogeneous classrooms, where teachers can anticipate common L1-based errors (e.g., article omission by Arab learners) and design targeted instruction."
+  },
+  {
+    "question": "What is the correct order of difficulty in Stockwell et al.’s (1965) hierarchy, from MOST to LEAST difficult?",
+    "options": [
+      "Split, New Category, Absent Category, Coalesced Forms, Complete Correspondence",
+      "New Category, Split, Coalesced, Absent Category, Complete Correspondence",
+      "Complete Correspondence, Coalesced, Absent, New, Split",
+      "Absent Category, Split, New, Coalesced, Complete Correspondence"
+    ],
+    "correct": 0,
+    "feedback": "Correct! The hierarchy is: (1) Split, (2) New Category, (3) Absent Category, (4) Coalesced Forms, (5) Complete Correspondence—reflecting decreasing levels of expected difficulty."
+  },
+  {
+    "question": "Which step is part of the traditional Contrastive Analysis methodology?",
+    "options": [
+      "Collecting learner errors before comparing languages.",
+      "Using different grammatical frameworks for L1 and L2.",
+      "Developing teaching materials based on predicted L1-L2 difficulties.",
+      "Avoiding any mention of the learner’s native language."
+    ],
+    "correct": 2,
+    "feedback": "Correct! One of the five traditional CA steps is to develop teaching materials after identifying structural similarities and differences using the same descriptive model for both languages."
+  },
+  {
+    "question": "How does enhanced Contrastive Analysis differ from the traditional version?",
+    "options": [
+      "It rejects all comparison between languages.",
+      "It assumes L1 has no influence on L2 learning.",
+      "It tests predictions against actual learner data before designing instruction.",
+      "It relies solely on native speaker intuition."
+    ],
+    "correct": 2,
+    "feedback": "Correct! Enhanced CA adds empirical validation: hypotheses from L1-L2 comparison are tested with real learner data, making the approach more scientific and less speculative."
+  },
+  {
+    "question": "Contrastive Analysis is primarily based on which learning theory?",
+    "options": [
+      "Constructivism",
+      "Cognitive Theory",
+      "Behaviorism",
+      "Sociocultural Theory"
+    ],
+    "correct": 2,
+    "feedback": "Correct! CA assumes language learning is habit formation—where L1 habits either facilitate (positive transfer) or interfere (negative transfer) with new L2 habits—aligning with behaviorist views dominant in the 1950s–60s."
+  },
+  {
+    "question": "What does 'Coalesced Forms' mean in Stockwell’s hierarchy?",
+    "options": [
+      "L2 has multiple forms where L1 has one.",
+      "L1 has multiple forms but L2 uses a single form for all.",
+      "Both languages use entirely different systems with no overlap.",
+      "The grammatical category exists only in L2."
+    ],
+    "correct": 1,
+    "feedback": "Correct! 'Coalesced Forms' occur when L1 distinguishes several categories (e.g., verb aspects), but L2 collapses them into one form—making it moderately difficult but less so than a 'Split.'"
+  },
+  {
+    "question": "Which scholar is most associated with establishing CA as a predictive framework in language teaching?",
+    "options": [
+      "Noam Chomsky",
+      "Stephen Krashen",
+      "Robert Lado",
+      "Dell Hymes"
+    ],
+    "correct": 2,
+    "feedback": "Correct! Robert Lado’s 1957 book 'Linguistics Across Cultures' laid the foundation for CA as a method to predict learning difficulties through systematic L1-L2 comparison."
+  },
+  {
+    "question": "What is an 'Absent Category' in Contrastive Analysis?",
+    "options": [
+      "A structure present in L2 but missing in L1.",
+      "A structure present in L1 but missing in L2.",
+      "A phoneme that is silent in both languages.",
+      "A vocabulary item that has no translation."
+    ],
+    "correct": 1,
+    "feedback": "Correct! An 'Absent Category' refers to a feature that exists in the learner’s L1 but not in the L2—ranked third in difficulty in Stockwell’s hierarchy."
+  },
+  {
+    "question": "Which of the following best illustrates the practical use of CA in teaching English to Arab learners?",
+    "options": [
+      "Assuming they will naturally acquire English articles without instruction.",
+      "Ignoring all grammar and focusing only on conversation.",
+      "Designing lessons that explicitly contrast Arabic and English article systems.",
+      "Teaching French instead, since it’s closer to Arabic."
+    ],
+    "correct": 2,
+    "feedback": "Correct! Knowing that Arabic lacks articles like 'a/an/the,' teachers can use CA to design contrastive lessons that directly address this gap and prevent fossilized errors."
+  },
+  {
+    "question": "What does 'Complete Correspondence' indicate in CA?",
+    "options": [
+      "L1 and L2 are genetically unrelated.",
+      "L1 and L2 structures are functionally and formally identical.",
+      "Learners will still struggle despite surface similarities.",
+      "No transfer occurs in either direction."
+    ],
+    "correct": 1,
+    "feedback": "Correct! 'Complete Correspondence'—the easiest case—means L1 and L2 share the same form and function (e.g., basic word order), leading to positive transfer and minimal difficulty."
+  },
+  {
+    "question": "Which error is likely due to L1 interference for an Arabic speaker learning English?",
+    "options": [
+      "Saying 'goed' instead of 'went.'",
+      "Using 'Have you seen him?' correctly.",
+      "Saying 'He teacher' instead of 'He is a teacher.'",
+      "Overusing the present perfect correctly."
+    ],
+    "correct": 2,
+    "feedback": "Correct! Omitting the verb 'is' and the article 'a' reflects Arabic sentence structure (which often omits copulas and lacks articles), making this a clear case of L1 interference."
+  },
+  {
+    "question": "Why is traditional CA considered 'predictive'?",
+    "options": [
+      "It forecasts learners’ final exam scores.",
+      "It predicts future language policy changes.",
+      "It uses L1-L2 comparison to anticipate learning difficulties before they occur.",
+      "It estimates how long fluency will take for each student."
+    ],
+    "correct": 2,
+    "feedback": "Correct! Traditional CA is predictive because it assumes teachers can forecast where learners will struggle (e.g., with English articles) based solely on structural differences between L1 and L2—before actual teaching begins."
+  },
+  {
+    "question": "Which statement reflects a balanced, modern view of Contrastive Analysis?",
+    "options": [
+      "CA explains every single L2 error and should replace all other SLA theories.",
+      "CA is completely useless and has been disproven by neuroscience.",
+      "CA is limited but remains a helpful tool for anticipating L1-based errors in specific teaching contexts.",
+      "CA only works for Indo-European languages."
+    ],
+    "correct": 2,
+    "feedback": "Correct! While CA cannot explain all errors (e.g., developmental ones), it is still valued as a practical heuristic—especially in homogeneous classrooms—for curriculum design and error prevention."
+  },
 
-function shuffle(array) { return array.sort(() => Math.random() - 0.5); }
+  {
+    "question": "What is the main assumption of Contrastive Analysis (CA)?",
+    "options": [
+      "L2 errors are primarily caused by cognitive overload.",
+      "L2 errors stem mainly from L1 interference, with greater differences causing more difficulty.",
+      "L2 acquisition follows the same stages regardless of the learner's native language.",
+      "L2 learners rarely transfer structures from their L1."
+    ],
+    "correct": 1,
+    "feedback": "Correct! As Lee (1968) stated, CA assumes that the primary source of L2 errors is L1 interference—greater structural differences between L1 and L2 lead to more learning difficulty, while similarities ease acquisition."
+  },
+  {
+    "question": "According to Lado (1957), how can language teaching anticipate learner difficulties?",
+    "options": [
+      "By analyzing only the target language’s grammar.",
+      "By comparing the learner’s native language and culture with the target language and culture.",
+      "By ignoring the learner’s L1 to avoid interference.",
+      "By focusing exclusively on communicative practice."
+    ],
+    "correct": 1,
+    "feedback": "Correct! Lado (1957) argued that comparing L1 and L2 (and their cultures) allows teachers to predict which structures will be difficult due to differences and which will be easy due to similarities—forming the predictive basis of CA."
+  },
+  {
+    "question": "Which of the following is an example of negative transfer from Arabic to English?",
+    "options": [
+      "Using 'I went' correctly in past tense contexts.",
+      "Saying 'He is teacher' instead of 'He is a teacher'.",
+      "Correctly using subject-verb agreement in present tense.",
+      "Using the word 'book' the same way in both languages."
+    ],
+    "correct": 1,
+    "feedback": "Correct! Arabic lacks indefinite articles like 'a/an,' so Arab learners often omit them in English—this is classic negative transfer explained by CA."
+  },
+  {
+    "question": "What does 'positive transfer' mean in Contrastive Analysis?",
+    "options": [
+      "The learner avoids using their L1 entirely.",
+      "L1 and L2 structures are different, causing confusion.",
+      "L1 and L2 structures are similar, facilitating learning.",
+      "The learner overuses L2 rules in L1 contexts."
+    ],
+    "correct": 2,
+    "feedback": "Correct! Positive transfer occurs when similarities between L1 and L2 (e.g., both having a Simple Past tense) make learning easier for the student."
+  },
+  {
+    "question": "According to Stockwell et al. (1965), which type of linguistic difference is MOST difficult for learners?",
+    "options": [
+      "Coalesced Forms",
+      "New Category",
+      "Split",
+      "Complete Correspondence"
+    ],
+    "correct": 2,
+    "feedback": "Correct! In Stockwell et al.’s hierarchy, a 'Split'—where L1 has one form but L2 has two or more (e.g., English 'ser' vs. Spanish 'ser/estar')—is the most difficult type of contrast for learners."
+  },
+  {
+    "question": "Why did Contrastive Analysis decline in the 1970s?",
+    "options": [
+      "It was too focused on communicative competence.",
+      "It accurately predicted all learner errors.",
+      "It overpredicted and underpredicted errors and ignored cognitive factors like overgeneralization.",
+      "It rejected comparison between languages entirely."
+    ],
+    "correct": 2,
+    "feedback": "Correct! CA was criticized for overpredicting errors (predicting problems that didn’t occur) and underpredicting others (e.g., *goed*, which comes from L2 rule overgeneralization, not L1 interference). It also relied on outdated behaviorist assumptions."
+  },
+  {
+    "question": "Which error by an Arab English learner CANNOT be explained by Contrastive Analysis?",
+    "options": [
+      "Saying 'He come yesterday' instead of 'He came yesterday.'",
+      "Using 'Did you see him today?' instead of 'Have you seen him today?'",
+      "Saying 'goed' instead of 'went.'",
+      "Omitting the article in 'She is doctor.'"
+    ],
+    "correct": 2,
+    "feedback": "Correct! 'Goed' results from overgeneralizing the English past tense -ed rule—a developmental error internal to L2 acquisition, not caused by Arabic interference. CA cannot explain such errors."
+  },
+  {
+    "question": "In which teaching context is Contrastive Analysis still considered useful today?",
+    "options": [
+      "Only in online, self-paced courses with mixed L1 backgrounds.",
+      "In homogeneous classrooms where all learners share the same L1.",
+      "Exclusively in theoretical linguistics seminars.",
+      "When avoiding any mention of the learner’s native language."
+    ],
+    "correct": 1,
+    "feedback": "Correct! CA remains practical in homogeneous classrooms (e.g., teaching English to Arabic speakers), where teachers can anticipate common L1-based errors and design targeted materials."
+  },
+  {
+    "question": "What is the correct order of Stockwell et al.’s (1965) hierarchy of difficulty from MOST to LEAST problematic?",
+    "options": [
+      "New Category, Split, Absent Category, Coalesced, Complete Correspondence",
+      "Split, New Category, Absent Category, Coalesced, Complete Correspondence",
+      "Complete Correspondence, Coalesced, Absent Category, New Category, Split",
+      "Absent Category, Split, Coalesced, New Category, Complete Correspondence"
+    ],
+    "correct": 1,
+    "feedback": "Correct! The hierarchy is: (1) Split, (2) New Category, (3) Absent Category, (4) Coalesced Forms, (5) Complete Correspondence—reflecting increasing ease of learning."
+  },
+  {
+    "question": "Which step is part of the traditional Contrastive Analysis methodology?",
+    "options": [
+      "Collecting learner error data before making comparisons.",
+      "Using different grammatical models for L1 and L2 to highlight contrasts.",
+      "Developing teaching materials based on predicted difficulties after identifying L1-L2 differences.",
+      "Avoiding any comparison to prevent negative transfer."
+    ],
+    "correct": 2,
+    "feedback": "Correct! One of the five traditional CA steps is to develop teaching materials based on predicted difficulties after systematically identifying similarities and differences using the same descriptive model for both languages."
+  },
+  {
+    "question": "How does enhanced Contrastive Analysis improve upon the traditional approach?",
+    "options": [
+      "By eliminating all reference to the learner’s L1.",
+      "By relying solely on theoretical comparison without data.",
+      "By testing CA predictions against actual learner performance data.",
+      "By assuming all errors are due to motivation deficits."
+    ],
+    "correct": 2,
+    "feedback": "Correct! The enhanced CA approach builds hypotheses from L1-L2 comparison but then validates them empirically using real learner data—making it more scientific and less speculative."
+  },
+  {
+    "question": "Contrastive Analysis is rooted in which psychological theory of learning?",
+    "options": [
+      "Constructivism",
+      "Cognitivism",
+      "Behaviorism",
+      "Humanism"
+    ],
+    "correct": 2,
+    "feedback": "Correct! CA assumes language learning is habit formation—where L1 habits either help (positive transfer) or hinder (negative transfer) new L2 habits—aligning with Skinner’s behaviorist theory dominant in the 1950s–60s."
+  },
+  {
+    "question": "Which of the following best describes 'Coalesced Forms' in Stockwell’s hierarchy?",
+    "options": [
+      "L1 has one form; L2 has multiple contrasting forms.",
+      "L1 has multiple forms; L2 uses a single form for all.",
+      "Both languages use identical forms for the same function.",
+      "A grammatical category exists only in the L2."
+    ],
+    "correct": 1,
+    "feedback": "Correct! 'Coalesced Forms' occur when L1 distinguishes multiple categories (e.g., formal/informal address), but L2 uses one form for all contexts—making it moderately difficult but less so than a 'Split.'"
+  },
+  {
+    "question": "What is a key limitation of using CA to explain all L2 errors?",
+    "options": [
+      "It overemphasizes the role of motivation.",
+      "It cannot account for errors caused by L2 internal processes like overgeneralization.",
+      "It assumes all learners have the same L1.",
+      "It ignores pronunciation completely."
+    ],
+    "correct": 1,
+    "feedback": "Correct! CA fails to explain developmental errors such as 'goed' or 'comed,' which arise from learners overapplying L2 rules—not from L1 interference."
+  },
+  {
+    "question": "Which scholar is most associated with establishing Contrastive Analysis as a predictive tool in language teaching?",
+    "options": [
+      "Noam Chomsky",
+      "Stephen Krashen",
+      "Robert Lado",
+      "Dell Hymes"
+    ],
+    "correct": 2,
+    "feedback": "Correct! Robert Lado (1957) is credited with formalizing CA as a method to predict learning difficulties through systematic L1-L2 comparison in his book 'Linguistics Across Cultures.'"
+  },
+  {
+    "question": "In CA, what does an 'Absent Category' refer to?",
+    "options": [
+      "A structure present in L2 but not in L1.",
+      "A structure present in L1 but not in L2.",
+      "A structure that is identical in both languages.",
+      "A phonological feature ignored by both languages."
+    ],
+    "correct": 1,
+    "feedback": "Correct! An 'Absent Category' in Stockwell’s hierarchy means a feature exists in the learner’s L1 but not in the L2—ranking as the third most difficult type of contrast."
+  },
+  {
+    "question": "Which practical application of CA helps teachers design better lessons for Arabic-speaking students?",
+    "options": [
+      "Assuming all errors are random and unconnected to L1.",
+      "Avoiding any mention of Arabic in English class.",
+      "Anticipating common article omission errors and providing targeted practice.",
+      "Teaching only through translation without contrastive focus."
+    ],
+    "correct": 2,
+    "feedback": "Correct! Knowing that Arabic lacks English articles, teachers can proactively address this through contrastive explanation and structured practice—leveraging CA for error prevention."
+  },
+  {
+    "question": "What does 'Complete Correspondence' mean in CA?",
+    "options": [
+      "L1 and L2 are completely unrelated.",
+      "L1 and L2 share identical forms and functions for a given structure.",
+      "L1 has more complex rules than L2 in all areas.",
+      "Learners show no transfer in either direction."
+    ],
+    "correct": 1,
+    "feedback": "Correct! 'Complete Correspondence'—the easiest case in Stockwell’s hierarchy—occurs when L1 and L2 structures are functionally and formally identical, leading to positive transfer and minimal difficulty."
+  },
+  {
+    "question": "Which statement reflects a modern, balanced view of Contrastive Analysis?",
+    "options": [
+      "CA explains all L2 errors and should replace other SLA theories.",
+      "CA is completely obsolete and has no classroom value.",
+      "CA is limited but still useful as one tool among many, especially in error anticipation and materials design.",
+      "CA only applies to European languages."
+    ],
+    "correct": 2,
+    "feedback": "Correct! While CA is not sufficient alone, it remains a valuable heuristic—particularly in homogeneous classrooms—for anticipating L1-based difficulties and leveraging positive transfer."
+  },
+  {
+    "question": "Why is Contrastive Analysis considered 'predictive' in its traditional form?",
+    "options": [
+      "It predicts learners’ future career paths based on language ability.",
+      "It forecasts weather conditions affecting language labs.",
+      "It uses L1-L2 comparison to forecast where learners will struggle before teaching begins.",
+      "It predicts native-like fluency timelines for all students."
+    ],
+    "correct": 2,
+    "feedback": "Correct! Traditional CA is predictive because it assumes that by analyzing structural differences between L1 and L2, teachers can forecast learning difficulties before they occur in the classroom."
+  }
+]
 
-startBtn.onclick = () => {
-    selectedQuestions = shuffle([...questions]).slice(0,3);
-    currentQuestionIndex = 0;
-    userAnswers = [];
-    startBtn.style.display = "none";
-    resultContainer.style.display = "none";
-    quizContainer.style.display = "block";
-    showQuestion();
-};
 
-function showQuestion() {
-    nextBtn.style.display = "none";
-    const q = selectedQuestions[currentQuestionIndex];
-    questionNumber.textContent = `Question ${currentQuestionIndex + 1}/3`;
-    questionText.textContent = q.question;
 
-    optionsDiv.innerHTML = "";
-    let shuffledOptions = shuffle([...q.options]);
-    shuffledOptions.forEach(option => {
-        const label = document.createElement("label");
-        label.innerHTML = `<input type="radio" name="option" value="${option}"> ${option}`;
-        optionsDiv.appendChild(label);
-    });
 
-    document.querySelectorAll('#options label').forEach(label => {
-        label.onclick = () => {
-            document.querySelectorAll('#options label').forEach(l => l.classList.remove('selected'));
-            label.classList.add('selected');
-            const radio = label.querySelector('input');
-            radio.checked = true;
-            userAnswers[currentQuestionIndex] = radio.value;
-            nextBtn.style.display = "inline-block";
-        };
-    });
-}
 
-nextBtn.onclick = () => {
-    currentQuestionIndex++;
-    if(currentQuestionIndex < selectedQuestions.length) showQuestion();
-    else showResult();
-};
 
-function showResult() {
-    quizContainer.style.display = "none";
-    resultContainer.style.display = "block";
-    resultList.innerHTML = "";
 
-    let correctCount = 0;
-    selectedQuestions.forEach((q,index) => {
-        const li = document.createElement("li");
-        const userAns = userAnswers[index];
-        if(userAns===q.answer){
-            li.innerHTML = `${q.question} <br> Your answer: ${userAns} <span class="correct">Correct</span>`;
-            correctCount++;
-        } else {
-            li.innerHTML = `${q.question} <br> Your answer: ${userAns} <span class="wrong">Wrong (Correct: ${q.answer})</span>`;
+
+
+
+
+
+
+
+
+
+        const trueFalseQuestions = 
+        
+[
+  {
+    "question": "Contrastive Analysis assumes that the primary source of L2 errors is interference from the learner’s first language.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True! As Lee (1968) stated, CA’s core assumption is that L1 interference is the main cause of L2 errors—greater differences between languages lead to more difficulty."
+  },
+  {
+    "question": "Lado (1957) believed that comparing L1 and L2 could help predict which language structures would be easy or difficult for learners.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True! Lado argued that by comparing the learner’s native language and culture with the target language and culture, teachers could predict learning difficulties and ease."
+  },
+  {
+    "question": "Positive transfer occurs when differences between L1 and L2 cause learning difficulties.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False! Positive transfer happens when L1 and L2 are similar, which facilitates learning (e.g., both having a Simple Past tense). Differences cause negative transfer."
+  },
+  {
+    "question": "According to Stockwell et al. (1965), 'Split' is the least difficult type of linguistic contrast for learners.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False! 'Split'—where L1 has one form and L2 has two or more—is actually the MOST difficult type in Stockwell’s hierarchy of difficulty."
+  },
+  {
+    "question": "Contrastive Analysis declined in the 1970s because it successfully predicted all learner errors with perfect accuracy.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False! CA declined because it often overpredicted errors (forecasting problems that never occurred) and underpredicted others (like 'goed'), which stem from L2 internal overgeneralization, not L1 interference."
+  },
+  {
+    "question": "The error 'goed' by an English learner can be explained by Contrastive Analysis as L1 interference.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False! 'Goed' results from overgeneralizing the English past tense -ed rule—a developmental error internal to L2 acquisition. CA cannot explain it because it’s not caused by the learner’s L1."
+  },
+  {
+    "question": "Contrastive Analysis is still useful in homogeneous classrooms where all learners share the same native language.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True! In such settings (e.g., teaching English to Arabic speakers), CA helps teachers anticipate common L1-based errors like article omission and tailor instruction accordingly."
+  },
+  {
+    "question": "The traditional Contrastive Analysis approach requires collecting learner error data before making L1-L2 comparisons.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False! Traditional CA is predictive—it makes comparisons first and forecasts difficulties without requiring actual learner data. Enhanced CA adds empirical validation afterward."
+  },
+  {
+    "question": "Contrastive Analysis is rooted in behaviorist theories of learning.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True! CA assumes language learning is habit formation, where L1 habits either help (positive transfer) or hinder (negative transfer) new L2 habits—consistent with Skinner’s behaviorism."
+  },
+  {
+    "question": "In Stockwell’s hierarchy, 'Complete Correspondence' refers to when L1 and L2 structures are identical in form and function.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True! 'Complete Correspondence' is the easiest case—learners experience positive transfer with minimal difficulty because the structures match perfectly."
+  },
+  {
+    "question": "An 'Absent Category' in CA means a grammatical feature exists in the L2 but not in the L1.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False! An 'Absent Category' means the feature exists in the L1 but is missing in the L2. (A feature only in L2 is a 'New Category.')"
+  },
+  {
+    "question": "Robert Lado is the scholar most associated with developing Contrastive Analysis as a predictive tool in language teaching.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True! Lado’s 1957 book 'Linguistics Across Cultures' established CA as a method to anticipate learning difficulties through systematic L1-L2 comparison."
+  },
+  {
+    "question": "Enhanced Contrastive Analysis tests its predictions against actual learner performance data.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True! Unlike traditional CA, the enhanced approach builds hypotheses from comparison but validates them empirically—making it more scientific and reliable."
+  },
+  {
+    "question": "Saying 'He is teacher' instead of 'He is a teacher' by an Arabic speaker is an example of negative transfer.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True! Arabic lacks indefinite articles like 'a/an,' so omitting them in English reflects L1 interference—this is classic negative transfer explained by CA."
+  },
+  {
+    "question": "Contrastive Analysis can fully explain all types of second language errors, including those from overgeneralization.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False! CA only explains errors caused by L1 interference. It cannot account for developmental errors (e.g., 'comed') that arise from learners overapplying L2 rules."
+  },
+  {
+    "question": "The CA methodology requires using the same descriptive linguistic model for both L1 and L2.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True! One of the five traditional steps is to ensure theoretical compatibility by analyzing both languages using the same grammatical framework (e.g., phonology, syntax)."
+  },
+  {
+    "question": "In Stockwell’s hierarchy, 'Coalesced Forms' means L1 has multiple forms that are expressed by a single form in L2.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True! For example, if L1 distinguishes formal/informal 'you' but L2 uses only 'you,' this coalescence creates moderate difficulty—ranked fourth in the hierarchy."
+  },
+  {
+    "question": "Contrastive Analysis is only useful for teaching English to speakers of European languages.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False! CA is applicable to any L1-L2 pair. It’s especially valuable for Arabic-English contrasts (e.g., articles, verb tense) in contexts like Algeria."
+  },
+  {
+    "question": "Traditional Contrastive Analysis is considered a reactive approach that analyzes errors after they occur.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False! Traditional CA is predictive—it aims to forecast difficulties before teaching begins. Error analysis (a later approach) is reactive, examining errors after they appear."
+  },
+  {
+    "question": "Contrastive Analysis plays no role in modern language teaching materials or curriculum design.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False! CA still informs textbook design, teacher training, and syllabus planning—especially in contexts with shared L1 backgrounds—by helping anticipate and address likely interference errors."
+  }
+]
+
+
+
+        // ===== GAME STATE =====
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let gameMode = 'mcq';
+        let timer;
+        let timeLeft = 60;
+        let answered = false;
+        let selectedOption = null;
+        let currentQuestions = [];
+
+        // DOM elements
+        const questionText = document.getElementById('question-text');
+        const gameContent = document.getElementById('game-content');
+        const feedbackElement = document.getElementById('feedback');
+        const nextBtn = document.getElementById('next-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const scoreValue = document.getElementById('score-value');
+        const timeValue = document.getElementById('time-value');
+        const progressBar = document.getElementById('progress-bar');
+        const modeBtns = document.querySelectorAll('.mode-btn');
+        const mistakesSection = document.getElementById('mistakes-section');
+
+        // Shuffle array function (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
         }
-        resultList.appendChild(li);
-    });
 
-    scoreText.textContent = `You got ${correctCount}/3 correct!`;
-}
+        // Select random subset of questions
+        function getRandomQuestions(questions, count = null) {
+            const shuffled = shuffleArray(questions);
+            if (count && count < questions.length) {
+                return shuffled.slice(0, count);
+            }
+            return shuffled;
+        }
 
-restartBtn.onclick = () => {
-    startBtn.style.display = "inline-block";
-    resultContainer.style.display = "none";
-};
-</script>
+        // Get current question set (randomized)
+        function getCurrentQuestionSet() {
+            if (gameMode === 'mcq') return getRandomQuestions(mcqQuestions, 5);
+            if (gameMode === 'true-false') return getRandomQuestions(trueFalseQuestions, 5);
+            return [];
+        }
+
+        // Initialize game
+        function initGame() {
+            currentQuestionIndex = 0;
+            score = 0;
+            timeLeft = 60;
+            answered = false;
+            selectedOption = null;
+            
+            // Get randomized questions for this session
+            currentQuestions = getCurrentQuestionSet();
+            
+            scoreValue.textContent = score;
+            timeValue.textContent = timeLeft;
+            updateProgressBar();
+            showQuestion();
+            startTimer();
+            mistakesSection.classList.remove('show');
+            nextBtn.disabled = true;
+        }
+
+        // Start timer
+        function startTimer() {
+            clearInterval(timer);
+            timer = setInterval(() => {
+                timeLeft--;
+                timeValue.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    if (!answered) {
+                        handleTimeUp();
+                    }
+                }
+            }, 1000);
+        }
+
+        // Handle time up
+        function handleTimeUp() {
+            answered = true;
+            feedbackElement.innerHTML = `<i class="fas fa-hourglass-end" style="color: var(--warning);"></i> Time's up!`;
+            feedbackElement.className = "feedback show";
+            nextBtn.disabled = false;
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Show current question based on mode
+        function showQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length) {
+                endGame();
+                return;
+            }
+            
+            const q = currentQuestions[currentQuestionIndex];
+            questionText.textContent = q.question;
+            feedbackElement.className = 'feedback';
+            gameContent.innerHTML = '';
+            answered = false;
+            nextBtn.disabled = true;
+            
+            renderMCQ(q);
+        }
+
+        // Render MCQ/True-False
+        function renderMCQ(q) {
+            const optionsContainer = document.createElement('div');
+            optionsContainer.className = 'answer-options';
+            
+            // For MCQ, shuffle options but keep track of correct answer
+            let displayOptions = [...q.options];
+            let correctIndex = q.correct;
+            
+            if (gameMode === 'mcq') {
+                // Create a copy with indices
+                let indexedOptions = q.options.map((opt, i) => ({text: opt, originalIndex: i}));
+                // Shuffle
+                indexedOptions = shuffleArray(indexedOptions);
+                // Update display
+                displayOptions = indexedOptions.map(item => item.text);
+                correctIndex = indexedOptions.findIndex(item => item.originalIndex === q.correct);
+            }
+            
+            displayOptions.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.textContent = option;
+                optionEl.addEventListener('click', () => selectMCQOption(index, correctIndex, q));
+                optionsContainer.appendChild(optionEl);
+            });
+            
+            gameContent.appendChild(optionsContainer);
+        }
+
+        // Handle MCQ option selection
+        function selectMCQOption(selectedIndex, correctIndex, q) {
+            if (answered) return;
+            
+            answered = true;
+            clearInterval(timer);
+            
+            const options = gameContent.querySelectorAll('.option');
+            options.forEach((opt, i) => {
+                if (i === selectedIndex) {
+                    opt.classList.add(selectedIndex === correctIndex ? 'correct' : 'incorrect');
+                }
+                if (i === correctIndex) {
+                    opt.classList.add('correct');
+                }
+            });
+            
+            if (selectedIndex === correctIndex) {
+                score++;
+                scoreValue.textContent = score;
+                feedbackElement.innerHTML = `<i class="fas fa-check-circle" style="color: var(--success);"></i> ${q.feedback}`;
+            } else {
+                feedbackElement.innerHTML = `<i class="fas fa-times-circle" style="color: var(--accent);"></i> ${q.feedback}`;
+            }
+            
+            feedbackElement.className = 'feedback show';
+            nextBtn.disabled = false;
+            
+            if (currentQuestionIndex === 0) {
+                setTimeout(() => {
+                    mistakesSection.classList.add('show');
+                }, 1500);
+            }
+        }
+
+        // Move to next question or end game
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex < currentQuestions.length) {
+                timeLeft = 60;
+                timeValue.textContent = timeLeft;
+                showQuestion();
+                startTimer();
+            } else {
+                endGame();
+            }
+            
+            updateProgressBar();
+        }
+
+        // End game
+        function endGame() {
+            questionText.textContent = `Game Completed! Your final score is ${score}/${currentQuestions.length}`;
+            gameContent.innerHTML = '';
+            feedbackElement.innerHTML = `<i class="fas fa-trophy" style="color: var(--success);"></i> Great job! You completed ${currentQuestions.length} random questions. Review the revision checklist above.`;
+            feedbackElement.className = 'feedback show';
+            nextBtn.disabled = true;
+            clearInterval(timer);
+        }
+
+        // Event listeners
+        nextBtn.addEventListener('click', nextQuestion);
+        resetBtn.addEventListener('click', initGame);
+        
+        modeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                gameMode = btn.dataset.mode;
+                initGame();
+            });
+        });
+
+        // Initialize
+        window.addEventListener('load', initGame);
+    </script>
 </body>
 </html>
