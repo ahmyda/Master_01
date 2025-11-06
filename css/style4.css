@@ -503,6 +503,43 @@ h1 {
 
 /*
 |--------------------------------------------------------------------------
+| 7.5. UTILITY BUTTONS (BACK TO LESSON) ⬅️
+|--------------------------------------------------------------------------
+| Centered button style for utility links (e.g., inside the game-container).
+*/
+.back-to-lesson-btn {
+    /* Centering Block Element */
+    display: block; 
+    width: fit-content; /* Only takes up necessary width */
+    margin-left: auto;  
+    margin-right: auto; 
+    margin-top: 30px; 
+    margin-bottom: 30px;
+
+    /* Appearance (Matching Dark Theme Aesthetic) */
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
+    color: var(--dark); /* Dark text on bright button */
+    text-decoration: none; 
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    
+    /* Interaction */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    box-shadow: var(--shadow-md); 
+}
+
+.back-to-lesson-btn:hover {
+    background: linear-gradient(135deg, var(--primary-dark), #047857);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+    color: var(--light); /* Lighter text on hover for contrast */
+}
+
+/*
+|--------------------------------------------------------------------------
 | 8. FOOTER
 |--------------------------------------------------------------------------
 */
