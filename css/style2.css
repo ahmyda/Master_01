@@ -242,49 +242,60 @@ tr:hover {
 }
 
 .control-buttons {
+  /* No change: Good use of Flexbox for centering and spacing */
   display: flex;
   justify-content: center;
-  gap: 20px; /* slightly smaller gap */
-  margin: 30px 0; /* reduce top/bottom margin */
-  flex-wrap: wrap; /* allow wrapping on small screens */
+  gap: 15px; /* Slightly smaller gap for tighter grouping */
+  margin: 40px 0; /* Increased vertical margin for better isolation */
+  flex-wrap: wrap; 
 }
 
 .btn {
-  display: inline-block;
+  display: inline-flex; /* Use inline-flex for better vertical alignment of content */
+  align-items: center; /* Center text vertically */
   text-decoration: none;
   text-align: center;
-  padding: 10px 20px; /* smaller padding */
-  font-size: 16px;    /* smaller font */
-  font-weight: bold;
-  border-radius: 10px;
-  color: #fff;
+  min-width: 150px; /* Ensure a minimum width for consistency */
+  padding: 12px 24px; /* Slightly larger padding for a bigger hit area */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use a modern font stack */
+  font-size: 17px; 
+  font-weight: 600; /* Slightly heavier weight */
+  border-radius: 12px; /* Slightly larger border-radius for a softer look */
+  color: #ffffff; /* Pure white text for max contrast */
   cursor: pointer;
-  transition: all 0.3s ease;
+  border: none; /* Ensure no default border */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition curve */
 }
 
-/* Button colors */
+/* --- Button Colors (Slightly adjusted for vibrancy/contrast) --- */
+
 .back {
-  background-color: #f94144;
+  background-color: #e63946; /* Brighter red */
 }
 .forward {
-  background-color: #43aa8b;
+  background-color: #2a9d8f; /* Deeper teal/green */
 }
 .quiz {
-  background-color: #577590;
+  background-color: #457b9d; /* Slightly softer blue */
 }
 .pdf {
-  background-color: #03770d;
+  background-color: #0077b6; /* Richer blue for PDF (often associated with documents) */
 }
 
-
-/* Hover effects */
+/* --- Hover Effects (More dynamic) --- */
 .btn:hover {
-  opacity: 0.85;
-  transform: scale(1.05);
+  /* Lifted and brighter effect */
+  transform: translateY(-2px) scale(1.03); /* Lift up slightly and scale */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25); /* Larger, more pronounced shadow on hover */
+  filter: brightness(1.1); /* Slightly brighten the color */
 }
 
-
-
+.btn:active {
+  /* Pressing effect */
+  transform: translateY(1px);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
 
 /* ===== SECTIONS ===== */
 .section {
