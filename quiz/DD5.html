@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Didactics Revision Game</title>
+    <link rel="stylesheet" href="../css/style4.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h3>Didactics Revision Game</h3>
+        </header>
+         <a href="../module5/lesson-five.html" class="back-to-lesson-btn">Back to lesson</a>
+
+        
+        <div class="game-info">
+            <div><i class="fas fa-star"></i> Score: <span id="score-value">0</span></div>
+            <div><i class="fas fa-clock"></i> Time: <span id="time-value">60</span>s</div>
+        </div>
+        
+        <div class="game-container">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="mcq">Multiple Choice</button>
+                <button class="mode-btn" data-mode="true-false">True/False</button>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            
+            <div class="question-card">
+                <div class="question" id="question-text">Loading question...</div>
+                <div id="game-content">
+                    <!-- Dynamic content will go here -->
+                </div>
+                <div class="feedback" id="feedback"></div>
+            </div>
+            
+            <div class="controls">
+                <button class="btn next-btn" id="next-btn" disabled>Next Question</button>
+                <button class="btn reset-btn" id="reset-btn">Reset Game</button>
+            </div>
+            
+
+            
+
+        </div>
+        
+        <footer>
+            <p>didactics</p>
+        </footer>
+    </div>
+
+    <script>
+        // ===== QUESTION BANK =====
+        const mcqQuestions = 
+        [
+  {
+    "question": "What are the two main types of classroom discourse described by Kramsch (1998)?",
+    "options": [
+      "Formal and informal",
+      "Monologic and dialogic",
+      "Pedagogic and natural",
+      "Teacher-centered and student-centered"
+    ],
+    "correct": 2,
+    "feedback": "Kramsch (1998) frames classroom discourse along a continuum from pedagogic (structured, teacher-led, accuracy-focused) to natural (spontaneous, collaborative, fluency-oriented)."
+  },
+  {
+    "question": "According to Walsh (2011), what does Classroom Interactional Competence (CIC) refer to?",
+    "options": [
+      "A teacher’s ability to correct grammar errors instantly",
+      "The capacity to use classroom interaction as a tool for mediating and assisting learning",
+      "Students’ fluency in speaking without hesitation",
+      "The use of technology to manage classroom communication"
+    ],
+    "correct": 1,
+    "feedback": "Walsh (2011) defines CIC as 'the ability to use interaction as a tool for mediating and assisting learning,' encompassing questioning, turn-taking, feedback, and clarification strategies."
+  },
+  {
+    "question": "Which of the following best describes 'Learner Talk Time' (LTT)?",
+    "options": [
+      "Time when students are silent and listening to the teacher",
+      "The total minutes students spend chatting off-task",
+      "Opportunities for learners to use the target language meaningfully through interaction",
+      "Time allocated for reading textbooks independently"
+    ],
+    "correct": 2,
+    "feedback": "LTT refers to purposeful, communicative language use by learners—essential for developing fluency, negotiating meaning, and practicing the target language in context."
+  },
+  {
+    "question": "What is the primary purpose of a referential question in classroom discourse?",
+    "options": [
+      "To test students’ memory of vocabulary",
+      "To check grammatical accuracy during drills",
+      "To elicit information the teacher does not already know",
+      "To maintain strict classroom control"
+    ],
+    "correct": 2,
+    "feedback": "Referential questions (e.g., 'What was your favorite part of the story?') create genuine information gaps and promote authentic communication, unlike display questions where the answer is known."
+  },
+  {
+    "question": "In pedagogic discourse, who typically controls the topic and flow of conversation?",
+    "options": [
+      "The learners",
+      "The textbook",
+      "The teacher",
+      "Random chance"
+    ],
+    "correct": 2,
+    "feedback": "Pedagogic discourse is teacher-led, with clear role distinctions: the teacher initiates topics, asks known-answer questions, and evaluates responses (e.g., IRF pattern)."
+  },
+  {
+    "question": "Which interactional strategy involves adjusting speech to make it more understandable for learners?",
+    "options": [
+      "Code-switching",
+      "Speech modification",
+      "Silent period enforcement",
+      "L1 translation"
+    ],
+    "correct": 1,
+    "feedback": "Speech modification—such as slowing rate, simplifying syntax, or repeating key phrases—enhances comprehensibility without oversimplifying, supporting input processing (Ellis, 2008)."
+  },
+  {
+    "question": "What does the IRF pattern stand for in classroom discourse analysis?",
+    "options": [
+      "Instruction, Response, Feedback",
+      "Initiation, Reaction, Follow-up",
+      "Initiation, Response, Feedback",
+      "Interaction, Reflection, Formation"
+    ],
+    "correct": 2,
+    "feedback": "IRF (Initiation-Response-Feedback) is a common tripartite structure in pedagogic discourse, first described by Sinclair & Coulthard (1975), where the teacher initiates a question, a student responds, and the teacher gives evaluative feedback."
+  },
+  {
+    "question": "According to Swain’s Output Hypothesis, why is learner talk important?",
+    "options": [
+      "It helps learners memorize vocabulary faster",
+      "It allows learners to practice pronunciation in isolation",
+      "It pushes learners to process language syntactically and notice gaps in their knowledge",
+      "It reduces the teacher’s workload"
+    ],
+    "correct": 2,
+    "feedback": "Swain (1995) argues that producing language (output) forces learners beyond comprehension, helping them test hypotheses and refine their interlanguage through use."
+  },
+  {
+    "question": "Which of the following is a key feature of natural discourse in the classroom?",
+    "options": [
+      "Learners only answer closed questions",
+      "The teacher provides all the correct answers",
+      "Learners initiate topics and express genuine opinions",
+      "Grammar is corrected immediately after every error"
+    ],
+    "correct": 2,
+    "feedback": "In natural discourse, roles are fluid, topics emerge from learners, and communication focuses on meaning—mirroring real-world conversation (Kramsch, 1998)."
+  },
+  {
+    "question": "What is the main goal of effective teacher talk?",
+    "options": [
+      "To demonstrate linguistic proficiency",
+      "To fill silence and maintain authority",
+      "To scaffold learning and create space for meaningful learner interaction",
+      "To minimize student questions"
+    ],
+    "correct": 2,
+    "feedback": "Effective teacher talk is purposeful: it explains, models, organizes tasks, and—crucially—creates opportunities for learners to communicate (Walsh, 2011)."
+  },
+  {
+    "question": "Which type of question is this: 'What did you think about the main character’s decision?'",
+    "options": [
+      "Display question",
+      "Referential question",
+      "Closed question",
+      "Rhetorical question"
+    ],
+    "correct": 1,
+    "feedback": "This is a referential question because the teacher does not know the learner’s personal opinion and is seeking new information—promoting authentic expression."
+  },
+  {
+    "question": "Why is equitable turn-taking important in classroom discourse?",
+    "options": [
+      "It ensures only the best students participate",
+      "It reduces the need for group work",
+      "It gives all learners opportunities to practice and co-construct meaning",
+      "It speeds up lesson delivery"
+    ],
+    "correct": 2,
+    "feedback": "Fair turn distribution is part of CIC (Walsh, 2011). It prevents dominance by a few and ensures inclusive, participatory learning."
+  },
+  {
+    "question": "Which theorist emphasized that negotiation of meaning (e.g., clarification requests) supports L2 acquisition?",
+    "options": [
+      "Vygotsky",
+      "Krashen",
+      "Michael Long",
+      "Gardner"
+    ],
+    "correct": 2,
+    "feedback": "Long’s (1996) Interaction Hypothesis posits that negotiating meaning during conversation makes input more comprehensible and draws attention to linguistic form."
+  },
+  {
+    "question": "What is a key limitation of overusing the IRF pattern?",
+    "options": [
+      "It increases grammar accuracy too quickly",
+      "It encourages too much learner autonomy",
+      "It limits extended discourse and reinforces teacher-centered interaction",
+      "It reduces classroom noise levels"
+    ],
+    "correct": 2,
+    "feedback": "IRF tends to produce short, evaluative exchanges that stifle dialogue and learner agency, contrasting with open-ended, collaborative discourse."
+  },
+  {
+    "question": "Which of the following best illustrates a blend of pedagogic and natural discourse?",
+    "options": [
+      "The teacher lectures for 45 minutes without student input",
+      "Students take a silent grammar quiz",
+      "The teacher explains a grammar rule, then students role-play a real-life situation using it",
+      "Learners watch a video with no follow-up discussion"
+    ],
+    "correct": 2,
+    "feedback": "This sequence uses pedagogic discourse for instruction and natural discourse for meaningful application—aligning with Kramsch’s (1998) balanced approach."
+  },
+  {
+    "question": "What role does feedback play in developing interactional competence?",
+    "options": [
+      "It should only correct errors to ensure accuracy",
+      "It should always be delayed until the end of class",
+      "It can draw attention to form while maintaining communication flow (e.g., through recasts)",
+      "It is unnecessary in fluency-focused tasks"
+    ],
+    "correct": 2,
+    "feedback": "Effective feedback (e.g., recasts, elicitation) supports learning without disrupting communication—balancing fluency and accuracy (Lyster & Ranta, 1997; Walsh, 2011)."
+  },
+  {
+    "question": "Which term refers to learners’ ability to manage conversations through requests for clarification or repetition?",
+    "options": [
+      "Metacognitive strategies",
+      "Affective strategies",
+      "Social strategies",
+      "Interactional strategies"
+    ],
+    "correct": 3,
+    "feedback": "Interactional strategies—like saying 'Could you repeat that?'—help learners maintain communication and are part of developing CIC (Walsh, 2011)."
+  },
+  {
+    "question": "In a language classroom, why is LTT particularly important?",
+    "options": [
+      "It gives the teacher time to prepare the next activity",
+      "It ensures students stay quiet and focused",
+      "Because the target language is both the subject and medium of instruction",
+      "Because exams only test speaking skills"
+    ],
+    "correct": 2,
+    "feedback": "Since learners must *use* English to learn English, LTT provides essential practice for developing productive and interactional skills in authentic contexts."
+  },
+  {
+    "question": "Which strategy helps a teacher increase meaningful LTT during a discussion task?",
+    "options": [
+      "Answering all questions immediately",
+      "Providing a clear information gap and assigning roles (e.g., interviewer/interviewee)",
+      "Allowing only volunteers to speak",
+      "Correcting every grammatical error on the spot"
+    ],
+    "correct": 1,
+    "feedback": "Structured tasks with genuine purposes (e.g., information gaps) create conditions for extended, purposeful LTT—central to communicative language teaching."
+  },
+  {
+    "question": "According to Walsh (2011), how can teachers develop their own CIC?",
+    "options": [
+      "By memorizing grammar rules",
+      "By avoiding all student errors",
+      "Through reflective practice, such as analyzing recorded lessons for interactional patterns",
+      "By speaking less and assigning more worksheets"
+    ],
+    "correct": 2,
+    "feedback": "Walsh (2011) advocates reflective analysis of classroom discourse (e.g., TTT/LTT ratio, question types) as a key method for developing CIC and improving practice."
+  }
+]
+
+        const trueFalseQuestions = 
+
+        [
+  {
+    "question": "Teacher Talk Time (TTT) should always be minimized to increase student participation.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "The lecture emphasizes that TTT should be *strategic*, not simply reduced. High-quality TTT (e.g., modeling, scaffolding) supports learning, while the goal is to maximize *meaningful* Learner Talk Time (LTT), not eliminate TTT entirely."
+  },
+  {
+    "question": "According to Walsh (2011), effective teacher talk focuses more on quantity than on purpose and clarity.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "Walsh (2011) argues that the *quality, variety, and purpose* of teacher talk matter far more than how much the teacher speaks. Speaking to fill silence does not support learning."
+  },
+  {
+    "question": "Learner Talk Time (LTT) is essential in a language classroom because English serves as both the subject and the medium of instruction.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "This is true. Since the target language is used for both content and communication, LTT provides crucial opportunities for practice, fluency development, and meaningful use."
+  },
+  {
+    "question": "Classroom Interactional Competence (CIC) refers only to the teacher’s ability to manage discipline and maintain order.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "CIC, as defined by Walsh (2011), is 'the ability to use interaction as a tool for mediating and assisting learning.' It includes questioning, turn-taking, feedback, and clarification—not classroom management alone."
+  },
+  {
+    "question": "Referential questions are those where the teacher already knows the answer.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. Referential questions seek *new* information (e.g., 'What did you do last weekend?'). Display questions are those where the teacher knows the answer (e.g., 'What’s the past tense of go?')."
+  },
+  {
+    "question": "Display questions are more effective than referential questions for promoting authentic communication.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. Referential questions simulate real conversation by creating genuine information gaps, making them more effective for fluency and communicative competence. Display questions are useful for accuracy checks but less engaging."
+  },
+  {
+    "question": "Kramsch (1998) describes classroom discourse as existing on a continuum from pedagogic to natural discourse.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. Pedagogic discourse is teacher-led and accuracy-focused; natural discourse is collaborative and fluency-oriented. Effective teaching blends both."
+  },
+  {
+    "question": "In natural discourse, the teacher is always the sole authority and source of knowledge.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. In natural discourse, roles are flexible and knowledge is co-constructed by teachers and learners through collaboration and negotiation of meaning."
+  },
+  {
+    "question": "Pedagogic discourse typically involves learners initiating topics and expressing personal opinions freely.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. This describes *natural* discourse. Pedagogic discourse is structured, teacher-initiated, and often involves known-answer questions with limited learner autonomy."
+  },
+  {
+    "question": "The IRF (Initiation-Response-Feedback) pattern is a common feature of pedagogic classroom discourse.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. IRF, identified by Sinclair & Coulthard (1975), is a tripartite structure where the teacher initiates, a student responds, and the teacher evaluates—common in traditional, teacher-centered classrooms."
+  },
+  {
+    "question": "Speech modification by teachers (e.g., slowing speech, simplifying syntax) is always considered ‘foreigner talk’ and should be avoided.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. Purposeful speech modification (‘teacher talk’) enhances comprehensibility and supports input processing. It differs from ‘foreigner talk,’ which can be patronizing or inaccurate."
+  },
+  {
+    "question": "According to Swain’s Output Hypothesis, producing language helps learners notice gaps in their knowledge and develop accuracy.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. Swain (1995) argues that output pushes learners to move beyond comprehension to syntactic processing, aiding interlanguage development."
+  },
+  {
+    "question": "Long’s Interaction Hypothesis suggests that negotiation of meaning (e.g., clarification requests) facilitates second language acquisition.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. Long (1996) posits that interaction involving meaning negotiation makes input more comprehensible and draws attention to form, supporting acquisition."
+  },
+  {
+    "question": "Classroom discourse includes only verbal exchanges and excludes nonverbal communication.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. While often analyzed through spoken language, classroom discourse broadly encompasses verbal and nonverbal interaction, including gestures, eye contact, and proximity."
+  },
+  {
+    "question": "Effective teachers use only natural discourse to create a relaxed and student-centered environment.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. The ideal classroom *balances* both types: pedagogic discourse for structured input and natural discourse for authentic practice (Kramsch, 1998)."
+  },
+  {
+    "question": "Turn-taking in the classroom is automatic and does not require teacher facilitation.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. Teachers with high CIC actively manage turn-taking to ensure equitable participation, using strategies like wait time, pair work, or structured discussion protocols."
+  },
+  {
+    "question": "Clarification requests (e.g., 'What do you mean by...?') are interactional features that support meaning negotiation and learning.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. These are key components of learner interactional competence and help resolve misunderstandings during communication."
+  },
+  {
+    "question": "A teacher who asks, 'Is this sentence correct?' is using a referential question.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. This is a *display* question—the teacher likely knows the answer and is checking accuracy. A referential version would be, 'How would you say this more naturally?'"
+  },
+  {
+    "question": "Learner talk is only valuable when it is grammatically accurate.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. Fluency, risk-taking, and communicative success are often prioritized in meaningful LTT. Accuracy develops over time through interaction, feedback, and noticing."
+  },
+  {
+    "question": "Walsh (2011) argues that both teachers and learners can develop Classroom Interactional Competence (CIC) through awareness and practice.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. CIC is not just a teacher skill—it includes learners’ ability to participate effectively in classroom interaction (e.g., asking for help, managing turns)."
+  }
+]
+
+
+
+         // ===== GAME STATE =====
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let gameMode = 'mcq';
+        let timer;
+        let timeLeft = 60;
+        let answered = false;
+        let selectedOption = null;
+        let currentQuestions = [];
+
+        // DOM elements
+        const questionText = document.getElementById('question-text');
+        const gameContent = document.getElementById('game-content');
+        const feedbackElement = document.getElementById('feedback');
+        const nextBtn = document.getElementById('next-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const scoreValue = document.getElementById('score-value');
+        const timeValue = document.getElementById('time-value');
+        const progressBar = document.getElementById('progress-bar');
+        const modeBtns = document.querySelectorAll('.mode-btn');
+        const mistakesSection = document.getElementById('mistakes-section');
+
+        // Shuffle array function (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Select random subset of questions
+        function getRandomQuestions(questions, count = null) {
+            const shuffled = shuffleArray(questions);
+            if (count && count < questions.length) {
+                return shuffled.slice(0, count);
+            }
+            return shuffled;
+        }
+
+        // Get current question set (randomized)
+        function getCurrentQuestionSet() {
+            if (gameMode === 'mcq') return getRandomQuestions(mcqQuestions, 5);
+            if (gameMode === 'true-false') return getRandomQuestions(trueFalseQuestions, 5);
+            return [];
+        }
+
+        // Initialize game
+        function initGame() {
+            currentQuestionIndex = 0;
+            score = 0;
+            timeLeft = 60;
+            answered = false;
+            selectedOption = null;
+            
+            // Get randomized questions for this session
+            currentQuestions = getCurrentQuestionSet();
+            
+            scoreValue.textContent = score;
+            timeValue.textContent = timeLeft;
+            updateProgressBar();
+            showQuestion();
+            startTimer();
+            mistakesSection.classList.remove('show');
+            nextBtn.disabled = true;
+        }
+
+        // Start timer
+        function startTimer() {
+            clearInterval(timer);
+            timer = setInterval(() => {
+                timeLeft--;
+                timeValue.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    if (!answered) {
+                        handleTimeUp();
+                    }
+                }
+            }, 1000);
+        }
+
+        // Handle time up
+        function handleTimeUp() {
+            answered = true;
+            feedbackElement.innerHTML = `<i class="fas fa-hourglass-end" style="color: var(--warning);"></i> Time's up!`;
+            feedbackElement.className = "feedback show";
+            nextBtn.disabled = false;
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Show current question based on mode
+        function showQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length) {
+                endGame();
+                return;
+            }
+            
+            const q = currentQuestions[currentQuestionIndex];
+            questionText.textContent = q.question;
+            feedbackElement.className = 'feedback';
+            gameContent.innerHTML = '';
+            answered = false;
+            nextBtn.disabled = true;
+            
+            renderMCQ(q);
+        }
+
+        // Render MCQ/True-False
+        function renderMCQ(q) {
+            const optionsContainer = document.createElement('div');
+            optionsContainer.className = 'answer-options';
+            
+            // For MCQ, shuffle options but keep track of correct answer
+            let displayOptions = [...q.options];
+            let correctIndex = q.correct;
+            
+            if (gameMode === 'mcq') {
+                // Create a copy with indices
+                let indexedOptions = q.options.map((opt, i) => ({text: opt, originalIndex: i}));
+                // Shuffle
+                indexedOptions = shuffleArray(indexedOptions);
+                // Update display
+                displayOptions = indexedOptions.map(item => item.text);
+                correctIndex = indexedOptions.findIndex(item => item.originalIndex === q.correct);
+            }
+            
+            displayOptions.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.textContent = option;
+                optionEl.addEventListener('click', () => selectMCQOption(index, correctIndex, q));
+                optionsContainer.appendChild(optionEl);
+            });
+            
+            gameContent.appendChild(optionsContainer);
+        }
+
+        // Handle MCQ option selection
+        function selectMCQOption(selectedIndex, correctIndex, q) {
+            if (answered) return;
+            
+            answered = true;
+            clearInterval(timer);
+            
+            const options = gameContent.querySelectorAll('.option');
+            options.forEach((opt, i) => {
+                if (i === selectedIndex) {
+                    opt.classList.add(selectedIndex === correctIndex ? 'correct' : 'incorrect');
+                }
+                if (i === correctIndex) {
+                    opt.classList.add('correct');
+                }
+            });
+            
+            if (selectedIndex === correctIndex) {
+                    score++;
+                    scoreValue.textContent = score;
+                    feedbackElement.innerHTML = `<i class="fas fa-check-circle" style="color: var(--success);"></i> Correct! ${q.feedback}`;
+                } else {
+                    feedbackElement.innerHTML = `<i class="fas fa-times-circle" style="color: var(--accent);"></i> Incorrect. ${q.feedback}`;
+                }
+            feedbackElement.className = 'feedback show';
+            nextBtn.disabled = false;
+            
+            if (currentQuestionIndex === 0) {
+                setTimeout(() => {
+                    mistakesSection.classList.add('show');
+                }, 1500);
+            }
+        }
+
+        // Move to next question or end game
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex < currentQuestions.length) {
+                timeLeft = 60;
+                timeValue.textContent = timeLeft;
+                showQuestion();
+                startTimer();
+            } else {
+                endGame();
+            }
+            
+            updateProgressBar();
+        }
+
+        // End game
+        function endGame() {
+            questionText.textContent = `Game Completed! Your final score is ${score}/${currentQuestions.length}`;
+            gameContent.innerHTML = '';
+            feedbackElement.innerHTML = `<i class="fas fa-trophy" style="color: var(--success);"></i> Great job! You completed ${currentQuestions.length} random questions. Review the revision checklist above.`;
+            feedbackElement.className = 'feedback show';
+            nextBtn.disabled = true;
+            clearInterval(timer);
+        }
+
+        // Event listeners
+        nextBtn.addEventListener('click', nextQuestion);
+        resetBtn.addEventListener('click', initGame);
+        
+        modeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                gameMode = btn.dataset.mode;
+                initGame();
+            });
+        });
+
+        // Initialize
+        window.addEventListener('load', initGame);
+    </script>
+</body>
+</html>       
+
+        
