@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLA Revision Game</title>
+    <link rel="stylesheet" href="../css/style4.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h3>SLA</h3>
+        </header>
+         <a href="../module6/lesson-three.html" class="back-to-lesson-btn">Back to lesson</a>
+
+        
+        <div class="game-info">
+            <div><i class="fas fa-star"></i> Score: <span id="score-value">0</span></div>
+            <div><i class="fas fa-clock"></i> Time: <span id="time-value">60</span>s</div>
+        </div>
+        
+        <div class="game-container">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="mcq">Multiple Choice</button>
+                <button class="mode-btn" data-mode="true-false">True/False</button>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            
+            <div class="question-card">
+                <div class="question" id="question-text">Loading question...</div>
+                <div id="game-content">
+                    <!-- Dynamic content will go here -->
+                </div>
+                <div class="feedback" id="feedback"></div>
+            </div>
+            
+            <div class="controls">
+                <button class="btn next-btn" id="next-btn" disabled>Next Question</button>
+                <button class="btn reset-btn" id="reset-btn">Reset Game</button>
+            </div>
+            
+
+            
+
+        </div>
+        
+        <footer>
+            <p>Second language acquisition</p>
+        </footer>
+    </div>
+
+    <script>
+        // ===== QUESTION BANK =====
+        const mcqQuestions = 
+        [
+  {
+    "question": "What does 'morpho-syntactic development' refer to?",
+    "options": [
+      "Learning sound patterns",
+      "Acquiring word formation and sentence structure rules",
+      "Understanding context-dependent meaning",
+      "Developing listening skills"
+    ],
+    "correct": 1,
+    "feedback": "This component covers how children learn to build words (e.g., 'unhappy') and combine them into grammatical sentences (e.g., 'The cat is sleeping')."
+  },
+  {
+    "question": "According to rationalism, what is the primary source of knowledge?",
+    "options": [
+      "Sensory experience",
+      "Social interaction",
+      "Reason",
+      "Imitation and reinforcement"
+    ],
+    "correct": 2,
+    "feedback": "Rationalism holds that reason—not experience—is the foundation of certain knowledge, such as mathematical or logical truths."
+  },
+  {
+    "question": "Which philosopher is most associated with the statement 'cogito, ergo sum'?",
+    "options": [
+      "John Locke",
+      "B.F. Skinner",
+      "René Descartes",
+      "Lev Vygotsky"
+    ],
+    "correct": 2,
+    "feedback": "Descartes used this statement to demonstrate knowledge derived through reason alone, a cornerstone of rationalist philosophy."
+  },
+  {
+    "question": "In rationalist SLA theory, what role does linguistic input play?",
+    "options": [
+      "It explicitly teaches grammar rules",
+      "It provides negative evidence through correction",
+      "It triggers parameter setting in Universal Grammar",
+      "It builds vocabulary through repetition drills"
+    ],
+    "correct": 2,
+    "feedback": "Input acts as a trigger for innate linguistic parameters, not as instructional data to be learned inductively."
+  },
+  {
+    "question": "What is the 'initial state' in rationalist language acquisition?",
+    "options": [
+      "A blank slate ready to absorb language",
+      "A mind equipped with Universal Grammar and unset parameters",
+      "A stage where children produce holophrastic speech",
+      "The point when literacy begins to support grammar"
+    ],
+    "correct": 1,
+    "feedback": "The initial state is the biologically endowed language faculty before exposure to a specific language."
+  },
+  {
+    "question": "Which concept suggests the mind’s rational structure mirrors that of reality?",
+    "options": [
+      "Deductive reasoning",
+      "Innate ideas",
+      "Mind-world correspondence",
+      "Prior knowledge"
+    ],
+    "correct": 2,
+    "feedback": "Mind-world correspondence is a core rationalist concept explaining why reality is intelligible through reason."
+  },
+  {
+    "question": "What does the 'poverty of the stimulus' argument claim?",
+    "options": [
+      "Children receive too much grammatical input to process",
+      "Input is too rich for innate knowledge to be necessary",
+      "Input is too poor to explain rapid, uniform language acquisition",
+      "Adults lack sufficient input to reset L1 parameters"
+    ],
+    "correct": 2,
+    "feedback": "It argues that children acquire complex grammar despite limited, uncorrected input—implying innate linguistic knowledge."
+  },
+  {
+    "question": "Who challenged the poverty of the stimulus using corpus studies of child-directed speech?",
+    "options": [
+      "Noam Chomsky",
+      "Michael Tomasello",
+      "Geoffrey Pullum and Barbara Scholz",
+      "Susan Ervin-Tripp"
+    ],
+    "correct": 2,
+    "feedback": "Pullum & Scholz (2002) showed that input contains more systematic patterns than rationalists assumed."
+  },
+  {
+    "question": "According to Tomasello (2003), how do children acquire language?",
+    "options": [
+      "By resetting UG parameters through input",
+      "Through operant conditioning and reinforcement",
+      "From concrete phrases to abstract rules via usage",
+      "By deducing grammar from innate logical axioms"
+    ],
+    "correct": 2,
+    "feedback": "Tomasello’s usage-based theory proposes gradual generalization from item-based learning, not innate triggering."
+  },
+  {
+    "question": "What is a major criticism of Universal Grammar based on linguistic diversity?",
+    "options": [
+      "Languages are too similar to require UG",
+      "Children acquire language too slowly for UG to be useful",
+      "Cross-linguistic variation exceeds UG’s predicted constraints",
+      "UG cannot explain phonological development"
+    ],
+    "correct": 2,
+    "feedback": "Critics argue that the vast typological diversity of languages challenges UG’s claim of strict universal constraints."
+  },
+  {
+    "question": "What is 'deductive reasoning' in rationalism?",
+    "options": [
+      "Learning from examples and generalizing",
+      "Deriving truth from self-evident principles through logic",
+      "Acquiring knowledge through observation",
+      "Building language through social interaction"
+    ],
+    "correct": 2,
+    "feedback": "Deductive reasoning moves from axioms to specific conclusions—central to rationalist methodology."
+  },
+  {
+    "question": "Which term describes knowledge that exists prior to experience?",
+    "options": [
+      "A posteriori",
+      "Empirical",
+      "A priori",
+      "Behavioral"
+    ],
+    "correct": 2,
+    "feedback": "A priori knowledge—like mathematical truths—is known through reason alone, independent of sensory input."
+  },
+  {
+    "question": "What does the 'steady state' refer to in rationalist acquisition theory?",
+    "options": [
+      "The pre-linguistic babbling stage",
+      "The point when vocabulary stops growing",
+      "The mature internalized grammar of the target language",
+      "The stage where metalinguistic awareness begins"
+    ],
+    "correct": 2,
+    "feedback": "The steady state is the end point of acquisition: a fully developed, target-like internal grammar."
+  },
+  {
+    "question": "Why does individual variation in acquisition paths challenge rationalism?",
+    "options": [
+      "It proves all children learn at the same rate",
+      "It supports the blank slate model",
+      "It contradicts the prediction of uniform biological maturation",
+      "It confirms UG is inaccessible in L2"
+    ],
+    "correct": 2,
+    "feedback": "Rationalism predicts uniform development due to shared innate structures, but children vary significantly in pace and strategy."
+  },
+  {
+    "question": "Which SLA approach argues that L1 parameter settings may block L2 resetting?",
+    "options": [
+      "Behaviorist",
+      "Social-interactionist",
+      "Rationalist",
+      "Empiricist"
+    ],
+    "correct": 2,
+    "feedback": "Rationalist SLA explores whether L1 grammar constrains access to UG in second language learning."
+  },
+  {
+    "question": "What is the role of Universal Grammar (UG) in first language acquisition?",
+    "options": [
+      "It provides explicit grammar rules taught by caregivers",
+      "It supplies general cognitive strategies for problem-solving",
+      "It offers innate principles and parameters that guide acquisition",
+      "It emerges only after sufficient input is received"
+    ],
+    "correct": 2,
+    "feedback": "UG is the biologically endowed language faculty that enables rapid and uniform L1 development despite limited input."
+  },
+  {
+    "question": "Which claim aligns with rationalist views of the mind?",
+    "options": [
+      "The mind is a tabula rasa at birth",
+      "Knowledge is built solely through social interaction",
+      "The mind actively structures experience using innate frameworks",
+      "Language is learned like any other habit"
+    ],
+    "correct": 2,
+    "feedback": "Rationalists reject the blank slate; they see the mind as actively organizing experience via innate structures."
+  },
+  {
+    "question": "How does rationalism view second language acquisition in adults?",
+    "options": [
+      "As identical to first language acquisition",
+      "As impossible after age 12",
+      "As potentially involving partial or no access to UG",
+      "As requiring only more input than children"
+    ],
+    "correct": 2,
+    "feedback": "Rationalists debate whether adults retain UG access—some argue for partial or no access due to maturational constraints."
+  },
+  {
+    "question": "Which concept explains why children produce novel sentences like 'I goed to park'?",
+    "options": [
+      "Imitation of adult speech",
+      "Operant conditioning",
+      "Overgeneralization of internalized rules",
+      "Phonological development"
+    ],
+    "correct": 2,
+    "feedback": "Such errors show rule-governed learning, not imitation—supporting nativist (rationalist) views of internal grammar."
+  },
+  {
+    "question": "What implication does the Critical Period Hypothesis have for rationalist SLA?",
+    "options": [
+      "It proves UG is irrelevant to language",
+      "It supports the idea that UG access declines with age",
+      "It shows adults learn faster than children",
+      "It validates behaviorist reinforcement models"
+    ],
+    "correct": 1,
+    "feedback": "Age-related decline in L2 proficiency aligns with rationalist claims that biological access to UG is time-limited."
+  }
+]
+
+
+
+        const trueFalseQuestions =
+        [
+  {
+    "question": "Rationalism holds that reason—not sensory experience—is the primary source of knowledge.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "Rationalism, associated with Descartes and others, asserts that certain knowledge (a priori) is derived through reason alone, independent of empirical input."
+  },
+  {
+    "question": "Descartes’ statement 'cogito, ergo sum' exemplifies empiricist thinking.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "It exemplifies rationalism: the truth 'I exist' is deduced through logic, not observed through the senses."
+  },
+  {
+    "question": "In rationalist theory, language acquisition is viewed as a form of biological maturation rather than learning.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "Rationalism sees acquisition as the unfolding of innate linguistic knowledge (UG), triggered by input—not learned from scratch."
+  },
+  {
+    "question": "According to rationalism, the mind is a tabula rasa (blank slate) at birth.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "Rationalists explicitly reject the blank slate idea; they argue the mind has innate structures, including for language."
+  },
+  {
+    "question": "Universal Grammar (UG) is a central concept in rationalist approaches to SLA.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "UG—Chomsky’s theory of innate linguistic principles—is foundational to the rationalist view of language acquisition."
+  },
+  {
+    "question": "In the rationalist model, linguistic input teaches grammar rules explicitly.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "Input acts as a trigger for parameter setting, not as instructional data; grammar is not 'learned' from input."
+  },
+  {
+    "question": "The 'initial state' in rationalist SLA refers to a learner’s mind equipped with Universal Grammar and unset parameters.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "Yes—the initial state is the biologically endowed language faculty before exposure to a specific language."
+  },
+  {
+    "question": "All rationalist SLA researchers agree that adult L2 learners have full access to Universal Grammar.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "There is debate: some (e.g., Flynn & Martohardjono, 1994) argue for access, others suggest UG is unavailable or limited in L2."
+  },
+  {
+    "question": "The 'poverty of the stimulus' argument claims that linguistic input is too rich for children to learn grammar without innate guidance.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "It claims the opposite: input is too *poor* (fragmented, uncorrected) to explain rapid, uniform acquisition—hence the need for UG."
+  },
+  {
+    "question": "Pullum and Scholz (2002) support the poverty of the stimulus argument with corpus evidence.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "They *challenge* it, showing child-directed speech contains more systematic patterns than rationalists assume."
+  },
+  {
+    "question": "Tomasello (2003) argues that language acquisition proceeds from concrete phrases to abstract rules without innate grammar.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "Yes—his usage-based theory proposes gradual generalization from item-based learning, opposing UG."
+  },
+  {
+    "question": "Cross-linguistic variation supports the strong constraints predicted by Universal Grammar.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "Critics argue that the vast typological diversity of languages *challenges* UG’s claim of strict universal constraints."
+  },
+  {
+    "question": "Rationalism includes 'deductive reasoning' as one of its core concepts.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "Yes—truth is derived logically from self-evident axioms, a hallmark of rationalist methodology."
+  },
+  {
+    "question": "The 'steady state' in acquisition refers to the stage where no further language development occurs.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "It refers to the mature, target-like internal grammar—not an end to all development, but the end of parameter setting."
+  },
+  {
+    "question": "Mind-world correspondence is the idea that the rational structure of the mind reflects that of reality.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "Yes—this is a key rationalist concept suggesting reality is intelligible through reason because mind and world share rational structure."
+  },
+  {
+    "question": "Individual differences in acquisition paths support the rationalist view of uniform biological maturation.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "Significant individual variation *challenges* rationalism, which predicts uniformity due to shared innate structures."
+  },
+  {
+    "question": "Rationalist SLA theory suggests that L1 parameter settings may block L2 parameter resetting.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "Yes—this is a key question in rationalist SLA: whether L1 grammar constrains access to UG in L2 learning."
+  },
+  {
+    "question": "Empiricist approaches are the main challengers to rationalist theories in SLA.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "Yes—empiricists and usage-based theorists argue language is learned from input, not triggered from innate knowledge."
+  },
+  {
+    "question": "According to rationalism, mathematical truths can be known through sensory experience alone.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "Rationalists claim mathematical truths are known a priori—through reason, not experience."
+  },
+  {
+    "question": "The Critical Period Hypothesis, if valid, would support rationalist claims about biological constraints on UG access.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "Yes—age-related decline in L2 proficiency aligns with the idea that UG access diminishes after a maturational window."
+  }
+]
+        
+        
+
+
+         // ===== GAME STATE =====
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let gameMode = 'mcq';
+        let timer;
+        let timeLeft = 60;
+        let answered = false;
+        let selectedOption = null;
+        let currentQuestions = [];
+
+        // DOM elements
+        const questionText = document.getElementById('question-text');
+        const gameContent = document.getElementById('game-content');
+        const feedbackElement = document.getElementById('feedback');
+        const nextBtn = document.getElementById('next-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const scoreValue = document.getElementById('score-value');
+        const timeValue = document.getElementById('time-value');
+        const progressBar = document.getElementById('progress-bar');
+        const modeBtns = document.querySelectorAll('.mode-btn');
+        const mistakesSection = document.getElementById('mistakes-section');
+
+        // Shuffle array function (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Select random subset of questions
+        function getRandomQuestions(questions, count = null) {
+            const shuffled = shuffleArray(questions);
+            if (count && count < questions.length) {
+                return shuffled.slice(0, count);
+            }
+            return shuffled;
+        }
+
+        // Get current question set (randomized)
+        function getCurrentQuestionSet() {
+            if (gameMode === 'mcq') return getRandomQuestions(mcqQuestions, 5);
+            if (gameMode === 'true-false') return getRandomQuestions(trueFalseQuestions, 5);
+            return [];
+        }
+
+        // Initialize game
+        function initGame() {
+            currentQuestionIndex = 0;
+            score = 0;
+            timeLeft = 60;
+            answered = false;
+            selectedOption = null;
+            
+            // Get randomized questions for this session
+            currentQuestions = getCurrentQuestionSet();
+            
+            scoreValue.textContent = score;
+            timeValue.textContent = timeLeft;
+            updateProgressBar();
+            showQuestion();
+            startTimer();
+            mistakesSection.classList.remove('show');
+            nextBtn.disabled = true;
+        }
+
+        // Start timer
+        function startTimer() {
+            clearInterval(timer);
+            timer = setInterval(() => {
+                timeLeft--;
+                timeValue.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    if (!answered) {
+                        handleTimeUp();
+                    }
+                }
+            }, 1000);
+        }
+
+        // Handle time up
+        function handleTimeUp() {
+            answered = true;
+            feedbackElement.innerHTML = `<i class="fas fa-hourglass-end" style="color: var(--warning);"></i> Time's up!`;
+            feedbackElement.className = "feedback show";
+            nextBtn.disabled = false;
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Show current question based on mode
+        function showQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length) {
+                endGame();
+                return;
+            }
+            
+            const q = currentQuestions[currentQuestionIndex];
+            questionText.textContent = q.question;
+            feedbackElement.className = 'feedback';
+            gameContent.innerHTML = '';
+            answered = false;
+            nextBtn.disabled = true;
+            
+            renderMCQ(q);
+        }
+
+        // Render MCQ/True-False
+        function renderMCQ(q) {
+            const optionsContainer = document.createElement('div');
+            optionsContainer.className = 'answer-options';
+            
+            // For MCQ, shuffle options but keep track of correct answer
+            let displayOptions = [...q.options];
+            let correctIndex = q.correct;
+            
+            if (gameMode === 'mcq') {
+                // Create a copy with indices
+                let indexedOptions = q.options.map((opt, i) => ({text: opt, originalIndex: i}));
+                // Shuffle
+                indexedOptions = shuffleArray(indexedOptions);
+                // Update display
+                displayOptions = indexedOptions.map(item => item.text);
+                correctIndex = indexedOptions.findIndex(item => item.originalIndex === q.correct);
+            }
+            
+            displayOptions.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.textContent = option;
+                optionEl.addEventListener('click', () => selectMCQOption(index, correctIndex, q));
+                optionsContainer.appendChild(optionEl);
+            });
+            
+            gameContent.appendChild(optionsContainer);
+        }
+
+        // Handle MCQ option selection
+        function selectMCQOption(selectedIndex, correctIndex, q) {
+            if (answered) return;
+            
+            answered = true;
+            clearInterval(timer);
+            
+            const options = gameContent.querySelectorAll('.option');
+            options.forEach((opt, i) => {
+                if (i === selectedIndex) {
+                    opt.classList.add(selectedIndex === correctIndex ? 'correct' : 'incorrect');
+                }
+                if (i === correctIndex) {
+                    opt.classList.add('correct');
+                }
+            });
+            
+            if (selectedIndex === correctIndex) {
+                    score++;
+                    scoreValue.textContent = score;
+                    feedbackElement.innerHTML = `<i class="fas fa-check-circle" style="color: var(--success);"></i> Correct! ${q.feedback}`;
+                } else {
+                    feedbackElement.innerHTML = `<i class="fas fa-times-circle" style="color: var(--accent);"></i> Incorrect. ${q.feedback}`;
+                }
+            feedbackElement.className = 'feedback show';
+            nextBtn.disabled = false;
+            
+            if (currentQuestionIndex === 0) {
+                setTimeout(() => {
+                    mistakesSection.classList.add('show');
+                }, 1500);
+            }
+        }
+
+        // Move to next question or end game
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex < currentQuestions.length) {
+                timeLeft = 60;
+                timeValue.textContent = timeLeft;
+                showQuestion();
+                startTimer();
+            } else {
+                endGame();
+            }
+            
+            updateProgressBar();
+        }
+
+        // End game
+        function endGame() {
+            questionText.textContent = `Game Completed! Your final score is ${score}/${currentQuestions.length}`;
+            gameContent.innerHTML = '';
+            feedbackElement.innerHTML = `<i class="fas fa-trophy" style="color: var(--success);"></i> Great job! You completed ${currentQuestions.length} random questions. Review the revision checklist above.`;
+            feedbackElement.className = 'feedback show';
+            nextBtn.disabled = true;
+            clearInterval(timer);
+        }
+
+        // Event listeners
+        nextBtn.addEventListener('click', nextQuestion);
+        resetBtn.addEventListener('click', initGame);
+        
+        modeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                gameMode = btn.dataset.mode;
+                initGame();
+            });
+        });
+
+        // Initialize
+        window.addEventListener('load', initGame);
+    </script>
+</body>
+</html>       
+
+        
