@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interculturality - Introduction</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style2.css">
+</head>
+<body>
+  <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+  <div id="sidebar-container"></div>
+
+  <div class="container">
+    <header>
+      <h1>Interculturality - Introduction</h1>
+    </header>
+
+
+
+    <div class="section">
+      <h2><i class="fas fa-globe"></i>1. Introduction to Interculturality</h2>
+      <p>Interculturality is the ability to understand, respect, and interact effectively with people from different cultural backgrounds. In a globalized world, it helps promote peaceful coexistence, tolerance, and collaboration.</p>
+
+      <div class="quote">
+        "Interculturality is not only about knowing other cultures, but also learning to live and work together with them." — UNESCO (2013)
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-users"></i>2. What is Culture?</h2>
+      <p>Culture refers to the shared beliefs, traditions, and practices that shape the behavior and identity of a community. It influences how people think, feel, and act in their daily lives.</p>
+
+      <ul>
+        <li><strong>Beliefs:</strong> Ideas that people accept as true (e.g., religion, family values).</li>
+        <li><strong>Traditions:</strong> Customs passed through generations (e.g., holidays, clothing, food).</li>
+        <li><strong>Values:</strong> Standards of what is considered right or wrong in a society.</li>
+      </ul>
+
+      <div class="example-box">
+        <div class="example-title"><i class="fas fa-lightbulb"></i>Examples:</div>
+        <ul>
+          <li>In Japan, bowing is a sign of respect, while in Western countries, a handshake is more common.</li>
+          <li>In some Arab cultures, hospitality is highly valued, and guests are treated with great honor.</li>
+        </ul>
+      </div>
+
+      <p><em>According to Edward T. Hall (1976), culture is “the silent language” that shapes how people interpret the world.</em></p>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-comments"></i>3. What is Communication?</h2>
+      <p>Communication is the exchange of information, ideas, and feelings between individuals or groups. It is both verbal and non-verbal, and it always reflects the culture of the speakers.</p>
+
+      <ul>
+        <li>Language choice, tone, and politeness vary across cultures.</li>
+        <li>Gestures, eye contact, and silence carry different meanings depending on the context.</li>
+      </ul>
+
+      <div class="example-box">
+        <div class="example-title"><i class="fas fa-lightbulb"></i>Examples:</div>
+        <ul>
+          <li>In the U.S., direct communication is appreciated, while in many Asian cultures, indirect communication is preferred to avoid conflict.</li>
+          <li>Maintaining eye contact is seen as confidence in some countries, but as disrespect in others.</li>
+        </ul>
+      </div>
+
+      <p><em>As Hall (1959) stated, “communication is culture and culture is communication.”</em></p>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-handshake"></i>4. What is Interculturality?</h2>
+      <p>Interculturality goes beyond simply comparing cultures — it emphasizes interaction, mutual learning, and respect among people from different backgrounds. It is an ongoing process of understanding and adaptation.</p>
+
+      <ul>
+        <li>Encourages dialogue and empathy between individuals and groups.</li>
+        <li>Promotes equality and appreciation of cultural diversity.</li>
+        <li>Helps overcome prejudice, stereotypes, and discrimination.</li>
+      </ul>
+
+      <div class="example-box">
+        <div class="example-title"><i class="fas fa-lightbulb"></i>Examples:</div>
+        <ul>
+          <li>Students from different countries studying together learn new ways of thinking and behaving.</li>
+          <li>In multinational companies, intercultural training improves teamwork and communication.</li>
+        </ul>
+      </div>
+
+      <p><em>Bennett (1998) describes intercultural competence as the ability to shift perspective and adapt behavior in culturally appropriate ways.</em></p>
+    </div>
+
+    <section class="section">
+      <h2><i class="fas fa-file-alt"></i>Quick Summary</h2>
+      <p>
+        Interculturality connects culture and communication. Understanding cultural differences allows people to communicate effectively, reduce misunderstandings, and build respectful relationships.
+      </p>
+      <ul>
+        <li><strong>Culture:</strong> Shared beliefs and traditions shaping identity.</li>
+        <li><strong>Communication:</strong> Reflects and expresses cultural values.</li>
+        <li><strong>Interculturality:</strong> Learning, adapting, and collaborating across cultures.</li>
+      </ul>
+      <p><em>Example:</em> A teacher who understands students’ cultural backgrounds can make lessons more inclusive and effective.</p>
+    </section>
+
+    <footer>
+      <p>Lecture Notes | Intercultural Communication | Master 1 Applied Linguistics</p>
+      <p>References: Hall, E.T. (1959, 1976); Bennett, M. (1998); UNESCO (2013).</p>
+    </footer>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const sidebarContainer = document.getElementById("sidebar-container");
+
+    fetch("../sidebar.html")
+      .then(res => res.text())
+      .then(html => {
+        sidebarContainer.innerHTML = html;
+        const sidebar = document.getElementById("sidebar");
+        const closeBtn = document.getElementById("closeSidebar");
+
+        menuBtn.addEventListener("click", () => sidebar.classList.toggle("active"));
+        closeBtn.addEventListener("click", () => sidebar.classList.remove("active"));
+      })
+      .catch(err => console.error("Failed to load sidebar:", err));
+  </script>
+</body>
+</html>
