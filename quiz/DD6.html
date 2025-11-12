@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLA Revision Game</title>
+    <link rel="stylesheet" href="../css/style4.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h3>Didactics</h3>
+        </header>
+         <a href="../module5/lesson-six.html" class="back-to-lesson-btn">Back to lesson</a>
+
+        
+        <div class="game-info">
+            <div><i class="fas fa-star"></i> Score: <span id="score-value">0</span></div>
+            <div><i class="fas fa-clock"></i> Time: <span id="time-value">60</span>s</div>
+        </div>
+        
+        <div class="game-container">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="mcq">Multiple Choice</button>
+                <button class="mode-btn" data-mode="true-false">True/False</button>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            
+            <div class="question-card">
+                <div class="question" id="question-text">Loading question...</div>
+                <div id="game-content">
+                    <!-- Dynamic content will go here -->
+                </div>
+                <div class="feedback" id="feedback"></div>
+            </div>
+            
+            <div class="controls">
+                <button class="btn next-btn" id="next-btn" disabled>Next Question</button>
+                <button class="btn reset-btn" id="reset-btn">Reset Game</button>
+            </div>
+            
+
+            
+
+        </div>
+        
+        <footer>
+            <p>Didactics</p>
+        </footer>
+    </div>
+
+    <script>
+        // ===== QUESTION BANK =====
+        const mcqQuestions = 
+        [
+  {
+    "question": "According to Doyle (1985), what is the primary purpose of classroom management?",
+    "options": [
+      "To enforce strict discipline and obedience",
+      "To minimize student talk and maximize teacher instruction",
+      "To create structures and processes that make teaching and learning possible",
+      "To prepare students for standardized testing"
+    ],
+    "correct": 2,
+    "feedback": "Doyle (1985) defines classroom management as involving 'the structures and processes that make both teaching and learning possible.'"
+  },
+  {
+    "question": "Which of the following is NOT one of the four key components of classroom management?",
+    "options": [
+      "Management of the physical environment",
+      "Management of learning",
+      "Classroom procedures and rules",
+      "Standardized curriculum delivery"
+    ],
+    "correct": 3,
+    "feedback": "The four components are: physical environment, learning, procedures/rules, and discipline—not rigid curriculum delivery."
+  },
+  {
+    "question": "What does effective 'management of learning' primarily involve?",
+    "options": [
+      "Assigning more homework to keep students busy",
+      "Using only textbook-based activities",
+      "Designing lessons that match diverse learning styles and reduce boredom",
+      "Ensuring all students work silently and independently"
+    ],
+    "correct": 2,
+    "feedback": "Effective management of learning includes differentiating instruction (e.g., using VARK preferences) to maintain engagement and reduce off-task behavior."
+  },
+  {
+    "question": "According to Brophy (1986), what is the goal of classroom management?",
+    "options": [
+      "To eliminate all student misbehavior",
+      "To maintain conditions that maximize student learning and engagement",
+      "To ensure the teacher always has control of the conversation",
+      "To prepare students for military-style discipline"
+    ],
+    "correct": 1,
+    "feedback": "Brophy (1986) emphasized that CM should create conditions that maximize learning and engagement—not just enforce order."
+  },
+  {
+    "question": "Which approach to discipline focuses on reflection, accountability, and repairing harm?",
+    "options": [
+      "Punitive discipline",
+      "Authoritarian control",
+      "Restorative practices",
+      "Behavioral conditioning"
+    ],
+    "correct": 2,
+    "feedback": "Restorative practices encourage students to reflect on their actions, understand impact, and make amends—building empathy and responsibility."
+  },
+  {
+    "question": "Why are classroom routines important in effective management?",
+    "options": [
+      "They allow the teacher to take frequent breaks",
+      "They reduce student autonomy and increase teacher control",
+      "They create predictability, reduce anxiety, and free cognitive resources for learning",
+      "They ensure all students follow the same learning pace"
+    ],
+    "correct": 2,
+    "feedback": "Clear routines (e.g., entry procedures, transitions) create a secure, predictable environment that supports focus and learning."
+  },
+  {
+    "question": "What is a common misconception about classroom management?",
+    "options": [
+      "It requires planning and reflection",
+      "It includes managing both behavior and learning",
+      "It is only necessary in elementary schools",
+      "It is the same as good teaching"
+    ],
+    "correct": 3,
+    "feedback": "While good teaching supports CM, effective management also requires explicit routines, relationship-building, and behavioral strategies beyond instruction alone."
+  },
+  {
+    "question": "How does the physical classroom environment affect learning?",
+    "options": [
+      "It has no real impact on student behavior",
+      "Only lighting matters; furniture layout is irrelevant",
+      "A well-organized, student-centered space can reduce distractions and support engagement",
+      "Students perform better in crowded, noisy rooms"
+    ],
+    "correct": 2,
+    "feedback": "The physical setup—such as desk arrangement, lighting, and organization—signals respect and directly influences focus and behavior."
+  },
+  {
+    "question": "According to Evertson and Weinstein (2006), what are the two types of learning fostered through classroom management?",
+    "options": [
+      "Cognitive and affective",
+      "Academic and social",
+      "Formal and informal",
+      "Individual and competitive"
+    ],
+    "correct": 1,
+    "feedback": "Evertson & Weinstein (2006) identify academic learning (study skills, thinking) and social learning (cooperation, communication) as dual goals of CM."
+  },
+  {
+    "question": "Which strategy is most effective for preventing misbehavior?",
+    "options": [
+      "Assigning detention immediately",
+      "Using public shaming to discourage others",
+      "Designing engaging, well-paced lessons with clear expectations",
+      "Ignoring all minor disruptions"
+    ],
+    "correct": 2,
+    "feedback": "Proactive CM focuses on prevention through engagement, clarity, and positive relationships—not just reacting to problems."
+  },
+  {
+    "question": "What role does teacher-student relationship play in classroom management?",
+    "options": [
+      "It is irrelevant as long as rules are strict",
+      "It only matters in primary education",
+      "Strong relationships increase student cooperation and motivation",
+      "It weakens teacher authority"
+    ],
+    "correct": 2,
+    "feedback": "Research (e.g., Marzano, 2003) shows students are more likely to follow norms when they feel respected and valued by their teacher."
+  },
+  {
+    "question": "What does 'management of discipline' ideally aim to do?",
+    "options": [
+      "Punish students to deter future misbehavior",
+      "Teach students self-regulation and responsible decision-making",
+      "Ensure perfect silence at all times",
+      "Transfer all behavioral responsibility to parents"
+    ],
+    "correct": 1,
+    "feedback": "Modern discipline is educative—it helps students reflect, learn from mistakes, and develop internal control."
+  },
+  {
+    "question": "Which of the following best describes a proactive classroom management approach?",
+    "options": [
+      "Waiting for problems to occur before acting",
+      "Relying solely on rewards and punishments",
+      "Establishing clear routines, building relationships, and designing engaging tasks before issues arise",
+      "Letting students set all classroom rules without guidance"
+    ],
+    "correct": 2,
+    "feedback": "Proactive CM prevents issues by creating a positive, structured, and engaging environment from day one."
+  },
+  {
+    "question": "How does recognizing VARK learning preferences support classroom management?",
+    "options": [
+      "It allows the teacher to label students as 'visual' or 'kinesthetic'",
+      "It ensures all students learn in exactly the same way",
+      "It helps reduce boredom and disengagement by varying instructional methods",
+      "It replaces the need for discipline"
+    ],
+    "correct": 2,
+    "feedback": "Differentiated instruction based on VARK preferences keeps lessons dynamic and inclusive, minimizing off-task behavior caused by disengagement."
+  },
+  {
+    "question": "What is a key limitation of viewing classroom management as 'just discipline'?",
+    "options": [
+      "It overemphasizes student freedom",
+      "It ignores the importance of lesson planning and environment design",
+      "It leads to too much student talk",
+      "It focuses too much on academic outcomes"
+    ],
+    "correct": 1,
+    "feedback": "Reducing CM to discipline overlooks its broader role in shaping the entire learning ecosystem—space, instruction, routines, and relationships."
+  },
+  {
+    "question": "Which statement best reflects the modern view of classroom management?",
+    "options": [
+      "Students must obey without question",
+      "The teacher’s authority should never be challenged",
+      "CM is about building a respectful learning community where students develop self-discipline",
+      "CM is only needed for 'difficult' students"
+    ],
+    "correct": 2,
+    "feedback": "Contemporary CM emphasizes community, mutual respect, and fostering student agency—not control through fear or authority."
+  },
+  {
+    "question": "Why is 'good teaching' not always enough for effective classroom management?",
+    "options": [
+      "Because students prefer entertainment over instruction",
+      "Because subject knowledge doesn’t automatically include skills in routines, behavior guidance, or group dynamics",
+      "Because teachers talk too much during lessons",
+      "Because all students learn at the same pace"
+    ],
+    "correct": 1,
+    "feedback": "Even excellent content delivery can fail without explicit strategies for transitions, behavior, and engagement—core CM competencies."
+  },
+  {
+    "question": "What is the purpose of using restorative conversations after a behavioral incident?",
+    "options": [
+      "To assign blame and determine punishment",
+      "To allow the teacher to vent frustration",
+      "To help students reflect on their actions, understand impact, and find better choices",
+      "To document incidents for administrative review only"
+    ],
+    "correct": 2,
+    "feedback": "Restorative dialogue focuses on learning and repair, not shame or exclusion—aligning with educational goals of growth."
+  },
+  {
+    "question": "Which of the following is a sign of effective classroom management?",
+    "options": [
+      "Complete silence throughout the lesson",
+      "Students only speak when called on",
+      "Smooth transitions, high engagement, and respectful interactions",
+      "Zero student movement during class"
+    ],
+    "correct": 2,
+    "feedback": "Effective CM is marked by productive energy, not silence—students are engaged, on-task, and interact respectfully."
+  },
+  {
+    "question": "How can a teacher promote social learning through classroom management?",
+    "options": [
+      "By banning all group work",
+      "By emphasizing competition over collaboration",
+      "By structuring opportunities for teamwork, empathy, and communication",
+      "By assigning individual worksheets only"
+    ],
+    "correct": 2,
+    "feedback": "Social learning—such as collaboration and conflict resolution—is nurtured through intentional CM practices that value interaction and mutual respect."
+  }
+]
+
+
+
+        const trueFalseQuestions =
+        [
+  {
+    "question": "Classroom management is primarily about controlling student behavior through strict rules and punishments.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "The lecture emphasizes that modern classroom management is proactive and holistic—it focuses on creating a supportive learning environment, building relationships, and teaching self-discipline, not just enforcing control."
+  },
+  {
+    "question": "According to Doyle (1985), classroom management includes the structures and processes that enable both teaching and learning.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. Doyle (1985) defines classroom management as involving 'the structures and processes that make both teaching and learning possible,' highlighting its foundational role."
+  },
+  {
+    "question": "A well-organized physical classroom environment has little impact on student behavior or engagement.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. The lecture states that the physical environment (e.g., layout, lighting, arrangement) significantly affects focus, comfort, and behavior—supporting or hindering learning."
+  },
+  {
+    "question": "Routines and procedures help students feel secure and reduce off-task behavior by providing predictability.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. Clear, consistent routines (e.g., warm-ups, transitions) create stability, lower anxiety, and free mental resources for learning."
+  },
+  {
+    "question": "Restorative discipline focuses on punishment to deter future misbehavior.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. Restorative practices emphasize reflection, accountability, and repairing harm—teaching responsibility rather than imposing penalties."
+  },
+  {
+    "question": "Differentiating instruction based on VARK learning preferences is a classroom management strategy.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. Tailoring lessons to visual, auditory, reading/writing, and kinesthetic preferences increases engagement and reduces boredom—a common cause of misbehavior."
+  },
+  {
+    "question": "Good lesson planning alone is sufficient to ensure effective classroom management.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. While strong instruction supports management, teachers also need explicit strategies for routines, relationships, behavior guidance, and environment design."
+  },
+  {
+    "question": "Evertson and Weinstein (2006) argue that classroom management should promote both academic and social learning.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. They identify academic learning (e.g., study skills) and social learning (e.g., empathy, collaboration) as dual outcomes of effective management."
+  },
+  {
+    "question": "Classroom management is only necessary in large or 'difficult' classes.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. Effective CM is essential in all learning environments—it shapes culture, engagement, and safety, regardless of class size or student profile."
+  },
+  {
+    "question": "A teacher who uses restorative conversations after a conflict is practicing punitive discipline.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. Restorative conversations are non-punitive; they focus on understanding impact, taking responsibility, and healing relationships."
+  },
+  {
+    "question": "The goal of classroom management is to create a community where students feel safe, respected, and motivated to learn.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. The lecture concludes that effective CM builds a learning community centered on respect, structure, and student agency—not control."
+  },
+  {
+    "question": "Teacher-student relationships have little influence on student cooperation and behavior.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. Strong, trusting relationships significantly increase student willingness to follow norms and participate positively."
+  },
+  {
+    "question": "Classroom procedures should be taught once at the beginning of the year and never revisited.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. Routines may need reteaching, modeling, or adjusting throughout the year based on student needs and classroom dynamics."
+  },
+  {
+    "question": "Managing learning effectively includes designing tasks that match diverse student needs and interests.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. The 'management of learning' component involves creating engaging, differentiated activities that sustain attention and reduce disruptions."
+  },
+  {
+    "question": "Discipline in modern classroom management should aim to teach, not just to punish.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. The lecture emphasizes that discipline is most effective when it builds self-regulation and understanding, not fear or compliance."
+  },
+  {
+    "question": "A silent classroom always indicates effective classroom management.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. Productive classrooms often include discussion, collaboration, and movement. Silence may signal disengagement or fear—not effective management."
+  },
+  {
+    "question": "According to Brophy (1986), classroom management helps maintain conditions that maximize student learning and engagement.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. Brophy (1986) defines effective CM as creating optimal conditions for both learning and active student involvement."
+  },
+  {
+    "question": "Classroom management is a reactive practice that only addresses problems after they occur.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. Modern CM is primarily proactive—preventing issues through environment design, engagement, and relationship-building."
+  },
+  {
+    "question": "Allowing students to co-create classroom norms can support a sense of ownership and responsibility.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "feedback": "True. Involving students in rule-setting fosters autonomy, buy-in, and intrinsic motivation—key elements of contemporary CM."
+  },
+  {
+    "question": "The physical arrangement of desks has no educational significance in classroom management.",
+    "options": ["True", "False"],
+    "correct": 1,
+    "feedback": "False. Seating arrangements (e.g., circles, groups, rows) influence interaction patterns, collaboration, and focus—making them a strategic CM tool."
+  }
+]
+        
+        
+
+
+         // ===== GAME STATE =====
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let gameMode = 'mcq';
+        let timer;
+        let timeLeft = 60;
+        let answered = false;
+        let selectedOption = null;
+        let currentQuestions = [];
+
+        // DOM elements
+        const questionText = document.getElementById('question-text');
+        const gameContent = document.getElementById('game-content');
+        const feedbackElement = document.getElementById('feedback');
+        const nextBtn = document.getElementById('next-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const scoreValue = document.getElementById('score-value');
+        const timeValue = document.getElementById('time-value');
+        const progressBar = document.getElementById('progress-bar');
+        const modeBtns = document.querySelectorAll('.mode-btn');
+        const mistakesSection = document.getElementById('mistakes-section');
+
+        // Shuffle array function (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Select random subset of questions
+        function getRandomQuestions(questions, count = null) {
+            const shuffled = shuffleArray(questions);
+            if (count && count < questions.length) {
+                return shuffled.slice(0, count);
+            }
+            return shuffled;
+        }
+
+        // Get current question set (randomized)
+        function getCurrentQuestionSet() {
+            if (gameMode === 'mcq') return getRandomQuestions(mcqQuestions, 5);
+            if (gameMode === 'true-false') return getRandomQuestions(trueFalseQuestions, 5);
+            return [];
+        }
+
+        // Initialize game
+        function initGame() {
+            currentQuestionIndex = 0;
+            score = 0;
+            timeLeft = 60;
+            answered = false;
+            selectedOption = null;
+            
+            // Get randomized questions for this session
+            currentQuestions = getCurrentQuestionSet();
+            
+            scoreValue.textContent = score;
+            timeValue.textContent = timeLeft;
+            updateProgressBar();
+            showQuestion();
+            startTimer();
+            mistakesSection.classList.remove('show');
+            nextBtn.disabled = true;
+        }
+
+        // Start timer
+        function startTimer() {
+            clearInterval(timer);
+            timer = setInterval(() => {
+                timeLeft--;
+                timeValue.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    if (!answered) {
+                        handleTimeUp();
+                    }
+                }
+            }, 1000);
+        }
+
+        // Handle time up
+        function handleTimeUp() {
+            answered = true;
+            feedbackElement.innerHTML = `<i class="fas fa-hourglass-end" style="color: var(--warning);"></i> Time's up!`;
+            feedbackElement.className = "feedback show";
+            nextBtn.disabled = false;
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Show current question based on mode
+        function showQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length) {
+                endGame();
+                return;
+            }
+            
+            const q = currentQuestions[currentQuestionIndex];
+            questionText.textContent = q.question;
+            feedbackElement.className = 'feedback';
+            gameContent.innerHTML = '';
+            answered = false;
+            nextBtn.disabled = true;
+            
+            renderMCQ(q);
+        }
+
+        // Render MCQ/True-False
+        function renderMCQ(q) {
+            const optionsContainer = document.createElement('div');
+            optionsContainer.className = 'answer-options';
+            
+            // For MCQ, shuffle options but keep track of correct answer
+            let displayOptions = [...q.options];
+            let correctIndex = q.correct;
+            
+            if (gameMode === 'mcq') {
+                // Create a copy with indices
+                let indexedOptions = q.options.map((opt, i) => ({text: opt, originalIndex: i}));
+                // Shuffle
+                indexedOptions = shuffleArray(indexedOptions);
+                // Update display
+                displayOptions = indexedOptions.map(item => item.text);
+                correctIndex = indexedOptions.findIndex(item => item.originalIndex === q.correct);
+            }
+            
+            displayOptions.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.textContent = option;
+                optionEl.addEventListener('click', () => selectMCQOption(index, correctIndex, q));
+                optionsContainer.appendChild(optionEl);
+            });
+            
+            gameContent.appendChild(optionsContainer);
+        }
+
+        // Handle MCQ option selection
+        function selectMCQOption(selectedIndex, correctIndex, q) {
+            if (answered) return;
+            
+            answered = true;
+            clearInterval(timer);
+            
+            const options = gameContent.querySelectorAll('.option');
+            options.forEach((opt, i) => {
+                if (i === selectedIndex) {
+                    opt.classList.add(selectedIndex === correctIndex ? 'correct' : 'incorrect');
+                }
+                if (i === correctIndex) {
+                    opt.classList.add('correct');
+                }
+            });
+            
+            if (selectedIndex === correctIndex) {
+                    score++;
+                    scoreValue.textContent = score;
+                    feedbackElement.innerHTML = `<i class="fas fa-check-circle" style="color: var(--success);"></i> Correct! ${q.feedback}`;
+                } else {
+                    feedbackElement.innerHTML = `<i class="fas fa-times-circle" style="color: var(--accent);"></i> Incorrect. ${q.feedback}`;
+                }
+            feedbackElement.className = 'feedback show';
+            nextBtn.disabled = false;
+            
+            if (currentQuestionIndex === 0) {
+                setTimeout(() => {
+                    mistakesSection.classList.add('show');
+                }, 1500);
+            }
+        }
+
+        // Move to next question or end game
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex < currentQuestions.length) {
+                timeLeft = 60;
+                timeValue.textContent = timeLeft;
+                showQuestion();
+                startTimer();
+            } else {
+                endGame();
+            }
+            
+            updateProgressBar();
+        }
+
+        // End game
+        function endGame() {
+            questionText.textContent = `Game Completed! Your final score is ${score}/${currentQuestions.length}`;
+            gameContent.innerHTML = '';
+            feedbackElement.innerHTML = `<i class="fas fa-trophy" style="color: var(--success);"></i> Great job! You completed ${currentQuestions.length} random questions. Review the revision checklist above.`;
+            feedbackElement.className = 'feedback show';
+            nextBtn.disabled = true;
+            clearInterval(timer);
+        }
+
+        // Event listeners
+        nextBtn.addEventListener('click', nextQuestion);
+        resetBtn.addEventListener('click', initGame);
+        
+        modeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                gameMode = btn.dataset.mode;
+                initGame();
+            });
+        });
+
+        // Initialize
+        window.addEventListener('load', initGame);
+    </script>
+</body>
+</html>       
+
+        
