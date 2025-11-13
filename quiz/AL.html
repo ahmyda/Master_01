@@ -1,0 +1,2418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Applied Linguistics Quiz</title>
+  <link rel="stylesheet" href="../css/try.css">
+</head>
+<body>
+  <div id="game">
+    <div id="header">
+      <h1>Applied Linguistics Quiz</h1>
+      <p>Test your knowledge of language theory and application</p>
+    </div>
+    
+    <!-- Game Settings -->
+    <div id="settings" class="settings-panel">
+      <h2>Quiz Settings</h2>
+      <div class="setting-group">
+        <label for="question-count">Number of Questions:</label>
+        <select id="question-count">
+          <option value="5">5 Questions</option>
+          <option value="10" selected>10 Questions</option>
+          <option value="15">15 Questions</option>
+          <option value="20">20 Questions</option>
+        </select>
+      </div>
+      <div class="setting-group">
+        <label for="time-limit">Time Limit:</label>
+        <select id="time-limit">
+          <option value="60">1 Minute</option>
+          <option value="120" selected>2 Minutes</option>
+          <option value="180">3 Minutes</option>
+          <option value="300">5 Minutes</option>
+        </select>
+      </div>
+      <div class="setting-group">
+        <label>Question Categories:</label>
+            <div class="checkbox-group">
+            <label><input type="checkbox" name="category" value="foundations" checked> Foundations of Applied Linguistics</label>
+            <label><input type="checkbox" name="category" value="ca" checked> Contrastive Analysis (CA)</label>
+            <label><input type="checkbox" name="category" value="ea" checked> Error Analysis (EA)</label>
+            <label><input type="checkbox" name="category" value="il" checked> Interlanguage (IL)</label>
+            </div>
+      </div>
+      <button id="start-btn" class="btn-primary">Start Quiz</button>
+      <!-- Add this button with your other controls in the settings panel -->
+    <button id="main-menu-btn" class="btn-secondary">Main Menu</button>
+    </div>
+    
+    <!-- Game Interface -->
+    <div id="game-interface" class="hidden">
+      <div id="game-header">
+        <div id="timer-container">
+          <div id="timer">Time: 120s</div>
+          <div id="progress-bar">
+            <div id="progress-fill"></div>
+          </div>
+        </div>
+        <div id="score-container">
+          <div id="score">Score: 0</div>
+          <div id="question-counter">Question: 1/10</div>
+        </div>
+      </div>
+      
+      <div id="question-container">
+        <div id="question-category" class="category-tag">Applied Linguistics</div>
+        <div id="question">Get ready...</div>
+      </div>
+      
+      <div class="choices" id="choices"></div>
+      
+      <div id="feedback-container">
+        <div id="feedback"></div>
+        <div id="explanation"></div>
+      </div>
+      
+      <div id="controls">
+        <button id="back" class="btn-primary hidden" onclick="goToPage('../Quiz.html')">Home</button>
+        <button id="next-btn" class="btn-primary " onclick="nextQuestion()">Next Question</button>
+        <button id="play-again-btn" class="btn-primary hidden" onclick="restartGame()">Play Again!</button>
+      </div>
+    </div>
+  
+    <!-- Results Screen -->
+    <div id="results" class="hidden">
+      <div id="results-content">
+        <h2>Quiz Complete!</h2>
+        <div id="results-score">
+          <div id="score-circle">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="54" fill="none" stroke="#e0e0e0" stroke-width="12"></circle>
+              <circle id="score-circle-fill" cx="60" cy="60" r="54" fill="none" stroke="#4361ee" stroke-width="12" stroke-dasharray="339.292" stroke-dashoffset="339.292" transform="rotate(-90 60 60)"></circle>
+              <text id="score-percent" x="60" y="65" text-anchor="middle" font-size="24" font-weight="bold" fill="#4361ee">0%</text>
+            </svg>
+          </div>
+          <div id="score-text">
+            <p>You scored</p>
+            <h3 id="final-score">0/0</h3>
+          </div>
+        </div>
+        <div id="performance-message"></div>
+        <div id="results-breakdown">
+          <div class="result-stat">
+            <span class="stat-label">Correct Answers:</span>
+            <span id="correct-count" class="stat-value">0</span>
+          </div>
+          <div class="result-stat">
+            <span class="stat-label">Time Used:</span>
+            <span id="time-used" class="stat-value">0s</span>
+          </div>
+          <div class="result-stat">
+            <span class="stat-label">Questions Answered:</span>
+            <span id="questions-answered" class="stat-value">0</span>
+          </div>
+        </div>
+        <div id="results-actions">
+          <button id="review-btn" class="btn-secondary">Review Answers</button>
+          <button id="new-game-btn" class="btn-primary" onclick="restartGame()">New Quiz</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const questions = 
+    [
+  {
+    "q": "Which statement best captures Brumfit’s (1977) definition of Applied Linguistics?",
+    "choices": [
+      "The study of universal grammar across languages",
+      "The theoretical and empirical investigation of real-world problems where language is central",
+      "The application of syntactic rules to language teaching"
+    ],
+    "answer": 1,
+    "explanation": "Brumfit (1977) defined AL as investigating real-world language-centered problems empirically and theoretically.",
+    "category": "foundations"
+  },
+  {
+    "q": "Why is Applied Linguistics considered interdisciplinary?",
+    "choices": [
+      "It only uses linguistic theory from generative grammar",
+      "It integrates insights from psychology, sociology, education, and law to solve language problems",
+      "It focuses exclusively on phonological analysis"
+    ],
+    "answer": 1,
+    "explanation": "AL draws on multiple disciplines because real-world language issues involve social, cognitive, and institutional factors (AAAL).",
+    "category": "foundations"
+  },
+  {
+    "q": "According to Spolsky (2005), what is the primary aim of Applied Linguistics?",
+    "choices": [
+      "To develop abstract models of linguistic competence",
+      "To describe historical language change",
+      "To resolve language-based problems people encounter in real life"
+    ],
+    "answer": 2,
+    "explanation": "Spolsky (2005) emphasized AL’s problem-solving orientation in practical contexts like education or policy.",
+    "category": "foundations"
+  },
+  {
+    "q": "What distinguishes 'Applied Linguistics' from 'Linguistics Applied'?",
+    "choices": [
+      "The former ignores context; the latter considers it",
+      "The former rigidly applies theory; the latter adapts it",
+      "The former mediates theory through social context; the latter assumes direct application"
+    ],
+    "answer": 2,
+    "explanation": "Widdowson argued AL involves mediation and contextual adaptation, unlike the mechanical 'Linguistics Applied' model.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which area is NOT traditionally part of early Applied Linguistics (1960s)?",
+    "choices": [
+      "Language teaching",
+      "Forensic linguistics",
+      "Audio-lingual methodology"
+    ],
+    "answer": 1,
+    "explanation": "Forensic linguistics emerged later; early AL was dominated by language teaching concerns post-WWII.",
+    "category": "foundations"
+  },
+  {
+    "q": "How does Applied Linguistics contribute to language policy in multilingual Algeria?",
+    "choices": [
+      "By enforcing a single national language",
+      "By providing evidence-based research on language use in education and media",
+      "By ignoring minority languages like Tamazight"
+    ],
+    "answer": 1,
+    "explanation": "AL informs policy by evaluating equity, access, and identity in language choice across institutions.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which field does NOT fall under modern Applied Linguistics?",
+    "choices": [
+      "Computational linguistics (NLP)",
+      "Lexicography",
+      "Theoretical syntax (e.g., Minimalism)"
+    ],
+    "answer": 2,
+    "explanation": "Theoretical syntax is part of theoretical linguistics, not applied problem-solving.",
+    "category": "foundations"
+  },
+  {
+    "q": "Why can’t theoretical linguistics alone solve real-world language problems?",
+    "choices": [
+      "It studies idealized systems and ignores context like power, identity, and culture",
+      "It focuses too much on classroom teaching",
+      "It overemphasizes learner errors"
+    ],
+    "answer": 0,
+    "explanation": "As Spolsky noted, theoretical linguistics has little to say about messy, contextual real-world issues.",
+    "category": "foundations"
+  },
+  {
+    "q": "What role does Applied Linguistics play in clinical settings?",
+    "choices": [
+      "Designing theoretical phoneme inventories",
+      "Diagnosing and treating communication disorders like aphasia or dyslexia",
+      "Analyzing ancient manuscripts"
+    ],
+    "answer": 1,
+    "explanation": "Clinical linguistics applies linguistic knowledge to therapeutic interventions for speech disorders.",
+    "category": "foundations"
+  },
+  {
+    "q": "What is the purpose of Critical Discourse Analysis (CDA) in AL?",
+    "choices": [
+      "To teach grammar rules more effectively",
+      "To examine how language reproduces power, ideology, and inequality",
+      "To compare verb tenses across languages"
+    ],
+    "answer": 1,
+    "explanation": "CDA, e.g., in political speeches, reveals how language constructs social realities and dominance.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which scholar is associated with the idea that AL 'mediates' theory rather than applying it directly?",
+    "choices": [
+      "Noam Chomsky",
+      "Henry Widdowson",
+      "Robert Lado"
+    ],
+    "answer": 1,
+    "explanation": "Widdowson stressed that AL interprets and adapts linguistic insights through human and social lenses.",
+    "category": "foundations"
+  },
+  {
+    "q": "Language testing in AL ensures exams are:",
+    "choices": [
+      "Based only on grammatical accuracy",
+      "Culturally biased to favor native speakers",
+      "Valid, reliable, and aligned with real-world communication needs"
+    ],
+    "answer": 2,
+    "explanation": "AL ensures tests like IELTS measure communicative competence fairly and without bias.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which is a key characteristic of Applied Linguistics since the 1960s?",
+    "choices": [
+      "Narrowing focus to only language teaching",
+      "Expansion into forensic, computational, and critical domains",
+      "Rejection of interdisciplinary approaches"
+    ],
+    "answer": 1,
+    "explanation": "AL evolved from a teaching-centric field to a broad, socially engaged discipline.",
+    "category": "foundations"
+  },
+  {
+    "q": "The American Association for Applied Linguistics (AAAL) describes AL as integrating:",
+    "choices": [
+      "Only linguistics and literature",
+      "The humanities to the social and natural sciences",
+      "Only behaviorist psychology"
+    ],
+    "answer": 1,
+    "explanation": "AAAL highlights AL’s integration across disciplines to address complex language problems.",
+    "category": "foundations"
+  },
+  {
+    "q": "In AL, 'real-world problems' include all EXCEPT:",
+    "choices": [
+      "Designing fair language proficiency tests",
+      "Proving universal grammar hypotheses",
+      "Resolving courtroom miscommunication"
+    ],
+    "answer": 1,
+    "explanation": "Proving UG is a theoretical linguistics goal, not an applied problem-solving task.",
+    "category": "foundations"
+  },
+  {
+    "q": "What is the central concern of language policy in multilingual contexts?",
+    "choices": [
+      "Eliminating all non-dominant languages",
+      "Balancing identity, equity, access, and practicality in language use",
+      "Promoting only foreign languages"
+    ],
+    "answer": 1,
+    "explanation": "AL helps policymakers weigh sociolinguistic factors in decisions about education and media.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which statement about AL is FALSE?",
+    "choices": [
+      "It is problem-driven and solution-oriented",
+      "It assumes linguistic theory can be directly transferred to practice",
+      "It values empirical evidence from real contexts"
+    ],
+    "answer": 1,
+    "explanation": "AL rejects direct transfer; it emphasizes mediation and adaptation (Widdowson).",
+    "category": "foundations"
+  },
+  {
+    "q": "Forensic linguistics in AL might involve:",
+    "choices": [
+      "Teaching pronunciation to actors",
+      "Analyzing authorship in threatening messages",
+      "Creating dictionaries for ancient languages"
+    ],
+    "answer": 1,
+    "explanation": "Forensic linguists use linguistic analysis in legal contexts, e.g., plagiarism or threat analysis.",
+    "category": "foundations"
+  },
+  {
+    "q": "What does AL assume about language learners?",
+    "choices": [
+      "They are passive recipients of rules",
+      "They are active meaning-makers navigating complex contexts",
+      "They only make errors due to laziness"
+    ],
+    "answer": 1,
+    "explanation": "Modern AL views learners as cognitively and socially active participants in language use.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which is a valid example of AL in education?",
+    "choices": [
+      "Memorizing verb conjugations without context",
+      "Designing tasks that reflect Algerian EFL students’ communicative needs",
+      "Ignoring students’ L1 in the classroom"
+    ],
+    "answer": 1,
+    "explanation": "AL tailors teaching to learners’ real-life contexts and goals (e.g., communicative activities).",
+    "category": "foundations"
+  },
+  {
+    "q": "The shift from 'Linguistics Applied' to 'Applied Linguistics' reflects:",
+    "choices": [
+      "A move toward more rigid teaching methods",
+      "Greater recognition of social, psychological, and cultural complexity",
+      "A rejection of all linguistic theory"
+    ],
+    "answer": 1,
+    "explanation": "AL acknowledges that real language use cannot be reduced to mechanical rule application.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which is NOT a goal of language testing in AL?",
+    "choices": [
+      "Ensuring cultural fairness",
+      "Measuring only rote grammar knowledge",
+      "Aligning with communicative competence"
+    ],
+    "answer": 1,
+    "explanation": "Modern AL-based testing prioritizes real-world communication over isolated grammar.",
+    "category": "foundations"
+  },
+  {
+    "q": "CDA might analyze how news media frame migrants by:",
+    "choices": [
+      "Counting the number of verbs used",
+      "Using dehumanizing lexical choices like 'flood' or 'swarm'",
+      "Teaching migrants correct pronunciation"
+    ],
+    "answer": 1,
+    "explanation": "CDA exposes how word choice constructs ideology and marginalizes groups.",
+    "category": "foundations"
+  },
+  {
+    "q": "AL’s interdisciplinary nature means it often collaborates with:",
+    "choices": [
+      "Only literary scholars",
+      "Psychologists, sociologists, educators, and computer scientists",
+      "Archaeologists and geologists"
+    ],
+    "answer": 1,
+    "explanation": "AL integrates knowledge from diverse fields to address multifaceted language problems.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which best describes the evolution of AL?",
+    "choices": [
+      "From narrow (teaching) to broad (policy, tech, law, health)",
+      "From broad to narrow focus on syntax",
+      "From qualitative to purely quantitative methods"
+    ],
+    "answer": 0,
+    "explanation": "AL expanded significantly beyond its initial language-teaching roots.",
+    "category": "foundations"
+  },
+  {
+    "q": "In multilingual Algeria, AL might evaluate:",
+    "choices": [
+      "Which language should be used in math instruction: Arabic, Tamazight, or French",
+      "Whether all students should speak only English",
+      "The correct pronunciation of Latin"
+    ],
+    "answer": 0,
+    "explanation": "AL informs medium-of-instruction decisions by assessing educational and social impacts.",
+    "category": "foundations"
+  },
+  {
+    "q": "What does 'mediation' mean in Widdowson’s view of AL?",
+    "choices": [
+      "Direct copying of linguistic rules into classrooms",
+      "Interpreting theory through cultural, educational, and individual contexts",
+      "Eliminating theory from practice"
+    ],
+    "answer": 1,
+    "explanation": "Mediation means adapting theory to human realities, not applying it mechanically.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which problem requires AL, not theoretical linguistics?",
+    "choices": [
+      "Modeling syntactic tree structures",
+      "Designing a bias-free English placement test for Algerian universities",
+      "Proving the existence of phonemes"
+    ],
+    "answer": 1,
+    "explanation": "Test design involves fairness, validity, and real-world stakes—core AL concerns.",
+    "category": "foundations"
+  },
+  {
+    "q": "AL’s approach to language teaching emphasizes:",
+    "choices": [
+      "Drilling grammar rules without context",
+      "Learner-centered, communicative, and context-sensitive methods",
+      "Avoiding all use of the L1"
+    ],
+    "answer": 1,
+    "explanation": "Modern AL-informed pedagogy prioritizes meaningful interaction and relevance.",
+    "category": "foundations"
+  },
+  {
+    "q": "Theoretical linguistics primarily studies:",
+    "choices": [
+      "Idealized, abstract language systems",
+      "Classroom discourse patterns",
+      "Courtroom translation errors"
+    ],
+    "answer": 0,
+    "explanation": "Theoretical linguistics focuses on competence, not performance in social contexts.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which is a limitation of viewing AL as 'Linguistics Applied'?",
+    "choices": [
+      "It overestimates the role of context",
+      "It assumes social factors are unimportant in language use",
+      "It uses too much learner data"
+    ],
+    "answer": 1,
+    "explanation": "The 'Linguistics Applied' model ignores the social, psychological, and cultural dimensions of real problems.",
+    "category": "foundations"
+  },
+  {
+    "q": "AL contributes to lexicography by:",
+    "choices": [
+      "Creating dictionaries based only on literary texts",
+      "Ensuring word definitions reflect real usage and learner needs",
+      "Ignoring spoken language"
+    ],
+    "answer": 1,
+    "explanation": "AL-informed dictionaries consider frequency, context, and user profiles (e.g., learners).",
+    "category": "foundations"
+  },
+  {
+    "q": "In clinical linguistics, AL helps with:",
+    "choices": [
+      "Analyzing Shakespeare’s syntax",
+      "Developing therapy for children with specific language impairment",
+      "Translating poetry"
+    ],
+    "answer": 1,
+    "explanation": "Clinical AL applies linguistic analysis to diagnose and treat communication disorders.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which statement about AL is TRUE?",
+    "choices": [
+      "It seeks universal solutions that work in all contexts",
+      "It tailors solutions to specific cultural and institutional realities",
+      "It rejects all forms of linguistic theory"
+    ],
+    "answer": 1,
+    "explanation": "AL is context-sensitive; solutions must be locally appropriate and evidence-based.",
+    "category": "foundations"
+  },
+  {
+    "q": "AL’s role in translation studies includes:",
+    "choices": [
+      "Focusing only on literal word-for-word equivalence",
+      "Analyzing pragmatic and cultural equivalence in real-world translation",
+      "Ignoring audience needs"
+    ],
+    "answer": 1,
+    "explanation": "AL examines how meaning is transferred across languages in context, not just form.",
+    "category": "foundations"
+  },
+  {
+    "q": "What makes AL 'applied'?",
+    "choices": [
+      "It applies theory without modification",
+      "It addresses practical problems with tailored, interdisciplinary approaches",
+      "It avoids empirical research"
+    ],
+    "answer": 1,
+    "explanation": "AL is defined by its problem-solving orientation in real-world settings.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which is an example of AL in digital contexts?",
+    "choices": [
+      "Building AI chatbots that understand user intent and pragmatics",
+      "Proving Chomsky’s hierarchy of grammars",
+      "Classifying ancient scripts"
+    ],
+    "answer": 1,
+    "explanation": "Computational AL develops NLP systems that handle real human language variation.",
+    "category": "foundations"
+  },
+  {
+    "q": "AL differs from sociolinguistics in that AL:",
+    "choices": [
+      "Only describes language variation without solving problems",
+      "Uses sociolinguistic insights to inform interventions (e.g., policy)",
+      "Ignores social factors completely"
+    ],
+    "answer": 1,
+    "explanation": "AL is intervention-oriented; it uses descriptive fields like sociolinguistics to design solutions.",
+    "category": "foundations"
+  },
+  {
+    "q": "The 'problem' in AL is defined by:",
+    "choices": [
+      "Theoretical elegance",
+      "Real stakeholders (learners, teachers, policymakers) facing language-related challenges",
+      "Abstract linguistic puzzles"
+    ],
+    "answer": 1,
+    "explanation": "AL starts with real human needs, not theoretical curiosities.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which scholar argued that comparing L1 and L2 helps predict learning difficulty?",
+    "choices": [
+      "Selinker",
+      "Corder",
+      "Lado"
+    ],
+    "answer": 2,
+    "explanation": "Lado (1957) proposed that L1-L2 comparison could predict ease or difficulty in language learning.",
+    "category": "foundations"
+  },
+  {
+    "q": "AL’s contribution to discourse analysis includes:",
+    "choices": [
+      "Only analyzing sentence grammar",
+      "Studying classroom interaction, turn-taking, and communicative competence",
+      "Ignoring spoken language"
+    ],
+    "answer": 1,
+    "explanation": "AL examines how discourse functions in real settings like classrooms (e.g., Walsh, 2011).",
+    "category": "foundations"
+  },
+  {
+    "q": "Which is a key principle of AL methodology?",
+    "choices": [
+      "Theory-first, then application",
+      "Problem-first, then interdisciplinary investigation",
+      "Avoiding empirical data"
+    ],
+    "answer": 1,
+    "explanation": "AL is problem-driven: identify the issue, then gather relevant theoretical and empirical tools.",
+    "category": "foundations"
+  },
+  {
+    "q": "In language planning, AL helps decide:",
+    "choices": [
+      "Which fonts to use in textbooks",
+      "Status and corpus planning for national and minority languages",
+      "The correct accent for all speakers"
+    ],
+    "answer": 1,
+    "explanation": "AL informs decisions about language roles (status) and standardization (corpus) in society.",
+    "category": "foundations"
+  },
+  {
+    "q": "AL rejects the idea that:",
+    "choices": [
+      "Language learning involves cognitive processes",
+      "One-size-fits-all teaching methods work universally",
+      "Context matters in communication"
+    ],
+    "answer": 1,
+    "explanation": "AL emphasizes context-specificity; universal methods often fail in diverse settings.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which best describes the relationship between AL and education?",
+    "choices": [
+      "AL provides research-based frameworks for effective teaching and assessment",
+      "AL dictates rigid curriculum content",
+      "AL avoids classroom research"
+    ],
+    "answer": 0,
+    "explanation": "AL informs pedagogy through evidence on learning, interaction, and assessment.",
+    "category": "foundations"
+  },
+  {
+    "q": "An AL approach to bilingual education would:",
+    "choices": [
+      "Ban all use of L1 in school",
+      "Evaluate the cognitive and social benefits of L1 use in learning",
+      "Assume L1 always interferes negatively"
+    ],
+    "answer": 1,
+    "explanation": "AL examines evidence on L1 use, recognizing its potential supportive role (e.g., scaffolding).",
+    "category": "foundations"
+  },
+  {
+    "q": "The 'real world' in AL includes:",
+    "choices": [
+      "Only formal institutions like schools",
+      "Any context where language creates or solves problems: courts, hospitals, apps, families",
+      "Only written texts"
+    ],
+    "answer": 1,
+    "explanation": "AL addresses language issues wherever they arise in human life.",
+    "category": "foundations"
+  },
+  {
+    "q": "Which is NOT a concern of AL?",
+    "choices": [
+      "How to teach English effectively in Algeria",
+      "Whether all languages have recursion",
+      "How to design accessible public signage in multilingual cities"
+    ],
+    "answer": 1,
+    "explanation": "Recursion is a theoretical linguistics debate; AL focuses on practical outcomes.",
+    "category": "foundations"
+  },
+  {
+    "q": "AL’s ethical stance includes:",
+    "choices": [
+      "Promoting linguistic imperialism",
+      "Advocating for equity, access, and linguistic human rights",
+      "Ignoring power dynamics in language"
+    ],
+    "answer": 1,
+    "explanation": "Modern AL is often critical and emancipatory, challenging linguistic inequality.",
+    "category": "foundations"
+  },
+  {
+    "q": "What is the core assumption of Contrastive Analysis (CA)?",
+    "choices": [
+      "L2 errors are random",
+      "L1 interference is the main source of L2 learning difficulty",
+      "Learners invent language rules independently"
+    ],
+    "answer": 1,
+    "explanation": "CA assumes structural differences between L1 and L2 cause learning problems (Lee, 1968).",
+    "category": "ca"
+  },
+  {
+    "q": "According to Lado (1957), language teaching should be based on:",
+    "choices": [
+      "Learner creativity alone",
+      "Comparison of native and target language and culture",
+      "Ignoring the learner’s L1"
+    ],
+    "answer": 1,
+    "explanation": "Lado argued that L1-L2 comparison predicts difficulty and guides teaching focus.",
+    "category": "ca"
+  },
+  {
+    "q": "Positive transfer in CA occurs when:",
+    "choices": [
+      "L1 and L2 differ greatly",
+      "L1 and L2 are similar, facilitating learning",
+      "The learner avoids using L2"
+    ],
+    "answer": 1,
+    "explanation": "Similarities (e.g., past tense in Arabic/English) ease acquisition—positive transfer.",
+    "category": "ca"
+  },
+  {
+    "q": "Negative transfer leads to errors like:",
+    "choices": [
+      "Using 'a' correctly in 'He is a teacher'",
+      "Omitting 'a' as in 'He is teacher' (Arabic lacks articles)",
+      "Overusing articles unnecessarily"
+    ],
+    "answer": 1,
+    "explanation": "Arabic speakers may omit English articles due to L1 structure—classic negative transfer.",
+    "category": "ca"
+  },
+  {
+    "q": "In Stockwell et al.’s (1965) hierarchy, which is LEAST difficult?",
+    "choices": [
+      "Split",
+      "New category",
+      "Complete correspondence"
+    ],
+    "answer": 2,
+    "explanation": "When L1 and L2 forms correspond exactly, learning is easiest.",
+    "category": "ca"
+  },
+  {
+    "q": "Why did CA decline in the 1970s?",
+    "choices": [
+      "It perfectly predicted all errors",
+      "It missed developmental errors like 'goed' and overpredicted L1 interference",
+      "It became too focused on learner creativity"
+    ],
+    "answer": 1,
+    "explanation": "CA failed to account for intralingual errors from L2 rule overgeneralization.",
+    "category": "ca"
+  },
+  {
+    "q": "Which error CAN be explained by CA?",
+    "choices": [
+      "Saying 'comed' for 'came'",
+      "Using Past Simple instead of Present Perfect: 'Did you see him today?'",
+      "Saying 'goed' for 'went'"
+    ],
+    "answer": 1,
+    "explanation": "Arabic lacks present perfect, so learners use past simple—L1 interference.",
+    "category": "ca"
+  },
+  {
+    "q": "Which error CANNOT be explained by CA?",
+    "choices": [
+      "Saying 'He is teacher' (no article)",
+      "Saying 'goed' (overgeneralization)",
+      "Using 'close the TV' (semantic transfer)"
+    ],
+    "answer": 1,
+    "explanation": "'Goed' comes from L2 rule overgeneralization, not L1 influence.",
+    "category": "ca"
+  },
+  {
+    "q": "Traditional CA methodology has how many steps?",
+    "choices": [
+      "3",
+      "5",
+      "8"
+    ],
+    "answer": 1,
+    "explanation": "The classic CA steps: select tasks, ensure compatibility, use same model, compare, design materials.",
+    "category": "ca"
+  },
+  {
+    "q": "Enhanced CA improves on traditional CA by:",
+    "choices": [
+      "Ignoring learner data",
+      "Testing predictions against actual learner output",
+      "Assuming all errors are from L1"
+    ],
+    "answer": 1,
+    "explanation": "Enhanced CA validates hypotheses with empirical learner data.",
+    "category": "ca"
+  },
+  {
+    "q": "CA is rooted in which learning theory?",
+    "choices": [
+      "Cognitivism",
+      "Behaviorism",
+      "Constructivism"
+    ],
+    "answer": 1,
+    "explanation": "CA views learning as habit formation where L1 habits interfere or facilitate L2 habits.",
+    "category": "ca"
+  },
+  {
+    "q": "In a homogeneous classroom (e.g., all Arabic speakers), CA is useful for:",
+    "choices": [
+      "Predicting common L1-based errors and designing targeted materials",
+      "Ignoring all individual differences",
+      "Teaching only literature"
+    ],
+    "answer": 0,
+    "explanation": "CA helps anticipate shared difficulties in same-L1 groups.",
+    "category": "ca"
+  },
+  {
+    "q": "Which is a strength of CA?",
+    "choices": [
+      "It explains all learner errors",
+      "It helps exploit positive transfer and prevent common mistakes",
+      "It replaces the need for classroom observation"
+    ],
+    "answer": 1,
+    "explanation": "CA remains practical for curriculum design in specific contexts.",
+    "category": "ca"
+  },
+  {
+    "q": "CA assumes that learning difficulty is primarily due to:",
+    "choices": [
+      "Lack of intelligence",
+      "Structural differences between L1 and L2",
+      "Poor teaching methods"
+    ],
+    "answer": 1,
+    "explanation": "Greater linguistic distance = greater difficulty (Lado, 1957).",
+    "category": "ca"
+  },
+  {
+    "q": "A 'split' in Stockwell’s hierarchy means:",
+    "choices": [
+      "L1 has one form, L2 has two or more (e.g., English 'he' vs. French 'il/elle')",
+      "L2 introduces a completely new sound",
+      "L1 and L2 are identical"
+    ],
+    "answer": 0,
+    "explanation": "Splits are highly problematic because learners must learn new distinctions.",
+    "category": "ca"
+  },
+  {
+    "q": "A 'new category' in CA refers to:",
+    "choices": [
+      "A feature present in both L1 and L2",
+      "A feature that exists only in L2 (e.g., English articles for Arabic speakers)",
+      "A feature absent in both languages"
+    ],
+    "answer": 1,
+    "explanation": "New categories require learners to acquire entirely new concepts.",
+    "category": "ca"
+  },
+  {
+    "q": "An 'absent category' means:",
+    "choices": [
+      "A feature only in L1, not L2",
+      "A feature only in L2, not L1",
+      "A feature in neither language"
+    ],
+    "answer": 0,
+    "explanation": "Learners may overuse or misapply L1 features not present in L2.",
+    "category": "ca"
+  },
+  {
+    "q": "Which is an example of positive transfer from Arabic to English?",
+    "choices": [
+      "Using subject-verb agreement correctly in simple past",
+      "Omitting the verb 'to be' in present tense",
+      "Confusing 'he' and 'she'"
+    ],
+    "answer": 0,
+    "explanation": "Both languages have past tense morphology, easing learning.",
+    "category": "ca"
+  },
+  {
+    "q": "CA is most effective when:",
+    "choices": [
+      "Learners have diverse L1 backgrounds",
+      "All learners share the same L1",
+      "The target language is unknown"
+    ],
+    "answer": 1,
+    "explanation": "Homogeneous classes allow reliable prediction of shared L1 interference.",
+    "category": "ca"
+  },
+  {
+    "q": "Which scholar is associated with CA’s predictive model?",
+    "choices": [
+      "Selinker",
+      "Corder",
+      "Lado"
+    ],
+    "answer": 2,
+    "explanation": "Lado (1957) pioneered the predictive use of L1-L2 comparison.",
+    "category": "ca"
+  },
+  {
+    "q": "The behaviorist foundation of CA views language learning as:",
+    "choices": [
+      "Hypothesis testing and rule formation",
+      "Habit formation through repetition and reinforcement",
+      "Innate universal grammar activation"
+    ],
+    "answer": 1,
+    "explanation": "CA aligns with Skinnerian behaviorism—learning as habit building.",
+    "category": "ca"
+  },
+  {
+    "q": "CA’s overprediction problem means it:",
+    "choices": [
+      "Correctly forecasts every error",
+      "Predicts errors that never actually occur",
+      "Underestimates the role of motivation"
+    ],
+    "answer": 1,
+    "explanation": "Many predicted L1 interference errors simply don’t appear in learner data.",
+    "category": "ca"
+  },
+  {
+    "q": "CA’s underprediction problem refers to:",
+    "choices": [
+      "Ignoring the teacher’s role",
+      "Failing to account for errors from L2 rule overgeneralization",
+      "Predicting too few L1-based errors"
+    ],
+    "answer": 1,
+    "explanation": "Errors like 'goed' arise internally, not from L1—CA misses these.",
+    "category": "ca"
+  },
+  {
+    "q": "Which is NOT a step in traditional CA?",
+    "choices": [
+      "Collecting learner errors",
+      "Comparing L1 and L2 using the same descriptive model",
+      "Developing teaching materials based on predictions"
+    ],
+    "answer": 0,
+    "explanation": "Error collection is part of EA, not predictive CA.",
+    "category": "ca"
+  },
+  {
+    "q": "CA compares languages based on:",
+    "choices": [
+      "Learner intuition",
+      "Theoretical linguistic descriptions",
+      "Social media usage"
+    ],
+    "answer": 1,
+    "explanation": "CA relies on structural linguistic analysis of both languages.",
+    "category": "ca"
+  },
+  {
+    "q": "In CA, 'coalesced forms' means:",
+    "choices": [
+      "L1 has multiple forms, L2 has one (e.g., English 'you' for singular/plural)",
+      "L1 and L2 have identical forms",
+      "L2 has more forms than L1"
+    ],
+    "answer": 0,
+    "explanation": "This is less problematic than 'split' because simplification is easier.",
+    "category": "ca"
+  },
+  {
+    "q": "A key criticism of CA is that it:",
+    "choices": [
+      "Focuses too much on the learner’s active role",
+      "Is too cognitive in orientation",
+      "Ignores the learner as an active hypothesis-former"
+    ],
+    "answer": 2,
+    "explanation": "CA treats learners as passive; EA and IL recognize their active rule-building.",
+    "category": "ca"
+  },
+  {
+    "q": "Which statement about CA is FALSE?",
+    "choices": [
+      "It was dominant in the 1950s–60s",
+      "It explains overgeneralization errors like 'foots'",
+      "It assumes L1 is the main error source"
+    ],
+    "answer": 1,
+    "explanation": "CA does NOT explain overgeneralization—those are intralingual, not L1-based.",
+    "category": "ca"
+  },
+  {
+    "q": "Modern CA is best described as:",
+    "choices": [
+      "Completely obsolete",
+      "Limited but useful in specific pedagogical contexts",
+      "The only valid approach to error prediction"
+    ],
+    "answer": 1,
+    "explanation": "While flawed, CA still informs teaching in homogeneous L1 settings.",
+    "category": "ca"
+  },
+  {
+    "q": "CA’s focus on 'difference' overlooks:",
+    "choices": [
+      "The role of similarity (positive transfer)",
+      "The fact that some L1 features may aid learning",
+      "Both A and B"
+    ],
+    "answer": 2,
+    "explanation": "CA emphasized difficulty (difference) but also recognized facilitation (similarity).",
+    "category": "ca"
+  },
+  {
+    "q": "Which hierarchy level is 'New Category'?",
+    "choices": [
+      "Most difficult",
+      "Second most difficult",
+      "Third most difficult"
+    ],
+    "answer": 1,
+    "explanation": "Order: Split > New Category > Absent Category > Coalesced > Correspondence.",
+    "category": "ca"
+  },
+  {
+    "q": "CA assumes linguistic equivalence can be established by:",
+    "choices": [
+      "Asking learners for opinions",
+      "Using consistent descriptive frameworks for both languages",
+      "Counting word frequency"
+    ],
+    "answer": 1,
+    "explanation": "CA requires comparable linguistic analysis to identify true similarities/differences.",
+    "category": "ca"
+  },
+  {
+    "q": "An Arab learner says 'book Ahmad' instead of 'Ahmad’s book'. This reflects:",
+    "choices": [
+      "English overgeneralization",
+      "L1 morphological transfer (Arabic uses 'kitab Ahmad')",
+      "Random guessing"
+    ],
+    "answer": 1,
+    "explanation": "Arabic uses noun-noun possession, leading to L1 interference in English.",
+    "category": "ca"
+  },
+  {
+    "q": "CA’s predictive power is strongest for:",
+    "choices": [
+      "Phonological and morphological errors from L1",
+      "Creative writing tasks",
+      "Motivational issues"
+    ],
+    "answer": 0,
+    "explanation": "Sound and structure differences are more predictable than discourse or pragmatics.",
+    "category": "ca"
+  },
+  {
+    "q": "Which is a valid modern use of CA?",
+    "choices": [
+      "Designing contrastive grammar notes for Arabic-speaking EFL learners",
+      "Claiming all errors come from L1",
+      "Replacing needs analysis"
+    ],
+    "answer": 0,
+    "explanation": "CA-informed materials can raise awareness of likely L1 interference points.",
+    "category": "ca"
+  },
+  {
+    "q": "CA differs from EA in that CA:",
+    "choices": [
+      "Starts with learner errors",
+      "Predicts errors before they occur",
+      "Focuses on intralingual errors"
+    ],
+    "answer": 1,
+    "explanation": "CA is predictive; EA is descriptive of actual errors.",
+    "category": "ca"
+  },
+  {
+    "q": "The decline of CA led to the rise of:",
+    "choices": [
+      "Error Analysis and Interlanguage theory",
+      "Pure behaviorist drilling",
+      "Theoretical syntax in classrooms"
+    ],
+    "answer": 0,
+    "explanation": "EA and IL recognized the learner’s active, internal language system.",
+    "category": "ca"
+  },
+  {
+    "q": "In CA, 'theoretical compatibility' means:",
+    "choices": [
+      "Both languages must be analyzed using the same linguistic model",
+      "Learners must understand linguistic theory",
+      "Teachers must agree on methodology"
+    ],
+    "answer": 0,
+    "explanation": "Valid comparison requires consistent analytical frameworks.",
+    "category": "ca"
+  },
+  {
+    "q": "Which error type is MOST amenable to CA explanation?",
+    "choices": [
+      "Saying 'eated' for 'ate'",
+      "Omitting third-person -s: 'he come'",
+      "Using 'big' instead of 'large' in formal writing"
+    ],
+    "answer": 1,
+    "explanation": "Arabic verbs don’t mark person/number like English, leading to omission.",
+    "category": "ca"
+  },
+  {
+    "q": "CA’s view of language is primarily:",
+    "choices": [
+      "Functional and communicative",
+      "Structural and formal",
+      "Sociolinguistic and variable"
+    ],
+    "answer": 1,
+    "explanation": "CA compares grammatical structures, not language use in context.",
+    "category": "ca"
+  },
+  {
+    "q": "The main pedagogical implication of CA is:",
+    "choices": [
+      "Teach all grammar points equally",
+      "Focus instruction on areas of L1-L2 difference",
+      "Avoid grammar entirely"
+    ],
+    "answer": 1,
+    "explanation": "CA suggests prioritizing structurally divergent features.",
+    "category": "ca"
+  },
+  {
+    "q": "Which scholar critiqued CA for ignoring learner creativity?",
+    "choices": [
+      "Lado",
+      "Corder",
+      "Stockwell"
+    ],
+    "answer": 1,
+    "explanation": "Corder (1967) emphasized the learner’s active role in forming hypotheses.",
+    "category": "ca"
+  },
+  {
+    "q": "CA is least useful for explaining errors in:",
+    "choices": [
+      "Phonology",
+      "Morphology",
+      "Pragmatics and discourse"
+    ],
+    "answer": 2,
+    "explanation": "Pragmatic competence involves context, culture, and interaction—beyond CA’s structural scope.",
+    "category": "ca"
+  },
+  {
+    "q": "In the CA hierarchy, 'Absent Category' ranks:",
+    "choices": [
+      "Third in difficulty",
+      "Second in difficulty",
+      "Fourth in difficulty"
+    ],
+    "answer": 0,
+    "explanation": "Order: Split (1), New (2), Absent (3), Coalesced (4), Correspondence (5).",
+    "category": "ca"
+  },
+  {
+    "q": "A teacher using CA principles would:",
+    "choices": [
+      "Ignore students’ L1",
+      "Anticipate article omission by Arabic speakers and provide targeted practice",
+      "Assume all errors are random"
+    ],
+    "answer": 1,
+    "explanation": "CA helps predict and address common L1-based difficulties proactively.",
+    "category": "ca"
+  },
+  {
+    "q": "What defines an 'error' in Error Analysis?",
+    "choices": [
+      "A random slip due to tiredness",
+      "A systematic deviation reflecting the learner’s current competence",
+      "A correct use of L2 that sounds odd"
+    ],
+    "answer": 1,
+    "explanation": "Errors reveal the learner’s developing interlanguage system (Corder).",
+    "category": "ea"
+  },
+  {
+    "q": "What defines a 'mistake' in EA?",
+    "choices": [
+      "A systematic L2 rule error",
+      "A performance slip that can be self-corrected",
+      "A fossilized form"
+    ],
+    "answer": 1,
+    "explanation": "Mistakes are temporary performance issues, not competence gaps.",
+    "category": "ea"
+  },
+  {
+    "q": "Which error is 'He goed to school'?",
+    "choices": [
+      "Interlingual (L1 transfer)",
+      "Intralingual (overgeneralization)",
+      "Performance mistake"
+    ],
+    "answer": 1,
+    "explanation": "This results from overextending the regular past tense rule in English.",
+    "category": "ea"
+  },
+  {
+    "q": "An Arab learner says 'Close the TV.' This is likely:",
+    "choices": [
+      "Phonological overgeneralization",
+      "Semantic interference from L1",
+      "A random mistake"
+    ],
+    "answer": 1,
+    "explanation": "Arabic may use a verb like 'close' for electronic devices, leading to false equivalence.",
+    "category": "ea"
+  },
+  {
+    "q": "How many steps are in Sridhar’s (1980) EA methodology?",
+    "choices": [
+      "5",
+      "8",
+      "10"
+    ],
+    "answer": 1,
+    "explanation": "Sridhar outlined an 8-step process from collection to remedy.",
+    "category": "ea"
+  },
+  {
+    "q": "The first step in EA is:",
+    "choices": [
+      "Classifying errors",
+      "Collecting learner language samples",
+      "Designing drills"
+    ],
+    "answer": 1,
+    "explanation": "Data collection (e.g., essays, speech) precedes analysis.",
+    "category": "ea"
+  },
+  {
+    "q": "EA revealed that CA:",
+    "choices": [
+      "Perfectly predicted all errors",
+      "Could not account for most attested learner errors",
+      "Focused too much on learners"
+    ],
+    "answer": 1,
+    "explanation": "EA showed many errors stem from L2 internal processes, not L1.",
+    "category": "ea"
+  },
+  {
+    "q": "'Huda student' for 'Huda is a student' by an Arabic speaker is:",
+    "choices": [
+      "Intralingual overgeneralization",
+      "Interlingual transfer (Arabic drops 'be' in present tense)",
+      "A performance mistake"
+    ],
+    "answer": 1,
+    "explanation": "Arabic often omits the copula in present tense—classic L1 transfer.",
+    "category": "ea"
+  },
+  {
+    "q": "A key strength of EA is that it:",
+    "choices": [
+      "Predicts errors before they happen",
+      "Provides data on actual learner difficulties",
+      "Ignores context"
+    ],
+    "answer": 1,
+    "explanation": "EA is empirical—it starts with real learner output.",
+    "category": "ea"
+  },
+  {
+    "q": "A limitation of EA is that it:",
+    "choices": [
+      "Overemphasizes developmental progress",
+      "Only shows what learners can’t do, not how they learn",
+      "Uses too much L1 data"
+    ],
+    "answer": 1,
+    "explanation": "EA is static; it doesn’t model the dynamic process of acquisition.",
+    "category": "ea"
+  },
+  {
+    "q": "In EA, 'overgeneralization' is a type of:",
+    "choices": [
+      "Interlingual error",
+      "Intralingual error",
+      "Performance mistake"
+    ],
+    "answer": 1,
+    "explanation": "It arises from misapplying L2 rules (e.g., 'foots', 'breaked').",
+    "category": "ea"
+  },
+  {
+    "q": "Errors of competence are:",
+    "choices": [
+      "Random and self-correctable",
+      "Systematic and reflect current L2 knowledge",
+      "Only found in native speakers"
+    ],
+    "answer": 1,
+    "explanation": "These show the learner’s transitional, rule-governed system.",
+    "category": "ea"
+  },
+  {
+    "q": "Which is an example of intralingual syntactic error?",
+    "choices": [
+      "Saying 'He is comes' (double marking)",
+      "Saying 'book Ahmad' (L1 possession)",
+      "Pronouncing 'ship' as 'sheep'"
+    ],
+    "answer": 0,
+    "explanation": "This reflects faulty application of English progressive tense rules.",
+    "category": "ea"
+  },
+  {
+    "q": "EA classifies errors by:",
+    "choices": [
+      "Only L1 influence",
+      "Source (L1, overgeneralization, etc.), type (morphological, syntactic), and frequency",
+      "Teacher preference"
+    ],
+    "answer": 1,
+    "explanation": "EA uses multi-dimensional classification for diagnostic insight.",
+    "category": "ea"
+  },
+  {
+    "q": "Learner avoidance can affect EA because:",
+    "choices": [
+      "Learners produce too many errors",
+      "Learners avoid structures they find difficult, hiding potential errors",
+      "Teachers don’t collect enough data"
+    ],
+    "answer": 1,
+    "explanation": "Absence of error doesn’t mean competence—it may reflect strategic avoidance.",
+    "category": "ea"
+  },
+  {
+    "q": "In EA, determining 'error seriousness' considers:",
+    "choices": [
+      "Only grammaticality",
+      "Impact on communication and comprehensibility",
+      "Number of syllables"
+    ],
+    "answer": 1,
+    "explanation": "Some errors (e.g., 'I eated') don’t impede meaning; others do.",
+    "category": "ea"
+  },
+  {
+    "q": "EA views the learner as:",
+    "choices": [
+      "A passive habit-former",
+      "An active hypothesis-maker about L2 rules",
+      "A mimic of native speech"
+    ],
+    "answer": 1,
+    "explanation": "Errors reflect the learner’s attempts to construct a rule system.",
+    "category": "ea"
+  },
+  {
+    "q": "Which error source is NOT interlingual?",
+    "choices": [
+      "L1 phonological transfer (/b/ for /p/)",
+      "Overgeneralization of L2 past tense",
+      "L1 syntactic structure transfer"
+    ],
+    "answer": 1,
+    "explanation": "Overgeneralization is intralingual—internal to the L2 system.",
+    "category": "ea"
+  },
+  {
+    "q": "EA’s focus on actual errors shifted attention from:",
+    "choices": [
+      "Learners to teachers",
+      "Teachers to learners",
+      "Theory to literature"
+    ],
+    "answer": 1,
+    "explanation": "EA centered the learner’s language as data, not teacher assumptions.",
+    "category": "ea"
+  },
+  {
+    "q": "An error like 'comed' for 'came' is categorized as:",
+    "choices": [
+      "Interlingual morphological",
+      "Intralingual morphological",
+      "Performance mistake"
+    ],
+    "answer": 1,
+    "explanation": "It’s a morphological error from overgeneralizing regular past tense.",
+    "category": "ea"
+  },
+  {
+    "q": "EA’s 'remedy' phase involves:",
+    "choices": [
+      "Ignoring errors",
+      "Providing targeted instruction or practice based on error patterns",
+      "Punishing learners"
+    ],
+    "answer": 1,
+    "explanation": "Teachers use EA findings to inform pedagogical responses.",
+    "category": "ea"
+  },
+  {
+    "q": "Which is a challenge in error identification?",
+    "choices": [
+      "All errors are obvious",
+      "L2 norms vary by context, making 'correctness' relative",
+      "Learners never make errors"
+    ],
+    "answer": 1,
+    "explanation": "What’s acceptable in informal speech may not be in formal writing.",
+    "category": "ea"
+  },
+  {
+    "q": "Literal translation of idioms (e.g., 'kick the bucket') is a:",
+    "choices": [
+      "Phonological intralingual error",
+      "Semantic intralingual error",
+      "Syntactic interlingual error"
+    ],
+    "answer": 1,
+    "explanation": "It reflects incorrect assumption that idioms translate word-for-word.",
+    "category": "ea"
+  },
+  {
+    "q": "EA emerged as a response to CA’s failure to:",
+    "choices": [
+      "Use enough linguistic theory",
+      "Predict or explain many actual learner errors",
+      "Focus on teachers"
+    ],
+    "answer": 1,
+    "explanation": "EA prioritized observed data over theoretical prediction.",
+    "category": "ea"
+  },
+  {
+    "q": "In EA, 'incomplete rule application' might produce:",
+    "choices": [
+      "Correct use of all tenses",
+      "Omission of third-person -s despite knowing the rule partially",
+      "Perfect pronunciation"
+    ],
+    "answer": 1,
+    "explanation": "The learner knows the rule exists but hasn’t fully internalized it.",
+    "category": "ea"
+  },
+  {
+    "q": "Which is NOT part of Sridhar’s EA steps?",
+    "choices": [
+      "Collection of errors",
+      "Prediction of future errors",
+      "Classification of error types"
+    ],
+    "answer": 1,
+    "explanation": "EA is descriptive, not predictive—unlike CA.",
+    "category": "ea"
+  },
+  {
+    "q": "EA helps teachers by:",
+    "choices": [
+      "Showing which errors are developmentally normal",
+      "Eliminating all errors immediately",
+      "Replacing curriculum design"
+    ],
+    "answer": 0,
+    "explanation": "Not all errors need correction; some reflect natural acquisition stages.",
+    "category": "ea"
+  },
+  {
+    "q": "An error like 'He is a student' said correctly by an Arabic speaker shows:",
+    "choices": [
+      "Negative transfer",
+      "Positive transfer or successful learning",
+      "A performance mistake"
+    ],
+    "answer": 1,
+    "explanation": "Correct use may indicate successful acquisition despite L1 differences.",
+    "category": "ea"
+  },
+  {
+    "q": "Mistakes are:",
+    "choices": [
+      "Indicative of fossilization",
+      "Performance phenomena that don’t reflect competence",
+      "Systematic and persistent"
+    ],
+    "answer": 1,
+    "explanation": "Even native speakers make slips; they’re not competence issues.",
+    "category": "ea"
+  },
+  {
+    "q": "Which error type is most common in early L2 stages?",
+    "choices": [
+      "Intralingual overgeneralization",
+      "Interlingual transfer",
+      "Pragmatic errors"
+    ],
+    "answer": 1,
+    "explanation": "Beginners rely heavily on L1 structures before developing L2 rules.",
+    "category": "ea"
+  },
+  {
+    "q": "EA’s classification might consider an error 'less serious' if:",
+    "choices": [
+      "It impedes all communication",
+      "It doesn’t affect comprehensibility",
+      "It occurs in writing only"
+    ],
+    "answer": 1,
+    "explanation": "Pedagogical priority goes to errors that cause real misunderstanding.",
+    "category": "ea"
+  },
+  {
+    "q": "A learner says 'I have 20 years' instead of 'I am 20 years old.' This is:",
+    "choices": [
+      "Intralingual overgeneralization",
+      "Interlingual transfer (French/Arabic structure)",
+      "A phonological mistake"
+    ],
+    "answer": 1,
+    "explanation": "Many languages use 'have' for age—classic L1 interference.",
+    "category": "ea"
+  },
+  {
+    "q": "In EA, 'false concepts' refer to:",
+    "choices": [
+      "Correct but unusual word choices",
+      "Learner misconceptions about L2 meaning or usage",
+      "Teacher errors"
+    ],
+    "answer": 1,
+    "explanation": "E.g., thinking 'big' and 'large' are always interchangeable.",
+    "category": "ea"
+  },
+  {
+    "q": "EA data is typically collected from:",
+    "choices": [
+      "Only controlled experiments",
+      "Compositions, oral interviews, and classroom tasks",
+      "Theoretical grammars"
+    ],
+    "answer": 1,
+    "explanation": "Naturalistic and elicited production provides rich error data.",
+    "category": "ea"
+  },
+  {
+    "q": "Which statement about EA is TRUE?",
+    "choices": [
+      "It assumes all errors are from L1",
+      "It recognizes multiple error sources including L2 internal factors",
+      "It ignores learner output"
+    ],
+    "answer": 1,
+    "explanation": "EA was revolutionary for acknowledging intralingual processes.",
+    "category": "ea"
+  },
+  {
+    "q": "An error like 'She can sings' shows:",
+    "choices": [
+      "L1 interference",
+      "Incomplete rule application (modal + base verb)",
+      "A performance mistake"
+    ],
+    "answer": 1,
+    "explanation": "The learner hasn’t fully acquired that modals are followed by bare infinitives.",
+    "category": "ea"
+  },
+  {
+    "q": "EA contributed to SLA by:",
+    "choices": [
+      "Proving behaviorism correct",
+      "Showing learners create systematic, rule-governed systems",
+      "Eliminating the need for theory"
+    ],
+    "answer": 1,
+    "explanation": "Errors aren’t random—they reveal underlying linguistic competence.",
+    "category": "ea"
+  },
+  {
+    "q": "Which is a semantic interlingual error?",
+    "choices": [
+      "Saying 'goed'",
+      "Using 'embarrassed' to mean 'pregnant' (false friend from French)",
+      "Saying 'He come'"
+    ],
+    "answer": 1,
+    "explanation": "False friends across languages cause meaning errors.",
+    "category": "ea"
+  },
+  {
+    "q": "In phonological intralingual error, a learner might:",
+    "choices": [
+      "Transfer L1 sounds directly",
+      "Apply L2 vowel rules inconsistently (e.g., in 'count' vs. 'country')",
+      "Never make pronunciation errors"
+    ],
+    "answer": 1,
+    "explanation": "This reflects unstable or incomplete phonological rule knowledge.",
+    "category": "ea"
+  },
+  {
+    "q": "EA’s emphasis on 'systematicity' means:",
+    "choices": [
+      "Errors occur randomly",
+      "Errors follow consistent patterns reflecting underlying rules",
+      "Only natives have systematic language"
+    ],
+    "answer": 1,
+    "explanation": "Consistency in errors proves the learner has a mental grammar.",
+    "category": "ea"
+  },
+  {
+    "q": "Which step follows 'identification of errors' in EA?",
+    "choices": [
+      "Remedy",
+      "Classification of error types",
+      "Prediction"
+    ],
+    "answer": 1,
+    "explanation": "After spotting deviations, analysts categorize them by type and source.",
+    "category": "ea"
+  },
+  {
+    "q": "EA differs from CA in that EA:",
+    "choices": [
+      "Starts with theory, not data",
+      "Studies both interlingual and intralingual errors",
+      "Ignores actual learner language"
+    ],
+    "answer": 1,
+    "explanation": "EA’s broad scope includes all error sources, not just L1.",
+    "category": "ea"
+  },
+  {
+    "q": "Who coined the term 'Interlanguage'?",
+    "choices": [
+      "Lado",
+      "Corder",
+      "Selinker"
+    ],
+    "answer": 2,
+    "explanation": "Selinker (1969) introduced 'Interlanguage' as the learner’s evolving system.",
+    "category": "il"
+  },
+  {
+    "q": "What does 'fossilization' refer to?",
+    "choices": [
+      "Temporary errors during learning",
+      "Permanent retention of non-target-like forms despite exposure",
+      "Complete mastery of L2"
+    ],
+    "answer": 1,
+    "explanation": "Fossilized errors resist correction even after years of input (Selinker).",
+    "category": "il"
+  },
+  {
+    "q": "Which is a cognitive process in Selinker’s (1972) IL model?",
+    "choices": [
+      "Teacher personality",
+      "Overgeneralization of L2 rules",
+      "Classroom temperature"
+    ],
+    "answer": 1,
+    "explanation": "Overgeneralization is a key internal mechanism in IL development.",
+    "category": "il"
+  },
+  {
+    "q": "Interlanguage is permeable, meaning:",
+    "choices": [
+      "It is fixed and unchanging",
+      "Its rules are unstable and open to revision with new input",
+      "It only allows certain sounds"
+    ],
+    "answer": 1,
+    "explanation": "Permeability allows IL to evolve as learners encounter new data.",
+    "category": "il"
+  },
+  {
+    "q": "Which scholar described IL as 'approximative systems'?",
+    "choices": [
+      "Selinker",
+      "Nemser",
+      "Corder"
+    ],
+    "answer": 1,
+    "explanation": "Nemser (1971) used 'approximative systems' to describe learner language.",
+    "category": "il"
+  },
+  {
+    "q": "IL is systematic because:",
+    "choices": [
+      "It mimics L1 exactly",
+      "It follows consistent internal rules (e.g., fixed word order)",
+      "It is random and chaotic"
+    ],
+    "answer": 1,
+    "explanation": "Learners produce consistent, rule-governed output—even if non-native.",
+    "category": "il"
+  },
+  {
+    "q": "Which factor may cause fossilization?",
+    "choices": [
+      "High motivation and rich input",
+      "Advanced age, low motivation, or limited communicative need",
+      "Perfect classroom conditions"
+    ],
+    "answer": 1,
+    "explanation": "Selinker & Lamendella (1978) identified these as key fossilization triggers.",
+    "category": "il"
+  },
+  {
+    "q": "Transfer of training refers to:",
+    "choices": [
+      "L1 influence on L2",
+      "Effects of instruction or teacher input on IL",
+      "Natural language exposure only"
+    ],
+    "answer": 1,
+    "explanation": "Teacher corrections or textbook rules shape the learner’s IL.",
+    "category": "il"
+  },
+  {
+    "q": "L2 communication strategies include:",
+    "choices": [
+      "Avoiding all speaking",
+      "Using gestures, paraphrase, or L1 to convey meaning",
+      "Memorizing dictionaries"
+    ],
+    "answer": 1,
+    "explanation": "These strategies help learners negotiate meaning during interaction.",
+    "category": "il"
+  },
+  {
+    "q": "IL differs from natural language in that it is:",
+    "choices": [
+      "More complex",
+      "Reduced in grammatical, lexical, and pragmatic scope",
+      "Identical to L1"
+    ],
+    "answer": 1,
+    "explanation": "IL systems are simpler and less nuanced than native competence.",
+    "category": "il"
+  },
+  {
+    "q": "Which is NOT one of Selinker’s five IL processes?",
+    "choices": [
+      "L1 transfer",
+      "L2 learning strategies",
+      "Universal grammar activation"
+    ],
+    "answer": 2,
+    "explanation": "Selinker’s processes are L1 transfer, training transfer, L2 strategies, communication strategies, and overgeneralization.",
+    "category": "il"
+  },
+  {
+    "q": "IL methodology compares:",
+    "choices": [
+      "Only L1 and L2",
+      "L1, IL, and native L2 data",
+      "Only learner errors"
+    ],
+    "answer": 1,
+    "explanation": "Triangulation reveals how IL differs from both L1 and target L2.",
+    "category": "il"
+  },
+  {
+    "q": "A key criticism of IL theory is:",
+    "choices": [
+      "It ignores all errors",
+      "It lacks a clear method to describe developmental changes over time",
+      "It focuses too much on motivation"
+    ],
+    "answer": 1,
+    "explanation": "Tracking IL development requires extensive longitudinal data.",
+    "category": "il"
+  },
+  {
+    "q": "IL shifts focus from error correction to:",
+    "choices": [
+      "Punishment",
+      "Understanding developmental progression",
+      "Eliminating L1"
+    ],
+    "answer": 1,
+    "explanation": "Errors are seen as natural stages, not failures to be eradicated.",
+    "category": "il"
+  },
+  {
+    "q": "Which error is likely fossilized?",
+    "choices": [
+      "A beginner’s omission of articles",
+      "An advanced speaker’s persistent L1-influenced word order",
+      "A slip like 'teached' once"
+    ],
+    "answer": 1,
+    "explanation": "Fossilization affects stable, long-term non-target forms in proficient learners.",
+    "category": "il"
+  },
+  {
+    "q": "IL is internally consistent, meaning:",
+    "choices": [
+      "It matches native speech exactly",
+      "It operates as a coherent linguistic system with its own logic",
+      "It changes randomly"
+    ],
+    "answer": 1,
+    "explanation": "Even 'wrong' IL sentences follow the learner’s mental rules.",
+    "category": "il"
+  },
+  {
+    "q": "Which process explains saying 'breaked'?",
+    "choices": [
+      "L1 transfer",
+      "Overgeneralization of L2 rules",
+      "Transfer of training"
+    ],
+    "answer": 1,
+    "explanation": "This reflects extending the regular past tense rule to irregular verbs.",
+    "category": "il"
+  },
+  {
+    "q": "IL emerged in response to limitations of:",
+    "choices": [
+      "Only CA",
+      "CA and EA",
+      "Theoretical linguistics only"
+    ],
+    "answer": 1,
+    "explanation": "IL integrated insights from both, adding a dynamic, developmental view.",
+    "category": "il"
+  },
+  {
+    "q": "Which is a social dimension in Selinker’s IL model?",
+    "choices": [
+      "Overgeneralization",
+      "L2 communication strategies",
+      "Phonological processing"
+    ],
+    "answer": 1,
+    "explanation": "Communication strategies are used in social interaction to convey meaning.",
+    "category": "il"
+  },
+  {
+    "q": "IL obeys universal constraints, such as:",
+    "choices": [
+      "All languages having articles",
+      "Presence of singular/plural distinctions or deep structure",
+      "Identical word order"
+    ],
+    "answer": 1,
+    "explanation": "IL respects linguistic universals, even if simplified.",
+    "category": "il"
+  },
+  {
+    "q": "Collecting authentic IL data is challenging because:",
+    "choices": [
+      "Learners always speak perfectly",
+      "Performance varies by task, context, and anxiety level",
+      "IL doesn’t exist"
+    ],
+    "answer": 1,
+    "explanation": "Spontaneous vs. monitored speech yield different IL manifestations.",
+    "category": "il"
+  },
+  {
+    "q": "'Transitional competence' was a term used by:",
+    "choices": [
+      "Selinker",
+      "Corder",
+      "Lado"
+    ],
+    "answer": 1,
+    "explanation": "Corder (1967) described learner language as transitional toward target competence.",
+    "category": "il"
+  },
+  {
+    "q": "Which statement about IL is FALSE?",
+    "choices": [
+      "It is rule-governed",
+      "It is identical to L1",
+      "It evolves over time (unless fossilized)"
+    ],
+    "answer": 1,
+    "explanation": "IL is a unique system, distinct from both L1 and L2.",
+    "category": "il"
+  },
+  {
+    "q": "IL theory supports:",
+    "choices": [
+      "Ignoring all errors",
+      "Tailoring instruction to learners’ current developmental stage",
+      "Teaching only literature"
+    ],
+    "answer": 1,
+    "explanation": "Knowing a learner’s IL helps target appropriate input and tasks.",
+    "category": "il"
+  },
+  {
+    "q": "Fossilization may occur because:",
+    "choices": [
+      "All learners achieve native-like competence",
+      "The learner’s communicative needs are met without perfect accuracy",
+      "Grammar is always taught well"
+    ],
+    "answer": 1,
+    "explanation": "If 'good enough' works, motivation to refine may drop (Selinker).",
+    "category": "il"
+  },
+  {
+    "q": "Which is a psychological process in IL development?",
+    "choices": [
+      "Transfer of training",
+      "L2 learning strategies",
+      "Classroom layout"
+    ],
+    "answer": 1,
+    "explanation": "Learning strategies (e.g., note-taking, pattern recognition) are cognitive.",
+    "category": "il"
+  },
+  {
+    "q": "IL analysis helps teachers:",
+    "choices": [
+      "Assume all learners are at the same level",
+      "Understand the logic behind 'errors' and plan stage-appropriate input",
+      "Avoid all feedback"
+    ],
+    "answer": 1,
+    "explanation": "IL provides insight into the learner’s current linguistic system.",
+    "category": "il"
+  },
+  {
+    "q": "Which error source is social in IL theory?",
+    "choices": [
+      "Overgeneralization",
+      "L2 communication strategies",
+      "Phonological processing"
+    ],
+    "answer": 1,
+    "explanation": "Communication strategies are deployed in real-time interaction.",
+    "category": "il"
+  },
+  {
+    "q": "IL is dynamic, meaning it:",
+    "choices": [
+      "Never changes",
+      "Constantly restructures as learning progresses",
+      "Is fixed after age 10"
+    ],
+    "answer": 1,
+    "explanation": "IL evolves through exposure, interaction, and hypothesis testing.",
+    "category": "il"
+  },
+  {
+    "q": "A learner says 'She eated pizza.' IL theory interprets this as:",
+    "choices": [
+      "Random noise",
+      "Evidence of an active, rule-forming system",
+      "Proof of low intelligence"
+    ],
+    "answer": 1,
+    "explanation": "This shows the learner has internalized a past tense rule but not its exceptions.",
+    "category": "il"
+  },
+  {
+    "q": "Which is required to validate IL developmental claims?",
+    "choices": [
+      "One-time test scores",
+      "Longitudinal data over months or years",
+      "Teacher opinions"
+    ],
+    "answer": 1,
+    "explanation": "Tracking change requires observing the same learner over time.",
+    "category": "il"
+  },
+  {
+    "q": "IL rejects the idea that learner language is:",
+    "choices": [
+      "Systematic",
+      "A collection of random errors and L1 habits",
+      "Transitional"
+    ],
+    "answer": 1,
+    "explanation": "IL theory affirms that learner language is rule-governed and coherent.",
+    "category": "il"
+  },
+  {
+    "q": "Which factor is NOT listed by Selinker as causing fossilization?",
+    "choices": [
+      "Advanced age",
+      "High integrative motivation",
+      "Limited L2 input"
+    ],
+    "answer": 1,
+    "explanation": "High motivation typically delays fossilization; low motivation promotes it.",
+    "category": "il"
+  },
+  {
+    "q": "In IL, 'reduced systems' means:",
+    "choices": [
+      "Fewer and simpler grammatical, lexical, and pragmatic rules than native competence",
+      "Complete absence of rules",
+      "Identical to L1 structure"
+    ],
+    "answer": 0,
+    "explanation": "IL systems are functional but less complex than target language systems.",
+    "category": "il"
+  },
+  {
+    "q": "IL’s universality claim means:",
+    "choices": [
+      "All learners fossilize at the same rate",
+      "IL systems respect linguistic universals like structure dependency",
+      "All ILs look the same"
+    ],
+    "answer": 1,
+    "explanation": "Even simplified ILs adhere to constraints common to all human languages.",
+    "category": "il"
+  },
+  {
+    "q": "Which process explains an Arab learner saying 'book Ahmad'?",
+    "choices": [
+      "Overgeneralization",
+      "L1 transfer",
+      "L2 communication strategy"
+    ],
+    "answer": 1,
+    "explanation": "This reflects direct transfer of Arabic noun possessive structure.",
+    "category": "il"
+  },
+  {
+    "q": "IL theory views errors as:",
+    "choices": [
+      "Signs of failure",
+      "Natural indicators of active language construction",
+      "Proof that L1 should be banned"
+    ],
+    "answer": 1,
+    "explanation": "Errors are evidence of learning, not deficiency.",
+    "category": "il"
+  },
+  {
+    "q": "Which is a limitation of IL theory?",
+    "choices": [
+      "It overemphasizes social factors",
+      "It is difficult to observe 'true' IL due to performance variables",
+      "It ignores all cognitive processes"
+    ],
+    "answer": 1,
+    "explanation": "Context, task type, and anxiety affect what IL forms learners produce.",
+    "category": "il"
+  },
+  {
+    "q": "IL supports a pedagogical approach that is:",
+    "choices": [
+      "Error-elimination focused",
+      "Developmentally sensitive and process-oriented",
+      "Based only on L1 comparison"
+    ],
+    "answer": 1,
+    "explanation": "Teaching should align with the learner’s current stage of IL development.",
+    "category": "il"
+  },
+  {
+    "q": "Which scholar emphasized that learners form 'transitional competence'?",
+    "choices": [
+      "Selinker",
+      "Corder",
+      "Widdowson"
+    ],
+    "answer": 1,
+    "explanation": "Corder (1967) highlighted the learner’s active construction of interim rules.",
+    "category": "il"
+  },
+  {
+    "q": "Fossilization is problematic for:",
+    "choices": [
+      "Only beginners",
+      "Advanced learners who plateau despite continued exposure",
+      "Native speakers"
+    ],
+    "answer": 1,
+    "explanation": "It explains why many learners never achieve full native-like competence.",
+    "category": "il"
+  },
+  {
+    "q": "In IL, 'transfer of training' might result from:",
+    "choices": [
+      "L1 influence only",
+      "Over-correction based on teacher feedback or textbook rules",
+      "Natural exposure alone"
+    ],
+    "answer": 1,
+    "explanation": "E.g., a learner overuses formal structures taught in class.",
+    "category": "il"
+  },
+  {
+    "q": "IL methodology helps distinguish between:",
+    "choices": [
+      "Mistakes and typos",
+      "L1 interference, overgeneralization, and other sources in learner output",
+      "Good and bad teachers"
+    ],
+    "answer": 1,
+    "explanation": "Triangulating L1, IL, and L2 data clarifies error origins.",
+    "category": "il"
+  }
+]
+    
+    // Game state
+let score = 0;
+let current = 0;
+let selectedQuestions = [];
+let timer = 120;
+let timerInterval = null;
+let totalTime = 0;
+let userAnswers = [];
+let timeUsed = 0;
+
+// DOM Elements
+const settingsEl = document.getElementById('settings');
+const gameInterfaceEl = document.getElementById('game-interface');
+const resultsEl = document.getElementById('results');
+const timerEl = document.getElementById('timer');
+const questionEl = document.getElementById('question');
+const choicesEl = document.getElementById('choices');
+const feedbackEl = document.getElementById('feedback');
+const explanationEl = document.getElementById('explanation');
+const nextBtn = document.getElementById('next-btn');
+const playAgainBtn = document.getElementById('play-again-btn');
+const scoreEl = document.getElementById('score');
+const progressFill = document.getElementById('progress-fill');
+const questionCounterEl = document.getElementById('question-counter');
+const questionCategoryEl = document.getElementById('question-category');
+const startBtn = document.getElementById('start-btn');
+const questionCountEl = document.getElementById('question-count');
+const timeLimitEl = document.getElementById('time-limit');
+
+// Initialize the game
+function init() {
+  startBtn.addEventListener('click', startGameWithSettings);
+    // Add this line for the main menu button
+  document.getElementById('main-menu-btn').addEventListener('click', () => {
+    goToPage('../Quiz.html'); // or whatever your main page is called
+  });
+}
+
+// Start game with custom settings
+function startGameWithSettings() {
+  const questionCount = parseInt(questionCountEl.value);
+  timer = parseInt(timeLimitEl.value);
+  totalTime = timer;
+  
+  // Get selected categories
+  const selectedCategories = [];
+  document.querySelectorAll('input[name="category"]:checked').forEach(checkbox => {
+    selectedCategories.push(checkbox.value);
+  });
+  
+  // Filter questions by category
+  const filteredQuestions = questions.filter(q => selectedCategories.includes(q.category));
+  
+  selectedQuestions = getRandomQuestions(filteredQuestions, questionCount);
+  
+  if (selectedQuestions.length === 0) {
+    alert("Please select at least one question category!");
+    return;
+  }
+  
+  score = 0;
+  current = 0;
+  userAnswers = [];
+  timeUsed = 0;
+  
+  scoreEl.textContent = `Score: ${score}`;
+  questionCounterEl.textContent = `Question: 1/${selectedQuestions.length}`;
+  
+  settingsEl.classList.add('hidden');
+  gameInterfaceEl.classList.remove('hidden');
+  resultsEl.classList.add('hidden');
+  
+  startTimer();
+  showQuestion();
+}
+
+// Get random subset of questions
+function getRandomQuestions(arr, count) {
+  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, Math.min(count, arr.length));
+}
+
+// Timer functions
+function startTimer() {
+  clearInterval(timerInterval);
+  updateTimer();
+  timerInterval = setInterval(() => {
+    timer--;
+    timeUsed++;
+    updateTimer();
+    if (timer <= 0) {
+      endGame();
+    }
+  }, 1000);
+}
+
+function updateTimer() {
+  timerEl.textContent = `Time: ${timer}s`;
+  if (timer <= 10) {
+    timerEl.classList.add('warning');
+  } else {
+    timerEl.classList.remove('warning');
+  }
+}
+
+// Update progress bar
+function updateProgress() {
+  const progress = ((current) / selectedQuestions.length) * 100;
+  progressFill.style.width = `${progress}%`;
+}
+
+// Show current question
+function showQuestion() {
+  if (current >= selectedQuestions.length) {
+    endGame();
+    return;
+  }
+
+  const q = selectedQuestions[current];
+  questionEl.textContent = q.q;
+  questionCategoryEl.textContent = getCategoryDisplayName(q.category);
+  choicesEl.innerHTML = '';
+  feedbackEl.textContent = '';
+  explanationEl.textContent = '';
+  feedbackEl.className = '';
+  explanationEl.className = '';
+  nextBtn.classList.add('hidden');
+  updateProgress();
+  questionCounterEl.textContent = `Question: ${current + 1}/${selectedQuestions.length}`;
+
+  q.choices.forEach((choice, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = choice;
+    btn.onclick = () => selectAnswer(i, q);
+    choicesEl.appendChild(btn);
+  });
+}
+
+// Get display name for category
+function getCategoryDisplayName(category) {
+  const names = {
+    'foundations': 'Foundations of Applied Linguistics',
+    'ca': 'Contrastive Analysis (CA)',
+    'ea': 'Error Analysis (EA)',
+    'il': 'Interlanguage (IL)'
+  };
+  return names[category] || category.charAt(0).toUpperCase() + category.slice(1);
+}
+
+// Handle answer selection
+function selectAnswer(selectedIndex, q) {
+  const isCorrect = selectedIndex === q.answer;
+  
+  // Store user answer for review
+  userAnswers.push({
+    question: q.q,
+    userChoice: q.choices[selectedIndex],
+    correctChoice: q.choices[q.answer],
+    explanation: q.explanation,
+    isCorrect: isCorrect
+  });
+
+  feedbackEl.textContent = isCorrect ? 'Correct!' : 'Incorrect!';
+  explanationEl.textContent = q.explanation;
+  
+  feedbackEl.className = isCorrect ? 'correct show' : 'incorrect show';
+  explanationEl.className = 'explanation show';
+
+  if (isCorrect) {
+    score++;
+    scoreEl.textContent = `Score: ${score}`;
+  }
+
+  // Disable choice buttons and highlight correct/incorrect
+  document.querySelectorAll('.choice-btn').forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.answer) {
+      btn.classList.add('correct-answer');
+    } else if (i === selectedIndex && !isCorrect) {
+      btn.classList.add('incorrect-answer');
+    }
+  });
+
+  nextBtn.classList.remove('hidden');
+}
+
+// Next question
+function nextQuestion() {
+  current++;
+  if (current < selectedQuestions.length && timer > 0) {
+    showQuestion();
+  } else {
+    endGame();
+  }
+}
+
+// End game
+function endGame() {
+  clearInterval(timerInterval);
+  
+  gameInterfaceEl.classList.add('hidden');
+  resultsEl.classList.remove('hidden');
+  
+  showResults(); // Use the new showResults function
+}
+
+// Show review of answers
+function showReview() {
+  let reviewHTML = '<h2>Review Your Answers</h2>';
+  
+  userAnswers.forEach((answer, index) => {
+    reviewHTML += `
+      <div class="review-item ${answer.isCorrect ? 'correct' : 'incorrect'}">
+        <h3>Question ${index + 1}:</h3>
+        <p>${answer.question}</p>
+        <div class="review-answer">
+          <p><strong>Your answer:</strong> ${answer.userChoice}</p>
+          <p><strong>Correct answer:</strong> ${answer.correctChoice}</p>
+        </div>
+        <div class="review-explanation">
+          <p><strong>Explanation:</strong> ${answer.explanation}</p>
+        </div>
+      </div>
+    `;
+  });
+  
+  resultsEl.innerHTML = `
+    <div id="results-content">
+      ${reviewHTML}
+      <div id="results-actions">
+        <button id="back-to-results" class="btn-secondary">Back to Results</button>
+        <button class="btn-primary" onclick="restartGame()">New Quiz</button>
+      </div>
+    </div>
+  `;
+
+  // Add event listener to the new button
+  document.getElementById('back-to-results').addEventListener('click', showResults);
+}
+
+// Show results screen
+function showResults() {
+  const maxScore = selectedQuestions.length;
+  const percent = Math.round((score / maxScore) * 100);
+  
+  resultsEl.innerHTML = `
+    <div id="results-content">
+      <h2>Quiz Complete!</h2>
+      <div id="results-score">
+        <div id="score-circle">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="54" fill="none" stroke="#e0e0e0" stroke-width="12"></circle>
+            <circle id="score-circle-fill" cx="60" cy="60" r="54" fill="none" stroke="#00BCD4" stroke-width="12" stroke-dasharray="339.292" stroke-dashoffset="339.292" transform="rotate(-90 60 60)"></circle>
+            <text id="score-percent" x="60" y="65" text-anchor="middle" font-size="24" font-weight="bold" fill="#00BCD4">${percent}%</text>
+          </svg>
+        </div>
+        <div id="score-text">
+          <p>You scored</p>
+          <h3 id="final-score">${score}/${maxScore}</h3>
+        </div>
+      </div>
+      <div id="performance-message">${getPerformanceMessage(percent)}</div>
+      <div id="results-breakdown">
+        <div class="result-stat">
+          <span class="stat-label">Correct Answers:</span>
+          <span id="correct-count" class="stat-value">${score}</span>
+        </div>
+        <div class="result-stat">
+          <span class="stat-label">Time Used:</span>
+          <span id="time-used" class="stat-value">${totalTime - timer}s</span>
+        </div>
+        <div class="result-stat">
+          <span class="stat-label">Questions Answered:</span>
+          <span id="questions-answered" class="stat-value">${current}</span>
+        </div>
+      </div>
+      <div id="results-actions">
+        <button id="review-btn" class="btn-secondary">Review Answers</button>
+        <button id="new-game-btn" class="btn-primary">New Quiz</button>
+      </div>
+    </div>
+  `;
+
+  // Re-add event listeners
+  document.getElementById('review-btn').addEventListener('click', showReview);
+  document.getElementById('new-game-btn').addEventListener('click', restartGame);
+  
+  // Re-animate the score circle
+  const circumference = 2 * Math.PI * 54;
+  const offset = circumference - (percent / 100) * circumference;
+  document.getElementById('score-circle-fill').style.strokeDashoffset = offset;
+}
+
+// Helper function for performance message
+function getPerformanceMessage(percent) {
+  if (percent >= 90) return 'Outstanding! You have a deep understanding of Applied Linguistics.';
+  if (percent >= 70) return 'Great job! You have a solid grasp of Applied Linguistics concepts.';
+  if (percent >= 50) return 'Good effort! Review the explanations to strengthen your knowledge.';
+  return 'Keep studying! Review the material and try again.';
+}
+
+// Go to home page
+function goToPage(url) {
+  window.location.href = url;
+}
+
+// Restart game
+function restartGame() {
+  clearInterval(timerInterval);
+  settingsEl.classList.remove('hidden');
+  gameInterfaceEl.classList.add('hidden');
+  resultsEl.classList.add('hidden');
+}
+
+// Initialize on load
+window.onload = init;
+  </script>
+</body>
+</html>
