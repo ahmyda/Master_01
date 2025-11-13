@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learning Hub - Quiz Portal</title>
+  <style>
+    :root {
+      --primary: #00BCD4; 
+      --accent: #F4D03F; 
+      --correct: #2ECC71; 
+      --incorrect: #E74C3C; 
+      --bg: #1E272E;
+      --card-bg: #2D3941;
+      --text: #F8F9FA;
+      --secondary: #3498DB;
+      --light-gray: #566573;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .header {
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      font-size: 3.5em;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+
+    h1 {
+      color: var(--primary);
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      color: var(--light-gray);
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    .quiz-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin: 40px 0;
+    }
+
+    .quiz-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 30px 25px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quiz-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--primary);
+    }
+
+    .quiz-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .quiz-card:nth-child(1):hover {
+      border-color: var(--primary);
+    }
+
+    .quiz-card:nth-child(2):hover {
+      border-color: var(--secondary);
+    }
+
+    .quiz-card:nth-child(3):hover {
+      border-color: var(--accent);
+    }
+
+    .quiz-icon {
+      font-size: 3em;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .quiz-card:nth-child(1) .quiz-icon {
+      color: var(--primary);
+    }
+
+    .quiz-card:nth-child(2) .quiz-icon {
+      color: var(--secondary);
+    }
+
+    .quiz-card:nth-child(3) .quiz-icon {
+      color: var(--accent);
+    }
+
+    .quiz-title {
+      font-size: 1.5em;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+
+    .quiz-description {
+      color: var(--light-gray);
+      font-size: 0.95em;
+      margin-bottom: 20px;
+    }
+
+    .quiz-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85em;
+      color: var(--light-gray);
+      margin-top: 15px;
+    }
+
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-start {
+      background: var(--primary);
+      color: var(--bg);
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .quiz-card:nth-child(1) .btn-start {
+      background: var(--primary);
+    }
+
+    .quiz-card:nth-child(2) .btn-start {
+      background: var(--secondary);
+    }
+
+    .quiz-card:nth-child(3) .btn-start {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .btn-start:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .footer {
+      margin-top: 50px;
+      color: var(--light-gray);
+      font-size: 0.9em;
+      border-top: 1px solid var(--light-gray);
+      padding-top: 20px;
+      width: 100%;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .quiz-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      h1 {
+        font-size: 2em;
+      }
+      
+      .logo {
+        font-size: 2.5em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 10px;
+      }
+      
+      .quiz-card {
+        padding: 20px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">🧠</div>
+      <h1>Learning Hub</h1>
+      <p class="subtitle">Test your knowledge across different disciplines</p>
+      <p>Choose a quiz to begin your learning journey</p>
+    </div>
+
+    <div class="quiz-grid">
+      <!-- Applied Linguistics Quiz -->
+      <a href="../quiz/AL.html" class="quiz-card">
+        <div class="quiz-icon">🗣️</div>
+        <h3 class="quiz-title">Applied Linguistics</h3>
+        <p class="quiz-description">
+          Explore language theory, analysis methods, and real-world applications 
+          of linguistic .
+        </p>
+        <div class="quiz-stats">
+          <div class="stat">📊 50+ Questions</div>
+          <div class="stat">⏱️ 2-5 min</div>
+        </div>
+        <div class="btn-start">Start Quiz</div>
+      </a>
+
+      <!-- DIDActics Quiz -->
+      <a href="../quiz/DD.html" class="quiz-card">
+        <div class="quiz-icon">📚</div>
+        <h3 class="quiz-title">DIDActics</h3>
+        <p class="quiz-description">
+          Master teaching methodologies, learning theories, and instructional 
+          design principles for effective educational practices.
+        </p>
+        <div class="quiz-stats">
+          <div class="stat">📊 100+ Questions</div>
+          <div class="stat">⏱️ 3-10 min</div>
+        </div>
+        <div class="btn-start">Start Quiz</div>
+      </a>
+
+      <!-- Socio Quiz -->
+    
+    </div>
+
+    <div class="footer">
+      <p>© 2024 Learning Hub | Expand Your Knowledge</p>
+    </div>
+  </div>
+
+  <script>
+    // Add some interactive effects
+    document.addEventListener('DOMContentLoaded', function() {
+      const quizCards = document.querySelectorAll('.quiz-card');
+      
+      quizCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-8px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+        });
+      });
+
+      // Add click animation
+      quizCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+          // You can add loading animation here if needed
+          console.log('Navigating to:', this.href);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
