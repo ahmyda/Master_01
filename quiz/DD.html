@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Didactics Quiz</title>
+  <link rel="stylesheet" href="../css/try.css">
+</head>
+<body>
+  <div id="game">
+    <div id="header">
+      <h1>Didactics Quiz</h1>
+      <p>Test your knowledge of Learner-teacher methos and theories</p>
+    </div>
+    
+    <!-- Game Settings -->
+    <div id="settings" class="settings-panel">
+      <h2>Quiz Settings</h2>
+      <div class="setting-group">
+        <label for="question-count">Number of Questions:</label>
+        <select id="question-count">
+          <option value="5">5 Questions</option>
+          <option value="10" selected>10 Questions</option>
+          <option value="15">15 Questions</option>
+          <option value="20">20 Questions</option>
+        </select>
+      </div>
+      <div class="setting-group">
+        <label for="time-limit">Time Limit:</label>
+        <select id="time-limit">
+          <option value="60">1 Minute</option>
+          <option value="120" selected>2 Minutes</option>
+          <option value="180">3 Minutes</option>
+          <option value="300">5 Minutes</option>
+        </select>
+      </div>
+      <div class="setting-group">
+        <label>Question Categories:</label>
+           <div class="checkbox-group">
+                <label><input type="checkbox" name="category" value="methods" checked> Language Teaching Methods</label>
+                <label><input type="checkbox" name="category" value="teacher_dev" checked> Teacher Development & Reflection</label>
+                <label><input type="checkbox" name="category" value="learning" checked> Learning Theories & Student Factors</label>
+                <label><input type="checkbox" name="category" value="interaction" checked> Classroom Interaction & Management</label>
+            </div>
+      </div>
+      <button id="start-btn" class="btn-primary">Start Quiz</button>
+      <!-- Add this button with your other controls in the settings panel -->
+    <button id="main-menu-btn" class="btn-secondary">Main Menu</button>
+    </div>
+    
+    <!-- Game Interface -->
+    <div id="game-interface" class="hidden">
+      <div id="game-header">
+        <div id="timer-container">
+          <div id="timer">Time: 120s</div>
+          <div id="progress-bar">
+            <div id="progress-fill"></div>
+          </div>
+        </div>
+        <div id="score-container">
+          <div id="score">Score: 0</div>
+          <div id="question-counter">Question: 1/10</div>
+        </div>
+      </div>
+      
+      <div id="question-container">
+        <div id="question-category" class="category-tag">Applied Linguistics</div>
+        <div id="question">Get ready...</div>
+      </div>
+      
+      <div class="choices" id="choices"></div>
+      
+      <div id="feedback-container">
+        <div id="feedback"></div>
+        <div id="explanation"></div>
+      </div>
+      
+      <div id="controls">
+        <button id="back" class="btn-primary hidden" onclick="goToPage('../Quiz.html')">Home</button>
+        <button id="next-btn" class="btn-primary " onclick="nextQuestion()">Next Question</button>
+        <button id="play-again-btn" class="btn-primary hidden" onclick="restartGame()">Play Again!</button>
+      </div>
+    </div>
+  
+    <!-- Results Screen -->
+    <div id="results" class="hidden">
+      <div id="results-content">
+        <h2>Quiz Complete!</h2>
+        <div id="results-score">
+          <div id="score-circle">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="54" fill="none" stroke="#e0e0e0" stroke-width="12"></circle>
+              <circle id="score-circle-fill" cx="60" cy="60" r="54" fill="none" stroke="#4361ee" stroke-width="12" stroke-dasharray="339.292" stroke-dashoffset="339.292" transform="rotate(-90 60 60)"></circle>
+              <text id="score-percent" x="60" y="65" text-anchor="middle" font-size="24" font-weight="bold" fill="#4361ee">0%</text>
+            </svg>
+          </div>
+          <div id="score-text">
+            <p>You scored</p>
+            <h3 id="final-score">0/0</h3>
+          </div>
+        </div>
+        <div id="performance-message"></div>
+        <div id="results-breakdown">
+          <div class="result-stat">
+            <span class="stat-label">Correct Answers:</span>
+            <span id="correct-count" class="stat-value">0</span>
+          </div>
+          <div class="result-stat">
+            <span class="stat-label">Time Used:</span>
+            <span id="time-used" class="stat-value">0s</span>
+          </div>
+          <div class="result-stat">
+            <span class="stat-label">Questions Answered:</span>
+            <span id="questions-answered" class="stat-value">0</span>
+          </div>
+        </div>
+        <div id="results-actions">
+          <button id="review-btn" class="btn-secondary">Review Answers</button>
+          <button id="new-game-btn" class="btn-primary" onclick="restartGame()">New Quiz</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const questions =
+    [
+  {
+    "q": "Why is there no 'perfect' language teaching method?",
+    "choices": [
+      "All students learn in exactly the same way.",
+      "Methods must adapt to diverse learners and contexts.",
+      "Only one method has been proven scientifically."
+    ],
+    "answer": 1,
+    "explanation": "Language teaching is complex and context-dependent; no single method addresses all variables like culture, proficiency, or resources.",
+    "category": "methods"
+  },
+  {
+    "q": "What defines a 'teaching method' in language education?",
+    "choices": [
+      "A random set of classroom activities.",
+      "A theory-based system for instruction.",
+      "A government-approved lesson template."
+    ],
+    "answer": 1,
+    "explanation": "Methods like ALM or TPR stem from specific theoretical views—e.g., habit formation or comprehension before speech.",
+    "category": "methods"
+  },
+  {
+    "q": "What is a key limitation of the Audio-Lingual Method (ALM)?",
+    "choices": [
+      "It encourages spontaneous conversation.",
+      "It prioritizes form over meaningful use.",
+      "It ignores pronunciation completely."
+    ],
+    "answer": 1,
+    "explanation": "ALM’s pattern drills (e.g., 'The green elephant sings jazz') prioritize form over meaningful communication.",
+    "category": "methods"
+  },
+  {
+    "q": "How does Suggestopedia aim to enhance language learning?",
+    "choices": [
+      "By using strict discipline and repetition.",
+      "By creating a relaxed, stress-free atmosphere.",
+      "By banning all use of the native language."
+    ],
+    "answer": 1,
+    "explanation": "Suggestopedia lowers the affective filter via a stress-free environment, though it’s hard to scale in standard classrooms.",
+    "category": "methods"
+  },
+  {
+    "q": "Why are traditional methods often called 'rigid'?",
+    "choices": [
+      "They adapt quickly to student feedback.",
+      "They use fixed techniques ignoring context.",
+      "They prioritize student creativity highly."
+    ],
+    "answer": 1,
+    "explanation": "For example, the Direct Method’s L2-only rule may overwhelm beginners who need L1 scaffolding.",
+    "category": "methods"
+  },
+  {
+    "q": "How does a 'learning-centered' approach differ from a 'teaching-focused' model?",
+    "choices": [
+      "It assumes all learners are identical.",
+      "It tailors learning to student needs and goals.",
+      "It removes the teacher from the classroom."
+    ],
+    "answer": 1,
+    "explanation": "Modern approaches value how students use language (e.g., projects, apps) over passive reception of rules.",
+    "category": "methods"
+  },
+  {
+    "q": "What does the shift from 'sage on the stage' to 'guide on the side' reflect?",
+    "choices": [
+      "Increased focus on teacher authority.",
+      "Greater emphasis on student discovery.",
+      "Reduced importance of lesson planning."
+    ],
+    "answer": 1,
+    "explanation": "In The Silent Way, for instance, teachers stay quiet while students deduce grammar using rods—fostering critical thinking.",
+    "category": "methods"
+  },
+  {
+    "q": "Which is a modern role of a language teacher?",
+    "choices": [
+      "Sole source of linguistic knowledge.",
+      "Facilitator, planner, and mentor.",
+      "Discipline officer only."
+    ],
+    "answer": 1,
+    "explanation": "Teachers now design projects (e.g., podcasts on Algerian heritage), guide collaboration, and support socio-emotional needs.",
+    "category": "methods"
+  },
+  {
+    "q": "Why is 'lesson clarity' essential in effective teaching?",
+    "choices": [
+      "It allows teachers to skip instructions.",
+      "It reduces confusion and maximizes learning time.",
+      "It ensures all students memorize facts."
+    ],
+    "answer": 1,
+    "explanation": "E.g., 'Use past tense to describe your weekend in pairs—5 minutes' sets purpose, procedure, and timing.",
+    "category": "methods"
+  },
+  {
+    "q": "How does incorporating pupil contributions enhance learning?",
+    "choices": [
+      "It slows down classroom pacing.",
+      "It validates student voice and builds relevance.",
+      "It replaces the need for curriculum."
+    ],
+    "answer": 1,
+    "explanation": "Linking 'bismillah' to English meal routines builds on prior knowledge and fosters inclusion.",
+    "category": "methods"
+  },
+  {
+    "q": "Why must effective teaching be context-specific?",
+    "choices": [
+      "All classrooms function identically.",
+      "Methods must fit age, culture, and resources.",
+      "Only urban schools need adaptation."
+    ],
+    "answer": 1,
+    "explanation": "TPR suits young learners ('Jump!') but not university philosophy seminars—context dictates appropriateness.",
+    "category": "methods"
+  },
+  {
+    "q": "How do student characteristics influence teaching effectiveness?",
+    "choices": [
+      "They have no impact on engagement.",
+      "They require differentiated instruction.",
+      "Only intelligence affects learning."
+    ],
+    "answer": 1,
+    "explanation": "An anxious learner may need written reflection before oral role-plays—a one-size-fits-all approach fails.",
+    "category": "methods"
+  },
+  {
+    "q": "What is a limitation of focusing only on 'how to teach'?",
+    "choices": [
+      "It overemphasizes student agency.",
+      "It ignores how learners construct knowledge.",
+      "It promotes excessive creativity."
+    ],
+    "answer": 1,
+    "explanation": "Drilling vocabulary (ALM) yields short-term recall but not deep retention without cognitive engagement.",
+    "category": "methods"
+  },
+  {
+    "q": "How can teachers balance structure and flexibility?",
+    "choices": [
+      "By abandoning all lesson plans.",
+      "By offering choices within clear goals.",
+      "By using only textbook materials."
+    ],
+    "answer": 1,
+    "explanation": "Structure ensures rigor; flexibility honors diverse learning preferences and maintains engagement.",
+    "category": "methods"
+  },
+  {
+    "q": "Why is a 'pleasant climate' essential in language classrooms?",
+    "choices": [
+      "It replaces grammar instruction.",
+      "It supports risk-taking and participation.",
+      "It guarantees native-like fluency."
+    ],
+    "answer": 1,
+    "explanation": "Celebrating effort over perfection encourages students to speak, make errors, and experiment without fear.",
+    "category": "methods"
+  },
+  {
+    "q": "Why isn’t teaching experience alone enough for professional growth?",
+    "choices": [
+      "Experience always leads to improvement.",
+      "Without reflection, it becomes routine.",
+      "Initial training covers everything."
+    ],
+    "answer": 1,
+    "explanation": "A teacher may repeat the same ineffective lecture for 10 years without self-monitoring to reveal disengagement.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "According to Armstrong and Firth (1984), what is self-monitoring?",
+    "choices": [
+      "Guessing how a lesson went.",
+      "Systematically observing one’s own teaching.",
+      "Asking students for casual opinions."
+    ],
+    "answer": 1,
+    "explanation": "It involves evidence-based reflection—e.g., tracking wait time or question distribution—not subjective impressions.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "How does self-monitoring close the 'reality gap'?",
+    "choices": [
+      "By confirming teacher assumptions.",
+      "By revealing gaps between intent and action.",
+      "By eliminating student feedback."
+    ],
+    "answer": 1,
+    "explanation": "A teacher may believe they 'encourage participation,' but data shows they wait only 2 seconds—discouraging responses.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "Which self-awareness dimension is 'known to others but not to self'?",
+    "choices": [
+      "Open Self",
+      "Blind Self",
+      "Secret Self"
+    ],
+    "answer": 1,
+    "explanation": "The Blind Self includes habits like interrupting students—visible to others but invisible to the teacher without feedback.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "Why is systematic data collection better than memory?",
+    "choices": [
+      "Memory is always accurate and fair.",
+      "Memory is biased; data is objective.",
+      "Data collection wastes too much time."
+    ],
+    "answer": 1,
+    "explanation": "A teacher may 'remember' a lively discussion, but audio reveals 15 minutes of monologue—highlighting recall bias.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "How can journaling support self-monitoring?",
+    "choices": [
+      "By listing all student names daily.",
+      "By revealing patterns through reflection.",
+      "By replacing formal lesson plans."
+    ],
+    "answer": 1,
+    "explanation": "Over time, journals uncover trends that guide evidence-based adjustments—not guesswork.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "What is the value of video recording in self-monitoring?",
+    "choices": [
+      "It proves the teacher is always right.",
+      "It exposes blind spots in practice.",
+      "It replaces peer collaboration."
+    ],
+    "answer": 1,
+    "explanation": "Video reveals behaviors the teacher is unaware of—e.g., staying at the board—enabling targeted growth.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "How does self-monitoring extend beyond initial training?",
+    "choices": [
+      "Training covers all classroom realities.",
+      "It allows adaptation of theory to practice.",
+      "Professional development is unnecessary."
+    ],
+    "answer": 1,
+    "explanation": "E.g., a teacher trained in CLT might use WhatsApp for speaking practice in large classes—blending theory and context.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "What is action research in teaching?",
+    "choices": [
+      "Publishing only in journals.",
+      "A cycle of problem, action, and reflection.",
+      "Copying online lesson plans."
+    ],
+    "answer": 1,
+    "explanation": "It turns the classroom into a lab for evidence-based refinement—e.g., testing word journals to boost vocabulary use.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "How does self-monitoring differ for novice vs. experienced teachers?",
+    "choices": [
+      "Novices reflect on deep pedagogy.",
+      "Novices focus on routines; experts on nuance.",
+      "Both focus only on test scores."
+    ],
+    "answer": 1,
+    "explanation": "Novices ask 'Did I finish?'; experts ask 'Am I fostering critical thinking?'—reflecting developmental priorities.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "What is a common challenge in starting self-monitoring?",
+    "choices": [
+      "It requires no time or effort.",
+      "Discomfort and time constraints exist.",
+      "Students always resist the process."
+    ],
+    "answer": 1,
+    "explanation": "Framing it as growth—not failure—and using simple tools (phone checklists) lowers barriers to entry.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "How does the 'Blind Self' hinder teaching effectiveness?",
+    "choices": [
+      "It enhances self-awareness fully.",
+      "It perpetuates unseen biases in practice.",
+      "It has no effect on equity."
+    ],
+    "answer": 1,
+    "explanation": "Without uncovering the Blind Self via data or feedback, well-meaning teachers may unknowingly marginalize groups.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "Why is self-monitoring a form of reflective teaching?",
+    "choices": [
+      "It focuses only on teacher delivery.",
+      "It examines evidence of learning impact.",
+      "It avoids student assessment data."
+    ],
+    "answer": 1,
+    "explanation": "Reflective teaching interrogates effectiveness through evidence, not assumption—core to professional growth.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "How do self-reporting checklists improve teaching?",
+    "choices": [
+      "They guarantee perfect lessons always.",
+      "They make implicit practices visible.",
+      "They replace all student feedback."
+    ],
+    "answer": 1,
+    "explanation": "Tracking behaviors over time—e.g., excessive L1 use on grammar days—prompts targeted, data-driven adjustments.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "Why is self-monitoring 'simple but effective'?",
+    "choices": [
+      "It needs expensive technology.",
+      "It requires only reflection and small steps.",
+      "It works only for expert teachers."
+    ],
+    "answer": 1,
+    "explanation": "A teacher can start tonight: note one strength, one gap, and one micro-change—accumulating into transformation.",
+    "category": "teacher_dev"
+  },
+  {
+    "q": "What are key characteristics of effective teaching?",
+    "choices": [
+      "Lecturing without student input.",
+      "High expectations and positive relationships.",
+      "Ignoring student diversity entirely."
+    ],
+    "answer": 1,
+    "explanation": "E.g., scaffolding for struggling students while maintaining high standards shows belief in their potential.",
+    "category": "learning"
+  },
+  {
+    "q": "How can a teacher show high expectations for struggling learners?",
+    "choices": [
+      "By assigning easier tasks to them.",
+      "By providing scaffolds with same goals.",
+      "By correcting every error immediately."
+    ],
+    "answer": 1,
+    "explanation": "Scaffolding communicates 'I believe you can do this'—boosting motivation and achievement (research-backed).",
+    "category": "learning"
+  },
+  {
+    "q": "What does the VARK model describe?",
+    "choices": [
+      "Four language teaching methods.",
+      "Four learning style preferences.",
+      "Four language skill categories."
+    ],
+    "answer": 1,
+    "explanation": "Fleming’s model suggests using varied modalities—e.g., mind maps (V), discussions (A), essays (R), role-plays (K).",
+    "category": "learning"
+  },
+  {
+    "q": "Why acknowledge varied ability levels in class?",
+    "choices": [
+      "To rank students by intelligence.",
+      "To ensure equity through differentiation.",
+      "To reduce planning time for teachers."
+    ],
+    "answer": 1,
+    "explanation": "In mixed-ability classes, beginners match keywords while advanced students analyze articles—both building comprehension.",
+    "category": "learning"
+  },
+  {
+    "q": "What commonly undermines effective teaching?",
+    "choices": [
+      "Student talk and collaboration.",
+      "Resource limits and heavy workloads.",
+      "Use of modern technology tools."
+    ],
+    "answer": 1,
+    "explanation": "These constraints exhaust teachers and reduce time for planning, feedback, or innovation.",
+    "category": "learning"
+  },
+  {
+    "q": "According to Raymond (1997), what is a 'belief' in teaching?",
+    "choices": [
+      "An objective research finding.",
+      "Subjective knowledge from experience.",
+      "A temporary classroom opinion."
+    ],
+    "answer": 1,
+    "explanation": "E.g., a teacher punished for errors may believe 'immediate correction is essential'—despite research on fluency.",
+    "category": "learning"
+  },
+  {
+    "q": "Why are teachers’ beliefs hard to change?",
+    "choices": [
+      "They are based on current science.",
+      "They are deeply rooted in experience.",
+      "Teachers never hold strong views."
+    ],
+    "answer": 1,
+    "explanation": "A teacher may accept CLT intellectually but revert to GTM because 'that’s how I succeeded'—showing deep entrenchment.",
+    "category": "learning"
+  },
+  {
+    "q": "How do beliefs about learners shape classroom practice?",
+    "choices": [
+      "They have no real impact on methods.",
+      "They directly influence teaching actions.",
+      "They only affect grading policies."
+    ],
+    "answer": 1,
+    "explanation": "Beliefs drive actions: 'resisters' → strict discipline; 'explorers' → inquiry-based tasks.",
+    "category": "learning"
+  },
+  {
+    "q": "What does it mean to see students as 'partners' in learning?",
+    "choices": [
+      "Students design all lessons alone.",
+      "Knowledge is co-constructed with students.",
+      "Teachers give no instructions at all."
+    ],
+    "answer": 1,
+    "explanation": "E.g., students voting on debate themes ('Should phones be banned?') builds ownership and investment.",
+    "category": "learning"
+  },
+  {
+    "q": "Why are beliefs about learning central to teaching effectiveness?",
+    "choices": [
+      "They determine classroom decor only.",
+      "They guide all instructional decisions.",
+      "They are irrelevant to student outcomes."
+    ],
+    "answer": 1,
+    "explanation": "As one scholar noted: 'What makes a good teacher must concern what and how learners learn.'",
+    "category": "learning"
+  },
+  {
+    "q": "How can insufficient resources impact learning style accommodation?",
+    "choices": [
+      "Teachers always afford needed tools.",
+      "It may force text-heavy lessons unfairly.",
+      "Resources don’t affect teaching quality."
+    ],
+    "answer": 1,
+    "explanation": "In under-resourced schools, TPR (body movements) or student-drawn posters compensate for missing videos or audio.",
+    "category": "learning"
+  },
+  {
+    "q": "What is the risk of viewing students as 'raw materials'?",
+    "choices": [
+      "It fosters individual creativity.",
+      "It ignores identity and agency.",
+      "It improves standardized test scores."
+    ],
+    "answer": 1,
+    "explanation": "Forcing memorization of irrelevant content (e.g., only Western lit) kills curiosity and disengages learners.",
+    "category": "learning"
+  },
+  {
+    "q": "How can heavy workloads affect feedback quality?",
+    "choices": [
+      "They improve feedback precision.",
+      "They lead to generic or delayed feedback.",
+      "They have no effect on students."
+    ],
+    "answer": 1,
+    "explanation": "Constructive feedback requires specificity and timeliness—both compromised by excessive grading demands.",
+    "category": "learning"
+  },
+  {
+    "q": "Why is professional development crucial for effective teaching?",
+    "choices": [
+      "Initial training covers all needs.",
+      "Education evolves; PD updates practice.",
+      "PD is only for new teachers."
+    ],
+    "answer": 1,
+    "explanation": "A teacher trained in 2005 may lack skills for AI tutors or neurodiverse support—PD prevents stagnation.",
+    "category": "learning"
+  },
+  {
+    "q": "How can teachers encourage student responsibility for learning?",
+    "choices": [
+      "By making all decisions for them.",
+      "By promoting metacognitive strategies.",
+      "By removing all assessment tasks."
+    ],
+    "answer": 1,
+    "explanation": "E.g., 'I’ll use 5 new words this week' → journal → 'Flashcards didn’t work—I’ll try labeling objects.'",
+    "category": "learning"
+  },
+  {
+    "q": "Why is the teaching-learning process 'dynamic and multi-dimensional'?",
+    "choices": [
+      "It follows a fixed linear path.",
+      "It involves multiple interacting agents.",
+      "It depends only on the textbook used."
+    ],
+    "answer": 1,
+    "explanation": "Learning is shaped by cognitive, emotional, social, and environmental factors—making it adaptive, not static.",
+    "category": "learning"
+  },
+  {
+    "q": "According to Stenhouse (1975), what is the teacher’s essential role?",
+    "choices": [
+      "To transmit knowledge accurately.",
+      "To enable the learner to learn.",
+      "To enforce strict classroom rules."
+    ],
+    "answer": 1,
+    "explanation": "Stenhouse saw teaching as formulating testable hypotheses about learning—not delivering predetermined content.",
+    "category": "learning"
+  },
+  {
+    "q": "How do declarative and procedural knowledge support problem-solving?",
+    "choices": [
+      "Only procedural knowledge matters.",
+      "Both provide facts and application skills.",
+      "They are irrelevant in language use."
+    ],
+    "answer": 1,
+    "explanation": "Writing an essay requires grammar rules (declarative) and organizing/revision skills (procedural).",
+    "category": "learning"
+  },
+  {
+    "q": "How does Gardner (1995) position motivation in SLA?",
+    "choices": [
+      "As a minor peripheral factor.",
+      "As a central driver of engagement.",
+      "As irrelevant to classroom success."
+    ],
+    "answer": 1,
+    "explanation": "Integrative/instrumental motivation directly influences willingness to communicate and develop competence.",
+    "category": "learning"
+  },
+  {
+    "q": "How does the VARK model inform differentiated instruction?",
+    "choices": [
+      "It prescribes one best method.",
+      "It encourages multi-modal teaching.",
+      "It applies only to visual learners."
+    ],
+    "answer": 1,
+    "explanation": "Using V, A, R, K ensures accessibility and engagement across diverse preferences—enhancing equity.",
+    "category": "learning"
+  },
+  {
+    "q": "What are the four agents of the teaching-learning ecosystem?",
+    "choices": [
+      "Teacher, textbook, test, tech.",
+      "Learner, teacher, environment, curriculum.",
+      "Principal, parents, peers, policy."
+    ],
+    "answer": 1,
+    "explanation": "Imbalance—e.g., rigid curriculum ignoring learner diversity—disrupts the ecosystem and reduces inclusion.",
+    "category": "learning"
+  },
+  {
+    "q": "How does Stenhouse’s (1975) curriculum view differ from traditional ones?",
+    "choices": [
+      "He saw it as a fixed content list.",
+      "He saw it as a dynamic process.",
+      "He rejected all forms of curriculum."
+    ],
+    "answer": 1,
+    "explanation": "Stenhouse emphasized teacher agency and adaptability—curriculum as responsive, not imposed.",
+    "category": "learning"
+  },
+  {
+    "q": "According to Kerr (1968), what is the 'totality' of curriculum?",
+    "choices": [
+      "Only formal lesson content.",
+      "All student experiences in school.",
+      "Government-mandated syllabi only."
+    ],
+    "answer": 1,
+    "explanation": "Learning occurs through both planned instruction and unplanned social/emotional encounters.",
+    "category": "learning"
+  },
+  {
+    "q": "Why is metacognitive strategy use critical for autonomy?",
+    "choices": [
+      "It increases teacher dependence.",
+      "It enables self-regulated learning.",
+      "It focuses only on memorization."
+    ],
+    "answer": 1,
+    "explanation": "An L2 learner who adjusts tactics based on self-assessment (e.g., 'Flashcards failed—I’ll label objects') becomes independent.",
+    "category": "learning"
+  },
+  {
+    "q": "How do affective strategies support SLA?",
+    "choices": [
+      "They ignore emotional factors.",
+      "They manage anxiety and self-esteem.",
+      "They replace grammar instruction."
+    ],
+    "answer": 1,
+    "explanation": "Krashen (1982) showed psychological safety is essential for risk-taking and language production.",
+    "category": "learning"
+  },
+  {
+    "q": "How does classroom environment influence cognitive engagement?",
+    "choices": [
+      "Only physical layout matters.",
+      "Safety and climate reduce stress load.",
+      "Environment has no cognitive role."
+    ],
+    "answer": 1,
+    "explanation": "Conway (1991) notes even weather affects mood—supportive environments minimize cognitive load from anxiety.",
+    "category": "learning"
+  },
+  {
+    "q": "Why must curriculum account for learner experience and attitudes?",
+    "choices": [
+      "To standardize all students equally.",
+      "Because identity mediates learning.",
+      "Curriculum should be culture-neutral."
+    ],
+    "answer": 1,
+    "explanation": "Teaching only Western lit in Algerian schools may feel irrelevant; Stenhouse insists on learner-centered flexibility.",
+    "category": "learning"
+  },
+  {
+    "q": "How does the 'ecosystem' view challenge traditional pedagogy?",
+    "choices": [
+      "It supports input-output models.",
+      "It emphasizes systemic interdependence.",
+      "It prioritizes teacher control only."
+    ],
+    "answer": 1,
+    "explanation": "Introducing group work (learner) affects dynamics (environment) and assessment (curriculum)—demanding holistic design.",
+    "category": "learning"
+  },
+  {
+    "q": "What role do social strategies play in constructivist learning?",
+    "choices": [
+      "They isolate learners completely.",
+      "They enable co-construction of knowledge.",
+      "They focus only on individual work."
+    ],
+    "answer": 1,
+    "explanation": "Peer editing or debate allows learners to scaffold understanding and internalize language through interaction.",
+    "category": "learning"
+  },
+  {
+    "q": "How can educators ensure harmony among the four teaching-learning agents?",
+    "choices": [
+      "By focusing only on curriculum.",
+      "By aligning all four intentionally.",
+      "By ignoring student diversity."
+    ],
+    "answer": 1,
+    "explanation": "Intentional alignment of learner, teacher, environment, and curriculum creates optimal conditions for growth.",
+    "category": "learning"
+  },
+  {
+    "q": "Why is teacher talk a 'strategic tool' (Walsh, 2011)?",
+    "choices": [
+      "It fills silence in the classroom.",
+      "It scaffolds learning purposefully.",
+      "It asserts teacher dominance always."
+    ],
+    "answer": 1,
+    "explanation": "Strategic talk is purposeful—e.g., referential questions to stimulate discussion, not just 'teacher noise.'",
+    "category": "interaction"
+  },
+  {
+    "q": "What is the ideal balance between TTT and LTT?",
+    "choices": [
+      "Maximize teacher talking time.",
+      "Maximize meaningful learner talk.",
+      "Eliminate all student speaking."
+    ],
+    "answer": 1,
+    "explanation": "Nunan (1987) and Walsh (2011) stress that LTT drives acquisition—TTT should enable, not dominate.",
+    "category": "interaction"
+  },
+  {
+    "q": "What is Classroom Interactional Competence (CIC)?",
+    "choices": [
+      "Teacher fluency in the target language.",
+      "Using interaction to mediate learning.",
+      "Student silence during instruction."
+    ],
+    "answer": 1,
+    "explanation": "CIC includes awareness of how talk structures support or hinder language development.",
+    "category": "interaction"
+  },
+  {
+    "q": "Which question type better supports L2 development?",
+    "choices": [
+      "Display questions testing known facts.",
+      "Referential questions seeking new info.",
+      "Rhetorical questions with no answer."
+    ],
+    "answer": 1,
+    "explanation": "Referential questions ('What surprised you?') simulate real conversation, promoting fluency and extended discourse (Long, 1996).",
+    "category": "interaction"
+  },
+  {
+    "q": "What is Kramsch’s (1998) distinction between discourse types?",
+    "choices": [
+      "Formal versus informal speech.",
+      "Pedagogic versus natural discourse.",
+      "Written versus spoken language."
+    ],
+    "answer": 1,
+    "explanation": "Overuse of pedagogic discourse creates artificiality; natural discourse develops real communicative competence.",
+    "category": "interaction"
+  },
+  {
+    "q": "How does learner talk contribute beyond 'practice'?",
+    "choices": [
+      "It only reinforces mistakes made.",
+      "It enables output and noticing gaps.",
+      "It wastes valuable class time."
+    ],
+    "answer": 1,
+    "explanation": "Learner talk is essential for hypothesis testing and refining interlanguage—not just repetition.",
+    "category": "interaction"
+  },
+  {
+    "q": "What is the IRF pattern, and what is a key limitation?",
+    "choices": [
+      "It encourages extended student talk.",
+      "It limits learner agency in dialogue.",
+      "It promotes peer-to-peer discussion."
+    ],
+    "answer": 1,
+    "explanation": "Sinclair & Coulthard (1975): IRF reinforces monologic, teacher-centered interaction over dialogic co-construction.",
+    "category": "interaction"
+  },
+  {
+    "q": "How should teachers modify speech for comprehensibility?",
+    "choices": [
+      "Use infantilizing 'foreigner talk'.",
+      "Adjust clarity while keeping authenticity.",
+      "Speak faster to increase challenge."
+    ],
+    "answer": 1,
+    "explanation": "Effective 'teacher talk' supports input processing without compromising linguistic integrity.",
+    "category": "interaction"
+  },
+  {
+    "q": "Why is turn-taking important in CIC?",
+    "choices": [
+      "It ensures only top students speak.",
+      "It promotes inclusion and equal access.",
+      "It reduces overall student talk time."
+    ],
+    "answer": 1,
+    "explanation": "Strategies like 'think-pair-share' prevent dominant students from monopolizing interaction.",
+    "category": "interaction"
+  },
+  {
+    "q": "What does 'quality over quantity' mean for teacher talk?",
+    "choices": [
+      "Speak as little as possible always.",
+      "Ensure talk is purposeful and clear.",
+      "Use complex words to challenge students."
+    ],
+    "answer": 1,
+    "explanation": "High-quality talk includes clear instructions, recasts, and modeling—not 'talking to talk.'",
+    "category": "interaction"
+  },
+  {
+    "q": "How can a teacher shift from pedagogic to natural discourse?",
+    "choices": [
+      "By extending lecture time further.",
+      "By using communicative information-gap tasks.",
+      "By banning all student interaction."
+    ],
+    "answer": 1,
+    "explanation": "Kramsch (1998): After controlled practice, natural discourse encourages spontaneous, meaningful use.",
+    "category": "interaction"
+  },
+  {
+    "q": "How does CIC benefit learners directly?",
+    "choices": [
+      "It makes them passive listeners.",
+      "It builds their interactional skills.",
+      "It reduces their speaking confidence."
+    ],
+    "answer": 1,
+    "explanation": "Learners gain skills like 'Could you repeat that?'—empowering real-world communication (Walsh, 2011).",
+    "category": "interaction"
+  },
+  {
+    "q": "What feedback type is most effective for fluency and noticing?",
+    "choices": [
+      "Explicit public error correction.",
+      "Implicit prompts like recasts.",
+      "Ignoring all learner mistakes."
+    ],
+    "answer": 1,
+    "explanation": "Lyster & Ranta (1997): Recasts integrate correction into interaction without disrupting communication.",
+    "category": "interaction"
+  },
+  {
+    "q": "Why is LTT not just 'student chatting'?",
+    "choices": [
+      "All student talk is off-task.",
+      "Structured LTT drives acquisition.",
+      "LTT should be minimized always."
+    ],
+    "answer": 1,
+    "explanation": "Ellis (2003): Purposeful LTT—e.g., problem-solving in pairs—is central to acquisition, not filler.",
+    "category": "interaction"
+  },
+  {
+    "q": "How can a teacher assess their own CIC?",
+    "choices": [
+      "By assuming they are perfect.",
+      "By analyzing recorded interactions.",
+      "By avoiding all self-reflection."
+    ],
+    "answer": 1,
+    "explanation": "Self-awareness of interactional habits is the first step toward more learner-centered discourse.",
+    "category": "interaction"
+  },
+  {
+    "q": "What is a key misconception about Classroom Management (CM)?",
+    "choices": [
+      "CM prevents problems proactively.",
+      "CM is only about punishing misbehavior.",
+      "CM supports student engagement."
+    ],
+    "answer": 1,
+    "explanation": "Modern CM focuses on creating conditions for learning, not just enforcing rules.",
+    "category": "interaction"
+  },
+  {
+    "q": "According to Doyle (1985), what is Classroom Management?",
+    "choices": [
+      "Punishing disruptive students.",
+      "Structures enabling teaching and learning.",
+      "Following a rigid rule handbook."
+    ],
+    "answer": 1,
+    "explanation": "CM enables both instruction and engagement through organization and relationship-building.",
+    "category": "interaction"
+  },
+  {
+    "q": "Why is managing the physical environment important in CM?",
+    "choices": [
+      "It has no learning impact.",
+      "Layout affects focus and interaction.",
+      "Only lighting truly matters."
+    ],
+    "answer": 1,
+    "explanation": "Environment shapes interaction: flexible seating enables collaboration; fixed desks may limit movement.",
+    "category": "interaction"
+  },
+  {
+    "q": "How does 'management of learning' reduce misbehavior?",
+    "choices": [
+      "By increasing teacher monologue.",
+      "By designing engaging, varied tasks.",
+      "By ignoring student interests."
+    ],
+    "answer": 1,
+    "explanation": "Using VARK-aligned activities (e.g., role-plays, tech tasks) maintains engagement—preventing disruption.",
+    "category": "interaction"
+  },
+  {
+    "q": "What is the purpose of classroom procedures and rules?",
+    "choices": [
+      "To restrict all student freedom.",
+      "To create predictability and confidence.",
+      "To replace actual teaching time."
+    ],
+    "answer": 1,
+    "explanation": "Clear routines (e.g., warm-ups, transitions) free cognitive resources for learning, not uncertainty.",
+    "category": "interaction"
+  },
+  {
+    "q": "How should discipline be approached in modern CM?",
+    "choices": [
+      "Through punishment only.",
+      "As teaching with restorative practices.",
+      "By ignoring all misbehavior."
+    ],
+    "answer": 1,
+    "explanation": "Discipline aims to develop self-regulation and intrinsic motivation, not just compliance.",
+    "category": "interaction"
+  },
+  {
+    "q": "According to Evertson and Weinstein (2006), what two types of learning does CM support?",
+    "choices": [
+      "Listening and speaking skills.",
+      "Academic and social learning.",
+      "Reading and writing only."
+    ],
+    "answer": 1,
+    "explanation": "CM develops both cognitive and interpersonal competencies essential for life beyond school.",
+    "category": "interaction"
+  },
+  {
+    "q": "What is a core role of the teacher in CM?",
+    "choices": [
+      "Enforcer of total silence.",
+      "Builder of climate and expectations.",
+      "Sole classroom decision-maker."
+    ],
+    "answer": 1,
+    "explanation": "Greeting by name, co-creating norms, and active listening build trust and motivation.",
+    "category": "interaction"
+  },
+  {
+    "q": "How can technology support CM?",
+    "choices": [
+      "By replacing the teacher fully.",
+      "Through tools for routine and engagement.",
+      "Only for student entertainment."
+    ],
+    "answer": 1,
+    "explanation": "Tech tools can streamline procedures (e.g., attendance apps) and boost participation (e.g., Kahoot!).",
+    "category": "interaction"
+  },
+  {
+    "q": "What is the core idea of effective CM?",
+    "choices": [
+      "Strict control and quietness.",
+      "Prevention, engagement, and relationships.",
+      "Maximizing teacher authority alone."
+    ],
+    "answer": 1,
+    "explanation": "CM succeeds when students feel safe, involved, and motivated—not controlled.",
+    "category": "interaction"
+  }
+]
+
+
+
+       // Game state
+// Game state
+let score = 0;
+let current = 0;
+let selectedQuestions = [];
+let timer = 120;
+let timerInterval = null;
+let totalTime = 0;
+let userAnswers = [];
+let timeUsed = 0;
+
+// DOM Elements
+const settingsEl = document.getElementById('settings');
+const gameInterfaceEl = document.getElementById('game-interface');
+const resultsEl = document.getElementById('results');
+const timerEl = document.getElementById('timer');
+const questionEl = document.getElementById('question');
+const choicesEl = document.getElementById('choices');
+const feedbackEl = document.getElementById('feedback');
+const explanationEl = document.getElementById('explanation');
+const nextBtn = document.getElementById('next-btn');
+const playAgainBtn = document.getElementById('play-again-btn');
+const scoreEl = document.getElementById('score');
+const progressFill = document.getElementById('progress-fill');
+const questionCounterEl = document.getElementById('question-counter');
+const questionCategoryEl = document.getElementById('question-category');
+const startBtn = document.getElementById('start-btn');
+const questionCountEl = document.getElementById('question-count');
+const timeLimitEl = document.getElementById('time-limit');
+
+// Initialize the game
+function init() {
+  startBtn.addEventListener('click', startGameWithSettings);
+  // Add this line for the main menu button
+  document.getElementById('main-menu-btn').addEventListener('click', () => {
+    goToPage('../Quiz.html');
+  });
+}
+
+// Shuffle array function (Fisher-Yates algorithm)
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+// Start game with custom settings
+function startGameWithSettings() {
+  const questionCount = parseInt(questionCountEl.value);
+  timer = parseInt(timeLimitEl.value);
+  totalTime = timer;
+  
+  // Get selected categories
+  const selectedCategories = [];
+  document.querySelectorAll('input[name="category"]:checked').forEach(checkbox => {
+    selectedCategories.push(checkbox.value);
+  });
+  
+  // Filter questions by category
+  const filteredQuestions = questions.filter(q => selectedCategories.includes(q.category));
+  
+  selectedQuestions = getRandomQuestions(filteredQuestions, questionCount);
+  
+  if (selectedQuestions.length === 0) {
+    alert("Please select at least one question category!");
+    return;
+  }
+  
+  score = 0;
+  current = 0;
+  userAnswers = [];
+  timeUsed = 0;
+  
+  scoreEl.textContent = `Score: ${score}`;
+  questionCounterEl.textContent = `Question: 1/${selectedQuestions.length}`;
+  
+  settingsEl.classList.add('hidden');
+  gameInterfaceEl.classList.remove('hidden');
+  resultsEl.classList.add('hidden');
+  
+  startTimer();
+  showQuestion();
+}
+
+// Get random subset of questions
+function getRandomQuestions(arr, count) {
+  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, Math.min(count, arr.length));
+}
+
+// Timer functions
+function startTimer() {
+  clearInterval(timerInterval);
+  updateTimer();
+  timerInterval = setInterval(() => {
+    timer--;
+    timeUsed++;
+    updateTimer();
+    if (timer <= 0) {
+      endGame();
+    }
+  }, 1000);
+}
+
+function updateTimer() {
+  timerEl.textContent = `Time: ${timer}s`;
+  if (timer <= 10) {
+    timerEl.classList.add('warning');
+  } else {
+    timerEl.classList.remove('warning');
+  }
+}
+
+// Update progress bar
+function updateProgress() {
+  const progress = ((current) / selectedQuestions.length) * 100;
+  progressFill.style.width = `${progress}%`;
+}
+
+// Show current question
+function showQuestion() {
+  if (current >= selectedQuestions.length) {
+    endGame();
+    return;
+  }
+
+  const q = selectedQuestions[current];
+  questionEl.textContent = q.q;
+  questionCategoryEl.textContent = getCategoryDisplayName(q.category);
+  choicesEl.innerHTML = '';
+  feedbackEl.textContent = '';
+  explanationEl.textContent = '';
+  feedbackEl.className = '';
+  explanationEl.className = '';
+  nextBtn.classList.add('hidden');
+  updateProgress();
+  questionCounterEl.textContent = `Question: ${current + 1}/${selectedQuestions.length}`;
+
+  // Shuffle the choices but track the correct answer index
+  const shuffledChoices = shuffleArray([...q.choices]);
+  const correctAnswerIndex = shuffledChoices.indexOf(q.choices[q.answer]);
+
+  // Store shuffled data for this question
+  q.shuffledChoices = shuffledChoices;
+  q.shuffledAnswerIndex = correctAnswerIndex;
+
+  shuffledChoices.forEach((choice, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = choice;
+    btn.onclick = () => selectAnswer(i, q);
+    choicesEl.appendChild(btn);
+  });
+}
+
+// Get display name for category
+function getCategoryDisplayName(category) {
+  const names = {
+    'methods': 'Language Teaching Methods',
+    'teacher_dev': 'Teacher Development & Reflection',
+    'learning': 'Learning Theories & Student Factors',
+    'interaction': 'Classroom Interaction & Management'
+  };
+  return names[category] || category.charAt(0).toUpperCase() + category.slice(1);
+}
+
+// Handle answer selection
+function selectAnswer(selectedIndex, q) {
+  const isCorrect = selectedIndex === q.shuffledAnswerIndex;
+  
+  // Store user answer for review (using shuffled choices)
+  userAnswers.push({
+    question: q.q,
+    userChoice: q.shuffledChoices[selectedIndex],
+    correctChoice: q.shuffledChoices[q.shuffledAnswerIndex],
+    explanation: q.explanation,
+    isCorrect: isCorrect
+  });
+
+  feedbackEl.textContent = isCorrect ? 'Correct!' : 'Incorrect!';
+  explanationEl.textContent = q.explanation;
+  
+  feedbackEl.className = isCorrect ? 'correct show' : 'incorrect show';
+  explanationEl.className = 'explanation show';
+
+  if (isCorrect) {
+    score++;
+    scoreEl.textContent = `Score: ${score}`;
+  }
+
+  // Disable choice buttons and highlight correct/incorrect
+  document.querySelectorAll('.choice-btn').forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.shuffledAnswerIndex) {
+      btn.classList.add('correct-answer');
+    } else if (i === selectedIndex && !isCorrect) {
+      btn.classList.add('incorrect-answer');
+    }
+  });
+
+  nextBtn.classList.remove('hidden');
+}
+
+// Next question
+function nextQuestion() {
+  current++;
+  if (current < selectedQuestions.length && timer > 0) {
+    showQuestion();
+  } else {
+    endGame();
+  }
+}
+
+// End game
+function endGame() {
+  clearInterval(timerInterval);
+  
+  gameInterfaceEl.classList.add('hidden');
+  resultsEl.classList.remove('hidden');
+  
+  showResults();
+}
+
+// Show review of answers
+function showReview() {
+  let reviewHTML = '<h2>Review Your Answers</h2>';
+  
+  userAnswers.forEach((answer, index) => {
+    reviewHTML += `
+      <div class="review-item ${answer.isCorrect ? 'correct' : 'incorrect'}">
+        <h3>Question ${index + 1}:</h3>
+        <p>${answer.question}</p>
+        <div class="review-answer">
+          <p><strong>Your answer:</strong> ${answer.userChoice}</p>
+          <p><strong>Correct answer:</strong> ${answer.correctChoice}</p>
+        </div>
+        <div class="review-explanation">
+          <p><strong>Explanation:</strong> ${answer.explanation}</p>
+        </div>
+      </div>
+    `;
+  });
+  
+  resultsEl.innerHTML = `
+    <div id="results-content">
+      ${reviewHTML}
+      <div id="results-actions">
+        <button id="back-to-results" class="btn-secondary">Back to Results</button>
+        <button class="btn-primary" onclick="restartGame()">New Quiz</button>
+      </div>
+    </div>
+  `;
+
+  // Add event listener to the new button
+  document.getElementById('back-to-results').addEventListener('click', showResults);
+}
+
+// Show results screen
+function showResults() {
+  const maxScore = selectedQuestions.length;
+  const percent = Math.round((score / maxScore) * 100);
+  
+  resultsEl.innerHTML = `
+    <div id="results-content">
+      <h2>Quiz Complete!</h2>
+      <div id="results-score">
+        <div id="score-circle">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="54" fill="none" stroke="#e0e0e0" stroke-width="12"></circle>
+            <circle id="score-circle-fill" cx="60" cy="60" r="54" fill="none" stroke="#00BCD4" stroke-width="12" stroke-dasharray="339.292" stroke-dashoffset="339.292" transform="rotate(-90 60 60)"></circle>
+            <text id="score-percent" x="60" y="65" text-anchor="middle" font-size="24" font-weight="bold" fill="#00BCD4">${percent}%</text>
+          </svg>
+        </div>
+        <div id="score-text">
+          <p>You scored</p>
+          <h3 id="final-score">${score}/${maxScore}</h3>
+        </div>
+      </div>
+      <div id="performance-message">${getPerformanceMessage(percent)}</div>
+      <div id="results-breakdown">
+        <div class="result-stat">
+          <span class="stat-label">Correct Answers:</span>
+          <span id="correct-count" class="stat-value">${score}</span>
+        </div>
+        <div class="result-stat">
+          <span class="stat-label">Time Used:</span>
+          <span id="time-used" class="stat-value">${totalTime - timer}s</span>
+        </div>
+        <div class="result-stat">
+          <span class="stat-label">Questions Answered:</span>
+          <span id="questions-answered" class="stat-value">${current}</span>
+        </div>
+      </div>
+      <div id="results-actions">
+        <button id="review-btn" class="btn-secondary">Review Answers</button>
+        <button id="new-game-btn" class="btn-primary">New Quiz</button>
+      </div>
+    </div>
+  `;
+
+  // Re-add event listeners
+  document.getElementById('review-btn').addEventListener('click', showReview);
+  document.getElementById('new-game-btn').addEventListener('click', restartGame);
+  
+  // Re-animate the score circle
+  const circumference = 2 * Math.PI * 54;
+  const offset = circumference - (percent / 100) * circumference;
+  document.getElementById('score-circle-fill').style.strokeDashoffset = offset;
+}
+
+// Helper function for performance message
+function getPerformanceMessage(percent) {
+  if (percent >= 90) return 'Outstanding! You have a deep understanding of Applied Linguistics.';
+  if (percent >= 70) return 'Great job! You have a solid grasp of Applied Linguistics concepts.';
+  if (percent >= 50) return 'Good effort! Review the explanations to strengthen your knowledge.';
+  return 'Keep studying! Review the material and try again.';
+}
+
+// Go to home page
+function goToPage(url) {
+  window.location.href = url;
+}
+
+// Restart game
+function restartGame() {
+  clearInterval(timerInterval);
+  settingsEl.classList.remove('hidden');
+  gameInterfaceEl.classList.add('hidden');
+  resultsEl.classList.add('hidden');
+}
+
+// Initialize on load
+window.onload = init;
+  </script>
+</body>
+</html>
