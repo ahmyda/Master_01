@@ -3,196 +3,757 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lecture 05: Language Learning Strategies</title>
+    <title>Language Learning Strategies - Applied Linguistics</title>
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style2.css">
+    <style>
+        /* Sidebar Styles */
+        .menu-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: linear-gradient(to right, #4a6fa5, #2c3e50);
+            color: white;
+            border: none;
+            padding: 12px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        #sidebar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%);
+            color: white;
+            overflow-y: auto;
+            transition: left 0.3s ease;
+            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .sidebar.active {
+            left: 0;
+        }
+        
+        .sidebar-header {
+            padding: 25px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sidebar-header h3 i {
+            color: #3498db;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: #3498db;
+        }
+        
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .nav-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            background: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+            padding-left: 25px;
+        }
+        
+        .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .arrow {
+            transition: transform 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .arrow.rotate {
+            transform: rotate(90deg);
+        }
+        
+        .nav-sublist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background: rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        
+        .nav-sublist .nav-link {
+            padding-left: 40px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-sublist .nav-link:hover {
+            padding-left: 45px;
+        }
+        
+        .sidebar-footer {
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #bdc3c7;
+        }
+        
+        /* Control Buttons */
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn.back {
+            background: linear-gradient(to right, #3498db, #2980b9);
+            color: white;
+        }
+        
+        .btn.quiz {
+            background: linear-gradient(to right, #2ecc71, #27ae60);
+            color: white;
+        }
+        
+        .btn.pdf {
+            background: linear-gradient(to right, #e74c3c, #c0392b);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn i {
+            font-size: 1.1rem;
+        }
+        
+        /* Header Styles Update */
+        header {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.05));
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        header h1 {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        header h2 {
+            color: #3498db;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Original Styles from the previous design */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        h2::before {
+            content: "📘";
+            font-size: 1.5rem;
+        }
+        
+        .section:nth-child(2) h2::before { content: "🤔"; }
+        .section:nth-child(3) h2::before { content: "🗂️"; }
+        .section:nth-child(4) h2::before { content: "🎯"; }
+        .section:nth-child(5) h2::before { content: "👨‍🏫"; }
+        
+        h3 {
+            color: #3498db;
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        .bubble {
+            background: #e8f4fc;
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            position: relative;
+            border: 2px solid #3498db;
+        }
+        
+        .bubble::after {
+            content: "💡";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+        }
+        
+        .strategy-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border-top: 5px solid;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        
+        .card-1 { border-color: #3498db; }
+        .card-2 { border-color: #2ecc71; }
+        .card-3 { border-color: #e74c3c; }
+        .card-4 { border-color: #f39c12; }
+        .card-5 { border-color: #9b59b6; }
+        .card-6 { border-color: #1abc9c; }
+        
+        .card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #2ecc71;
+        }
+        
+        .example-title {
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .factor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .factor {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .factor h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tip {
+            background: #fff8e1;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px dashed #f1c40f;
+        }
+        
+        .tip-title {
+            color: #d35400;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checklist {
+            background: #e8f6f3;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+        
+        .checklist li {
+            margin: 10px 0;
+            padding-left: 35px;
+            position: relative;
+        }
+        
+        .checklist li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #2c3e50;
+            color: white;
+            margin-top: 50px;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .keyword {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .content { padding: 20px; }
+            header h1 { font-size: 1.8rem; }
+            header h2 { font-size: 1.5rem; }
+            .strategy-cards, .factor-grid { grid-template-columns: 1fr; }
+            .section { padding: 20px; }
+            .control-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 300px; justify-content: center; }
+        }
+        
+        /* Make sure content doesn't hide under sidebar */
+        @media (min-width: 768px) {
+            body {
+                margin-left: 0;
+                transition: margin-left 0.3s;
+            }
+            
+            body.sidebar-active {
+                margin-left: 280px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Toggle Menu Button -->
     <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+
+    <!-- Sidebar will load here -->
     <div id="sidebar-container"></div>
 
     <div class="container">
         <header>
-            <h1>Lecture 05: Language Learning Strategies</h1>
+            <h1>Applied Linguistics - Lecture 5</h1>
+            <h2>Language Learning Strategies</h2>
+            <div class="lecture-info">
+                <div class="info-badge">🎓 Master 1 - Applied Linguistics</div>
+                <div class="info-badge">👩‍🏫 Instructor: Nour el houda KHERFANE</div>
+                <div class="info-badge">🏛️ Zaine Achour University</div>
+            </div>
         </header>
 
         <section class="control-buttons">
-            <a class="btn back" href="../module1/lecture04.html">Previous Lesson</a>
-            <a class="btn pdf" href="../pdfs/AL_5.pdf">PDF File</a>
+            <a class="btn back" href="../module1/lesson-four.html">
+                <i class="fas fa-arrow-left"></i> Previous lesson
+            </a>
+            <a class="btn quiz" href="../module1/EP5.html">
+                <i class="fas fa-graduation-cap"></i> EXAM PREP
+            </a>
+            <a class="btn pdf" href="../pdfs/AL_5.pdf">
+                <i class="fas fa-file-pdf"></i> PDF FILE
+            </a>
         </section>
 
-        <!-- INTRODUCTION -->
-        <div class="section">
-            <h2><i class="fas fa-lightbulb"></i> Introduction</h2>
-            <p>Language learning strategies (LLS) refer to the conscious steps, thoughts, and techniques that learners use to improve the comprehension, acquisition, and retention of a second language. These strategies vary from learner to learner, depending on preferences, goals, needs, and learning contexts.</p>
-            <p>Researchers such as O’Malley, Chamot, and Oxford contributed significantly to our understanding of how learners manage their learning process. LLS play a central role in developing autonomy, motivation, and effective learning habits.</p>
+        <div class="content">
+            <!-- Rest of your content remains exactly the same -->
+            <section class="section">
+                <h2>What Are Learning Strategies Anyway?</h2>
+                
+                <div class="bubble">
+                    <p>Think of learning strategies as your personal <span class="highlight">"cheat codes"</span> for language learning! They're not about being lazy—they're about being smart. Just like you'd use a map to navigate a new city, strategies help you navigate the journey of learning a new language.</p>
+                </div>
+                
+                <p>Researchers sometimes disagree about the details, but they all agree on one thing: <span class="highlight">good strategies make learning easier, faster, and more effective.</span> It's like the difference between randomly trying to assemble furniture without instructions versus following a clear step-by-step guide.</p>
+                
+                <h3>Why Should You Care About Strategies?</h3>
+                
+                <div class="strategy-cards">
+                    <div class="card card-1">
+                        <h4>🚀 Boost Your Learning</h4>
+                        <p>Good strategies can speed up your progress. Imagine learning 50 words in the time it used to take to learn 20!</p>
+                        <div class="example-box">
+                            <div class="example-title">📝 Example:</div>
+                            <p>Instead of just repeating words, you could create funny stories with them or connect them to images.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card card-2">
+                        <h4>💪 Build Confidence</h4>
+                        <p>When you know how to tackle learning challenges, you feel more in control and less frustrated.</p>
+                        <div class="example-box">
+                            <div class="example-title">📝 Example:</div>
+                            <p>Having a plan for what to do when you don't understand something prevents panic.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card card-3">
+                        <h4>🎯 Become Independent</h4>
+                        <p>You learn how to learn on your own, not just in class. This is a superpower for life!</p>
+                        <div class="example-box">
+                            <div class="example-title">📝 Example:</div>
+                            <p>Knowing how to find language partners online or how to learn from movies without a teacher.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>Your Strategy Toolbox</h2>
+                
+                <div class="bubble">
+                    <p>Learning strategies come in different flavors. Think of them as different tools in your toolbox—you wouldn't use a hammer to screw in a lightbulb!</p>
+                </div>
+                
+                <h3>The Three Big Categories (O'Malley's Way)</h3>
+                
+                <div class="strategy-cards">
+                    <div class="card card-4">
+                        <h4>🧠 Metacognitive Strategies</h4>
+                        <p><strong>The "Plan & Check" Strategies</strong></p>
+                        <p>These are your big-picture thinking skills. It's like being the manager of your own learning.</p>
+                        <div class="example-box">
+                            <div class="example-title">✨ Examples:</div>
+                            <p><strong>Planning:</strong> "I'll study vocabulary for 30 minutes after dinner."</p>
+                            <p><strong>Monitoring:</strong> "Wait, I'm not really understanding this grammar rule."</p>
+                            <p><strong>Evaluating:</strong> "That study method worked well—I'll use it again!"</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card card-5">
+                        <h4>📚 Cognitive Strategies</h4>
+                        <p><strong>The "Hands-On" Strategies</strong></p>
+                        <p>These are the actual things you do with the language material.</p>
+                        <div class="example-box">
+                            <div class="example-title">✨ Examples:</div>
+                            <p><strong>Repeating:</strong> Saying new words aloud multiple times</p>
+                            <p><strong>Note-taking:</strong> Writing down new phrases with examples</p>
+                            <p><strong>Translating:</strong> Understanding by comparing to your native language</p>
+                            <p><strong>Grouping:</strong> Learning all food words together</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card card-6">
+                        <h4>👥 Social Strategies</h4>
+                        <p><strong>The "Teamwork" Strategies</strong></p>
+                        <p>Learning with and from others. Language is for communication, after all!</p>
+                        <div class="example-box">
+                            <div class="example-title">✨ Examples:</div>
+                            <p><strong>Asking questions:</strong> "Can you repeat that more slowly?"</p>
+                            <p><strong>Cooperating:</strong> Studying with a partner and testing each other</p>
+                            <p><strong>Practicing together:</strong> Doing role-plays or conversations</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Oxford's Even Simpler Split</h3>
+                
+                <div class="tip">
+                    <div class="tip-title">🎯 Quick Tip:</div>
+                    <p>Oxford divides strategies into just two types:</p>
+                    <p><strong>DIRECT:</strong> You're working directly with the language (memorizing, practicing, guessing meaning)</p>
+                    <p><strong>INDIRECT:</strong> You're setting up the conditions for learning (planning, managing emotions, finding people to practice with)</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>What Makes YOU Choose Certain Strategies?</h2>
+                
+                <div class="bubble">
+                    <p>We're all unique learners! What works for your friend might not work for you. Here's what influences your strategy choices:</p>
+                </div>
+                
+                <div class="factor-grid">
+                    <div class="factor">
+                        <h4>🎂 Your Age</h4>
+                        <p><strong>Kids vs Adults:</strong> Kids use simple, specific strategies ("point at what I want"). Adults use more flexible, general strategies ("I'll look for patterns").</p>
+                        <div class="example-box">
+                            <div class="example-title">💭 Study Hack:</div>
+                            <p>If you're an adult learner, use your ability to spot patterns to learn grammar faster!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="factor">
+                        <h4>🔥 Your Motivation</h4>
+                        <p><strong>More motivated = More strategies.</strong> If you really want to learn, you'll try more approaches.</p>
+                        <div class="example-box">
+                            <div class="example-title">💭 Study Hack:</div>
+                            <p>Connect your learning to your passions. Love music? Learn through songs!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="factor">
+                        <h4>😊 Your Personality</h4>
+                        <p><strong>Extroverts:</strong> Love communication strategies, take more risks speaking</p>
+                        <p><strong>Introverts:</strong> Prefer individual study, careful preparation</p>
+                        <div class="example-box">
+                            <div class="example-title">💭 Study Hack:</div>
+                            <p>Play to your strengths! Introverts can prepare thoroughly before speaking.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="factor">
+                        <h4>📚 Your Experience</h4>
+                        <p><strong>Beginners:</strong> Might panic when stuck, use fewer strategies</p>
+                        <p><strong>Experienced learners:</strong> Stay calm, transfer strategies from previous learning</p>
+                        <div class="example-box">
+                            <div class="example-title">💭 Study Hack:</div>
+                            <p>Even if you're a beginner, ask yourself: "What worked when I learned other things?"</p>
+                        </div>
+                    </div>
+                    
+                    <div class="factor">
+                        <h4>📋 The Task</h4>
+                        <p><strong>Different tasks need different strategies!</strong></p>
+                        <p><strong>Learning vocabulary:</strong> Use grouping, flashcards, associations</p>
+                        <p><strong>Listening practice:</strong> Use note-taking, predicting, summarizing</p>
+                        <div class="example-box">
+                            <div class="example-title">💭 Study Hack:</div>
+                            <p>Match your strategy to your goal. Don't use vocabulary strategies for listening practice!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="factor">
+                        <h4>🏫 The Setting</h4>
+                        <p><strong>Classroom:</strong> Often fewer social strategies (less interaction)</p>
+                        <p><strong>Real life:</strong> More social strategies (asking for clarification, practicing with people)</p>
+                        <div class="example-box">
+                            <div class="example-title">💭 Study Hack:</div>
+                            <p>Create opportunities for social strategies even in class—form study groups!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>How Teachers Can Help (And How You Can Help Yourself!)</h2>
+                
+                <div class="bubble">
+                    <p>The best teachers don't just teach the language—they teach you HOW to learn the language. It's the classic "give a man a fish" vs "teach a man to fish" situation!</p>
+                </div>
+                
+                <div class="checklist">
+                    <h3>🎓 The Teacher's Strategy Guide:</h3>
+                    <ol>
+                        <li><strong>Show don't just tell:</strong> Demonstrate different strategies, don't just talk about them</li>
+                        <li><strong>Build independence:</strong> Help students learn how to learn on their own</li>
+                        <li><strong>Offer choices:</strong> Present multiple strategies and let students pick what works for them</li>
+                        <li><strong>Connect to real life:</strong> Show how language learning strategies are useful for other subjects too</li>
+                    </ol>
+                </div>
+                
+                <h3>Your Personal Action Plan</h3>
+                
+                <div class="strategy-cards">
+                    <div class="card card-1">
+                        <h4>📝 Step 1: Self-Awareness</h4>
+                        <p>Ask yourself: "What strategies am I already using? What's working? What's not?"</p>
+                        <div class="example-box">
+                            <div class="example-title">Try This:</div>
+                            <p>Keep a learning journal for one week. Note what you do when you study.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card card-2">
+                        <h4>🔍 Step 2: Experiment</h4>
+                        <p>Try one new strategy each week. See what sticks!</p>
+                        <div class="example-box">
+                            <div class="example-title">Try This:</div>
+                            <p>This week, try the "association" method for vocabulary: connect new words to funny images or stories.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card card-3">
+                        <h4>🔄 Step 3: Personalize</h4>
+                        <p>Adjust strategies to fit YOUR personality, schedule, and goals.</p>
+                        <div class="example-box">
+                            <div class="example-title">Try This:</div>
+                            <p>If you're busy, try 5-minute learning bursts. If you love socializing, find language partners.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tip">
+                    <div class="tip-title">🌟 Golden Rule:</div>
+                    <p>The best strategy is the one that works FOR YOU. Don't just copy others—test, adjust, and find your perfect learning mix!</p>
+                </div>
+                
+                <div class="example-box">
+                    <div class="example-title">🎯 Quick Review Keywords:</div>
+                    <p>
+                        <span class="keyword">Metacognitive</span>
+                        <span class="keyword">Cognitive</span>
+                        <span class="keyword">Social Strategies</span>
+                        <span class="keyword">Direct vs Indirect</span>
+                        <span class="keyword">Personalization</span>
+                        <span class="keyword">Learning Independence</span>
+                    </p>
+                </div>
+            </section>
         </div>
-
-        <!-- O'MALLEY STRATEGIES -->
-        <div class="section">
-            <h2><i class="fas fa-list"></i> O’Malley et al. (1985) – Three Main Types of Strategies</h2>
-            <dl class="definition-list">
-                <dt><i class="fas fa-brain"></i> Metacognitive Strategies</dt>
-                <dd>
-                    These strategies involve planning, monitoring, and evaluating learning. Learners using metacognitive strategies think about their own thinking.
-                    <ul>
-                        <li>Planning before starting a task</li>
-                        <li>Setting learning goals</li>
-                        <li>Monitoring comprehension during reading or listening</li>
-                        <li>Evaluating performance after completing a task</li>
-                    </ul>
-                    <p><strong>Example:</strong> A student decides to focus only on verb forms during a grammar lesson to improve accuracy.</p>
-                </dd>
-
-                <dt><i class="fas fa-pen"></i> Cognitive Strategies</dt>
-                <dd>
-                    These involve direct manipulation of learning materials.
-                    <ul>
-                        <li>Repetition</li>
-                        <li>Summarizing</li>
-                        <li>Note-taking</li>
-                        <li>Translation</li>
-                        <li>Guessing meaning from context</li>
-                    </ul>
-                    <p><strong>Example:</strong> Repeating new vocabulary aloud several times to memorize pronunciation.</p>
-                </dd>
-
-                <dt><i class="fas fa-users"></i> Social Strategies</dt>
-                <dd>
-                    These involve learning through interaction with others.
-                    <ul>
-                        <li>Asking questions for clarification</li>
-                        <li>Cooperating with peers</li>
-                        <li>Practicing with native speakers</li>
-                    </ul>
-                    <p><strong>Example:</strong> Asking a teacher to give another explanation of a difficult phrase.</p>
-                </dd>
-            </dl>
-        </div>
-
-        <!-- OXFORD'S STRATEGIES EXTENDED -->
-        <div class="section">
-            <h2><i class="fas fa-layer-group"></i> Oxford (1990) – Six Categories of Strategies</h2>
-            <p>Oxford proposed a widely used and detailed classification of LLS, dividing them into <strong>Direct</strong> and <strong>Indirect</strong> strategies.</p>
-
-            <h3><i class="fas fa-arrow-right"></i> Direct Strategies</h3>
-            <ul>
-                <li><strong>Memory Strategies:</strong> Grouping, imagery, creating associations.</li>
-                <li><strong>Cognitive Strategies:</strong> Practicing, analyzing, summarizing, translating.</li>
-                <li><strong>Compensation Strategies:</strong> Guessing unknown words, using gestures, paraphrasing.</li>
-            </ul>
-
-            <h3><i class="fas fa-arrow-right"></i> Indirect Strategies</h3>
-            <ul>
-                <li><strong>Metacognitive Strategies:</strong> Planning, monitoring, evaluating.</li>
-                <li><strong>Affective Strategies:</strong> Managing emotions, self-encouragement, relaxation.</li>
-                <li><strong>Social Strategies:</strong> Cooperation, asking questions, cultural understanding.</li>
-            </ul>
-        </div>
-
-        <!-- TABLES & COMPARISONS -->
-        <div class="section">
-            <h2><i class="fas fa-table"></i> Comparison Tables</h2>
-
-            <h3>1. O’Malley’s Strategies (Table)</h3>
-            <table class="styled-table">
-                <tr>
-                    <th>Strategy Type</th>
-                    <th>Description</th>
-                    <th>Example</th>
-                </tr>
-                <tr>
-                    <td>Metacognitive</td>
-                    <td>Planning and evaluating learning</td>
-                    <td>Setting a goal before studying</td>
-                </tr>
-                <tr>
-                    <td>Cognitive</td>
-                    <td>Direct manipulation of language</td>
-                    <td>Repeating vocabulary</td>
-                </tr>
-                <tr>
-                    <td>Social</td>
-                    <td>Learning through interaction</td>
-                    <td>Asking for clarification</td>
-                </tr>
-            </table>
-
-            <h3>2. Oxford’s Strategies (Table)</h3>
-            <table class="styled-table">
-                <tr>
-                    <th>Category</th>
-                    <th>Sub-type</th>
-                    <th>Example</th>
-                </tr>
-                <tr><td>Direct</td><td>Memory</td><td>Using images to recall words</td></tr>
-                <tr><td>Direct</td><td>Cognitive</td><td>Summarizing a text</td></tr>
-                <tr><td>Direct</td><td>Compensation</td><td>Guessing from context</td></tr>
-                <tr><td>Indirect</td><td>Metacognitive</td><td>Monitoring progress</td></tr>
-                <tr><td>Indirect</td><td>Affective</td><td>Breathing to reduce anxiety</td></tr>
-                <tr><td>Indirect</td><td>Social</td><td>Practicing with peers</td></tr>
-            </table>
-        </div>
-
-        <!-- EXTENDED EXAMPLES -->
-        <div class="section">
-            <h2><i class="fas fa-lightbulb"></i> Extended Examples for Better Understanding</h2>
-            <ul>
-                <li><strong>Repetition (Cognitive):</strong> Saying “responsibility” 10 times to master stress.</li>
-                <li><strong>Selective Attention (Metacognitive):</strong> Listening only for adjectives in a podcast.</li>
-                <li><strong>Using Gestures (Compensation):</strong> Acting out a word when you forget the name.</li>
-                <li><strong>Self-Evaluation (Metacognitive):</strong> Asking: “Did I meet today’s learning goal?”</li>
-                <li><strong>Lowering Anxiety (Affective):</strong> Taking deep breaths before giving a presentation.</li>
-                <li><strong>Cooperation (Social):</strong> Working in pairs to check homework answers.</li>
-            </ul>
-        </div>
-
-        <!-- IMPORTANCE OF STRATEGIES -->
-        <div class="section">
-            <h2><i class="fas fa-star"></i> Why Are Learning Strategies Important?</h2>
-            <p>LLS make learners more active, independent, and responsible for their own progress. They help improve memory, comprehension, communication, and overall performance.</p>
-            <ul>
-                <li>Enhance motivation</li>
-                <li>Support self-regulated learning</li>
-                <li>Improve problem-solving skills</li>
-                <li>Help overcome learning difficulties</li>
-            </ul>
-        </div>
-
-        <!-- PEDAGOGICAL IMPLICATIONS -->
-        <div class="section">
-            <h2><i class="fas fa-chalkboard-teacher"></i> Pedagogical Implications</h2>
-            <p>Teachers should guide students to discover and apply strategies that fit their learning style. Strategy training can be integrated into classroom activities.</p>
-            <ul>
-                <li>Teach students how to plan effectively</li>
-                <li>Encourage reflection and self-evaluation</li>
-                <li>Promote cooperation and group work</li>
-                <li>Model the use of different strategies</li>
-                <li>Help learners manage anxiety</li>
-            </ul>
-        </div>
-
-        <!-- QUIZ -->
-        <div class="section">
-            <h2><i class="fas fa-question-circle"></i> Quick Quiz</h2>
-            <ul>
-                <li>Give an example of a cognitive strategy.</li>
-                <li>Why are metacognitive strategies important?</li>
-                <li>What is the difference between memory and compensation strategies?</li>
-                <li>How can a teacher help students develop social strategies?</li>
-            </ul>
-        </div>
+        
+        <footer class="footer">
+            <h3>🎓 Ready to Level Up Your Learning?</h3>
+            <p>Remember: Smart strategies + Consistent effort = Language success!</p>
+            <p style="margin-top: 20px; opacity: 0.8;">Applied Linguistics - Master 1 | Lecture 05 Summary</p>
+        </footer>
     </div>
-
-    <footer>
-        <p>Applied Linguistics Course | Lecture 05: Language Learning Strategies © 2025</p>
-        <p>Further Reading: Oxford, R. (1990). Language Learning Strategies. New York: Oxford University Press.</p>
-    </footer>
 
     <script>
         const menuBtn = document.getElementById("menuBtn");
         const sidebarContainer = document.getElementById("sidebar-container");
 
+        // Load sidebar
         fetch("../sidebar.html")
             .then(res => res.text())
             .then(html => {
@@ -203,12 +764,15 @@
 
                 menuBtn.addEventListener("click", () => {
                     sidebar.classList.toggle("active");
+                    document.body.classList.toggle("sidebar-active");
                 });
 
                 closeBtn.addEventListener("click", () => {
                     sidebar.classList.remove("active");
+                    document.body.classList.remove("sidebar-active");
                 });
 
+                // Accordion for sidebar links
                 document.querySelectorAll(".nav-link").forEach(link => {
                     link.addEventListener("click", e => {
                         e.preventDefault();
